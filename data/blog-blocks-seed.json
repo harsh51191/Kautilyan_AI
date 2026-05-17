@@ -1,0 +1,157 @@
+{
+  "ai-implementation-where-to-start": {
+    "version": 1,
+    "blocks": [
+      {
+        "id": "paths-comparison",
+        "type": "comparison",
+        "anchor": "The three paths",
+        "leftTitle": "Tool-first / SI-led",
+        "leftBody": "Long timelines, automates existing broken flows, unclear ownership.",
+        "rightTitle": "Scoped pilot (diagnose → redesign → prove)",
+        "rightBody": "Named metric in ~45 days, keeps existing systems, one process owner."
+      },
+      {
+        "id": "paths-chart",
+        "type": "chart",
+        "anchor": "The three paths",
+        "chartType": "bar",
+        "title": "Typical time-to-first proof (illustrative)",
+        "labels": ["Buy & configure", "Large SI", "Scoped pilot"],
+        "datasets": [{ "label": "Months to measurable proof", "values": [9, 12, 1.5] }]
+      },
+      {
+        "id": "start-callout",
+        "type": "callout",
+        "anchor": "Map your operating reality",
+        "variant": "tip",
+        "title": "Start here",
+        "body": "Pick one high-value, visibly broken workflow — not the most politically sensitive — and answer where work lives, where it breaks, who is the bottleneck, and what “fixed” means in 45 days."
+      }
+    ]
+  },
+  "ai-execution-stack": {
+    "version": 1,
+    "blocks": [
+      {
+        "id": "stack-chart",
+        "type": "chart",
+        "anchor": "The 9 building blocks",
+        "chartType": "bar",
+        "title": "AI execution stack — nine building blocks",
+        "labels": ["Prompt", "Context", "Playbook", "Tool", "Hook", "Subagent", "Agent", "Workflow", "Memory"],
+        "datasets": [{ "label": "Governance depth (conceptual)", "values": [1, 2, 3, 4, 5, 6, 7, 8, 9] }]
+      },
+      {
+        "id": "stack-table",
+        "type": "table",
+        "anchor": "The one principle that prevents",
+        "title": "Pick the smallest safe architecture",
+        "headers": ["Need", "Use"],
+        "rows": [
+          ["One-time answer", "Prompt"],
+          ["Right documents/data", "Context"],
+          ["Recurring expertise", "Playbook"],
+          ["Read/update systems", "Tool"],
+          ["Automatic rules", "Hook"],
+          ["Specialist isolation", "Subagent"],
+          ["Ongoing ownership", "Agent"],
+          ["Sequence & approvals", "Workflow"]
+        ]
+      }
+    ]
+  },
+  "why-ai-mandates-fail": {
+    "version": 1,
+    "blocks": [
+      {
+        "id": "six-factors",
+        "type": "chart",
+        "anchor": "The six things that have to be true",
+        "chartType": "doughnut",
+        "title": "Six factors for change (all required)",
+        "labels": ["Vision", "Consensus", "Skills", "Incentives", "Resources", "Action plan"],
+        "datasets": [{ "label": "Failure mode if missing", "values": [1, 1, 1, 1, 1, 1] }]
+      },
+      {
+        "id": "mandate-callout",
+        "type": "callout",
+        "anchor": "The question that predicts success",
+        "variant": "info",
+        "title": "Success predictor",
+        "body": "One named owner with authority and time — not “the CIO, but very busy.” Transformation needs a human owner, not only a technology partner."
+      }
+    ]
+  },
+  "teams-using-ai-organisation-isnt": {
+    "version": 1,
+    "blocks": [
+      {
+        "id": "tools-vs-org",
+        "type": "comparison",
+        "anchor": "The difference between tools and capability",
+        "leftTitle": "Individual AI tool usage",
+        "leftBody": "People work faster; org chart, handoffs, and knowledge loss stay the same.",
+        "rightTitle": "Organisational AI capability",
+        "rightBody": "Decisions, memory, and workflows improve — intelligence compounds across teams."
+      },
+      {
+        "id": "signs-chart",
+        "type": "chart",
+        "anchor": "Five signs your organisation",
+        "chartType": "bar",
+        "title": "Signals you’re at tool usage, not org capability",
+        "labels": ["Senior in every decision", "Knowledge leaves with people", "Siloed AI tools", "Answers not actions", "Mandate without path"],
+        "datasets": [{ "label": "Severity (self-assessment)", "values": [4, 5, 4, 3, 5] }]
+      }
+    ]
+  },
+  "institutional-knowledge-loss": {
+    "version": 1,
+    "blocks": [
+      {
+        "id": "cost-callout",
+        "type": "callout",
+        "anchor": "What knowledge loss actually costs",
+        "variant": "warning",
+        "title": "Invisible tax",
+        "body": "Handover notes rarely capture negotiation history, exceptions, or relationship nuance — replacements rebuild context for months while relationships quietly cool."
+      },
+      {
+        "id": "capture-chart",
+        "type": "chart",
+        "anchor": "What institutionalising knowledge",
+        "chartType": "line",
+        "title": "Decision trace maturity (illustrative)",
+        "labels": ["Month 1", "Month 3", "Month 6", "Month 12"],
+        "datasets": [{ "label": "Reusable context captured", "values": [10, 28, 52, 78] }]
+      }
+    ]
+  },
+  "cio-ai-mandate-execution-gap": {
+    "version": 1,
+    "blocks": [
+      {
+        "id": "three-questions",
+        "type": "table",
+        "anchor": "The gap isn't technical",
+        "title": "Three structural questions before any vendor",
+        "headers": ["Question", "Why it blocks execution"],
+        "rows": [
+          ["Which workflow goes first?", "Without one first win, budget stays in intent"],
+          ["What does success look like?", "No shared metric → pilots don’t scale"],
+          ["Who owns it (business, not IT)?", "No available process owner → drift"]
+        ]
+      },
+      {
+        "id": "timeline-chart",
+        "type": "chart",
+        "anchor": "A practical path from mandate",
+        "chartType": "line",
+        "title": "Mandate → first proof (weeks)",
+        "labels": ["Wk 1-2", "Wk 3-4", "Wk 5-6", "Wk 7+"],
+        "datasets": [{ "label": "Readiness / proof momentum", "values": [25, 50, 75, 100] }]
+      }
+    ]
+  }
+}

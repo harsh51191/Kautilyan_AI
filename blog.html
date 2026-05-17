@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — AI Workflow &amp; Operations | Kautilyan AI</title>
+  <meta name="description" content="Practical writing on AI implementation, mandates, organisational capability, and workflow transformation for growing businesses." />
+  <link rel="canonical" href="https://kautilyan.ai/blog" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css" />
+  <link rel="stylesheet" href="css/resources.css" />
+  <link rel="stylesheet" href="css/blog.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="content-wrap">
+    <nav id="navbar">
+      <div class="container">
+        <div class="nav-inner">
+          <a href="index.html" class="nav-logo">
+            <div class="nav-logo-icon">⚡</div>
+            KAUTILYAN
+          </a>
+          <ul class="nav-links" id="nav-menu">
+            <!--<li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="use-cases.html">Use Cases</a></li>
+            <li><a href="pricing.html">Pricing</a></li>-->
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="nav-mobile-only"><a href="assessment.html" class="assessment-external-link">View Your Report →</a></li>
+            <li class="nav-mobile-only"><a href="#" class="btn btn-primary nav-book-solid js-open-modal">Book Free Diagnosis →</a></li>
+          </ul>
+          <div class="nav-cta">
+            <a href="assessment.html" class="btn btn-ghost nav-report-link assessment-external-link">View Your Report →</a>
+            <a href="#" class="btn btn-primary nav-book-solid js-open-modal">Book Free Diagnosis →</a>
+          </div>
+          <button class="nav-hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main id="main">
+      <section class="hero page-hero page-hero--resources">
+        <div class="hero-container">
+          <div class="hero-intro-wrap">
+            <div class="hero-copy-block">
+              <div class="hero-badge fade-up">From the team</div>
+              <h1 class="hero-headline hero-title fade-up">
+                <span class="hero-title-accent">Latest thinking</span> on AI-era operations.
+              </h1>
+              <p class="hero-lead fade-up fade-up-delay-1">Implementation guides for operators — mandates, workflows, and organisational capability.</p>
+            </div>
+            <div class="hero-cta-row fade-up fade-up-delay-2">
+              <a href="resources.html" class="btn-hero-secondary">Downloads &amp; frameworks</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <div class="container">
+          <p id="blog-loading" class="blog-loading">Loading articles…</p>
+          <div id="blog-list-grid" class="blog-list-grid"></div>
+        </div>
+      </section>
+
+      <section class="cta-strip">
+        <div class="container">
+          <div class="cta-strip-inner fade-up">
+            <h2 class="display-lg">Ready to apply this to your business?</h2>
+            <p>45 minutes. A written map of your operating reality.</p>
+            <div class="cta-strip-actions">
+              <button type="button" class="btn btn-primary btn-xl js-open-modal">Book Free Diagnosis →</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="site-footer"></footer>
+    <script src="js/footer.js"></script>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+    <div class="booking-modal-backdrop js-close-modal"></div>
+    <div class="booking-modal-panel">
+      <button type="button" class="booking-modal-close js-close-modal" aria-label="Close">×</button>
+      <h2 id="modal-title">Book Free Diagnosis</h2>
+      <p class="modal-sub">45-minute working session. No pitch. Written output yours to keep.</p>
+      <form id="modal-call-form" class="modal-form" novalidate>
+        <div class="cr-group"><label for="mf-name">Name *</label><input id="mf-name" required autocomplete="name" /></div>
+        <div class="cr-group"><label for="mf-email">Work email *</label><input id="mf-email" type="email" required autocomplete="email" /></div>
+        <button type="submit" class="cr-submit">Book Free Diagnosis →</button>
+      </form>
+    </div>
+  </div>
+  <button type="button" id="sticky-cta" class="sticky-cta js-open-modal">Book Free Diagnosis →</button>
+  <div id="sticky-bar" class="sticky-bar"><button type="button" class="sticky-bar-btn js-open-modal">Book Free Diagnosis →</button></div>
+
+  <script src="js/site.js"></script>
+  <script src="js/blog-markdown.js"></script>
+  <script src="js/blog-feed.js"></script>
+  <script src="js/blog-list.js"></script>
+</body>
+</html>

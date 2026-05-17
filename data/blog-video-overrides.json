@@ -1,0 +1,32 @@
+{
+  "ai-implementation-where-to-start": {
+    "src": "https://drive.google.com/file/d/1ihxmAdFf3crgoBCweJgSxgOa1fpnVK2B/view?usp=sharing",
+    "caption": "Where to start when your CEO gives you an AI mandate",
+    "insertAfter": "This guide is for you."
+  },
+  "ai-execution-stack": {
+    "src": "https://drive.google.com/file/d/1pY90i4wuqM7tKwejxYjOycHkGR3ncAjz/view?usp=sharing",
+    "caption": "The AI execution stack — prompts, agents, workflows, and memory",
+    "insertAfter": "Here's the actual stack."
+  },
+  "why-ai-mandates-fail": {
+    "src": "https://drive.google.com/file/d/1CRAQIzyv_NYyEaVyZ7Lt0JTSAhYOzBnW/view?usp=sharing",
+    "caption": "Why AI mandates fail before the build even starts",
+    "insertAfter": "The failure happens in the six weeks between \"we're doing AI\" and \"we've started building.\""
+  },
+  "teams-using-ai-organisation-isnt": {
+    "src": "https://drive.google.com/file/d/1mEr_glZtbPkmLfqp6sRgtvqcdvnya1nm/view?usp=sharing",
+    "caption": "Individual AI usage vs organisational AI capability",
+    "insertAfter": "The answer is that individual AI usage and organisational AI capability are two completely different things."
+  },
+  "institutional-knowledge-loss": {
+    "src": "https://drive.google.com/file/d/18xSm9bS2_xtmYWa8yo3GjTKRxylhnqWm/view?usp=sharing",
+    "caption": "What you lose when institutional knowledge walks out the door",
+    "insertAfter": "This is not a people problem. It's a systems problem. And it's the most expensive invisible tax most organisations pay."
+  },
+  "cio-ai-mandate-execution-gap": {
+    "src": "https://drive.google.com/file/d/1BsTdkS79pyYq5HtLAXJEArJNP6S-Q2Rf/view?usp=sharing",
+    "caption": "From AI mandate and budget to first proof — a CIO path",
+    "insertAfter": "Here's what's actually happening."
+  }
+}

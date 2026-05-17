@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assessment — Kautilyan</title>
+  <meta name="description" content="Understand what your questionnaire result means and open the form when you are ready." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #080810;
+      color: #E8E8F0;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 2px solid #F0A030; outline-offset: 3px; }
+    :root {
+      --bg: #080810;
+      --bg-card: #0F0F1C;
+      --border: rgba(255,255,255,0.07);
+      --text-muted: #7A7A9A;
+      --text-dim: #555570;
+      --amber: #F0A030;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+    .container { max-width: 780px; margin: 0 auto; padding: 100px 24px 80px; }
+    .nav-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      padding: 18px 24px;
+      background: rgba(8,8,16,0.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+    }
+    .nav-logo-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(240,160,48,0.2), rgba(139,92,246,0.15));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+    .nav-links { font-size: 0.88rem; color: var(--text-muted); display: flex; gap: 16px; flex-wrap: wrap; }
+    .nav-links a:hover { color: #E8E8F0; }
+    .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .lede {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 52ch;
+      line-height: 1.65;
+    }
+    .assessment-risk-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+    @media (min-width: 768px) {
+      .assessment-risk-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .assessment-risk-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 18px 16px;
+    }
+    .assessment-risk-card h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+    .assessment-risk-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+    }
+    .btn-primary {
+      background: linear-gradient(120deg, #F0A030, #E05545, #8B5CF6);
+      color: white;
+    }
+    .btn-primary:hover { opacity: 0.92; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { color: #E8E8F0; border-color: rgba(255,255,255,0.14); }
+    .small {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      max-width: 42ch;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav-bar">
+    <a href="index.html#main" class="nav-logo">
+      <span class="nav-logo-icon">⚡</span>
+      KAUTILYAN
+    </a>
+    <div class="nav-links">
+      <a href="index.html#book-call">Book Stage 0</a>
+      <a href="index.html">← Home</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <span class="label">Assessment questionnaire</span>
+    <h1>What your result band means</h1>
+    <p class="lede">
+      After you submit the questionnaire, you land in one of three bands. Each band includes a recommended next step toward execution — not a label for its own sake.
+    </p>
+
+    <div class="assessment-risk-grid">
+      <div class="assessment-risk-card">
+        <h2>Low risk</h2>
+        <p>Signals suggest limited structural drain relative to your stage — often still worth validating with numbers. Most founders who score low discover a medium-risk situation within the first 15 minutes of Stage 0 — because the cost is in the specific numbers, not the general sense.</p>
+      </div>
+      <div class="assessment-risk-card">
+        <h2>Moderate risk</h2>
+        <p>Multiple dependency or leakage signals show up — enough that waiting has a cost. This is the profile Stage 0 was built for. The rupee number typically surprises people.</p>
+      </div>
+      <div class="assessment-risk-card">
+        <h2>High / critical risk</h2>
+        <p>Severe concentration of knowledge, founder involvement, or operational fragility — material rupee exposure and execution risk. We recommend booking within 7 days. Harsha will personally review your answers before the call.</p>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <!--<a href="#" class="btn btn-primary" id="open-questionnaire">Open questionnaire →</a>-->
+      <a href="index.html#book-call" class="btn btn-ghost">Book Stage 0 instead →</a>
+    </div>
+    <p class="small" id="questionnaire-hint">
+      Set <code style="font-size:0.75em;">ASSESSMENT_URL</code> in this page’s script (mirror of <code style="font-size:0.75em;">index.html</code> CONFIG) to point at your Google Form, Typeform, or Tally link.
+    </p>
+  </main>
+
+  <script>
+    /* Mirror CONFIG.ASSESSMENT_URL from index.html when you deploy. */
+    const CONFIG = {
+      ASSESSMENT_URL: '',
+    };
+    (function () {
+      var u = (CONFIG.ASSESSMENT_URL || '').trim();
+      var hint = document.getElementById('questionnaire-hint');
+      var btn = document.getElementById('open-questionnaire');
+      if (u && btn) {
+        btn.href = u;
+        btn.target = '_blank';
+        btn.rel = 'noopener noreferrer';
+        if (hint) hint.style.display = 'none';
+      } else if (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          alert('Set ASSESSMENT_URL in assessment.html (same value as index.html CONFIG).');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

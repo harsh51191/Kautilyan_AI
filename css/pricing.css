@@ -1,0 +1,256 @@
+/* Page 4 — Pricing */
+
+.nav-links a.is-current { color: #fff; }
+
+.page-hero {
+  padding: calc(var(--nav-height) + 40px) 64px 48px;
+  min-height: auto;
+  box-sizing: border-box;
+}
+.page-hero .hero-intro-wrap { gap: 24px; max-width: 720px; }
+.page-hero--pricing .hero-lead { max-width: 640px; }
+
+#stages {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139, 92, 246, 0.08), transparent 50%),
+    radial-gradient(ellipse 55% 45% at 0% 80%, rgba(240, 160, 48, 0.06), transparent 45%),
+    var(--bg);
+}
+
+@media (max-width: 768px) {
+  .page-hero { padding: calc(var(--nav-height) + 24px) 24px 36px; }
+}
+
+/* Journey rail */
+.pricing-journey {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 36px 0 12px;
+  flex-wrap: wrap;
+}
+.pricing-journey-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  min-width: 100px;
+  text-align: center;
+}
+.pricing-journey-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-size: 1.35rem;
+  background: linear-gradient(165deg, rgba(18, 18, 32, 0.95), rgba(8, 8, 16, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.08);
+}
+.pricing-journey-step.is-highlight .pricing-journey-icon {
+  background: linear-gradient(rgba(12, 12, 22, 0.95), rgba(12, 12, 22, 0.95)) padding-box, var(--gradient) border-box;
+  border: 1px solid transparent;
+  box-shadow: 0 0 32px rgba(240, 160, 48, 0.15);
+}
+.pricing-journey-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.pricing-journey-name {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.25;
+  max-width: 110px;
+}
+.pricing-journey-arrow {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 1.25rem;
+  padding: 0 8px;
+  margin-bottom: 28px;
+}
+
+.pricing-credit-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 28px auto 0;
+  max-width: 640px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: rgba(240, 160, 48, 0.06);
+  border: 1px solid rgba(240, 160, 48, 0.2);
+}
+.pricing-credit-flow span {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+.pricing-credit-flow strong { color: var(--amber); }
+.pricing-credit-arrow { color: var(--amber); font-weight: 700; }
+
+/* Cards — chip highlights instead of long lists */
+.pricing-page-grid {
+  margin-top: 40px;
+}
+.pricing-card--stage0 .pricing-stage { color: var(--green); }
+.pricing-card--stage2 .pricing-amount .num {
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+}
+.pricing-card-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(240, 160, 48, 0.12), rgba(139, 92, 246, 0.12));
+  font-size: 1.25rem;
+  margin-bottom: 14px;
+}
+.pricing-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+.pricing-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 18px;
+}
+.pricing-chip {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.2;
+}
+.pricing-card--stage0 .pricing-chip { border-color: rgba(52, 211, 153, 0.2); }
+.pricing-card.featured .pricing-chip { border-color: rgba(240, 160, 48, 0.25); }
+.pricing-card-foot {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.45;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.pricing-guarantee-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 14px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--green);
+}
+.pricing-scarcity-inline {
+  font-size: 0.75rem;
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pricing-scarcity-inline::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  animation: pulse 2s infinite;
+}
+
+/* BYOK */
+.byok-section {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(139, 92, 246, 0.08), transparent 55%),
+    var(--bg);
+}
+.byok-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 32px;
+}
+.byok-card {
+  padding: 22px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(165deg, rgba(18, 18, 32, 0.9), rgba(8, 8, 16, 0.85));
+  text-align: center;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.byok-card:hover {
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 0 32px rgba(139, 92, 246, 0.08);
+}
+.byok-icon {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+.byok-card h4 {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  margin-bottom: 8px;
+}
+.byok-card p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+.byok-tagline {
+  max-width: 560px;
+  margin: 20px auto 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.byok-tagline strong { color: rgba(255, 255, 255, 0.85); font-weight: 600; }
+
+/* Pricing FAQ */
+.pricing-faq-list {
+  max-width: 720px;
+  margin: 32px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (max-width: 1024px) {
+  .byok-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .pricing-journey-arrow { display: none; }
+  .pricing-journey {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .byok-grid { grid-template-columns: 1fr; }
+}

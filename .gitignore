@@ -1,0 +1,46 @@
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Editors & IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Cursor (local agent/editor state)
+.cursor/
+
+# Environment & secrets (if you add env-based config later)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies (if you add Node tooling later)
+node_modules/
+
+# Build / deploy artifacts
+dist/
+build/
+.vercel/
+.netlify/
+
+# Optional local overrides (create these locally; do not commit)
+config.local.js
+secrets.json
