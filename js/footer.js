@@ -32,18 +32,24 @@
             '<h3 class="footer-col-title">Company</h3>' +
             '<ul>' +
               '<li><a href="about.html">About</a></li>' +
-              '<li><a href="assessment.html" class="assessment-external-link">Assessment</a></li>' +
-              '<li><a href="#" class="js-open-modal">Book diagnosis</a></li>' +
+              '<li><a href="contact.html">Contact</a></li>' +
+              '<li><a href="assessment.html">Pre-call intake</a></li>' +
+              '<li><button type="button" class="footer-text-btn js-open-modal">Book Stage 0 call</button></li>' +
             '</ul>' +
           '</div>' +
         '</div>' +
         '<div class="footer-aside">' +
           '<p class="footer-aside-label">Get in touch</p>' +
           '<a href="mailto:founders@kautilyan.com" class="footer-email">founders@kautilyan.com</a>' +
-          '<button type="button" class="footer-cta-btn js-open-modal">Book Free Diagnosis →</button>' +
+          '<button type="button" class="footer-cta-btn js-open-modal">Book Stage 0 Call →</button>' +
         '</div>' +
       '</div>' +
       '<div class="footer-bottom">' +
+        '<p class="footer-legal">' +
+          '<a href="privacy.html">Privacy Policy</a>' +
+          ' · ' +
+          '<a href="terms.html">Terms of Use</a>' +
+        '</p>' +
         '<p class="footer-copy">© 2026 Kautilyan AI. All rights reserved.</p>' +
         '<p class="footer-meta">Built in Bangalore · Designed for Indian businesses and beyond</p>' +
       '</div>' +

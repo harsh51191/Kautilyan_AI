@@ -1,8 +1,17 @@
 (function () {
   'use strict';
 
-  var params = new URLSearchParams(window.location.search);
-  var slug = params.get('slug');
+  function slugFromLocation() {
+    var params = new URLSearchParams(window.location.search);
+    var fromQuery = params.get('slug');
+    if (fromQuery) return String(fromQuery).trim().toLowerCase();
+    var path = window.location.pathname || '';
+    var match = path.match(/\/blog\/([^/]+)\/?$/i);
+    if (match) return decodeURIComponent(match[1]).trim().toLowerCase();
+    return '';
+  }
+
+  var slug = slugFromLocation();
   var root = document.getElementById('article-root');
   var loading = document.getElementById('article-loading');
 
@@ -22,13 +31,16 @@
       return;
     }
 
-    document.title = post.title + ' | Kautilyan AI';
-    var meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute('content', post.meta_description || post.excerpt);
-
-    var canonical = document.querySelector('link[rel="canonical"]');
-    var pageUrl = window.location.origin + window.location.pathname + '?slug=' + encodeURIComponent(post.slug);
-    if (canonical) canonical.setAttribute('href', pageUrl);
+    var pageUrl = window.KautilyanSEO
+      ? KautilyanSEO.applyArticleMeta(post)
+      : (function () {
+          document.title = post.title + ' | Kautilyan AI';
+          var meta = document.querySelector('meta[name="description"]');
+          if (meta) meta.setAttribute('content', post.meta_description || post.excerpt);
+          return BlogFeed.absoluteArticleUrl
+            ? BlogFeed.absoluteArticleUrl(post.slug)
+            : window.location.href;
+        })();
 
     BlogFeed.renderArticleSchema(post, pageUrl);
 

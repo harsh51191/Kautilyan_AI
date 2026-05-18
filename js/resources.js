@@ -123,6 +123,9 @@
           painPoints: resourceTitles[resourceId] || resourceId,
         });
       }
+      if (window.KautilyanAnalytics) {
+        KautilyanAnalytics.resourceDownloaded({ resource_id: resourceId || 'unknown' });
+      }
 
       var url = (RESOURCES.gated[resourceId] || '').trim();
       closeGateModal();

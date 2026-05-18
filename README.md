@@ -46,7 +46,7 @@ Three stages, no risk until you've seen the evidence:
 
 ## This repository
 
-This is the marketing and lead-capture website for Kautilyan, hosted at [kautilyan.ai](https://kautilyan.ai). It is static HTML/CSS/JavaScript with no build step.
+This is the marketing and lead-capture website for Kautilyan, hosted at [www.kautilyan.com](https://www.kautilyan.com). It is static HTML/CSS/JavaScript with no build step.
 
 ### Files
 
@@ -69,7 +69,10 @@ This is the marketing and lead-capture website for Kautilyan, hosted at [kautily
 ### Local preview
 
 ```bash
-# Python 3
+# Python 3 (includes /blog/:slug → article.html rewrite, same as Vercel)
+python3 serve.py
+
+# Plain static server — use article.html?slug= links from blog list only
 python3 -m http.server 8080
 
 # or Node.js
@@ -86,6 +89,7 @@ All runtime settings live in the `CONFIG` block at the bottom of `index.html`:
 
 ```javascript
 const CONFIG = {
+  SITE_URL: 'https://www.kautilyan.com',
   SHOW_PRICING: true,
   SHOW_NAV_PRICING: true,
   CAL_LINK: '',
@@ -98,6 +102,7 @@ const CONFIG = {
 
 | Key | Description |
 |-----|-------------|
+| `SITE_URL` | Canonical public URL (`https://www.kautilyan.com`) — used for SEO and blog links |
 | `GOOGLE_SCRIPT_URL` | Apps Script web app URL — required for **Request a call** rows in Google Sheets |
 | `ASSESSMENT_URL` | External questionnaire (Google Form, Typeform, etc.) |
 | `CAL_LINK` | Optional Cal.com booking button |
@@ -117,10 +122,10 @@ Static hosting only — no npm install or build step required.
 1. Push this repo to GitHub.
 2. Import the project in [Vercel](https://vercel.com).
 3. Set the project root to this folder (or use `public/` + `vercel.json` as described in SETUP.md).
-4. Point your domain (`kautilyan.ai`) in Vercel DNS settings.
+4. Point your domain (`www.kautilyan.com` and apex `kautilyan.com`) in Vercel DNS settings.
 5. Optionally uncomment the Vercel Analytics script in `index.html` after deploy.
 
-Update **canonical** and **Open Graph** URLs in `index.html` if your live domain differs from `https://kautilyan.ai/`.
+**Canonical site:** `https://www.kautilyan.com`. All pages use this in canonical/OG tags; `vercel.json` 301-redirects apex `kautilyan.com` and any `kautilyan.ai` hostnames to `www.kautilyan.com`.
 
 ---
 
@@ -143,7 +148,7 @@ Update **canonical** and **Open Graph** URLs in `index.html` if your live domain
 
 ## Contact
 
-**founders@kautilyan.com** · [kautilyan.ai](https://kautilyan.ai) · Made in Bangalore.
+**founders@kautilyan.com** · [www.kautilyan.com](https://www.kautilyan.com) · Made in Bangalore.
 
 ---
 

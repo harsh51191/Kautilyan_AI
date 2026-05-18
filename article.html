@@ -3,9 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
   <title>Article | Kautilyan AI</title>
-  <meta name="description" content="Kautilyan AI blog" />
-  <link rel="canonical" href="https://kautilyan.ai/blog" />
+  <meta name="description" content="Practical writing on AI workflow transformation, mandates, and organisational capability for growing businesses." />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.kautilyan.com/blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Kautilyan AI" />
+  <meta property="og:url" content="https://www.kautilyan.com/blog" />
+  <meta property="og:title" content="Article | Kautilyan AI" />
+  <meta property="og:description" content="Practical writing on AI workflow transformation for growing businesses." />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -36,7 +45,7 @@
             <li><a href="about.html">About</a></li>
           </ul>
           <div class="nav-cta">
-            <a href="#" class="btn btn-primary nav-book-solid js-open-modal">Book Free Diagnosis →</a>
+            <button type="button" class="btn btn-primary nav-book-solid js-open-modal">Book Stage 0 Call →</button>
           </div>
           <button class="nav-hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
             <span></span><span></span><span></span>
@@ -56,22 +65,13 @@
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
-    <div class="booking-modal-backdrop js-close-modal"></div>
-    <div class="booking-modal-panel">
-      <button type="button" class="booking-modal-close js-close-modal" aria-label="Close">×</button>
-      <h2 id="modal-title">Book Free Diagnosis</h2>
-      <p class="modal-sub">45-minute working session. No pitch.</p>
-      <form id="modal-call-form" class="modal-form" novalidate>
-        <div class="cr-group"><label for="mf-name">Name *</label><input id="mf-name" required /></div>
-        <div class="cr-group"><label for="mf-email">Work email *</label><input id="mf-email" type="email" required /></div>
-        <button type="submit" class="cr-submit">Book Free Diagnosis →</button>
-      </form>
-    </div>
-  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous"></script>
   <script src="js/site.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/analytics.js" defer></script>
+  <script src="js/booking.js"></script>
+  <script src="js/seo.js"></script>
   <script src="js/blog-media.js"></script>
   <script src="js/blog-blocks.js"></script>
   <script src="js/blog-markdown.js"></script>

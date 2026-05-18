@@ -15,47 +15,7 @@
   onReady(function () {
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* ——— Booking modal (popup form) ——— */
-    var bookingModal = document.getElementById('booking-modal');
-    var bookingForm = document.getElementById('call-request-form');
-
-    function openBookingModal() {
-      if (!bookingModal) return;
-      bookingModal.classList.add('is-open');
-      bookingModal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      var first = bookingForm && bookingForm.querySelector('input, select, textarea');
-      if (first) setTimeout(function () { first.focus(); }, 80);
-    }
-
-    function closeBookingModal() {
-      if (!bookingModal) return;
-      bookingModal.classList.remove('is-open');
-      bookingModal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    window.openBookingModal = openBookingModal;
-    window.closeBookingModal = closeBookingModal;
-
-    document.addEventListener('click', function (e) {
-      if (e.target.closest('.js-open-modal, .js-scroll-to-form')) {
-        e.preventDefault();
-        openBookingModal();
-      }
-      if (e.target.closest('.js-close-modal')) {
-        e.preventDefault();
-        closeBookingModal();
-      }
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && bookingModal && bookingModal.classList.contains('is-open')) {
-        closeBookingModal();
-      }
-    });
-
-    document.querySelectorAll('#nav-menu a.js-open-modal').forEach(function (link) {
+    document.querySelectorAll('#nav-menu .js-open-modal').forEach(function (link) {
       link.addEventListener('click', function () {
         var nav = document.getElementById('navbar');
         var btn = document.getElementById('hamburger');
@@ -99,7 +59,7 @@
     var pathOneliner = document.getElementById('hero-path-oneliner');
     var pathProgressFill = document.getElementById('hero-path-progress-fill');
     var pathLines = [
-      'Map your operating reality in 45 minutes — written output, no commitment.',
+      'No sales deck. No product demo. Just a blueprint you can keep — even if you never hire us.',
       'Proof of value on your data in 72 hours — before you commit to a pilot.',
       '45-day pilot with a guaranteed outcome or full refund.',
     ];
@@ -252,7 +212,10 @@
 
     /* ——— Hash: open modal on load ——— */
     if (window.location.hash === '#request-call' || window.location.hash === '#book-call') {
-      setTimeout(openBookingModal, 300);
+      setTimeout(function () {
+        if (window.KautilyanBooking) KautilyanBooking.open();
+        else openBookingModal();
+      }, 300);
     }
   });
 })();

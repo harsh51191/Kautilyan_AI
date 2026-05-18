@@ -1,0 +1,25 @@
+.uc-landing-body { max-width: 720px; }
+.uc-landing-list {
+  margin: 0 0 28px;
+  padding-left: 1.25rem;
+  color: var(--text-section);
+  line-height: 1.65;
+}
+.uc-landing-list li { margin-bottom: 10px; }
+.uc-landing-metric {
+  padding: 20px 22px;
+  border-radius: 12px;
+  border: 1px solid rgba(240, 160, 48, 0.25);
+  background: rgba(240, 160, 48, 0.06);
+  margin-bottom: 24px;
+}
+.uc-landing-metric p {
+  margin: 8px 0 0;
+  font-size: 1.05rem;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+.uc-landing-case { margin: 20px 0; }
+.uc-landing-case a { color: var(--amber); font-weight: 600; }
+.uc-landing-cta { margin-top: 36px; text-align: center; }
+.page-hero--uc-landing { padding-bottom: 48px; }

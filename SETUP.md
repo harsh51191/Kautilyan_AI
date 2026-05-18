@@ -139,7 +139,9 @@ SHOW_NAV_PRICING: false,
 ## 5) Deploy + SEO
 
 - Put `index.html` behind Vercel (or similar); add your domain.
-- If the live domain is not `kautilyan.ai`, search `index.html` for `kautilyan.ai` and update **canonical** / **Open Graph** URLs.
+- **Live site (canonical):** `https://www.kautilyan.com` — already set in page `<link rel="canonical">`, Open Graph URLs, `sitemap.xml`, `robots.txt`, `llms.txt`, and `CONFIG.SITE_URL` in `js/site.js` / `index.html`.
+- **Redirects:** `vercel.json` sends `kautilyan.com`, `kautilyan.ai`, and `www.kautilyan.ai` → `https://www.kautilyan.com` (301). Keep those rules if you own alternate domains so traffic consolidates on www.
+- In Google Search Console, verify the **www** property (`https://www.kautilyan.com`).
 
 ### Vercel Analytics (optional)
 
@@ -155,6 +157,7 @@ After deploy, enable Analytics in Vercel, then uncomment in `index.html`:
 
 ```javascript
 const CONFIG = {
+  SITE_URL: 'https://www.kautilyan.com',
   SHOW_PRICING: true,
   SHOW_NAV_PRICING: true,
   CAL_LINK: '',

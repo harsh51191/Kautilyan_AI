@@ -1,0 +1,58 @@
+.assessment-main {
+  padding: 100px 0 80px;
+}
+#diagnosis-intake-mount {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.intake-page-header {
+  margin-bottom: 32px;
+}
+.intake-page-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.intake-lede--secondary {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.intake-inline-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--amber);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.intake-inline-link:hover { color: var(--text); }
+
+.intake-lede {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.65;
+  max-width: 52ch;
+}
+.diagnosis-intake-form--page {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+}
+.founder-grid--single {
+  grid-template-columns: 1fr;
+  max-width: 420px;
+}
+.founder-contact {
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+.founder-contact a {
+  color: var(--amber);
+}

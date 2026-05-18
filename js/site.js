@@ -3,14 +3,16 @@
   'use strict';
 
   window.CONFIG = window.CONFIG || {
+    SITE_URL: 'https://www.kautilyan.com',
     SHOW_PRICING: false,
     SHOW_NAV_PRICING: true,
-    CAL_LINK: '',
+    CAL_LINK: 'https://cal.com/kautilyan/stage-0-diagnosis',
     ASSESSMENT_URL: '',
     GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxr380yBL72cXD8ZiDQqAJFVtLAd7_de67q9qvqs5hvh9-VrqD1bayuJmaMJRLGysBd0g/exec',
     BLOG_FEED_URL: 'https://script.google.com/macros/s/AKfycbwr3r44sIUeaFCbHH4Qw8Ldx_VQH08vof4SsgMR6M05Cqu7dPvTwa9WZgWzZ4dQhvXe/exec',
     GOOGLE_APPOINTMENT_URL: '',
     FOUNDERS_EMAIL: 'founders@kautilyan.com',
+    GA4_MEASUREMENT_ID: '',
   };
 
   function qs(sel, root) { return (root || document).querySelector(sel); }
@@ -80,11 +82,12 @@
     }
   }
 
-  /* Modal */
-  var modal = document.getElementById('booking-modal');
-  var modalForm = document.getElementById('modal-call-form');
+  function getBookingModal() {
+    return document.getElementById('booking-modal');
+  }
 
   function openModal() {
+    var modal = getBookingModal();
     if (!modal) return;
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
@@ -94,49 +97,29 @@
   }
 
   function closeModal() {
+    var modal = getBookingModal();
     if (!modal) return;
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
 
-  document.addEventListener('click', function (e) {
-    if (e.target.closest('.js-open-modal')) {
-      e.preventDefault();
-      openModal();
-    }
-  });
   window.openBookingModal = openModal;
+  window.closeBookingModal = closeModal;
 
-  qsa('.js-close-modal').forEach(function (el) {
-    el.addEventListener('click', function (e) {
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('.js-close-modal')) {
       e.preventDefault();
       closeModal();
-    });
+    }
   });
 
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) closeModal();
+    if (e.key === 'Escape') {
+      var modal = getBookingModal();
+      if (modal && modal.classList.contains('is-open')) closeModal();
+    }
   });
-
-  if (modalForm) {
-    modalForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var payload = {
-        name: qs('#mf-name', modalForm).value.trim(),
-        email: qs('#mf-email', modalForm).value.trim(),
-        company: qs('#mf-company', modalForm).value.trim(),
-        role: qs('#mf-role', modalForm).value,
-        painPoints: qs('#mf-workflow', modalForm).value.trim(),
-        source: 'modal_diagnosis',
-        message: qs('#mf-slot', modalForm).value.trim(),
-      };
-      submitToSheets(payload);
-      showToast('Request sent. We will reach out shortly.', 'success');
-      modalForm.reset();
-      closeModal();
-    });
-  }
 
   /* Sticky CTA */
   var stickyDesktop = document.getElementById('sticky-cta');

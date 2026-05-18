@@ -55,7 +55,10 @@
       --border: rgba(255,255,255,0.07);
       --border-hover: rgba(255,255,255,0.14);
       --text: #E8E8F0;
-      --text-muted: #7A7A9A;
+      --text-muted: #A8A8C8;
+      --text-body: rgba(255, 255, 255, 0.85);
+      --text-section: rgba(255, 255, 255, 0.78);
+      --text-card: rgba(255, 255, 255, 0.72);
       --text-dim: #555570;
       --amber: #F0A030;
       --coral: #E05545;
@@ -260,6 +263,7 @@
       color: #fff;
       border: none;
       padding: 13px 24px;
+      min-height: 44px;
       font-weight: 700;
       box-shadow: 0 2px 20px rgba(240, 160, 48, 0.2), 0 4px 32px rgba(139, 92, 246, 0.12);
     }
@@ -890,7 +894,7 @@
     .section-intro {
       font-size: 1rem;
       line-height: 1.65;
-      color: var(--text-muted);
+      color: var(--text-section);
       margin-top: 12px;
       max-width: 42rem;
     }
@@ -1553,11 +1557,22 @@
       border-radius: var(--radius-sm);
       padding: 10px 14px;
       font-family: var(--font-body);
-      font-size: 0.88rem;
+      font-size: 16px;
       color: var(--text);
       outline: none;
       width: 100%;
       transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .cr-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237A7A9A' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .cr-input[type="date"] {
+      color-scheme: dark;
     }
     .cr-textarea { min-height: 80px; resize: vertical; }
     .cr-input:focus, .cr-select:focus, .cr-textarea:focus { border-color: rgba(240,160,48,0.4); }
@@ -1830,6 +1845,21 @@
       transition: color 0.2s;
     }
     .footer-col a:hover { color: var(--text); }
+    .footer-text-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      font: inherit;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: left;
+    }
+    .footer-text-btn:hover { color: var(--text); }
+    .nav-cta button.btn,
+    .nav-links button.btn {
+      font-family: inherit;
+      cursor: pointer;
+    }
     .footer-aside {
       display: flex;
       flex-direction: column;
@@ -1851,12 +1881,29 @@
       transition: opacity 0.2s;
     }
     .footer-email:hover { opacity: 0.85; }
+    .footer-legal {
+      width: 100%;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .footer-legal a {
+      color: var(--text-muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .footer-legal a:hover { color: var(--text); }
     .footer-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       margin-top: 4px;
       padding: 12px 20px;
+      min-height: 44px;
       border: none;
       border-radius: 10px;
       background: var(--gradient);
+      text-decoration: none;
       color: #fff;
       font-weight: 600;
       font-size: 0.88rem;
@@ -2047,7 +2094,7 @@
     }
     .drain-card-icon svg { width: 22px; height: 22px; }
     .drain-card h3 { font-size: 1rem; margin-bottom: 8px; }
-    .drain-short { font-size: 0.85rem; color: var(--text-muted); line-height: 1.45; }
+    .drain-short { font-size: 0.85rem; color: var(--text-card); line-height: 1.45; }
     .drain-detail {
       font-size: 0.82rem;
       color: var(--text-muted);
@@ -2592,15 +2639,40 @@
     .modal-form label { display: block; font-size: 0.75rem; font-weight: 600; margin-bottom: 6px; color: var(--text-muted); }
     .modal-form input,
     .modal-form select,
-    .modal-form textarea {
+    .modal-form textarea,
+    .modal-form select,
+    .modal-form input {
       width: 100%;
       padding: 10px 12px;
       border-radius: 8px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       background: rgba(8, 8, 16, 0.8);
       color: var(--text);
-      font-size: 0.9rem;
+      font-size: 16px;
+      -webkit-appearance: none;
+      appearance: none;
     }
+    .modal-form select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237A7A9A' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+    }
+    .cr-foot a { color: var(--amber); text-decoration: underline; }
+    .cr-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin: 0 0 8px;
+    }
+    .cr-hint a { color: var(--amber); }
+    .cr-file { padding: 10px 12px; }
+    .booking-modal-panel--wide {
+      max-width: 640px;
+      max-height: 92vh;
+      overflow-y: auto;
+    }
+    .diagnosis-intake-form .cr-textarea { min-height: 72px; }
     .modal-form .cr-submit { width: 100%; margin-top: 8px; }
 
     .sticky-cta {
@@ -2609,6 +2681,7 @@
       right: 24px;
       z-index: 9000;
       padding: 14px 22px;
+      min-height: 44px;
       border-radius: 999px;
       border: none;
       background: var(--gradient);
@@ -2836,5 +2909,28 @@
       .hero-loop-step { padding: 5px 8px; font-size: 0.62rem; }
       .hero-loop-wrap { padding: 18px 16px; }
       .cr-row { grid-template-columns: 1fr; }
+      .btn,
+      .btn-primary,
+      .btn-ghost,
+      .btn-hero-primary,
+      .btn-hero-secondary,
+      .cr-submit,
+      .nav-book-solid,
+      .sticky-cta,
+      .sticky-bar-btn,
+      .footer-cta-btn {
+        min-height: 44px;
+      }
+      .hero-cta-row .btn-hero-primary,
+      .hero-cta-row .btn-hero-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+      .cr-input,
+      .cr-select,
+      .cr-textarea {
+        font-size: 16px;
+        min-height: 44px;
+      }
     }
   

@@ -3,9 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
   <title>About Kautilyan AI — Built for Indian Businesses</title>
   <meta name="description" content="Kautilyan was built because we kept seeing the same problem — AI mandates without implementation paths. We embed, diagnose, redesign, and build. Then hand it over." />
-  <link rel="canonical" href="https://kautilyan.ai/about" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.kautilyan.com/about" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Kautilyan AI" />
+  <meta property="og:url" content="https://www.kautilyan.com/about" />
+  <meta property="og:title" content="About Kautilyan AI — Built for Indian Businesses" />
+  <meta property="og:description" content="AI mandates without implementation paths. We embed, diagnose, redesign, and build governed AI workflows — then hand it over." />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -33,12 +42,10 @@
             <!--<li><a href="pricing.html">Pricing</a></li>-->
             <li><a href="resources.html">Resources</a></li>
             <li><a href="about.html" class="is-current">About</a></li>
-            <li class="nav-mobile-only"><a href="assessment.html" class="assessment-external-link">View Your Report →</a></li>
-            <li class="nav-mobile-only"><a href="#" class="btn btn-primary nav-book-solid js-open-modal">Book Free Diagnosis →</a></li>
+            <li class="nav-mobile-only"><button type="button" class="btn btn-primary nav-book-solid js-open-modal">Book Stage 0 Call →</button></li>
           </ul>
           <div class="nav-cta">
-            <a href="assessment.html" class="btn btn-ghost nav-report-link assessment-external-link">View Your Report →</a>
-            <a href="#" class="btn btn-primary nav-book-solid js-open-modal">Book Free Diagnosis →</a>
+            <button type="button" class="btn btn-primary nav-book-solid js-open-modal">Book Stage 0 Call →</button>
           </div>
           <button class="nav-hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
             <span></span><span></span><span></span>
@@ -168,20 +175,14 @@
             <h2 class="section-headline">The team behind the method.</h2>
           </div>
 
-          <div class="founder-grid fade-up">
+          <div class="founder-grid fade-up founder-grid--single">
             <article class="founder-card">
-              <div class="founder-avatar" aria-hidden="true">HV</div>
-              <h3>Harsha Vellanki</h3>
-              <p class="founder-role">Co-Founder — Product, Strategy, Commercial</p>
-              <p>11+ years across BlackBuck, Solv, Zee, Asian Paints, DHL, VakilSearch. Supply chain, operations, and AI product. Runs every client engagement end-to-end.</p>
-              <a id="founder-link-harsha" href="#" class="founder-link">LinkedIn →</a>
-            </article>
-            <article class="founder-card">
-              <div class="founder-avatar" aria-hidden="true">S</div>
-              <h3>Soumya</h3>
+              <a href="#" id="founder-link-soumya" class="founder-avatar" aria-label="Soumya Cherukupalli on LinkedIn">SC</a>
+              <h3>Soumya Cherukupalli</h3>
               <p class="founder-role">Co-Founder — Engineering, Data Science</p>
               <p>Builds the intelligence layer — diagnosis tools, agent architecture, and every system integration in client environments.</p>
-              <a id="founder-link-soumya" href="#" class="founder-link">LinkedIn →</a>
+              <a href="#" class="founder-link" data-founder-linkedin="soumya">LinkedIn →</a>
+              <p class="founder-contact"><a href="mailto:founders@kautilyan.com">founders@kautilyan.com</a></p>
             </article>
           </div>
         </div>
@@ -225,39 +226,21 @@
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
-    <div class="booking-modal-backdrop js-close-modal"></div>
-    <div class="booking-modal-panel">
-      <button type="button" class="booking-modal-close js-close-modal" aria-label="Close">×</button>
-      <h2 id="modal-title">Book Free Diagnosis</h2>
-      <p class="modal-sub">45-minute working session. No pitch. Written output yours to keep.</p>
-      <form id="modal-call-form" class="modal-form" novalidate>
-        <div class="cr-group"><label for="mf-name">Name *</label><input id="mf-name" required autocomplete="name" /></div>
-        <div class="cr-group"><label for="mf-email">Work email *</label><input id="mf-email" type="email" required autocomplete="email" /></div>
-        <div class="cr-group"><label for="mf-company">Company</label><input id="mf-company" autocomplete="organization" /></div>
-        <div class="cr-group"><label for="mf-role">Role</label>
-          <select id="mf-role"><option value="">Select</option><option>Founder / CEO</option><option>Co-Founder</option><option>Operations Lead</option><option>Other</option></select>
-        </div>
-        <div class="cr-group full"><label for="mf-workflow">What workflow feels messy right now?</label><textarea id="mf-workflow" rows="3"></textarea></div>
-        <div class="cr-group full"><label for="mf-slot">Preferred time slot</label><input id="mf-slot" placeholder="e.g. Weekday mornings IST" /></div>
-        <button type="submit" class="cr-submit">Book Free Diagnosis →</button>
-      </form>
-    </div>
-  </div>
   <button type="button" id="sticky-cta" class="sticky-cta js-open-modal">Book Free Diagnosis →</button>
   <div id="sticky-bar" class="sticky-bar"><button type="button" class="sticky-bar-btn js-open-modal">Book Free Diagnosis →</button></div>
 
   <script>
     window.ABOUT_CONFIG = {
       linkedin: {
-        harsha: '',
-        soumya: '',
-        company: 'https://www.linkedin.com/company/kautilyan-ai'
+        soumya: 'https://www.linkedin.com/in/sowmya-cherukupalli/',
+        company: 'https://www.linkedin.com/company/kautilyan/'
       }
     };
   </script>
   <script src="js/site.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/analytics.js" defer></script>
+  <script src="js/booking.js"></script>
   <script src="js/about.js"></script>
 </body>
 </html>

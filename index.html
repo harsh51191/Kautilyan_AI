@@ -3,16 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
   <title>AI Workflow Transformation for Indian Businesses | Kautilyan AI</title>
   <meta name="description" content="Kautilyan helps growing businesses identify, redesign, and implement high-value AI workflows on existing systems. Start with a free AI Workflow Diagnosis. One workflow. One metric. Proof before scale." />
-  <link rel="canonical" href="https://kautilyan.com/" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.kautilyan.com/" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://kautilyan.com/" />
+  <meta property="og:site_name" content="Kautilyan AI" />
+  <meta property="og:url" content="https://www.kautilyan.com/" />
   <meta property="og:title" content="AI Workflow Transformation for Indian Businesses | Kautilyan AI" />
   <meta property="og:description" content="Identify, redesign, and implement high-value AI workflows on existing systems. Free AI Workflow Diagnosis. One workflow. One metric. Proof before scale." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AI Workflow Transformation | Kautilyan AI" />
   <meta name="twitter:description" content="Free AI Workflow Diagnosis. One workflow. One metric. Proof before scale. Governed AI on your existing systems." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.kautilyan.com/#organization",
+        "name": "Kautilyan AI",
+        "url": "https://www.kautilyan.com/",
+        "logo": "https://www.kautilyan.com/logo.png",
+        "description": "AI workflow transformation for growing businesses. Identify, redesign, and implement high-value AI workflows on existing systems. One workflow. One metric. Proof before scale.",
+        "email": "founders@kautilyan.com",
+        "foundingLocation": {
+          "@type": "Place",
+          "name": "Bangalore, India"
+        },
+        "areaServed": "IN",
+        "serviceType": "AI Workflow Transformation",
+        "sameAs": ["https://www.linkedin.com/company/kautilyan/"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.kautilyan.com/#website",
+        "url": "https://www.kautilyan.com/",
+        "name": "Kautilyan AI",
+        "publisher": { "@id": "https://www.kautilyan.com/#organization" },
+        "inLanguage": "en-IN"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.kautilyan.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Kautilyan AI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Kautilyan AI helps growing businesses identify, redesign, and implement high-value AI workflows on existing systems. We start with one workflow, prove measurable value in 45 days, and institutionalise what works."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do we need to replace our existing systems?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Kautilyan works on top of your existing systems — ERP, CRM, email, Excel, dashboards, and internal tools. No forced migration."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the 45-day guarantee?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Before the pilot starts, we agree on a specific, measurable success metric written into the contract. If we miss the agreed outcome after client-side dependencies are met, we refund the pilot fee."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens to our data?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We support bring-your-own-key setups with Gemini, Claude, or OpenAI. We design for read-only access, data minimisation, and permission control. Your data is never used to train our models or shared across clients."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <!-- =====================================================================
     FONTS
@@ -84,7 +157,10 @@
       --border: rgba(255,255,255,0.07);
       --border-hover: rgba(255,255,255,0.14);
       --text: #E8E8F0;
-      --text-muted: #7A7A9A;
+      --text-muted: #A8A8C8;
+      --text-body: rgba(255, 255, 255, 0.85);
+      --text-section: rgba(255, 255, 255, 0.78);
+      --text-card: rgba(255, 255, 255, 0.72);
       --text-dim: #555570;
       --amber: #F0A030;
       --coral: #E05545;
@@ -512,13 +588,82 @@
       margin: 0;
       padding: 0;
     }
-    .hero-trust-line {
-      margin: 0;
-      font-size: 12px;
+    .hero-trust-strip {
+      list-style: none;
+      margin: 14px 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
       font-weight: 500;
-      letter-spacing: 0.02em;
-      color: rgba(255, 255, 255, 0.4);
+      color: var(--text-section);
+      line-height: 1.45;
     }
+    .hero-trust-strip li::before {
+      content: "✓ ";
+      color: var(--amber);
+      font-weight: 700;
+    }
+    .social-proof-section {
+      padding: 48px 0 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .social-proof-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .proof-metric {
+      text-align: center;
+      padding: 20px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .proof-metric-value {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--amber);
+      margin-bottom: 6px;
+    }
+    .proof-metric-label {
+      font-size: 0.8rem;
+      color: var(--text-card);
+      line-height: 1.35;
+    }
+    .social-proof-quotes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .proof-quote {
+      margin: 0;
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .proof-quote p {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      line-height: 1.55;
+      color: var(--text-body);
+      font-style: italic;
+    }
+    .proof-quote footer {
+      font-size: 0.8rem;
+      color: var(--text-card);
+    }
+    .proof-quote footer a {
+      color: var(--amber);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .proof-quote footer a:hover { text-decoration: underline; }
     .hero-headline { margin: 0; }
     #book-call,
     #request-call,
@@ -1583,12 +1728,21 @@
       border-radius: var(--radius-sm);
       padding: 10px 14px;
       font-family: var(--font-body);
-      font-size: 0.88rem;
+      font-size: 16px;
       color: var(--text);
       outline: none;
       width: 100%;
       transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
     }
+    .cr-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237A7A9A' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .cr-input[type="date"] { color-scheme: dark; }
     .cr-textarea { min-height: 80px; resize: vertical; }
     .cr-input:focus, .cr-select:focus, .cr-textarea:focus { border-color: rgba(240,160,48,0.4); }
     .cr-submit {
@@ -2017,7 +2171,7 @@
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.4);
+      color: var(--text-card);
       margin: 0 0 12px;
       text-align: center;
     }
@@ -2910,6 +3064,30 @@
       padding-top: 28px;
       border-top: 1px solid var(--border);
     }
+    .path-cta-wrap--text {
+      font-size: 0.95rem;
+      color: var(--text-section);
+      line-height: 1.55;
+    }
+    .path-scroll-link,
+    .uc-section-foot a {
+      color: var(--amber);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .path-scroll-link:hover,
+    .uc-section-foot a:hover {
+      text-decoration: underline;
+    }
+    .uc-section-foot {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.95rem;
+      color: var(--text-section);
+      line-height: 1.55;
+      text-align: center;
+    }
     .trust-visual-card h4 {
       font-family: var(--font-display);
       font-size: 0.95rem;
@@ -2972,6 +3150,7 @@
       background: rgba(4, 4, 10, 0.85);
       backdrop-filter: blur(8px);
     }
+    .booking-modal-panel--wide { max-width: 720px; }
     .booking-modal-panel {
       position: relative;
       width: 100%;
@@ -3116,6 +3295,12 @@
       .hero-trust-strip {
         flex-direction: column;
         align-items: flex-start;
+      }
+      .social-proof-metrics {
+        grid-template-columns: 1fr 1fr;
+      }
+      .social-proof-quotes {
+        grid-template-columns: 1fr;
       }
       .pain-grid,
       .drain-grid {
@@ -3295,16 +3480,12 @@
             <li><a href="resources.html">Resources</a></li>
             <li><a href="about.html">About</a></li>
             <li class="nav-mobile-only">
-              <a href="assessment.html" class="assessment-external-link">View Your Report →</a>
-            </li>
-            <li class="nav-mobile-only">
-              <a href="#" class="btn btn-primary nav-book-solid js-open-modal">Book Free Diagnosis →</a>
+              <button type="button" class="btn btn-primary nav-book-solid js-open-modal">Book Stage 0 Call →</button>
             </li>
           </ul>
 
           <div class="nav-cta">
-            <a href="assessment.html" class="btn btn-ghost nav-report-link assessment-external-link">View Your Report →</a>
-            <a href="#" class="btn btn-primary nav-book-solid js-open-modal">Book Free Diagnosis →</a>
+            <button type="button" class="btn btn-primary nav-book-solid js-open-modal">Book Stage 0 Call →</button>
           </div>
 
           <button class="nav-hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
@@ -3336,11 +3517,15 @@
             <p class="hero-principle">Agent proposes. Human approves. Organisation learns.</p>
 
             <div class="hero-cta-row">
-              <a href="#" class="btn-hero-primary js-open-modal">Book Free Diagnosis →</a>
-              <!--<a href="how-it-works.html" class="btn-hero-secondary">See How It Works →</a>-->
+              <button type="button" class="btn-hero-primary js-open-modal">Book Stage 0 Call →</button>
+              <a href="how-it-works.html" class="btn-hero-secondary">See How It Works →</a>
             </div>
 
-            <p class="hero-trust-line">No migration required · One workflow first · Human-approved AI</p>
+            <ul class="hero-trust-strip" aria-label="Why book a diagnosis">
+              <li>Works on your existing systems — no migration required</li>
+              <li>One workflow. Named outcome. Guaranteed or refunded.</li>
+              <li>No sales deck. No product demo. Just a written map of your operating reality.</li>
+            </ul>
           </div>
 
           <div class="hero-path-wrap fade-up fade-up-delay-2" aria-label="Proof-of-value path">
@@ -3362,8 +3547,32 @@
                 <span class="hero-path-step-name">Pilot</span>
               </span>
             </div>
-            <p class="hero-path-oneliner" id="hero-path-oneliner">Map your operating reality in 45 minutes — written output, no commitment.</p>
+            <p class="hero-path-oneliner" id="hero-path-oneliner">No sales deck. No product demo. Just a blueprint of your operating reality that you can keep — even if you never hire us.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+      SOCIAL PROOF (P1.2)
+    =================================================================== -->
+    <section id="social-proof" class="social-proof-section">
+      <div class="container">
+        <div class="social-proof-metrics fade-up" aria-label="Outcome highlights">
+          <div class="proof-metric"><span class="proof-metric-value">45</span><span class="proof-metric-label">Days — pilot guarantee</span></div>
+          <div class="proof-metric"><span class="proof-metric-value">₹50K</span><span class="proof-metric-label">Blueprint credited to Stage 2</span></div>
+          <div class="proof-metric"><span class="proof-metric-value">100%</span><span class="proof-metric-label">Refund if we miss Day 45</span></div>
+          <div class="proof-metric"><span class="proof-metric-value">1</span><span class="proof-metric-label">Workflow. One named metric.</span></div>
+        </div>
+        <div class="social-proof-quotes fade-up">
+          <blockquote class="proof-quote">
+            <p>"The forecast cycle that used to take 8 days now generates a same-day operating brief."</p>
+            <footer>— Group IT Head, Manufacturing company, 500+ employees · <a href="case-studies/manufacturing-forecast.html">Read outcome →</a></footer>
+          </blockquote>
+          <blockquote class="proof-quote">
+            <p>"Every important decision still required me personally. Now the logic is in the system."</p>
+            <footer>— Managing Director, B2B distribution company, 200 employees · <a href="case-studies/distribution-revenue.html">Read outcome →</a></footer>
+          </blockquote>
         </div>
       </div>
     </section>
@@ -3569,7 +3778,7 @@
             </div>
           </article>
         </div>
-        <p class="path-cta-wrap fade-up"><a href="#" class="btn-hero-primary js-open-modal">Start with a free 45-minute diagnosis →</a></p>
+        <p class="path-cta-wrap fade-up path-cta-wrap--text">Stage 0 is free — a written operating map, no commitment. <a href="#book-call" class="path-scroll-link">Book below when you are ready →</a></p>
       </div>
     </section>
 
@@ -3624,46 +3833,40 @@
               <p class="uc-messy"><strong>Messy workflow:</strong> Numbers in the ERP; market context in WhatsApp and field judgment — 7–8 days of coordination before leadership has a usable forecast.</p>
               <ul class="uc-changes"><li>Detects forecast risk signals from connected systems</li><li>Assembles context packs from history and field input</li><li>Drafts forecast scenarios for human approval</li></ul>
               <p class="uc-proof"><strong>Proof metric:</strong> Cut forecast preparation from days to same-day with governance intact.</p>
-              <button type="button" class="btn-hero-secondary js-open-modal">Diagnose this workflow →</button>
             </div>
             <div class="tabs-panel" data-panel="revenue-leak" role="tabpanel">
               <p class="uc-messy"><strong>Messy workflow:</strong> CRM tracks stages, but competitor risk, discount logic, and next-best action still wait on one senior person.</p>
               <ul class="uc-changes"><li>Surfaces quote and deal-risk signals early</li><li>Drafts next-best actions with precedent</li><li>Routes approvals with full decision trace</li></ul>
               <p class="uc-proof"><strong>Proof metric:</strong> Reduce quote leakage and stalled deals waiting on judgment.</p>
-              <button type="button" class="btn-hero-secondary js-open-modal">Diagnose this workflow →</button>
             </div>
             <div class="tabs-panel" data-panel="approvals" role="tabpanel">
               <p class="uc-messy"><strong>Messy workflow:</strong> Approvals happen verbally or over chat — no record, no routing, no learning captured.</p>
               <ul class="uc-changes"><li>Drafts approval options with policy context</li><li>One-click human approval with audit trail</li><li>Stores overrides as reusable precedent</li></ul>
               <p class="uc-proof"><strong>Proof metric:</strong> Shorten approval cycles while maintaining governance.</p>
-              <button type="button" class="btn-hero-secondary js-open-modal">Diagnose this workflow →</button>
             </div>
             <div class="tabs-panel" data-panel="d2c" role="tabpanel">
               <p class="uc-messy"><strong>Messy workflow:</strong> Shopify, Amazon, Flipkart, Meta ads, support, returns, inventory, logistics, and WhatsApp all show signals — but no one sees the operating picture in time.</p>
               <ul class="uc-changes"><li>Detects stockout risk, return spikes, delayed refunds, and marketplace issue patterns</li><li>Connects campaign activity with inventory and fulfilment signals</li><li>Drafts daily operating briefs for founders and ops leads</li></ul>
               <p class="uc-proof"><strong>Proof metric:</strong> Reduce daily manual reconciliation across commerce, inventory, support, and logistics.</p>
-              <button type="button" class="btn-hero-secondary js-open-modal">Diagnose this workflow →</button>
             </div>
             <div class="tabs-panel" data-panel="escalations" role="tabpanel">
               <p class="uc-messy"><strong>Messy workflow:</strong> Customer issues surface late — buried in support threads and informal escalations.</p>
               <ul class="uc-changes"><li>Detects escalation signals before churn</li><li>Assembles customer context across channels</li><li>Drafts response options for approval</li></ul>
               <p class="uc-proof"><strong>Proof metric:</strong> Surface escalations earlier with named response SLAs.</p>
-              <button type="button" class="btn-hero-secondary js-open-modal">Diagnose this workflow →</button>
             </div>
             <div class="tabs-panel" data-panel="leadership" role="tabpanel">
               <p class="uc-messy"><strong>Messy workflow:</strong> Dashboards show what happened; leaders still need someone to assemble context and recommend action.</p>
               <ul class="uc-changes"><li>Connects variance signals across systems</li><li>Drafts leadership briefs with stuck decisions flagged</li><li>Routes follow-ups automatically after approval</li></ul>
               <p class="uc-proof"><strong>Proof metric:</strong> Reduce manual reporting effort by a named percentage.</p>
-              <button type="button" class="btn-hero-secondary js-open-modal">Diagnose this workflow →</button>
             </div>
             <div class="tabs-panel" data-panel="docs" role="tabpanel">
               <p class="uc-messy"><strong>Messy workflow:</strong> SOPs describe the ideal process; real exceptions live in people's heads.</p>
               <ul class="uc-changes"><li>Captures real workflow from artifacts and traces</li><li>Maps exceptions and decision points</li><li>Turns approved decisions into living documentation</li></ul>
               <p class="uc-proof"><strong>Proof metric:</strong> Reduce workflow fragility when key people are unavailable.</p>
-              <button type="button" class="btn-hero-secondary js-open-modal">Diagnose this workflow →</button>
             </div>
           </div>
         </div>
+        <p class="uc-section-foot fade-up">Not sure which pattern fits? We map your actual workflow on a free 45-minute Stage 0 call — <a href="#book-call" class="path-scroll-link">see booking below →</a></p>
         </div>
       </div>
     </section>
@@ -3683,7 +3886,6 @@
           <div class="diag-step"><span class="diag-num">5</span><p>Which signals stay invisible until too late</p></div>
           <div class="diag-step"><span class="diag-num">6</span><p>Best workflow candidate for a 45-day proof-of-value</p></div>
         </div>
-        <p class="diag-cta-wrap fade-up"><a href="#" class="btn-hero-primary js-open-modal">Book Free Diagnosis →</a></p>
       </div>
     </section>
 
@@ -3798,23 +4000,13 @@
           <h2 class="display-lg">Your first AI win should not start with a tool. It should start with the right workflow.</h2>
           <p>Bring us one important, high-value workflow. We'll help you diagnose where it breaks, redesign how it should run with AI, and define what measurable proof looks like in 45 days.</p><p>No sales pitch. No generic demo. No platform commitment before proof.</p>
           <div class="cta-strip-actions">
-            <a href="#" class="btn btn-primary btn-xl js-open-modal">Book Free Diagnosis →</a>
-            <a
-              href="#"
-              class="btn btn-primary btn-xl cal-booking-link"
-              id="cal-booking-btn"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="display:none;"
-            >
-              Book via Cal.com →
-            </a>
-            <!--<a href="resources.html#gated-resources" class="btn btn-ghost btn-xl">Get the AI Workflow Diagnosis Checklist →</a>-->
+            <button type="button" class="btn btn-primary btn-xl js-open-modal">Book Stage 0 Call →</button>
+            <a href="assessment.html" class="btn btn-ghost btn-xl">Full pre-call intake →</a>
           </div>
           <p class="cta-scarcity">We take a limited number of diagnosis calls each week so every session produces a useful written output.</p>
           <p id="book-call-google-alt" style="display:none; margin-top:14px; font-size:0.8rem; color:var(--text-dim);"></p>
           <p style="margin-top:20px; font-size:0.8rem; color:var(--text-dim);">
-            Personally facilitated by Harsha Vellanki, Co-Founder, Kautilyan AI. No SDRs. No sales scripts. We confirm your 45-minute window by email.
+            Personally facilitated by our team at Kautilyan AI. No SDRs. No sales scripts. We confirm your 45-minute window by email.
           </p>
         </div>
 
@@ -3840,10 +4032,11 @@
       CONFIG — edit these values
     =================================================================== */
     const CONFIG = {
+      SITE_URL: 'https://www.kautilyan.com',
       SHOW_PRICING: false,
       SHOW_NAV_PRICING: true,
       // Optional: Cal.com (or other) link — shown as a secondary button when set.
-      CAL_LINK: '',
+      CAL_LINK: 'https://cal.com/kautilyan/stage-0-diagnosis',
       // Full URL to your questionnaire (Google Form, Typeform, Tally, etc.).
       ASSESSMENT_URL: '',
       // Google Apps Script Web App URL — required for "Request a call" to append rows (see SETUP.md).
@@ -3851,7 +4044,9 @@
       // Optional: Google Calendar appointment schedule — shown as a small link under the CTAs when set (primary path is the form below).
       GOOGLE_APPOINTMENT_URL: '',
       FOUNDERS_EMAIL: 'founders@kautilyan.com',
+      GA4_MEASUREMENT_ID: '',
     };
+    window.CONFIG = Object.assign({}, window.CONFIG || {}, CONFIG);
 
     function assessmentUrl() {
       return (CONFIG.ASSESSMENT_URL || '').trim();
@@ -3948,101 +4143,6 @@
         if (footerPricing) footerPricing.style.display = 'none';
       }
 
-      function initBookingDatePicker() {
-        var dateEl = document.getElementById('cf-preferred-date');
-        if (!dateEl) return;
-        var today = new Date();
-        dateEl.min = today.toISOString().slice(0, 10);
-        dateEl.addEventListener('change', function () {
-          if (!dateEl.value) return;
-          var d = new Date(dateEl.value + 'T12:00:00');
-          var day = d.getDay();
-          if (day === 0 || day === 6) {
-            showToast('Please pick a weekday (Mon–Fri).', 'error');
-            dateEl.value = '';
-          }
-        });
-      }
-
-      function formatBookingSlot() {
-        var dateEl = document.getElementById('cf-preferred-date');
-        var slotEl = document.getElementById('cf-preferred-slot');
-        var dateVal = dateEl ? dateEl.value : '';
-        var slotVal = slotEl ? slotEl.value : '';
-        if (!dateVal && !slotVal) return '';
-        if (dateVal && slotVal) {
-          return 'Call on ' + dateVal + ' at ' + slotVal + ' (45 min)';
-        }
-        return dateVal || slotVal;
-      }
-
-      function closeBookingModalInline() {
-        if (typeof window.closeBookingModal === 'function') {
-          window.closeBookingModal();
-          return;
-        }
-        var modal = document.getElementById('booking-modal');
-        if (!modal) return;
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }
-
-      initBookingDatePicker();
-
-      var form = document.getElementById('call-request-form');
-      if (form) {
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          var name = document.getElementById('cf-name').value.trim();
-          var email = document.getElementById('cf-email').value.trim();
-          var dateVal = document.getElementById('cf-preferred-date').value;
-          var slotVal = document.getElementById('cf-preferred-slot').value;
-          if (!name || !email || email.indexOf('@') < 0) {
-            showToast('Please enter your name and a valid work email.', 'error');
-            return;
-          }
-          if (!dateVal) {
-            showToast('Please choose a preferred date.', 'error');
-            return;
-          }
-          if (!slotVal) {
-            showToast('Please choose a start time.', 'error');
-            return;
-          }
-          var d = new Date(dateVal + 'T12:00:00');
-          if (d.getDay() === 0 || d.getDay() === 6) {
-            showToast('Please pick a weekday (Mon–Fri).', 'error');
-            return;
-          }
-          var ctx = document.getElementById('cf-context').value.trim();
-          var painArr = ctx ? [ctx] : [];
-          if (!(CONFIG.GOOGLE_SCRIPT_URL || '').trim()) {
-            showToast('Set GOOGLE_SCRIPT_URL in index.html (Apps Script Web App URL) so requests are saved to Google Sheets.', 'error');
-            return;
-          }
-          var payload = {
-            name: name,
-            email: email,
-            phone: document.getElementById('cf-phone').value.trim(),
-            company: document.getElementById('cf-company').value.trim(),
-            role: document.getElementById('cf-role').value,
-            teamSize: document.getElementById('cf-size').value,
-            revenue: document.getElementById('cf-revenue').value,
-            painPoints: painArr,
-            heardFrom: document.getElementById('cf-heard').value,
-            source: 'call_request',
-            score: '',
-            message: formatBookingSlot(),
-          };
-          submitToSheets(payload);
-          showToast('Request sent. We will reach out shortly.', 'success');
-          form.reset();
-          initBookingDatePicker();
-          closeBookingModalInline();
-        });
-      }
-
     });
 
     var navbar = document.getElementById('navbar');
@@ -4074,7 +4174,7 @@
       var fill = document.getElementById('hero-path-progress-fill');
       var oneliner = document.getElementById('hero-path-oneliner');
       var lines = [
-        'Map your operating reality in 45 minutes — written output, no commitment.',
+        'No sales deck. No product demo. Just a blueprint you can keep — even if you never hire us.',
         'Proof of value on your data in 72 hours — before you commit to a pilot.',
         '45-day pilot with a guaranteed outcome or full refund.',
       ];
@@ -4190,74 +4290,14 @@
 
 
 
-  <div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title" aria-modal="true">
-    <div class="booking-modal-backdrop js-close-modal"></div>
-    <div class="booking-modal-panel">
-      <button type="button" class="booking-modal-close js-close-modal" aria-label="Close">×</button>
-      <h2 id="modal-title">Book Free Diagnosis</h2>
-      <p class="modal-sub">45-minute working session. Written output yours to keep. Pick a date and time — we confirm by email.</p>
-      <form id="call-request-form" class="call-request-form" novalidate>
-        <div class="cr-row">
-          <div class="cr-group"><label class="cr-label" for="cf-name">Name *</label><input id="cf-name" class="cr-input" required autocomplete="name" /></div>
-          <div class="cr-group"><label class="cr-label" for="cf-email">Work email *</label><input id="cf-email" class="cr-input" type="email" required autocomplete="email" /></div>
-        </div>
-        <div class="cr-row">
-          <div class="cr-group"><label class="cr-label" for="cf-phone">Phone</label><input id="cf-phone" class="cr-input" type="tel" autocomplete="tel" /></div>
-          <div class="cr-group"><label class="cr-label" for="cf-company">Company</label><input id="cf-company" class="cr-input" autocomplete="organization" /></div>
-        </div>
-        <div class="cr-row">
-          <div class="cr-group"><label class="cr-label" for="cf-role">Role</label>
-            <select id="cf-role" class="cr-select"><option value="">Select</option><option>Founder / CEO</option><option>Co-Founder</option><option>Head of Operations</option><option>Head of CS / Revenue</option><option>Other</option></select>
-          </div>
-          <div class="cr-group"><label class="cr-label" for="cf-size">Team size</label>
-            <select id="cf-size" class="cr-select"><option value="">Select</option><option>1–10</option><option>11–50</option><option>51–200</option><option>200+</option></select>
-          </div>
-        </div>
-        <div class="cr-group"><label class="cr-label" for="cf-revenue">Annual revenue (approx.)</label>
-          <select id="cf-revenue" class="cr-select"><option value="">Select</option><option>Under ₹10 Cr</option><option>₹10–50 Cr</option><option>₹50–200 Cr</option><option>₹200 Cr+</option></select>
-        </div>
-        <div class="cr-group full"><label class="cr-label" for="cf-context">What workflow feels messy right now?</label><textarea id="cf-context" class="cr-textarea" rows="3" placeholder="e.g. Forecasting, approvals, customer escalations…"></textarea></div>
-        <div class="cr-group full cr-slot-field">
-          <div class="cr-slot-header">
-            <label class="cr-slot-title">When should we call?</label>
-            <span class="cr-slot-badge">45 min · IST</span>
-          </div>
-          <p class="cr-slot-lede">Choose a weekday date and start time. We send one confirmed calendar invite.</p>
-          <div class="cr-row cr-datetime-row">
-            <div class="cr-group">
-              <label class="cr-label" for="cf-preferred-date">Preferred date *</label>
-              <input id="cf-preferred-date" class="cr-input" type="date" required autocomplete="off" />
-            </div>
-            <div class="cr-group">
-              <label class="cr-label" for="cf-preferred-slot">Start time *</label>
-              <select id="cf-preferred-slot" class="cr-select cr-slot-select" required>
-                <option value="">Select a time</option>
-                <option value="9:00 AM IST">9:00 AM</option>
-                <option value="9:45 AM IST">9:45 AM</option>
-                <option value="10:30 AM IST">10:30 AM</option>
-                <option value="11:15 AM IST">11:15 AM</option>
-                <option value="12:00 PM IST">12:00 PM</option>
-                <option value="12:45 PM IST">12:45 PM</option>
-                <option value="1:30 PM IST">1:30 PM</option>
-                <option value="2:15 PM IST">2:15 PM</option>
-                <option value="3:00 PM IST">3:00 PM</option>
-                <option value="3:45 PM IST">3:45 PM</option>
-                <option value="4:30 PM IST">4:30 PM</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="cr-group"><label class="cr-label" for="cf-heard">How did you hear about us?</label>
-          <select id="cf-heard" class="cr-select"><option value="">Select</option><option>Referral</option><option>LinkedIn</option><option>Search</option><option>Event</option><option>Other</option></select>
-        </div>
-        <button type="submit" class="cr-submit">Book Free Diagnosis →</button>
-        <p class="cr-foot">Submitted securely to our team. No spam. No platform pitch.</p>
-      </form>
-    </div>
-  </div>
-  <button type="button" id="sticky-cta" class="sticky-cta js-open-modal" aria-label="Book Free Diagnosis">Book Free Diagnosis →</button>
-  <div id="sticky-bar" class="sticky-bar"><button type="button" class="sticky-bar-btn js-open-modal">Book Free Diagnosis →</button></div>
 
-  <script src="js/homepage.js?v=4"></script>
+  <button type="button" id="sticky-cta" class="sticky-cta js-open-modal" aria-label="Book Stage 0 Call">Book Stage 0 Call →</button>
+  <div id="sticky-bar" class="sticky-bar"><button type="button" class="sticky-bar-btn js-open-modal">Book Stage 0 Call →</button></div>
+
+  <script src="js/site.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/analytics.js" defer></script>
+  <script src="js/booking.js"></script>
+  <script src="js/homepage.js?v=6"></script>
 </body>
 </html>

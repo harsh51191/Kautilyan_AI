@@ -1,0 +1,55 @@
+# Kautilyan AI
+
+> Kautilyan helps growing Indian businesses identify, redesign, and implement high-value AI workflows on existing systems — one workflow, one metric, proof before scale.
+
+Kautilyan is an AI workflow transformation partner (not a generic SaaS platform). Engagements start with a free 45-minute AI Workflow Diagnosis, then a scoped Proof of Value Blueprint and a 45-day pilot with a named outcome guaranteed in writing.
+
+## What we do
+
+- Diagnose which operational workflow is breaking and why
+- Redesign the workflow for the AI era (not just automate the old one)
+- Implement governed AI agents on existing systems (ERP, CRM, WhatsApp, Excel, etc.)
+- Prove measurable value in ~45 days before scaling
+
+## How we work
+
+1. **Stage 0 — Free AI Workflow Diagnosis:** 45-minute session, written output, no commitment.
+2. **Stage 1 — Proof of Value Blueprint:** Deep-dive workflow analysis, future-state design, named success metric (credited against pilot).
+3. **Stage 2 — 45-day pilot:** One workflow, one named outcome, refund guarantee if outcome is missed after client dependencies are met.
+4. **Stage 3 — Kautilyan Intelligence Layer:** Institutionalise what works at scale.
+
+## Key principles
+
+- Agent proposes. Human approves. Organisation learns.
+- BYOK — clients bring own API keys; read-only access, data minimisation, no model training on client data.
+- Platform after proof — no platform commitment before the first workflow proves value.
+- **SLOPE Framework:** Start Small, Leverage Right Tools, Own Your Data, Powered Experiments, Evaluate Always.
+
+## Who we work with
+
+Growing businesses with operational complexity — D2C brands, ecommerce operators, manufacturers, distributors, B2B services, logistics, healthcare — with existing systems, an AI mandate, and no clear implementation path.
+
+## Contact
+
+- Email: founders@kautilyan.com
+- Website: https://www.kautilyan.com
+
+## Key pages
+
+- [Homepage](https://www.kautilyan.com/)
+- [How it works](https://www.kautilyan.com/how-it-works)
+- [Use cases](https://www.kautilyan.com/use-cases)
+- [Pricing](https://www.kautilyan.com/pricing)
+- [Resources](https://www.kautilyan.com/resources)
+- [About](https://www.kautilyan.com/about)
+- [Assessment](https://www.kautilyan.com/assessment)
+- [Blog](https://www.kautilyan.com/blog)
+
+## Blog articles
+
+- [My CEO told me to implement AI. Where do I actually start?](https://www.kautilyan.com/blog/ai-implementation-where-to-start)
+- [Stop calling everything an agent — the AI execution stack](https://www.kautilyan.com/blog/ai-execution-stack)
+- [Why AI mandates fail before they start](https://www.kautilyan.com/blog/why-ai-mandates-fail)
+- [Your teams are using AI. Your organisation isn't.](https://www.kautilyan.com/blog/teams-using-ai-organisation-isnt)
+- [We lost three years of context when someone left](https://www.kautilyan.com/blog/institutional-knowledge-loss)
+- [You have the AI mandate, the budget, and the board's attention](https://www.kautilyan.com/blog/cio-ai-mandate-execution-gap)

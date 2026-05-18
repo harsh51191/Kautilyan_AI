@@ -223,13 +223,41 @@
     }
   }
 
+  function siteBase() {
+    var cfg = getConfig();
+    return String(cfg.SITE_URL || 'https://www.kautilyan.com').replace(/\/$/, '');
+  }
+
+  function needsArticleHtmlPath() {
+    if (typeof window === 'undefined' || !window.location) return false;
+    var p = window.location.protocol;
+    if (p === 'file:') return true;
+    var host = (window.location.hostname || '').toLowerCase();
+    return (
+      host === 'localhost' ||
+      host === '127.0.0.1' ||
+      host === '[::]' ||
+      host === '::1' ||
+      host === '0.0.0.0'
+    );
+  }
+
   function articleUrl(slug) {
-    return 'article.html?slug=' + encodeURIComponent(slug);
+    slug = String(slug || '').trim().toLowerCase();
+    if (needsArticleHtmlPath()) {
+      return 'article.html?slug=' + encodeURIComponent(slug);
+    }
+    return '/blog/' + encodeURIComponent(slug);
+  }
+
+  function absoluteArticleUrl(slug) {
+    return siteBase() + '/blog/' + encodeURIComponent(String(slug || '').trim().toLowerCase());
   }
 
   function renderArticleSchema(post, url) {
     var script = document.getElementById('article-schema');
     if (!script) return;
+    var pageUrl = url || absoluteArticleUrl(post.slug);
     var schema = {
       '@context': 'https://schema.org',
       '@type': 'Article',
@@ -239,10 +267,11 @@
       publisher: {
         '@type': 'Organization',
         name: 'Kautilyan AI',
-        logo: { '@type': 'ImageObject', url: 'https://kautilyan.ai/favicon.ico' },
+        logo: { '@type': 'ImageObject', url: siteBase() + '/logo.png' },
       },
       datePublished: post.published_date || undefined,
-      mainEntityOfPage: url,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+      url: pageUrl,
     };
     script.textContent = JSON.stringify(schema);
   }
@@ -252,6 +281,7 @@
     getPostBySlug: getPostBySlug,
     formatDate: formatDate,
     articleUrl: articleUrl,
+    absoluteArticleUrl: absoluteArticleUrl,
     renderArticleSchema: renderArticleSchema,
     renderPostBody: renderPostBody,
     enhanceArticle: enhanceArticle,

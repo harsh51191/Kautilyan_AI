@@ -1,0 +1,28 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "kautilyan.com" }],
+      "destination": "https://www.kautilyan.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "kautilyan.ai" }],
+      "destination": "https://www.kautilyan.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.kautilyan.ai" }],
+      "destination": "https://www.kautilyan.com/:path*",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    { "source": "/blog/:slug", "destination": "/article.html?slug=:slug" },
+    { "source": "/use-cases/:slug", "destination": "/use-case-landing.html?slug=:slug" }
+  ]
+}

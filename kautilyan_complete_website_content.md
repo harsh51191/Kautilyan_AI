@@ -58,7 +58,7 @@ Agent proposes. Human approves. Organisation learns.
 ✓ 45-day outcome guaranteed in writing
 
 **Right column — UI Mock card header:**
-kautilyan.ai — Live Intelligence Layer
+www.kautilyan.com — Live Intelligence Layer
 
 Flow nodes: Signal → Context → Draft → Approve → Execute → Learn
 

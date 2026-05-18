@@ -3,9 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Workflow Use Cases — Sales, Operations, Finance, and More | Kautilyan AI</title>
+  <link rel="icon" href="data:," />
+  <title>AI Workflow Use Cases — Where Kautilyan Starts | Kautilyan AI</title>
   <meta name="description" content="Real AI workflow transformations for sales forecasting, revenue leakage, approval automation, leadership reporting, D2C operations, and more. See where Kautilyan starts." />
-  <link rel="canonical" href="https://kautilyan.ai/use-cases" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.kautilyan.com/use-cases" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Kautilyan AI" />
+  <meta property="og:url" content="https://www.kautilyan.com/use-cases" />
+  <meta property="og:title" content="AI Workflow Use Cases — Where Kautilyan Starts | Kautilyan AI" />
+  <meta property="og:description" content="Real AI workflow transformations for sales forecasting, approval automation, leadership reporting, D2C operations, and more." />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -33,12 +42,10 @@
             <li><a href="pricing.html">Pricing</a></li>
             <li><a href="resources.html">Resources</a></li>
             <li><a href="about.html">About</a></li>
-            <li class="nav-mobile-only"><a href="assessment.html" class="assessment-external-link">View Your Report →</a></li>
-            <li class="nav-mobile-only"><a href="#" class="btn btn-primary nav-book-solid js-open-modal">Book Free Diagnosis →</a></li>
+            <li class="nav-mobile-only"><button type="button" class="btn btn-primary nav-book-solid js-open-modal">Book Stage 0 Call →</button></li>
           </ul>
           <div class="nav-cta">
-            <a href="assessment.html" class="btn btn-ghost nav-report-link assessment-external-link">View Your Report →</a>
-            <a href="#" class="btn btn-primary nav-book-solid js-open-modal">Book Free Diagnosis →</a>
+            <button type="button" class="btn btn-primary nav-book-solid js-open-modal">Book Stage 0 Call →</button>
           </div>
           <button class="nav-hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
             <span></span><span></span><span></span>
@@ -60,7 +67,7 @@
               <p class="hero-lead fade-up fade-up-delay-1">The right first workflow is painful, visible, and measurable — scoped enough to prove value in 45 days. Explore the workflows we most commonly diagnose and what proof looks like for each.</p>
             </div>
             <div class="hero-cta-row fade-up fade-up-delay-2">
-              <button type="button" class="btn-hero-primary js-open-modal">Book Free Diagnosis →</button>
+              <button type="button" class="btn-hero-primary js-open-modal">Book Stage 0 Call →</button>
               <a href="#use-case-tabs" class="btn-hero-secondary">Browse use cases ↓</a>
             </div>
           </div>
@@ -72,6 +79,7 @@
           <div class="section-header fade-up">
             <span class="label">Use cases</span>
             <h2 class="section-headline">Pick a workflow. See what changes.</h2>
+            <p class="section-intro">Deep dives: <a href="use-cases/sales-forecasting">Sales forecasting</a> · <a href="use-cases/revenue-leakage">Revenue leakage</a> · <a href="use-cases/leadership-reporting">Leadership reporting</a></p>
           </div>
 
           <div class="tabs-wrap uc-tabs-wrap fade-up" data-tabs id="usecase-tabs">
@@ -298,7 +306,7 @@
           <div class="section-header fade-up">
             <span class="label">What we find</span>
             <h2 class="section-headline">Real patterns we diagnose.</h2>
-            <p class="section-intro">Not hypothetical — the operating patterns we find consistently across established businesses.</p>
+            <p class="section-intro">Not hypothetical — the operating patterns we find consistently across established businesses. <a href="case-studies/manufacturing-forecast.html">Forecast outcome</a> · <a href="case-studies/distribution-revenue.html">Revenue outcome</a></p>
           </div>
           <div class="pattern-cards-grid fade-up">
             <article class="pattern-card-v">
@@ -357,7 +365,7 @@
             <h2 class="display-lg">Know which workflow hurts most?</h2>
             <p>45 minutes. We map your operating reality and identify the first workflow worth proving — in writing, no pitch.</p>
             <div class="cta-strip-actions">
-              <button type="button" class="btn btn-primary btn-xl js-open-modal">Book Free Diagnosis →</button>
+              <button type="button" class="btn btn-primary btn-xl js-open-modal">Book Stage 0 Call →</button>
               <a href="how-it-works.html" class="btn btn-ghost btn-xl">See how it works</a>
             </div>
           </div>
@@ -371,30 +379,13 @@
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
-    <div class="booking-modal-backdrop js-close-modal"></div>
-    <div class="booking-modal-panel">
-      <button type="button" class="booking-modal-close js-close-modal" aria-label="Close">×</button>
-      <h2 id="modal-title">Book Free Diagnosis</h2>
-      <p class="modal-sub">45-minute working session. No pitch. Written output yours to keep.</p>
-      <form id="modal-call-form" class="modal-form" novalidate>
-        <div class="cr-group"><label for="mf-name">Name *</label><input id="mf-name" required autocomplete="name" /></div>
-        <div class="cr-group"><label for="mf-email">Work email *</label><input id="mf-email" type="email" required autocomplete="email" /></div>
-        <div class="cr-group"><label for="mf-company">Company</label><input id="mf-company" autocomplete="organization" /></div>
-        <div class="cr-group"><label for="mf-role">Role</label>
-          <select id="mf-role"><option value="">Select</option><option>Founder / CEO</option><option>Co-Founder</option><option>Operations Lead</option><option>Other</option></select>
-        </div>
-        <div class="cr-group full"><label for="mf-workflow">What workflow feels messy right now?</label><textarea id="mf-workflow" rows="3"></textarea></div>
-        <div class="cr-group full"><label for="mf-slot">Preferred time slot</label><input id="mf-slot" placeholder="e.g. Weekday mornings IST" /></div>
-        <button type="submit" class="cr-submit">Book Free Diagnosis →</button>
-      </form>
-    </div>
-  </div>
-  <button type="button" id="sticky-cta" class="sticky-cta js-open-modal">Book Free Diagnosis →</button>
-  <div id="sticky-bar" class="sticky-bar"><button type="button" class="sticky-bar-btn js-open-modal">Book Free Diagnosis →</button></div>
+  <button type="button" id="sticky-cta" class="sticky-cta js-open-modal">Book Stage 0 Call →</button>
+  <div id="sticky-bar" class="sticky-bar"><button type="button" class="sticky-bar-btn js-open-modal">Book Stage 0 Call →</button></div>
 
   <script src="js/site.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/analytics.js" defer></script>
+  <script src="js/booking.js"></script>
   <script src="js/use-cases.js"></script>
 </body>
 </html>

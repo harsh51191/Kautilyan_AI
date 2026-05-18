@@ -21,17 +21,8 @@
 
   /* Optional: pre-fill modal for blueprint / pilot CTAs */
   document.querySelectorAll('[data-booking-intent]').forEach(function (el) {
-    el.addEventListener('click', function () {
-      var intent = el.getAttribute('data-booking-intent');
-      var workflow = document.getElementById('mf-workflow');
-      if (!workflow || !intent) return;
-      var hints = {
-        blueprint: 'Interested in Proof of Value Blueprint (Stage 1)',
-        pilot: 'Interested in 45-day Proof of Value Pilot (Stage 2)',
-      };
-      if (hints[intent] && !workflow.value.trim()) {
-        workflow.placeholder = hints[intent];
-      }
-    });
+    if (!el.classList.contains('js-open-modal')) {
+      el.classList.add('js-open-modal');
+    }
   });
 })();

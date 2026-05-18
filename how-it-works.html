@@ -3,14 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
   <title>How Kautilyan Works — AI Workflow Transformation in 4 Phases</title>
   <meta name="description" content="The Kautilyan method: diagnose the operating reality, redesign the workflow, implement governed AI agents, institutionalise what works. One workflow. 45 days. Guaranteed outcome." />
-  <link rel="canonical" href="https://kautilyan.ai/how-it-works" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.kautilyan.com/how-it-works" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Kautilyan AI" />
+  <meta property="og:url" content="https://www.kautilyan.com/how-it-works" />
+  <meta property="og:title" content="How Kautilyan Works — AI Workflow Transformation in 4 Phases" />
+  <meta property="og:description" content="Diagnose operating reality, redesign the workflow, implement governed AI agents, institutionalise what works." />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/site.css" />
   <link rel="stylesheet" href="css/how-it-works.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How Kautilyan transforms AI workflows in 45 days",
+    "description": "Diagnose operating reality, redesign the workflow, implement governed AI agents, institutionalise what works.",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Diagnose the operating reality",
+        "text": "45-minute session to map how the workflow actually runs — handoffs, decision points, coordination failures."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Redesign the workflow for AI",
+        "text": "Define what gets automated, what gets assisted, and what stays human. Design the governance model."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Implement the first governed AI workflow",
+        "text": "Build on existing systems. Agent proposes. Human approves. Decision trace captured."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Institutionalise the learning",
+        "text": "Every approval and override becomes reusable operating intelligence. Next workflow builds on the first."
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -33,12 +72,10 @@
             <li><a href="pricing.html">Pricing</a></li>
             <li><a href="resources.html">Resources</a></li>
             <li><a href="about.html">About</a></li>
-            <li class="nav-mobile-only"><a href="assessment.html" class="assessment-external-link">View Your Report →</a></li>
-            <li class="nav-mobile-only"><a href="#" class="btn btn-primary nav-book-solid js-open-modal">Book Free Diagnosis →</a></li>
+            <li class="nav-mobile-only"><button type="button" class="btn btn-primary nav-book-solid js-open-modal">Book Stage 0 Call →</button></li>
           </ul>
           <div class="nav-cta">
-            <a href="assessment.html" class="btn btn-ghost nav-report-link assessment-external-link">View Your Report →</a>
-            <a href="#" class="btn btn-primary nav-book-solid js-open-modal">Book Free Diagnosis →</a>
+            <button type="button" class="btn btn-primary nav-book-solid js-open-modal">Book Stage 0 Call →</button>
           </div>
           <button class="nav-hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
             <span></span><span></span><span></span>
@@ -325,30 +362,13 @@
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
-    <div class="booking-modal-backdrop js-close-modal"></div>
-    <div class="booking-modal-panel">
-      <button type="button" class="booking-modal-close js-close-modal" aria-label="Close">×</button>
-      <h2 id="modal-title">Book Free Diagnosis</h2>
-      <p class="modal-sub">45-minute working session. No pitch. Written output yours to keep.</p>
-      <form id="modal-call-form" class="modal-form" novalidate>
-        <div class="cr-group"><label for="mf-name">Name *</label><input id="mf-name" required autocomplete="name" /></div>
-        <div class="cr-group"><label for="mf-email">Work email *</label><input id="mf-email" type="email" required autocomplete="email" /></div>
-        <div class="cr-group"><label for="mf-company">Company</label><input id="mf-company" autocomplete="organization" /></div>
-        <div class="cr-group"><label for="mf-role">Role</label>
-          <select id="mf-role"><option value="">Select</option><option>Founder / CEO</option><option>Co-Founder</option><option>Operations Lead</option><option>Other</option></select>
-        </div>
-        <div class="cr-group full"><label for="mf-workflow">What workflow feels messy right now?</label><textarea id="mf-workflow" rows="3"></textarea></div>
-        <div class="cr-group full"><label for="mf-slot">Preferred time slot</label><input id="mf-slot" placeholder="e.g. Weekday mornings IST" /></div>
-        <button type="submit" class="cr-submit">Book Free Diagnosis →</button>
-      </form>
-    </div>
-  </div>
   <button type="button" id="sticky-cta" class="sticky-cta js-open-modal">Book Free Diagnosis →</button>
   <div id="sticky-bar" class="sticky-bar"><button type="button" class="sticky-bar-btn js-open-modal">Book Free Diagnosis →</button></div>
 
   <script src="js/site.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/analytics.js" defer></script>
+  <script src="js/booking.js"></script>
   <script src="js/how-it-works.js"></script>
 </body>
 </html>

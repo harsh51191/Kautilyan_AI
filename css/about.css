@@ -188,6 +188,23 @@
   color: #fff;
   background: var(--gradient);
   margin-bottom: 16px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.founder-avatar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(240, 160, 48, 0.25);
+}
+.founder-grid--single {
+  grid-template-columns: 1fr;
+  max-width: 420px;
+}
+.founder-contact {
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+.founder-contact a {
+  color: var(--amber);
 }
 .founder-card h3 {
   font-family: var(--font-display);
