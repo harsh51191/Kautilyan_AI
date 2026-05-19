@@ -159,9 +159,11 @@
       --text: #E8E8F0;
       --text-muted: #A8A8C8;
       --text-body: rgba(255, 255, 255, 0.85);
-      --text-section: rgba(255, 255, 255, 0.78);
-      --text-card: rgba(255, 255, 255, 0.72);
-      --text-dim: #555570;
+      --text-section: rgba(255, 255, 255, 0.88);
+      --text-card: rgba(255, 255, 255, 0.82);
+      --text-dim: #9494B0;
+      --bg-elevated: #12121f;
+      --bg-surface: #16162a;
       --amber: #F0A030;
       --coral: #E05545;
       --violet: #8B5CF6;
@@ -195,6 +197,7 @@
       font-weight: 700;
       line-height: 1.08;
       letter-spacing: -0.025em;
+      color: #fff;
     }
     .display-md {
       font-family: var(--font-display);
@@ -202,13 +205,14 @@
       font-weight: 700;
       line-height: 1.1;
       letter-spacing: -0.02em;
+      color: #fff;
     }
     .label {
       font-family: var(--font-body);
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.1em;
-      color: rgba(255, 255, 255, 0.35);
+      color: rgba(255, 255, 255, 0.58);
       text-transform: uppercase;
       margin-bottom: 16px;
       display: inline-block;
@@ -477,7 +481,7 @@
       line-height: 1.65;
       margin: 0;
       max-width: 680px;
-      color: rgba(255, 255, 255, 0.72);
+      color: var(--text-section);
     }
     .hero-principle {
       font-family: var(--font-body);
@@ -770,8 +774,8 @@
       margin-top: 48px;
     }
     .pain-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(165deg, rgba(24, 24, 44, 0.5), rgba(16, 16, 30, 0.75));
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       padding: 28px;
       display: flex;
@@ -812,7 +816,7 @@
       font-weight: 400;
       font-size: 14px;
       line-height: 1.6;
-      color: rgba(255, 255, 255, 0.6);
+      color: var(--text-section);
       margin: 0;
     }
     /* ===================================================================
@@ -968,8 +972,8 @@
     }
     .compare-at-glance { margin-top: 8px; }
     .compare-callout {
-      background: rgba(249, 115, 22, 0.08);
-      border: 1px solid rgba(249, 115, 22, 0.2);
+      background: linear-gradient(165deg, rgba(40, 28, 18, 0.55), rgba(24, 20, 16, 0.75));
+      border: 1px solid rgba(249, 115, 22, 0.28);
       border-radius: 10px;
       padding: 20px 28px;
       margin-top: 32px;
@@ -983,7 +987,7 @@
       font-weight: 500;
       font-size: 16px;
       line-height: 1.6;
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.94);
       margin: 0;
     }
     .compare-callout-accent {
@@ -1062,7 +1066,7 @@
     .section-intro {
       font-size: 1rem;
       line-height: 1.65;
-      color: var(--text-muted);
+      color: var(--text-section);
       margin-top: 12px;
       max-width: 42rem;
     }
@@ -1074,99 +1078,154 @@
       margin-top: 20px;
     }
 
-    /* Proof-of-value path timeline */
-    .path-timeline {
+    /* Proof-of-value path — compact at-a-glance grid */
+    .path-at-glance {
+      margin-top: 40px;
+    }
+    .path-rail {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0;
+      margin: 0 0 20px;
+      padding: 0 8px;
+      list-style: none;
+    }
+    .path-rail-step {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 0;
-      margin-top: 40px;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border);
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+      position: relative;
+      min-width: 0;
     }
-    .path-stage {
-      display: grid;
-      grid-template-columns: 64px 1fr;
-      gap: 0;
-      background: var(--bg-card);
-      border-bottom: 1px solid var(--border);
+    .path-rail-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: calc(50% + 18px);
+      right: calc(-50% + 18px);
+      height: 2px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+      z-index: 0;
     }
-    .path-stage:last-child { border-bottom: none; }
-    .path-stage-marker {
+    .path-rail-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
-      padding-top: 36px;
-      background: rgba(0, 0, 0, 0.2);
-      border-right: 1px solid var(--border);
-    }
-    .path-stage-marker span {
       font-family: var(--font-display);
-      font-size: 1.5rem;
+      font-size: 0.8rem;
       font-weight: 800;
-      opacity: 0.35;
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      background: var(--bg-surface);
+      position: relative;
+      z-index: 1;
     }
-    .path-stage-0 .path-stage-marker span { color: var(--green); opacity: 0.7; }
-    .path-stage-1 .path-stage-marker span { color: var(--amber); opacity: 0.7; }
-    .path-stage-2 .path-stage-marker span { color: var(--violet); opacity: 0.7; }
-    .path-stage-3 .path-stage-marker span { color: var(--coral); opacity: 0.5; }
-    .path-stage-body {
-      padding: 32px 36px 36px 28px;
-    }
-    .path-stage-label {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 600;
+    .path-rail-step--0 .path-rail-dot { color: var(--green); border-color: rgba(52, 211, 153, 0.45); background: rgba(52, 211, 153, 0.1); }
+    .path-rail-step--1 .path-rail-dot { color: var(--amber); border-color: rgba(240, 160, 48, 0.45); background: rgba(240, 160, 48, 0.1); }
+    .path-rail-step--2 .path-rail-dot { color: var(--violet); border-color: rgba(139, 92, 246, 0.45); background: rgba(139, 92, 246, 0.1); }
+    .path-rail-step--3 .path-rail-dot { color: var(--coral); border-color: rgba(224, 85, 69, 0.4); background: rgba(224, 85, 69, 0.08); }
+    .path-rail-name {
+      font-size: 0.68rem;
+      font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 8px;
+      color: var(--text-section);
+      line-height: 1.2;
     }
-    .path-stage-body h3 {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    .path-stage-lead {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-      margin-bottom: 16px;
-    }
-    .path-stage-list {
+    .path-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
       list-style: none;
-      margin: 0 0 16px;
+      margin: 0;
       padding: 0;
     }
-    .path-stage-list li {
-      position: relative;
-      padding: 6px 0 6px 20px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.5;
+    .path-grid > li,
+    .path-rail > li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
-    .path-stage-list li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--amber);
-      font-size: 0.75rem;
+    .path-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 18px 16px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(165deg, rgba(24, 24, 44, 0.92), var(--bg-surface));
+      min-height: 100%;
+    }
+    .path-card--0 { border-top: 2px solid rgba(52, 211, 153, 0.5); }
+    .path-card--1 { border-top: 2px solid rgba(240, 160, 48, 0.5); }
+    .path-card--2 { border-top: 2px solid rgba(139, 92, 246, 0.5); }
+    .path-card--3 { border-top: 2px solid rgba(224, 85, 69, 0.45); }
+    .path-card-phase {
+      font-size: 0.65rem;
       font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
-    .path-stage-note {
-      font-size: 0.82rem;
-      color: var(--text-dim);
-      font-style: italic;
-      margin-bottom: 12px;
+    .path-card--0 .path-card-phase { color: var(--green); }
+    .path-card--1 .path-card-phase { color: var(--amber); }
+    .path-card--2 .path-card-phase { color: var(--violet); }
+    .path-card--3 .path-card-phase { color: var(--coral); }
+    .path-card-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #fff;
+      margin: 0;
+      letter-spacing: -0.01em;
     }
+    .path-card-hook {
+      font-size: 0.8rem;
+      line-height: 1.45;
+      color: var(--text-section);
+      margin: 0;
+      flex: 1;
+    }
+    .path-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .path-card-tags li {
+      font-size: 0.68rem;
+      font-weight: 500;
+      line-height: 1.3;
+      color: var(--text-card);
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .path-card-meta {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin: 0;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+    .path-card--0 .path-card-meta { color: var(--green); }
 
     /* Content sections */
     .content-section {
       border-top: 1px solid var(--border);
     }
     .content-section--alt {
-      background: rgba(255, 255, 255, 0.02);
+      background: linear-gradient(180deg, rgba(20, 20, 36, 0.65) 0%, rgba(14, 14, 26, 0.4) 100%);
     }
     .diagnosis-grid {
       display: grid;
@@ -1388,11 +1447,12 @@
     =================================================================== */
     .how-it-works {
       background:
-        linear-gradient(180deg, rgba(8, 8, 16, 0.92) 0%, rgba(10, 10, 22, 0.96) 50%, rgba(8, 8, 16, 0.92) 100%),
-        var(--gradient-subtle);
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: inset 0 1px 0 rgba(240, 160, 48, 0.06);
+        radial-gradient(ellipse 85% 55% at 50% 0%, rgba(139, 92, 246, 0.08), transparent 58%),
+        radial-gradient(ellipse 50% 40% at 100% 80%, rgba(240, 160, 48, 0.06), transparent 50%),
+        linear-gradient(180deg, #10101c 0%, #141428 50%, #10101c 100%);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 0 rgba(240, 160, 48, 0.08);
     }
     .stages {
       display: grid;
@@ -1903,7 +1963,7 @@
       font-weight: 400;
       font-size: 14px;
       line-height: 1.65;
-      color: rgba(255, 255, 255, 0.6);
+      color: var(--text-section);
       margin: 0;
     }
     .pricing-trust-banner {
@@ -2166,8 +2226,8 @@
       margin: 0;
       padding: 18px 20px 16px;
       border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: linear-gradient(165deg, rgba(18, 18, 32, 0.85), rgba(8, 8, 16, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(165deg, rgba(24, 24, 44, 0.92), rgba(16, 16, 30, 0.96));
       box-shadow: 0 0 40px rgba(139, 92, 246, 0.1);
       max-width: 100%;
     }
@@ -2253,7 +2313,7 @@
       font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.03em;
-      color: rgba(255, 255, 255, 0.38);
+      color: rgba(255, 255, 255, 0.68);
       white-space: nowrap;
       transition: color 0.35s ease;
     }
@@ -2293,8 +2353,8 @@
       gap: 16px;
     }
     .drain-card {
-      background: linear-gradient(165deg, rgba(18, 18, 32, 0.92), var(--bg-card));
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(165deg, rgba(24, 24, 44, 0.96), var(--bg-surface));
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: var(--radius-sm);
       padding: 22px 18px;
       cursor: pointer;
@@ -2314,11 +2374,17 @@
       color: var(--amber);
     }
     .drain-card-icon svg { width: 22px; height: 22px; }
-    .drain-card h3 { font-size: 1rem; margin-bottom: 8px; }
-    .drain-short { font-size: 0.85rem; color: var(--text-muted); line-height: 1.45; }
+    .drain-card h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .drain-short { font-size: 0.85rem; color: var(--text-section); line-height: 1.45; }
     .drain-detail {
       font-size: 0.82rem;
-      color: var(--text-muted);
+      color: var(--text-card);
       line-height: 1.55;
       margin-top: 12px;
       padding-top: 12px;
@@ -2351,13 +2417,13 @@
       flex-direction: column;
     }
     .ops-flow-track--before {
-      background: linear-gradient(165deg, rgba(40, 20, 20, 0.35), rgba(12, 12, 22, 0.9));
-      border-color: rgba(224, 85, 69, 0.2);
+      background: linear-gradient(165deg, rgba(52, 28, 28, 0.55), rgba(20, 20, 36, 0.96));
+      border-color: rgba(224, 85, 69, 0.28);
       box-shadow: 0 0 40px rgba(224, 85, 69, 0.06);
     }
     .ops-flow-track--after {
-      background: linear-gradient(165deg, rgba(20, 24, 40, 0.5), rgba(12, 12, 22, 0.9));
-      border-color: rgba(139, 92, 246, 0.25);
+      background: linear-gradient(165deg, rgba(28, 32, 52, 0.65), rgba(20, 20, 36, 0.96));
+      border-color: rgba(139, 92, 246, 0.3);
       box-shadow: 0 0 40px rgba(139, 92, 246, 0.1);
     }
     .ops-flow-track-head {
@@ -2470,9 +2536,9 @@
       border-radius: 50%;
       font-size: 0.68rem;
       font-weight: 700;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(8, 8, 16, 0.9);
-      color: rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(14, 14, 26, 0.9);
+      color: rgba(255, 255, 255, 0.72);
       transition: border-color 0.35s ease, background 0.35s ease, color 0.35s ease, transform 0.35s ease;
     }
     .ops-flow-step.is-active .ops-flow-step-num {
@@ -2490,7 +2556,7 @@
     .ops-flow-step-text {
       font-size: 0.82rem;
       line-height: 1.35;
-      color: rgba(255, 255, 255, 0.38);
+      color: rgba(255, 255, 255, 0.68);
       transition: color 0.35s ease, font-weight 0.35s ease, text-shadow 0.35s ease;
     }
     .ops-flow-step.is-active .ops-flow-step-text {
@@ -2551,7 +2617,7 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       margin-bottom: 4px;
-      color: var(--text-dim);
+      color: var(--text-muted);
     }
     .transform-before { font-size: 0.9rem; color: rgba(255, 120, 100, 0.85); }
     .transform-after { font-size: 0.9rem; color: rgba(255, 255, 255, 0.9); }
@@ -2574,9 +2640,9 @@
     .diag-step {
       padding: 18px 16px;
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(12, 12, 22, 0.7);
-      opacity: 0.45;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(165deg, rgba(22, 22, 40, 0.85), rgba(16, 16, 30, 0.92));
+      opacity: 0.55;
       transition: all 0.4s ease;
     }
     .diag-step.is-lit {
@@ -2593,9 +2659,10 @@
       background: var(--gradient);
       font-size: 0.75rem;
       font-weight: 700;
+      color: #fff;
       margin-bottom: 10px;
     }
-    .diag-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; margin: 0; }
+    .diag-step p { font-size: 0.82rem; color: var(--text-section); line-height: 1.45; margin: 0; }
     .trace-card {
       position: relative;
       padding: 24px;
@@ -2644,12 +2711,12 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .ops-compare-col--before {
-      background: linear-gradient(165deg, rgba(40, 20, 20, 0.35), rgba(12, 12, 22, 0.9));
-      border-color: rgba(224, 85, 69, 0.2);
+      background: linear-gradient(165deg, rgba(52, 28, 28, 0.55), rgba(20, 20, 36, 0.96));
+      border-color: rgba(224, 85, 69, 0.28);
     }
     .ops-compare-col--after {
-      background: linear-gradient(165deg, rgba(20, 24, 40, 0.5), rgba(12, 12, 22, 0.9));
-      border-color: rgba(139, 92, 246, 0.25);
+      background: linear-gradient(165deg, rgba(28, 32, 52, 0.65), rgba(20, 20, 36, 0.96));
+      border-color: rgba(139, 92, 246, 0.3);
       box-shadow: 0 0 48px rgba(139, 92, 246, 0.08);
     }
     .ops-compare-head {
@@ -2739,15 +2806,15 @@
       align-items: center;
       padding: 14px 16px;
       border-radius: 12px;
-      background: rgba(12, 12, 22, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: linear-gradient(165deg, rgba(24, 24, 44, 0.75), rgba(18, 18, 32, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .why-visual-aspect {
       font-size: 0.78rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--text-dim);
+      color: var(--text-muted);
     }
     .why-pill {
       display: block;
@@ -2757,9 +2824,9 @@
       line-height: 1.35;
     }
     .why-pill--dim {
-      background: rgba(255, 255, 255, 0.04);
-      color: rgba(255, 255, 255, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.06);
+      color: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .why-pill--highlight {
       background: linear-gradient(rgba(12, 12, 22, 0.95), rgba(12, 12, 22, 0.95)) padding-box, var(--gradient) border-box;
@@ -2777,7 +2844,7 @@
       font-size: 0.72rem;
       font-weight: 600;
       line-height: 1.4;
-      color: var(--text-muted);
+      color: var(--text-section);
     }
     .why-col-header--k {
       text-align: right;
@@ -2812,8 +2879,8 @@
     .trust-visual-card {
       padding: 24px 18px;
       border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: linear-gradient(165deg, rgba(18, 18, 32, 0.9), var(--bg-card));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(165deg, rgba(24, 24, 44, 0.92), var(--bg-surface));
       text-align: center;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
@@ -2854,10 +2921,11 @@
       font-family: var(--font-display);
       font-size: 0.95rem;
       margin-bottom: 8px;
+      color: #fff;
     }
     .trust-visual-card p {
       font-size: 0.8rem;
-      color: var(--text-muted);
+      color: var(--text-section);
       line-height: 1.45;
       margin: 0;
     }
@@ -2996,11 +3064,17 @@
       .pattern-grid {
         grid-template-columns: 1fr;
       }
-      .path-stage {
-        grid-template-columns: 48px 1fr;
+      .path-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
-      .path-stage-body {
-        padding: 24px 20px 28px 16px;
+      .path-rail-step:not(:last-child)::after {
+        display: none;
+      }
+      .path-rail {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        padding: 0;
       }
       .hero-trust-strip {
         flex-direction: column;
@@ -3070,6 +3144,7 @@
     }
     @media (max-width: 1100px) {
       .drain-grid { grid-template-columns: repeat(2, 1fr); }
+      .path-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 960px) {
       .footer-top {
@@ -3139,6 +3214,8 @@
       .cta-strip-actions { flex-direction: column; }
       .trust-grid,
       .trust-visual { grid-template-columns: 1fr; }
+      .path-grid { grid-template-columns: 1fr; }
+      .path-rail { margin-bottom: 16px; }
       section.hero { padding: calc(var(--nav-height) + 16px) 20px 32px; }
       .hero-intro-wrap { gap: 24px; }
       .hero-copy-block { gap: 14px; }
@@ -3410,48 +3487,69 @@
           <p class="section-intro">We don't start with a platform. We start with one workflow that matters — map how it actually runs, redesign it for AI, prove the value in 45 days, then institutionalise what works.</p>
         </div>
 
-        <div class="path-timeline fade-up" aria-label="Four phases of the proof-of-value path">
-          <article class="path-stage path-stage-0">
-            <div class="path-stage-marker"><span>0</span></div>
-            <div class="path-stage-body">
-              <span class="path-stage-label">Diagnose — map your operating reality in 45 minutes</span>
-              <h3>Free AI Workflow Diagnosis</h3>
-              <p class="path-stage-lead">45-minute session to find the first workflow worth transforming.</p>
-              <ul class="path-stage-list"><li>Written summary</li><li>Ranked workflow candidates</li><li>Recommended first workflow</li></ul>
-              <p class="path-stage-note">45 mins · Written output · No commitment</p>
-            </div>
-          </article>
-          <article class="path-stage path-stage-1">
-            <div class="path-stage-marker"><span>1</span></div>
-            <div class="path-stage-body">
-              <span class="path-stage-label">Blueprint</span>
-              <h3>Proof of Value Blueprint</h3>
-              <p class="path-stage-lead">Deeper analysis of your selected workflow using real process flows, systems, and decision logic.</p>
-              <ul class="path-stage-list"><li>As-is workflow map</li><li>Future-state design + governance model</li><li>Named success metric for pilot</li></ul>
-              <p class="path-stage-note">72 hrs · Your data · Proof before you commit</p>
-            </div>
-          </article>
-          <article class="path-stage path-stage-2">
-            <div class="path-stage-marker"><span>2</span></div>
-            <div class="path-stage-body">
-              <span class="path-stage-label">Pilot</span>
-              <h3>45-Day Pilot</h3>
-              <p class="path-stage-lead">One workflow reimagined on your existing systems — with a named outcome agreed in writing.</p>
-              <ul class="path-stage-list"><li>Live governed AI workflow</li><li>Human approval at every consequential step</li><li>Before/after evidence at Day 45</li></ul>
-              <p class="path-stage-note">Guaranteed outcome or full refund</p>
-            </div>
-          </article>
-          <article class="path-stage path-stage-3">
-            <div class="path-stage-marker"><span>3</span></div>
-            <div class="path-stage-body">
-              <span class="path-stage-label">Scale</span>
-              <h3>Institutionalise what works</h3>
-              <p class="path-stage-lead">After proof, Kautilyan becomes the intelligence layer that institutionalises what works.</p>
-              <ul class="path-stage-list"><li>Reusable operating intelligence</li><li>Faster second-workflow builds</li><li>Org memory from decision traces</li></ul>
-            </div>
-          </article>
+        <div class="path-at-glance fade-up">
+          <ol class="path-rail" aria-hidden="true">
+            <li class="path-rail-step path-rail-step--0"><span class="path-rail-dot">0</span><span class="path-rail-name">Diagnose</span></li>
+            <li class="path-rail-step path-rail-step--1"><span class="path-rail-dot">1</span><span class="path-rail-name">Blueprint</span></li>
+            <li class="path-rail-step path-rail-step--2"><span class="path-rail-dot">2</span><span class="path-rail-name">Pilot</span></li>
+            <li class="path-rail-step path-rail-step--3"><span class="path-rail-dot">3</span><span class="path-rail-name">Scale</span></li>
+          </ol>
+          <ol class="path-grid" aria-label="Four phases of the proof-of-value path">
+            <li>
+              <article class="path-card path-card--0">
+                <span class="path-card-phase">Stage 0</span>
+                <h3 class="path-card-title">Free AI Workflow Diagnosis</h3>
+                <p class="path-card-hook">Map how work actually runs and pick the first workflow to transform.</p>
+                <ul class="path-card-tags">
+                  <li>Written summary</li>
+                  <li>Ranked candidates</li>
+                  <li>First workflow pick</li>
+                </ul>
+                <p class="path-card-meta">45 mins · Free · No commitment</p>
+              </article>
+            </li>
+            <li>
+              <article class="path-card path-card--1">
+                <span class="path-card-phase">Stage 1</span>
+                <h3 class="path-card-title">Proof of Value Blueprint</h3>
+                <p class="path-card-hook">Deep-dive on one workflow — as-is map, future design, and a named pilot metric.</p>
+                <ul class="path-card-tags">
+                  <li>As-is map</li>
+                  <li>Future design</li>
+                  <li>Success metric</li>
+                </ul>
+                <p class="path-card-meta">72 hrs · Proof before you commit</p>
+              </article>
+            </li>
+            <li>
+              <article class="path-card path-card--2">
+                <span class="path-card-phase">Stage 2</span>
+                <h3 class="path-card-title">45-Day Pilot</h3>
+                <p class="path-card-hook">One workflow live on your systems with human approval at every consequential step.</p>
+                <ul class="path-card-tags">
+                  <li>Governed AI workflow</li>
+                  <li>Human-in-the-loop</li>
+                  <li>Day-45 evidence</li>
+                </ul>
+                <p class="path-card-meta">Guaranteed outcome or full refund</p>
+              </article>
+            </li>
+            <li>
+              <article class="path-card path-card--3">
+                <span class="path-card-phase">Stage 3</span>
+                <h3 class="path-card-title">Institutionalise what works</h3>
+                <p class="path-card-hook">Turn the pilot into reusable operating intelligence for the next workflow.</p>
+                <ul class="path-card-tags">
+                  <li>Reusable intelligence</li>
+                  <li>Faster rebuilds</li>
+                  <li>Org memory</li>
+                </ul>
+                <p class="path-card-meta">After proof · Scale what worked</p>
+              </article>
+            </li>
+          </ol>
         </div>
-        <p class="path-cta-wrap fade-up path-cta-wrap--text">Stage 0 is free — a written operating map, no commitment. <a href="#book-call" class="path-scroll-link">Book below when you are ready →</a></p>
+        <p class="path-cta-wrap fade-up path-cta-wrap--text">Stage 0 is free — a written operating map, no commitment.</p>
       </div>
     </section>
 
