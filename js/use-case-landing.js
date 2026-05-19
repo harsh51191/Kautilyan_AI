@@ -23,7 +23,7 @@
     return;
   }
 
-  fetch('data/use-cases-landing.json', { cache: 'default' })
+  fetch('/data/use-cases-landing.json', { cache: 'default' })
     .then(function (r) {
       if (!r.ok) throw new Error('load failed');
       return r.json();

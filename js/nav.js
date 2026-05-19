@@ -12,6 +12,9 @@
 
   function currentKey() {
     var path = (window.location.pathname || '').toLowerCase();
+    if (path.indexOf('/blog/') !== -1 || path === '/article' || path.indexOf('/article') === 0) {
+      return 'resources';
+    }
     var page = path.split('/').pop() || 'index.html';
     if (page === '' || page === 'index.html') return 'home';
     if (page === 'article.html') return 'resources';

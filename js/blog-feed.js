@@ -18,7 +18,7 @@
 
   function loadVideoOverrides() {
     if (videoOverridesBySlug) return Promise.resolve(videoOverridesBySlug);
-    return fetch('data/blog-video-overrides.json', { cache: 'default' })
+    return fetch('/data/blog-video-overrides.json', { cache: 'default' })
       .then(function (r) {
         if (!r.ok) return {};
         return r.json();
@@ -59,7 +59,7 @@
 
   function loadBlocksSeed() {
     if (blocksSeedBySlug) return Promise.resolve(blocksSeedBySlug);
-    return fetch('data/blog-blocks-seed.json', { cache: 'default' })
+    return fetch('/data/blog-blocks-seed.json', { cache: 'default' })
       .then(function (r) {
         if (!r.ok) return {};
         return r.json();
@@ -139,7 +139,7 @@
   }
 
   function fetchFallback() {
-    return fetch('data/blog-posts.json', { cache: 'default' })
+    return fetch('/data/blog-posts.json', { cache: 'default' })
       .then(function (r) {
         if (!r.ok) throw new Error('fallback json missing');
         return r.json();

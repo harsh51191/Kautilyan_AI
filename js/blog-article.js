@@ -27,7 +27,7 @@
     if (loading) loading.remove();
 
     if (!post) {
-      root.innerHTML = '<p class="blog-error">Article not found. <a href="resources.html">Back to articles</a></p>';
+      root.innerHTML = '<p class="blog-error">Article not found. <a href="/resources">Back to articles</a></p>';
       return;
     }
 
