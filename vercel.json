@@ -7,18 +7,6 @@
       "has": [{ "type": "host", "value": "kautilyan.com" }],
       "destination": "https://www.kautilyan.com/:path*",
       "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "kautilyan.ai" }],
-      "destination": "https://www.kautilyan.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.kautilyan.ai" }],
-      "destination": "https://www.kautilyan.com/:path*",
-      "permanent": true
     }
   ],
   "rewrites": [

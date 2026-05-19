@@ -33,15 +33,12 @@
             '<ul>' +
               '<li><a href="about.html">About</a></li>' +
               '<li><a href="contact.html">Contact</a></li>' +
-              '<li><a href="assessment.html">Pre-call intake</a></li>' +
-              '<li><button type="button" class="footer-text-btn js-open-modal">Book Stage 0 call</button></li>' +
             '</ul>' +
           '</div>' +
         '</div>' +
         '<div class="footer-aside">' +
           '<p class="footer-aside-label">Get in touch</p>' +
           '<a href="mailto:founders@kautilyan.com" class="footer-email">founders@kautilyan.com</a>' +
-          '<button type="button" class="footer-cta-btn js-open-modal">Book Stage 0 Call →</button>' +
         '</div>' +
       '</div>' +
       '<div class="footer-bottom">' +

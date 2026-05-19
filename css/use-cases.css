@@ -16,6 +16,27 @@
 
 .uc-tabs-wrap { margin-top: 8px; }
 
+.uc-tabs-wrap.is-auto-tabs .tabs-panel.is-active .uc-panel-layout {
+  animation: uc-panel-in 0.45s ease;
+}
+
+@keyframes uc-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .uc-tabs-wrap.is-auto-tabs .tabs-panel.is-active .uc-panel-layout {
+    animation: none;
+  }
+}
+
 .uc-panel-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -28,17 +49,6 @@
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(8, 8, 16, 0.6);
-}
-
-.uc-icon {
-  width: 48px; height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(240, 160, 48, 0.15), rgba(139, 92, 246, 0.15));
-  font-size: 1.4rem;
-  margin-bottom: 16px;
 }
 
 .uc-messy-box {
@@ -176,15 +186,10 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(12, 12, 22, 0.7);
 }
-.criteria-icon {
-  font-size: 1.75rem;
-  margin-bottom: 12px;
-  line-height: 1;
-}
 .criteria-card h4 {
   font-family: var(--font-display);
   font-size: 0.95rem;
-  margin-bottom: 8px;
+  margin: 0 0 8px;
 }
 .criteria-card p {
   font-size: 0.8rem;

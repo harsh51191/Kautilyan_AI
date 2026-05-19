@@ -671,8 +671,6 @@
     #faq,
     #trust,
     #diagnosis,
-    #use-cases,
-    #why-compounds,
     #why-kautilyan {
       scroll-margin-top: 100px;
     }
@@ -1238,17 +1236,6 @@
       line-height: 1.6;
       margin: 0;
     }
-    .compounds-body {
-      max-width: 40rem;
-    }
-    .compounds-body p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 16px;
-    }
-    .compounds-body p:last-child { margin-bottom: 0; }
-    .compounds-body strong { color: var(--text); }
     .vendor-table-wrap {
       overflow-x: auto;
       border-radius: var(--radius);
@@ -1838,7 +1825,7 @@
       border-radius: 10px;
       font-size: 0.88rem;
       font-weight: 500;
-      z-index: 999;
+      z-index: 10050;
       transform: translateY(100px);
       opacity: 0;
       transition: all 0.3s;
@@ -1847,6 +1834,24 @@
     .toast.show { transform: translateY(0); opacity: 1; }
     .toast-success { background: rgba(52,211,153,0.15); border: 1px solid rgba(52,211,153,0.3); color: var(--green); }
     .toast-error { background: rgba(224,85,69,0.15); border: 1px solid rgba(224,85,69,0.3); color: var(--coral); }
+    .booking-form-error {
+      margin: 0 0 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--coral);
+      background: rgba(224, 85, 69, 0.12);
+      border: 1px solid rgba(224, 85, 69, 0.35);
+    }
+    .booking-form-error[hidden] { display: none !important; }
+    .booking-form-error a { color: var(--amber); text-decoration: underline; }
+    .cr-input.is-invalid {
+      border-color: rgba(224, 85, 69, 0.75);
+      box-shadow: 0 0 0 1px rgba(224, 85, 69, 0.25);
+    }
+    .booking-cal-actions { margin-top: 8px; }
+    .booking-cal-actions .cr-submit { width: 100%; }
 
     /* ===================================================================
       FAQ
@@ -2560,123 +2565,6 @@
       font-weight: 700;
     }
 
-    .tabs-wrap { margin-top: 8px; }
-    .tabs-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-    .tabs-nav-wrap {
-      position: relative;
-      margin-bottom: 24px;
-    }
-    .tabs-nav-wrap::before,
-    .tabs-nav-wrap::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 8px;
-      width: 28px;
-      pointer-events: none;
-      z-index: 2;
-    }
-    .tabs-nav-wrap::before {
-      left: 0;
-      background: linear-gradient(90deg, rgba(8, 8, 16, 0.98), transparent);
-    }
-    .tabs-nav-wrap::after {
-      right: 0;
-      background: linear-gradient(270deg, rgba(8, 8, 16, 0.98), transparent);
-    }
-    .tabs-nav--scroll {
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding-bottom: 10px;
-      margin-bottom: 0;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(240, 160, 48, 0.45) rgba(255, 255, 255, 0.06);
-      -webkit-overflow-scrolling: touch;
-      scroll-snap-type: x proximity;
-    }
-    .tabs-nav--scroll .tabs-btn { scroll-snap-align: start; flex-shrink: 0; }
-    .tabs-nav--scroll::-webkit-scrollbar { height: 6px; }
-    .tabs-nav--scroll::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 999px;
-    }
-    .tabs-nav--scroll::-webkit-scrollbar-thumb {
-      background: linear-gradient(90deg, rgba(240, 160, 48, 0.5), rgba(139, 92, 246, 0.5));
-      border-radius: 999px;
-    }
-    @media (min-width: 1100px) {
-      .tabs-nav--usecases { flex-wrap: wrap; overflow-x: visible; }
-      .tabs-nav-wrap--usecases::before,
-      .tabs-nav-wrap--usecases::after { display: none; }
-    }
-
-    .tabs-btn {
-      padding: 10px 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(12, 12, 22, 0.8);
-      color: var(--text-muted);
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-    }
-    .tabs-btn.is-active {
-      background: var(--gradient);
-      color: #fff;
-      border-color: transparent;
-      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.2);
-    }
-    .tabs-btn:hover:not(.is-active) { border-color: rgba(255, 255, 255, 0.25); color: #fff; }
-    .tabs-panel { display: none; }
-    .tabs-panel.is-active { display: block; }
-    .tabs-lead { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 16px; max-width: 640px; }
-    .tabs-outputs {
-      list-style: none;
-      margin: 0 0 24px;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .tabs-outputs li {
-      padding-left: 20px;
-      position: relative;
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.75);
-    }
-    .tabs-outputs li::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0.55em;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--gradient);
-    }
-    .uc-messy, .uc-proof { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.55; }
-    .uc-changes { list-style: none; margin: 0 0 16px; padding: 0; }
-    .uc-changes li {
-      padding: 8px 0 8px 18px;
-      position: relative;
-      font-size: 0.88rem;
-      color: rgba(255, 255, 255, 0.8);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .uc-changes li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--amber);
-      font-size: 0.75rem;
-    }
-
     .diag-map {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -2836,87 +2724,6 @@
       white-space: nowrap;
     }
 
-    /* Decision flow — clear left-to-right */
-    .decision-flow {
-      position: relative;
-      padding: 28px 20px 24px;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(8, 8, 16, 0.75);
-      margin-bottom: 24px;
-    }
-    .decision-flow-progress {
-      position: absolute;
-      left: 8%;
-      right: 8%;
-      top: 42px;
-      height: 3px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .decision-flow-progress-fill {
-      display: block;
-      height: 100%;
-      width: 0%;
-      background: var(--gradient);
-      border-radius: 3px;
-      transition: width 0.6s ease;
-    }
-    .decision-flow.is-animated .decision-flow-progress-fill { width: var(--flow-progress, 0%); }
-    .decision-flow-steps {
-      position: relative;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 8px;
-    }
-    .decision-flow-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 10px;
-      opacity: 0.35;
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .decision-flow-step.is-active,
-    .decision-flow-step.is-done {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .dfs-num {
-      width: 36px; height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      font-size: 0.8rem;
-      font-weight: 700;
-      border: 2px solid rgba(255, 255, 255, 0.15);
-      background: rgba(12, 12, 22, 0.9);
-      color: rgba(255, 255, 255, 0.5);
-      transition: all 0.35s ease;
-    }
-    .decision-flow-step.is-active .dfs-num,
-    .decision-flow-step.is-done .dfs-num {
-      border-color: transparent;
-      background: var(--gradient);
-      color: #fff;
-      box-shadow: 0 0 20px rgba(139, 92, 246, 0.35);
-    }
-    .dfs-label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      line-height: 1.3;
-      color: rgba(255, 255, 255, 0.55);
-      max-width: 100px;
-    }
-    .decision-flow-step.is-active .dfs-label,
-    .decision-flow-step.is-done .dfs-label { color: rgba(255, 255, 255, 0.9); }
-
     /* Why Kautilyan visual */
     .why-visual {
       max-width: 900px;
@@ -3024,40 +2831,6 @@
       color: var(--amber);
     }
     .trust-visual-icon svg { width: 22px; height: 22px; }
-    /* Industry hub — use cases */
-    .use-cases-layout {
-      display: grid;
-      grid-template-columns: minmax(200px, 280px) 1fr;
-      gap: 32px;
-      align-items: start;
-    }
-    .use-cases-layout .tabs-wrap {
-      min-width: 0;
-    }
-    .path-cta-wrap {
-      text-align: center;
-    }
-    .industry-hub {
-      position: relative;
-      aspect-ratio: 1;
-      max-width: 280px;
-      margin: 0 auto;
-    }
-    .industry-hub svg {
-      width: 100%;
-      height: 100%;
-    }
-    .industry-hub-center {
-      font-family: var(--font-display);
-      font-size: 0.85rem;
-      font-weight: 700;
-      fill: #fff;
-    }
-    .industry-hub-spoke {
-      font-size: 0.62rem;
-      font-weight: 600;
-      fill: rgba(255, 255, 255, 0.75);
-    }
     .path-cta-wrap {
       text-align: center;
       margin-top: 36px;
@@ -3069,24 +2842,13 @@
       color: var(--text-section);
       line-height: 1.55;
     }
-    .path-scroll-link,
-    .uc-section-foot a {
+    .path-scroll-link {
       color: var(--amber);
       font-weight: 600;
       text-decoration: none;
     }
-    .path-scroll-link:hover,
-    .uc-section-foot a:hover {
+    .path-scroll-link:hover {
       text-decoration: underline;
-    }
-    .uc-section-foot {
-      margin-top: 28px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-      font-size: 0.95rem;
-      color: var(--text-section);
-      line-height: 1.55;
-      text-align: center;
     }
     .trust-visual-card h4 {
       font-family: var(--font-display);
@@ -3206,58 +2968,6 @@
       border: 0;
     }
 
-    .sticky-cta {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 9000;
-      padding: 14px 22px;
-      border-radius: 999px;
-      border: none;
-      background: var(--gradient);
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.88rem;
-      cursor: pointer;
-      box-shadow: 0 8px 32px rgba(139, 92, 246, 0.25);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(12px);
-      transition: all 0.3s ease;
-    }
-    .sticky-cta.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
-    .sticky-cta.is-hidden-footer {
-      opacity: 0 !important;
-      visibility: hidden !important;
-      pointer-events: none;
-    }
-    .sticky-bar {
-      display: none;
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      z-index: 9000;
-      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-      background: rgba(8, 8, 16, 0.96);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(100%);
-      transition: all 0.3s ease;
-    }
-    .sticky-bar.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
-    .sticky-bar-btn {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      background: var(--gradient);
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-    }
-
     /* ===================================================================
       RESPONSIVE
     =================================================================== */
@@ -3326,11 +3036,6 @@
         writing-mode: horizontal-tb;
         transform: none;
       }
-      .decision-flow-steps {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-      }
-      .decision-flow-progress { display: none; }
       .why-visual-row {
         grid-template-columns: 1fr;
         gap: 8px;
@@ -3356,10 +3061,8 @@
         align-items: flex-start;
       }
       .site-footer {
-        padding: 40px 0 calc(72px + env(safe-area-inset-bottom));
+        padding: 40px 0 calc(24px + env(safe-area-inset-bottom));
       }
-      .sticky-cta { display: none; }
-      .sticky-bar { display: block; }
       .hero-context { padding: 28px 24px 36px; }
       .faq-grid {
         grid-template-columns: 1fr;
@@ -3386,8 +3089,6 @@
       :root { --section-gap: 80px; }
       .stages { grid-template-columns: 1fr; }
       .ops-flows-dual { grid-template-columns: 1fr; }
-      .use-cases-layout { grid-template-columns: 1fr; }
-      .industry-hub { max-width: 240px; margin-bottom: 8px; }
       .pricing-grid { grid-template-columns: 1fr; }
       .trust-grid-4 { grid-template-columns: 1fr; }
       .nav-links {
@@ -3520,12 +3221,6 @@
               <button type="button" class="btn-hero-primary js-open-modal">Book Stage 0 Call →</button>
               <a href="how-it-works.html" class="btn-hero-secondary">See How It Works →</a>
             </div>
-
-            <ul class="hero-trust-strip" aria-label="Why book a diagnosis">
-              <li>Works on your existing systems — no migration required</li>
-              <li>One workflow. Named outcome. Guaranteed or refunded.</li>
-              <li>No sales deck. No product demo. Just a written map of your operating reality.</li>
-            </ul>
           </div>
 
           <div class="hero-path-wrap fade-up fade-up-delay-2" aria-label="Proof-of-value path">
@@ -3553,29 +3248,7 @@
       </div>
     </section>
 
-    <!-- ===================================================================
-      SOCIAL PROOF (P1.2)
-    =================================================================== -->
-    <section id="social-proof" class="social-proof-section">
-      <div class="container">
-        <div class="social-proof-metrics fade-up" aria-label="Outcome highlights">
-          <div class="proof-metric"><span class="proof-metric-value">45</span><span class="proof-metric-label">Days — pilot guarantee</span></div>
-          <div class="proof-metric"><span class="proof-metric-value">₹50K</span><span class="proof-metric-label">Blueprint credited to Stage 2</span></div>
-          <div class="proof-metric"><span class="proof-metric-value">100%</span><span class="proof-metric-label">Refund if we miss Day 45</span></div>
-          <div class="proof-metric"><span class="proof-metric-value">1</span><span class="proof-metric-label">Workflow. One named metric.</span></div>
-        </div>
-        <div class="social-proof-quotes fade-up">
-          <blockquote class="proof-quote">
-            <p>"The forecast cycle that used to take 8 days now generates a same-day operating brief."</p>
-            <footer>— Group IT Head, Manufacturing company, 500+ employees · <a href="case-studies/manufacturing-forecast.html">Read outcome →</a></footer>
-          </blockquote>
-          <blockquote class="proof-quote">
-            <p>"Every important decision still required me personally. Now the logic is in the system."</p>
-            <footer>— Managing Director, B2B distribution company, 200 employees · <a href="case-studies/distribution-revenue.html">Read outcome →</a></footer>
-          </blockquote>
-        </div>
-      </div>
-    </section>
+ 
 
     <!-- ===================================================================
       PAIN SECTION
@@ -3782,94 +3455,6 @@
       </div>
     </section>
 
-    <section id="use-cases" class="content-section content-section--alt">
-      <div class="container">
-        <div class="section-header fade-up">
-          <span class="label">What we find</span>
-          <h2 class="section-headline">Real patterns we diagnose.</h2>
-          <p class="section-intro">Cross-industry workflow patterns — pick a workflow to see what changes.</p>
-        </div>
-        <div class="use-cases-layout fade-up">
-          <div class="industry-hub" aria-hidden="true">
-            <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Industries served by Kautilyan">
-              <defs>
-                <linearGradient id="hubGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#f0a030"/>
-                  <stop offset="50%" stop-color="#e05545"/>
-                  <stop offset="100%" stop-color="#8b5cf6"/>
-                </linearGradient>
-              </defs>
-              <circle cx="120" cy="120" r="28" fill="rgba(12,12,22,0.95)" stroke="url(#hubGrad)" stroke-width="2"/>
-              <text x="120" y="125" text-anchor="middle" class="industry-hub-center">Kautilyan</text>
-              <g stroke="rgba(255,255,255,0.15)" stroke-width="1">
-                <line x1="120" y1="92" x2="120" y2="38"/><line x1="148" y1="104" x2="198" y2="68"/>
-                <line x1="148" y1="136" x2="198" y2="172"/><line x1="120" y1="148" x2="120" y2="202"/>
-                <line x1="92" y1="136" x2="42" y2="172"/><line x1="92" y1="104" x2="42" y2="68"/>
-              </g>
-              <g class="industry-hub-spoke">
-                <text x="120" y="28" text-anchor="middle">Manufacturing</text>
-                <text x="208" y="62" text-anchor="middle">Distribution</text>
-                <text x="208" y="182" text-anchor="middle">B2B Services</text>
-                <text x="120" y="218" text-anchor="middle">Ecommerce</text>
-                <text x="32" y="182" text-anchor="middle">Logistics</text>
-                <text x="32" y="62" text-anchor="middle">Healthcare</text>
-              </g>
-            </svg>
-          </div>
-        <div class="tabs-wrap" data-tabs id="usecase-tabs">
-          <div class="tabs-nav-wrap tabs-nav-wrap--usecases">
-          <div class="tabs-nav tabs-nav--scroll tabs-nav--usecases" role="tablist">
-            <button type="button" class="tabs-btn is-active" data-tab="sales-forecast" role="tab" aria-selected="true">Sales Forecasting</button>
-            <button type="button" class="tabs-btn" data-tab="revenue-leak" role="tab">Revenue Leakage</button>
-            <button type="button" class="tabs-btn" data-tab="approvals" role="tab">Approvals</button>
-            <button type="button" class="tabs-btn" data-tab="d2c" role="tab">Ecommerce &amp; Retail</button>
-            <button type="button" class="tabs-btn" data-tab="escalations" role="tab">Customer Escalations</button>
-            <button type="button" class="tabs-btn" data-tab="leadership" role="tab">Leadership Reporting</button>
-            <button type="button" class="tabs-btn" data-tab="docs" role="tab">Process Documentation</button>
-          </div>
-          </div>
-          <div class="tabs-panels">
-            <div class="tabs-panel is-active" data-panel="sales-forecast" role="tabpanel">
-              <p class="uc-messy"><strong>Messy workflow:</strong> Numbers in the ERP; market context in WhatsApp and field judgment — 7–8 days of coordination before leadership has a usable forecast.</p>
-              <ul class="uc-changes"><li>Detects forecast risk signals from connected systems</li><li>Assembles context packs from history and field input</li><li>Drafts forecast scenarios for human approval</li></ul>
-              <p class="uc-proof"><strong>Proof metric:</strong> Cut forecast preparation from days to same-day with governance intact.</p>
-            </div>
-            <div class="tabs-panel" data-panel="revenue-leak" role="tabpanel">
-              <p class="uc-messy"><strong>Messy workflow:</strong> CRM tracks stages, but competitor risk, discount logic, and next-best action still wait on one senior person.</p>
-              <ul class="uc-changes"><li>Surfaces quote and deal-risk signals early</li><li>Drafts next-best actions with precedent</li><li>Routes approvals with full decision trace</li></ul>
-              <p class="uc-proof"><strong>Proof metric:</strong> Reduce quote leakage and stalled deals waiting on judgment.</p>
-            </div>
-            <div class="tabs-panel" data-panel="approvals" role="tabpanel">
-              <p class="uc-messy"><strong>Messy workflow:</strong> Approvals happen verbally or over chat — no record, no routing, no learning captured.</p>
-              <ul class="uc-changes"><li>Drafts approval options with policy context</li><li>One-click human approval with audit trail</li><li>Stores overrides as reusable precedent</li></ul>
-              <p class="uc-proof"><strong>Proof metric:</strong> Shorten approval cycles while maintaining governance.</p>
-            </div>
-            <div class="tabs-panel" data-panel="d2c" role="tabpanel">
-              <p class="uc-messy"><strong>Messy workflow:</strong> Shopify, Amazon, Flipkart, Meta ads, support, returns, inventory, logistics, and WhatsApp all show signals — but no one sees the operating picture in time.</p>
-              <ul class="uc-changes"><li>Detects stockout risk, return spikes, delayed refunds, and marketplace issue patterns</li><li>Connects campaign activity with inventory and fulfilment signals</li><li>Drafts daily operating briefs for founders and ops leads</li></ul>
-              <p class="uc-proof"><strong>Proof metric:</strong> Reduce daily manual reconciliation across commerce, inventory, support, and logistics.</p>
-            </div>
-            <div class="tabs-panel" data-panel="escalations" role="tabpanel">
-              <p class="uc-messy"><strong>Messy workflow:</strong> Customer issues surface late — buried in support threads and informal escalations.</p>
-              <ul class="uc-changes"><li>Detects escalation signals before churn</li><li>Assembles customer context across channels</li><li>Drafts response options for approval</li></ul>
-              <p class="uc-proof"><strong>Proof metric:</strong> Surface escalations earlier with named response SLAs.</p>
-            </div>
-            <div class="tabs-panel" data-panel="leadership" role="tabpanel">
-              <p class="uc-messy"><strong>Messy workflow:</strong> Dashboards show what happened; leaders still need someone to assemble context and recommend action.</p>
-              <ul class="uc-changes"><li>Connects variance signals across systems</li><li>Drafts leadership briefs with stuck decisions flagged</li><li>Routes follow-ups automatically after approval</li></ul>
-              <p class="uc-proof"><strong>Proof metric:</strong> Reduce manual reporting effort by a named percentage.</p>
-            </div>
-            <div class="tabs-panel" data-panel="docs" role="tabpanel">
-              <p class="uc-messy"><strong>Messy workflow:</strong> SOPs describe the ideal process; real exceptions live in people's heads.</p>
-              <ul class="uc-changes"><li>Captures real workflow from artifacts and traces</li><li>Maps exceptions and decision points</li><li>Turns approved decisions into living documentation</li></ul>
-              <p class="uc-proof"><strong>Proof metric:</strong> Reduce workflow fragility when key people are unavailable.</p>
-            </div>
-          </div>
-        </div>
-        <p class="uc-section-foot fade-up">Not sure which pattern fits? We map your actual workflow on a free 45-minute Stage 0 call — <a href="#book-call" class="path-scroll-link">see booking below →</a></p>
-        </div>
-      </div>
-    </section>
 
     <section id="diagnosis" class="content-section">
       <div class="container">
@@ -3889,45 +3474,6 @@
       </div>
     </section>
 
-    <section id="product-loop" class="content-section content-section--alt">
-      <div class="container">
-        <div class="section-header fade-up">
-          <span class="label">How the product works</span>
-          <h2 class="section-headline">How the Kautilyan intelligence layer works</h2>
-          <p class="section-intro">Once your workflow is mapped and redesigned, every decision moves through a governed loop — signal to learning, with human approval at every consequential step.</p>
-        </div>
-        <div class="decision-flow fade-up" id="decision-flow" aria-label="Intelligence layer flow">
-          <div class="decision-flow-progress" aria-hidden="true"><span class="decision-flow-progress-fill"></span></div>
-          <ol class="decision-flow-steps">
-            <li class="decision-flow-step is-active"><span class="dfs-num">1</span><span class="dfs-label">Signal</span></li>
-            <li class="decision-flow-step"><span class="dfs-num">2</span><span class="dfs-label">Context</span></li>
-            <li class="decision-flow-step"><span class="dfs-num">3</span><span class="dfs-label">Draft</span></li>
-            <li class="decision-flow-step"><span class="dfs-num">4</span><span class="dfs-label">Approve</span></li>
-            <li class="decision-flow-step"><span class="dfs-num">5</span><span class="dfs-label">Execute</span></li>
-            <li class="decision-flow-step"><span class="dfs-num">6</span><span class="dfs-label">Learn</span></li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================================================================
-      WHY IT COMPOUNDS
-    =================================================================== -->
-    <section id="why-compounds" class="content-section">
-      <div class="container">
-        <div class="section-header fade-up">
-          <span class="label">Why it scales</span>
-          <h2 class="section-headline">Why this compounds after the first workflow.</h2>
-        </div>
-        <div class="compounds-body fade-up">
-          <p>Your organisation should not just remember. It should act with context — and learn from every decision.</p>
-          <p>Once the first workflow proves value, Kautilyan captures the context behind every signal, recommendation, approval, override, exception, and outcome.</p>
-          <p>That becomes reusable operating intelligence.</p>
-          <p>The next time a similar situation appears, the system does not start from zero. It knows what happened before, what was approved, what was changed, and why.</p>
-          <p><strong>That is how one workflow becomes a repeatable operating capability.</strong> And how a repeatable operating capability becomes organisational intelligence that compounds.</p>
-        </div>
-      </div>
-    </section>
 
 <!-- ===================================================================
       TRUST & DATA
@@ -3991,29 +3537,7 @@
     </section>
 
 
-    <!-- ===================================================================
-      BOOK CALL CTA
-    =================================================================== -->
-    <section id="book-call" class="cta-strip">
-      <div class="container">
-        <div class="cta-strip-inner fade-up" style="padding-bottom: 32px;">
-          <h2 class="display-lg">Your first AI win should not start with a tool. It should start with the right workflow.</h2>
-          <p>Bring us one important, high-value workflow. We'll help you diagnose where it breaks, redesign how it should run with AI, and define what measurable proof looks like in 45 days.</p><p>No sales pitch. No generic demo. No platform commitment before proof.</p>
-          <div class="cta-strip-actions">
-            <button type="button" class="btn btn-primary btn-xl js-open-modal">Book Stage 0 Call →</button>
-            <a href="assessment.html" class="btn btn-ghost btn-xl">Full pre-call intake →</a>
-          </div>
-          <p class="cta-scarcity">We take a limited number of diagnosis calls each week so every session produces a useful written output.</p>
-          <p id="book-call-google-alt" style="display:none; margin-top:14px; font-size:0.8rem; color:var(--text-dim);"></p>
-          <p style="margin-top:20px; font-size:0.8rem; color:var(--text-dim);">
-            Personally facilitated by our team at Kautilyan AI. No SDRs. No sales scripts. We confirm your 45-minute window by email.
-          </p>
-        </div>
-
-        <span id="request-call" class="visually-hidden" aria-hidden="true"></span>
-
-      </div>
-    </section>
+  
 
     <!-- ===================================================================
       FOOTER
@@ -4034,7 +3558,7 @@
     const CONFIG = {
       SITE_URL: 'https://www.kautilyan.com',
       SHOW_PRICING: false,
-      SHOW_NAV_PRICING: true,
+      SHOW_NAV_PRICING: false,
       // Optional: Cal.com (or other) link — shown as a secondary button when set.
       CAL_LINK: 'https://cal.com/kautilyan/stage-0-diagnosis',
       // Full URL to your questionnaire (Google Form, Typeform, Tally, etc.).
@@ -4128,6 +3652,7 @@
         toast.classList.remove('show');
       }, 4500);
     }
+    window.showToast = showToast;
 
     document.addEventListener('DOMContentLoaded', function () {
       applyExternalLinks();
@@ -4291,8 +3816,6 @@
 
 
 
-  <button type="button" id="sticky-cta" class="sticky-cta js-open-modal" aria-label="Book Stage 0 Call">Book Stage 0 Call →</button>
-  <div id="sticky-bar" class="sticky-bar"><button type="button" class="sticky-bar-btn js-open-modal">Book Stage 0 Call →</button></div>
 
   <script src="js/site.js"></script>
   <script src="js/nav.js"></script>

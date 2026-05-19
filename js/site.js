@@ -5,7 +5,7 @@
   window.CONFIG = window.CONFIG || {
     SITE_URL: 'https://www.kautilyan.com',
     SHOW_PRICING: false,
-    SHOW_NAV_PRICING: true,
+    SHOW_NAV_PRICING: false,
     CAL_LINK: 'https://cal.com/kautilyan/stage-0-diagnosis',
     ASSESSMENT_URL: '',
     GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxr380yBL72cXD8ZiDQqAJFVtLAd7_de67q9qvqs5hvh9-VrqD1bayuJmaMJRLGysBd0g/exec',
@@ -22,19 +22,68 @@
     return (CONFIG.ASSESSMENT_URL || '').trim();
   }
 
-  window.submitToSheets = function (data) {
+  /**
+   * POST to Apps Script and return parsed JSON (booking flow).
+   * Uses text/plain to avoid CORS preflight on script.google.com web apps.
+   */
+  function postLeadCapture(u, data, useCors) {
+    return fetch(u, {
+      method: 'POST',
+      mode: useCors ? 'cors' : 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(data),
+    });
+  }
+
+  window.submitToSheetsAsync = function (data) {
     var u = (CONFIG.GOOGLE_SCRIPT_URL || '').trim();
     if (!u) {
+      return Promise.reject(new Error('GOOGLE_SCRIPT_URL is not set'));
+    }
+
+    return postLeadCapture(u, data, true).then(function (res) {
+      return res.text().then(function (text) {
+        var parsed;
+        try {
+          parsed = JSON.parse(text);
+        } catch (parseErr) {
+          throw new Error('Could not read server response. Redeploy LeadsCapture.gs as a new web app version.');
+        }
+        if (parsed.status === 'error') {
+          throw new Error(parsed.message || 'Sheet save failed');
+        }
+        if (!parsed.status) {
+          throw new Error('Unexpected response from lead capture script');
+        }
+        return parsed;
+      });
+    }).catch(function (err) {
+      var msg = err && err.message ? err.message : '';
+      var isNetwork =
+        err instanceof TypeError ||
+        /failed to fetch|network|cors|load failed/i.test(msg);
+      if (!isNetwork) {
+        return Promise.reject(err);
+      }
+      return postLeadCapture(u, data, false).then(function () {
+        return {
+          status: 'ok',
+          action: data.action || 'create',
+          submissionId: data.submissionId,
+          fallback: true,
+        };
+      });
+    });
+  };
+
+  /** Fire-and-forget (contact form, resource downloads). */
+  window.submitToSheets = function (data) {
+    if (!(CONFIG.GOOGLE_SCRIPT_URL || '').trim()) {
       console.warn('[Kautilyan] GOOGLE_SCRIPT_URL is not set — row not sent:', data);
       return false;
     }
-    fetch(u, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    }).catch(function (err) {
-      console.warn('[Kautilyan] Sheet submission fetch error:', err);
+    window.submitToSheetsAsync(data).catch(function (err) {
+      console.warn('[Kautilyan] Sheet submission error:', err);
     });
     return true;
   };
@@ -120,31 +169,6 @@
       if (modal && modal.classList.contains('is-open')) closeModal();
     }
   });
-
-  /* Sticky CTA */
-  var stickyDesktop = document.getElementById('sticky-cta');
-  var stickyMobile = document.getElementById('sticky-bar');
-  var hero = document.querySelector('.hero, .page-hero');
-
-  function updateSticky() {
-    if (!hero) return;
-    var past = window.scrollY > hero.offsetHeight * 0.7;
-    if (stickyDesktop) stickyDesktop.classList.toggle('is-visible', past);
-    if (stickyMobile) stickyMobile.classList.toggle('is-visible', past);
-  }
-  window.addEventListener('scroll', updateSticky, { passive: true });
-  updateSticky();
-
-  var siteFooter = document.querySelector('.site-footer');
-  if (siteFooter && stickyDesktop && 'IntersectionObserver' in window) {
-    var footerCtaObserver = new IntersectionObserver(
-      function (entries) {
-        stickyDesktop.classList.toggle('is-hidden-footer', entries[0].isIntersecting);
-      },
-      { rootMargin: '0px 0px -80px 0px', threshold: 0.05 }
-    );
-    footerCtaObserver.observe(siteFooter);
-  }
 
   /* Tabs */
   qsa('[data-tabs]').forEach(function (wrap) {

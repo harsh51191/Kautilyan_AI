@@ -125,7 +125,7 @@ Static hosting only — no npm install or build step required.
 4. Point your domain (`www.kautilyan.com` and apex `kautilyan.com`) in Vercel DNS settings.
 5. Optionally uncomment the Vercel Analytics script in `index.html` after deploy.
 
-**Canonical site:** `https://www.kautilyan.com`. All pages use this in canonical/OG tags; `vercel.json` 301-redirects apex `kautilyan.com` and any `kautilyan.ai` hostnames to `www.kautilyan.com`.
+**Canonical site:** `https://www.kautilyan.com`. All pages use this in canonical/OG tags; `vercel.json` 301-redirects apex `kautilyan.com` to `www.kautilyan.com`.
 
 ---
 

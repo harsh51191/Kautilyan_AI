@@ -16,7 +16,7 @@
   var loading = document.getElementById('article-loading');
 
   if (!slug) {
-    window.location.replace('blog.html');
+    window.location.replace('resources.html');
     return;
   }
 
@@ -27,7 +27,7 @@
     if (loading) loading.remove();
 
     if (!post) {
-      root.innerHTML = '<p class="blog-error">Article not found. <a href="blog.html">Back to blog</a></p>';
+      root.innerHTML = '<p class="blog-error">Article not found. <a href="resources.html">Back to articles</a></p>';
       return;
     }
 

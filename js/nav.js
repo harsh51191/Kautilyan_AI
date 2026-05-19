@@ -18,10 +18,17 @@
     return page.replace('.html', '');
   }
 
+  function navLinks() {
+    if (window.CONFIG && window.CONFIG.SHOW_NAV_PRICING === false) {
+      return NAV_LINKS.filter(function (item) { return item.key !== 'pricing'; });
+    }
+    return NAV_LINKS;
+  }
+
   function buildNavMenu() {
     var active = currentKey();
     var html = '';
-    NAV_LINKS.forEach(function (item) {
+    navLinks().forEach(function (item) {
       var cls = item.key === active ? ' class="is-current"' : '';
       var id = item.id ? ' id="' + item.id + '"' : '';
       html += '<li><a href="' + item.href + '"' + id + cls + '>' + item.label + '</a></li>';

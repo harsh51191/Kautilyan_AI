@@ -66,17 +66,16 @@ No developer placeholder text is visible on any public page. "View Your Report �
 ### P0.3 — FIX CANONICAL URL MISMATCH
 
 **The problem:**
-Every page declares `canonical: https://kautilyan.ai/...` while the live site is `https://www.kautilyan.com/`. This splits SEO link equity between two domains. Google sees two different sites.
+Some pages previously declared a non-canonical domain while the live site is `https://www.kautilyan.com/`. That splits SEO link equity. Google should see one site.
 
 **The fix:**
-- Decide on one canonical domain: `https://kautilyan.com` (without www) recommended for simplicity
-- Update every page's canonical tag to match: `<link rel="canonical" href="https://kautilyan.com/[page-path]" />`
+- Use one canonical domain: `https://www.kautilyan.com`
+- Update every page's canonical tag: `<link rel="canonical" href="https://www.kautilyan.com/[page-path]" />`
 - Update every `og:url` tag to match
-- Set up a 301 redirect: kautilyan.ai → kautilyan.com (permanent redirect, all paths)
-- Set up a 301 redirect: www.kautilyan.com → kautilyan.com
+- Set up a 301 redirect: apex `kautilyan.com` → `https://www.kautilyan.com` (permanent redirect, all paths)
 
 **Acceptance criteria:**
-All pages have matching canonical URLs. kautilyan.ai redirects to kautilyan.com with 301. No canonical mismatch in Google Search Console.
+All pages have matching canonical URLs on `www.kautilyan.com`. Apex `kautilyan.com` redirects to `www.kautilyan.com` with 301. No canonical mismatch in Google Search Console.
 
 ---
 
@@ -652,7 +651,7 @@ Custom channel for AI referral traffic:
 - Channel name: AI Referral
 
 Google Search Console:
-- Verify kautilyan.com (not kautilyan.ai)
+- Verify `https://www.kautilyan.com` (canonical property)
 - Submit sitemap
 - Monitor for crawl errors weekly
 
@@ -910,7 +909,7 @@ Before marking anything as done, test the following:
 **P0 sign-off:**
 - [ ] Clicked every CTA on every page — all open Cal.com
 - [ ] Assessment page: developer placeholder not visible to any public visitor
-- [ ] kautilyan.ai redirects to kautilyan.com
+- [ ] Apex `kautilyan.com` redirects to `www.kautilyan.com`
 - [ ] Privacy policy live and linked from footer
 - [ ] Booking form date picker works on iPhone Safari
 - [ ] Soumya's full name and LinkedIn live on About page

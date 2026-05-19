@@ -33,7 +33,6 @@
   background: linear-gradient(rgba(12, 12, 22, 0.95), rgba(12, 12, 22, 0.95)) padding-box, var(--gradient) border-box;
   box-shadow: 0 0 48px rgba(139, 92, 246, 0.12);
 }
-.partner-col-icon { font-size: 2rem; margin-bottom: 12px; line-height: 1; }
 .partner-col h4 {
   font-family: var(--font-display);
   font-size: 1rem;
@@ -78,11 +77,6 @@
 .pillar-card:hover {
   border-color: rgba(240, 160, 48, 0.25);
   transform: translateY(-3px);
-}
-.pillar-icon {
-  font-size: 1.75rem;
-  margin-bottom: 12px;
-  line-height: 1;
 }
 .pillar-card h4 {
   font-family: var(--font-display);

@@ -42,8 +42,4 @@
   };
 
   initGA();
-
-  if (document.getElementById('diagnosis-intake-mount') && window.KautilyanAnalytics) {
-    KautilyanAnalytics.assessmentStarted({ page: 'assessment' });
-  }
 })();

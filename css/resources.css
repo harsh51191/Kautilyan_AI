@@ -2,16 +2,15 @@
 
 .nav-links a.is-current { color: #fff; }
 
-.page-hero {
-  padding: calc(var(--nav-height) + 40px) 64px 48px;
-  min-height: auto;
-  box-sizing: border-box;
+#blog.content-section--page-top {
+  border-top: none;
+  padding-top: calc(var(--nav-height) + 48px);
 }
-.page-hero .hero-intro-wrap { gap: 24px; max-width: 780px; }
-.page-hero--resources .hero-lead { max-width: 560px; }
 
 @media (max-width: 768px) {
-  .page-hero { padding: calc(var(--nav-height) + 24px) 24px 36px; }
+  #blog.content-section--page-top {
+    padding-top: calc(var(--nav-height) + 32px);
+  }
 }
 
 /* Thought starters */

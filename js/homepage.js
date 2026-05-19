@@ -27,31 +27,6 @@
       });
     });
 
-    /* ——— Sticky CTA ——— */
-    var stickyDesktop = document.getElementById('sticky-cta');
-    var stickyMobile = document.getElementById('sticky-bar');
-    var hero = document.querySelector('.hero');
-
-    function updateSticky() {
-      if (!hero) return;
-      var past = window.scrollY > hero.offsetHeight * 0.85;
-      if (stickyDesktop) stickyDesktop.classList.toggle('is-visible', past);
-      if (stickyMobile) stickyMobile.classList.toggle('is-visible', past);
-    }
-    window.addEventListener('scroll', updateSticky, { passive: true });
-    updateSticky();
-
-    var siteFooter = document.querySelector('.site-footer');
-    if (siteFooter && stickyDesktop && 'IntersectionObserver' in window) {
-      var footerCtaObserver = new IntersectionObserver(
-        function (entries) {
-          stickyDesktop.classList.toggle('is-hidden-footer', entries[0].isIntersecting);
-        },
-        { rootMargin: '0px 0px -80px 0px', threshold: 0.05 }
-      );
-      footerCtaObserver.observe(siteFooter);
-    }
-
     /* ——— Hero path strip — one stage highlighted at a time ——— */
     var heroPathMini = document.getElementById('hero-path-mini');
     var pathSteps = heroPathMini ? qsa('.hero-path-step', heroPathMini) : [];

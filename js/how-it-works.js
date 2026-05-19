@@ -1,45 +1,86 @@
+/* How It Works — SLOPE auto-cycle (desktop); full cards on mobile */
 (function () {
-  'use strict';
+  var bar = document.getElementById('slope-bar');
+  if (!bar) return;
 
-  var phaseWrap = document.getElementById('phase-tabs');
-  if (!phaseWrap) return;
+  var cells = Array.prototype.slice.call(bar.querySelectorAll('.slope-cell'));
+  if (!cells.length) return;
 
-  var railFill = document.getElementById('phase-rail-fill');
-  var stepBtns = Array.from(phaseWrap.querySelectorAll('.phase-step-btn'));
-  var panels = Array.from(phaseWrap.querySelectorAll('.phase-panel'));
+  var INTERVAL_MS = 7000;
+  var index = 0;
+  var timer = null;
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mobileMq = window.matchMedia('(max-width: 768px)');
 
-  function activatePhase(id) {
-    var idx = stepBtns.findIndex(function (b) { return b.getAttribute('data-tab') === id; });
-    stepBtns.forEach(function (btn, i) {
-      var active = btn.getAttribute('data-tab') === id;
-      btn.classList.toggle('is-active', active);
-      btn.classList.toggle('is-done', i < idx);
-      btn.setAttribute('aria-selected', active ? 'true' : 'false');
+  function isMobile() {
+    return mobileMq.matches;
+  }
+
+  function setActive(i) {
+    index = i;
+    cells.forEach(function (cell, j) {
+      cell.classList.toggle('is-active', j === i);
     });
-    panels.forEach(function (p) {
-      p.classList.toggle('is-active', p.getAttribute('data-panel') === id);
-    });
-    if (railFill && stepBtns.length > 1) {
-      var pct = idx <= 0 ? 0 : (idx / (stepBtns.length - 1)) * 84;
-      railFill.style.width = pct + '%';
+  }
+
+  function next() {
+    setActive((index + 1) % cells.length);
+  }
+
+  function stop() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
     }
   }
 
-  stepBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      activatePhase(btn.getAttribute('data-tab'));
-    });
-  });
+  function start() {
+    stop();
+    if (reducedMotion || isMobile()) return;
+    timer = setInterval(next, INTERVAL_MS);
+  }
 
-  activatePhase('phase-1');
-
-  /* Slope cards expand on click */
-  document.querySelectorAll('.slope-card').forEach(function (card) {
-    card.addEventListener('click', function (e) {
-      if (e.target.closest('.slope-detail a')) return;
-      var open = card.classList.toggle('is-open');
-      var btn = card.querySelector('.acc-trigger');
-      if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  function bindDesktop() {
+    cells.forEach(function (cell) {
+      cell.addEventListener('mouseenter', function () {
+        stop();
+        setActive(cells.indexOf(cell));
+      });
+      cell.addEventListener('focusin', function () {
+        stop();
+        setActive(cells.indexOf(cell));
+      });
     });
-  });
+
+    bar.addEventListener('mouseleave', function () {
+      if (!reducedMotion && !isMobile()) start();
+    });
+  }
+
+  function init() {
+    if (isMobile()) {
+      stop();
+      cells.forEach(function (cell) {
+        cell.classList.add('is-active');
+      });
+      return;
+    }
+
+    if (reducedMotion) {
+      setActive(0);
+      return;
+    }
+
+    setActive(0);
+    bindDesktop();
+    start();
+  }
+
+  init();
+
+  if (mobileMq.addEventListener) {
+    mobileMq.addEventListener('change', init);
+  } else if (mobileMq.addListener) {
+    mobileMq.addListener(init);
+  }
 })();

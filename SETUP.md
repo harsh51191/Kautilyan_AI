@@ -15,40 +15,22 @@
 2. In **row 1**, paste these headers (exact order matches the script):
 
 ```
-Timestamp | Name | Email | Phone | Company | Role | Team Size | Revenue | Pain Points | Heard From | Source | Score | Message
+Timestamp | Name | Email | Phone | Company | Role | Team Size | Revenue | Pain Points | Heard From | Source | Score | Message | Submission ID
 ```
+
+Column **N — Submission ID** links step 1 (contact) and step 2 (five questions) to the **same row**.
 
 ### 1b — Apps Script (`doPost`)
 
 1. Sheet → **Extensions → Apps Script**.
-2. Replace the default code with:
-
-```javascript
-function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var data = JSON.parse(e.postData.contents);
-  sheet.appendRow([
-    new Date(),
-    data.name || '',
-    data.email || '',
-    data.phone || '',
-    data.company || '',
-    data.role || '',
-    data.teamSize || '',
-    data.revenue || '',
-    (data.painPoints || []).join(', '),
-    data.heardFrom || '',
-    data.source || '',
-    data.score || '',
-    data.message || '',
-  ]);
-  return ContentService
-    .createTextOutput(JSON.stringify({ status: 'ok' }))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-```
-
+2. Copy the code from **`google-apps-script/LeadsCapture.gs`** in this repo (supports `action: create` and `action: update` by `submissionId`).
 3. **Save** the project.
+
+The booking flow uses **`submitToSheetsAsync`**, which reads the JSON response (so step 2 only opens after step 1 is confirmed). The browser sends `Content-Type: text/plain` to avoid a CORS preflight block on `script.google.com`.
+
+After any script change: **Deploy → Manage deployments → Edit → New version → Deploy** (same `/exec` URL).
+
+Test the endpoint: open `YOUR_WEB_APP_URL?ping=1` in a browser — you should see `{"status":"ok","ping":true}`.
 
 ### 1c — Deploy as Web App
 
@@ -97,11 +79,17 @@ Hook the form to Sheets using **Responses → Link to Sheets** in Google Forms (
 
 ---
 
-## 3) Booking: form first, then optional Google / Cal.com
+## 3) Booking: Cal.com first → prep questions only after schedule
 
-### Primary path — “Schedule a call”
+### Flow
 
-The main Stage 0 CTA scrolls to **Request a call** (`#request-call`). Founders pick a **preferred 45-minute window (IST, 9:00–17:00)** from a dropdown; the choice is stored in the Sheet **Message** column (same JSON field: `message`).
+1. **Book Stage 0 Call** → form with **name, email, company** + **Pick your time on Cal.com** (no five questions yet).
+2. Cal.com button saves contact to the sheet, then opens Cal.com.
+3. After booking, Cal.com redirects to **`https://www.kautilyan.com/assessment?scheduled=1`** (set in Cal.com **Booking redirects**).
+4. That page shows **only the five prep questions** (same sheet row updated via `submissionId`).
+5. `/assessment` without `?scheduled=1` shows the same contact form + Cal button (not the five questions).
+
+Deploy **`LeadsCapture.gs`** (`action: create` on contact, `action: update` on prep questions).
 
 ### Google Calendar (optional)
 
@@ -140,7 +128,7 @@ SHOW_NAV_PRICING: false,
 
 - Put `index.html` behind Vercel (or similar); add your domain.
 - **Live site (canonical):** `https://www.kautilyan.com` — already set in page `<link rel="canonical">`, Open Graph URLs, `sitemap.xml`, `robots.txt`, `llms.txt`, and `CONFIG.SITE_URL` in `js/site.js` / `index.html`.
-- **Redirects:** `vercel.json` sends `kautilyan.com`, `kautilyan.ai`, and `www.kautilyan.ai` → `https://www.kautilyan.com` (301). Keep those rules if you own alternate domains so traffic consolidates on www.
+- **Redirects:** `vercel.json` sends apex `kautilyan.com` → `https://www.kautilyan.com` (301). All canonical and OG URLs use `www.kautilyan.com`.
 - In Google Search Console, verify the **www** property (`https://www.kautilyan.com`).
 
 ### Vercel Analytics (optional)
