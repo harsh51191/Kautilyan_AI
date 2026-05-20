@@ -5,7 +5,8 @@
   var loading = document.getElementById('blog-loading');
   if (!grid || !window.BlogFeed) return;
 
-  BlogFeed.loadPosts().then(function (posts) {
+  var loadListing = BlogFeed.loadPostsListing || BlogFeed.loadPosts;
+  loadListing({ refresh: true }).then(function (posts) {
     if (loading) loading.remove();
     if (!posts.length) {
       grid.innerHTML = '<p class="blog-error">No posts yet. Check back soon.</p>';

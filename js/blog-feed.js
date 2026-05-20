@@ -164,6 +164,39 @@
       });
   }
 
+  function loadPostsListing(options) {
+    options = options || {};
+    var cached = readCache();
+    if (cached && cached.length) {
+      if (options.refresh) {
+        loadPosts().then(function (fresh) {
+          if (fresh && fresh.length) writeCache(fresh);
+        }).catch(function () { /* ignore background refresh */ });
+      }
+      return Promise.resolve(cached);
+    }
+
+    return fetch('/data/blog-posts.json', { cache: 'default' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('fallback json missing');
+        return r.json();
+      })
+      .then(function (data) {
+        var posts = publishedOnly(data.posts || []);
+        if (posts.length) writeCache(posts);
+        if (options.refresh) {
+          loadPosts().then(function (fresh) {
+            if (fresh && fresh.length) writeCache(fresh);
+          }).catch(function () { /* ignore */ });
+        }
+        return posts;
+      })
+      .catch(function () {
+        if (!feedUrl()) return [];
+        return fetchSheet().catch(function () { return []; });
+      });
+  }
+
   function loadPosts() {
     var cached = readCache();
     var assetsPromise = Promise.all([loadBlocksSeed(), loadVideoOverrides()]);
@@ -278,6 +311,8 @@
 
   global.BlogFeed = {
     loadPosts: loadPosts,
+    loadPostsListing: loadPostsListing,
+    readCache: readCache,
     getPostBySlug: getPostBySlug,
     formatDate: formatDate,
     articleUrl: articleUrl,

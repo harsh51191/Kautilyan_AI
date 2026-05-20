@@ -2,15 +2,56 @@
 
 .nav-links a.is-current { color: #fff; }
 
-#blog.content-section--page-top {
+.resources-hero.content-section--page-top {
   border-top: none;
-  padding-top: calc(var(--nav-height) + 48px);
+  padding-top: calc(var(--nav-height) + 40px);
+  padding-bottom: 24px;
+}
+
+#blog.content-section--compact {
+  padding-top: 0;
+  padding-bottom: 72px;
 }
 
 @media (max-width: 768px) {
-  #blog.content-section--page-top {
-    padding-top: calc(var(--nav-height) + 32px);
+  .resources-hero.content-section--page-top {
+    padding-top: calc(var(--nav-height) + 28px);
+    padding-bottom: 16px;
   }
+}
+
+/* Skeleton cards — visible while feed loads */
+.blog-list-card--skeleton {
+  pointer-events: none;
+  min-height: 200px;
+}
+.blog-skeleton-line {
+  display: block;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+  background-size: 200% 100%;
+  animation: blogSkeletonShimmer 1.2s ease-in-out infinite;
+}
+.blog-skeleton-line--sm { width: 40%; height: 10px; margin-bottom: 14px; }
+.blog-skeleton-line--lg { width: 92%; height: 18px; margin-bottom: 10px; }
+.blog-skeleton-line--md { width: 75%; height: 12px; }
+@keyframes blogSkeletonShimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+.blog-list-card-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  line-height: 1.3;
+  margin: 0 0 10px;
+  letter-spacing: -0.02em;
+  color: #fff;
+  font-weight: 700;
+}
+
+#blog .blog-list-grid {
+  margin-top: 0;
 }
 
 /* Thought starters */

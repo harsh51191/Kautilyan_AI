@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/site.css" />
-  <link rel="stylesheet" href="css/how-it-works.css?v=4" />
+  <link rel="stylesheet" href="css/how-it-works.css?v=5" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -209,9 +209,9 @@
             <h2 class="section-headline">The SLOPE Framework</h2>
             <p class="section-intro">Five principles behind every engagement — not a sales process, a discipline.</p>
           </div>
-          <p class="slope-hint fade-up" id="slope-hint">Principles cycle automatically — hover a letter to read it now.</p>
-          <div class="slope-bar fade-up" id="slope-bar" role="list" aria-live="polite">
-            <div class="slope-cell is-active" tabindex="0" role="listitem" data-slope="0">
+          <p class="slope-hint fade-up" id="slope-hint">Hover or click a card to read the full principle.</p>
+          <div class="slope-bar fade-up" id="slope-bar" role="list">
+            <div class="slope-cell" tabindex="0" role="listitem" data-slope="0" aria-expanded="false">
               <div class="slope-cell-letter" aria-hidden="true">S</div>
               <div class="slope-cell-body">
                 <h4>Start Small</h4>
@@ -222,7 +222,7 @@
                 </div>
               </div>
             </div>
-            <div class="slope-cell" tabindex="0" role="listitem" data-slope="1">
+            <div class="slope-cell" tabindex="0" role="listitem" data-slope="1" aria-expanded="false">
               <div class="slope-cell-letter" aria-hidden="true">L</div>
               <div class="slope-cell-body">
                 <h4>Leverage Right Tools</h4>
@@ -233,7 +233,7 @@
                 </div>
               </div>
             </div>
-            <div class="slope-cell" tabindex="0" role="listitem" data-slope="2">
+            <div class="slope-cell" tabindex="0" role="listitem" data-slope="2" aria-expanded="false">
               <div class="slope-cell-letter" aria-hidden="true">O</div>
               <div class="slope-cell-body">
                 <h4>Own Your Data</h4>
@@ -244,7 +244,7 @@
                 </div>
               </div>
             </div>
-            <div class="slope-cell" tabindex="0" role="listitem" data-slope="3">
+            <div class="slope-cell" tabindex="0" role="listitem" data-slope="3" aria-expanded="false">
               <div class="slope-cell-letter" aria-hidden="true">P</div>
               <div class="slope-cell-body">
                 <h4>Powered Experiments</h4>
@@ -255,7 +255,7 @@
                 </div>
               </div>
             </div>
-            <div class="slope-cell" tabindex="0" role="listitem" data-slope="4">
+            <div class="slope-cell" tabindex="0" role="listitem" data-slope="4" aria-expanded="false">
               <div class="slope-cell-letter" aria-hidden="true">E</div>
               <div class="slope-cell-body">
                 <h4>Evaluate Always</h4>
@@ -374,6 +374,6 @@
   <script src="js/nav.js"></script>
   <script src="js/analytics.js" defer></script>
   <script src="js/booking.js"></script>
-  <script src="js/how-it-works.js?v=1"></script>
+  <script src="js/how-it-works.js?v=2"></script>
 </body>
 </html>

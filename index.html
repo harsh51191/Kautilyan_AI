@@ -1075,7 +1075,16 @@
       margin-top: 14px;
     }
     .hero-lead-block .hero-lead:first-child {
-      margin-top: 20px;
+      margin-top: 16px;
+    }
+    .hero-lead-block .hero-trust-strip {
+      margin-top: 16px;
+    }
+    .hero-lead-block .hero-trust-strip li::before {
+      content: none;
+    }
+    .hero-lead .hero-title-accent {
+      display: inline;
     }
 
     /* Proof-of-value path — compact at-a-glance grid */
@@ -1160,7 +1169,47 @@
       border-radius: var(--radius-sm);
       border: 1px solid rgba(255, 255, 255, 0.1);
       background: linear-gradient(165deg, rgba(24, 24, 44, 0.92), var(--bg-surface));
-      min-height: 100%;
+      min-height: 148px;
+      height: 100%;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+    }
+    .path-card:hover,
+    .path-card:focus-within,
+    .path-card.is-open {
+      border-color: transparent;
+      background: linear-gradient(rgba(12, 12, 22, 0.95), rgba(12, 12, 22, 0.95)) padding-box, var(--gradient) border-box;
+      box-shadow: 0 8px 32px rgba(139, 92, 246, 0.12);
+      transform: translateY(-2px);
+    }
+    .path-card-expand {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.35s ease, opacity 0.25s ease;
+    }
+    .path-card:hover .path-card-expand,
+    .path-card:focus-within .path-card-expand,
+    .path-card.is-open .path-card-expand {
+      max-height: 220px;
+      opacity: 1;
+    }
+    .path-card-hint {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin: auto 0 0;
+    }
+    .path-card:hover .path-card-hint,
+    .path-card:focus-within .path-card-hint,
+    .path-card.is-open .path-card-hint {
+      display: none;
     }
     .path-card--0 { border-top: 2px solid rgba(52, 211, 153, 0.5); }
     .path-card--1 { border-top: 2px solid rgba(240, 160, 48, 0.5); }
@@ -2153,13 +2202,7 @@
       .hero-badge::before { animation: none; }
       .orb { opacity: 0.06; filter: blur(80px); }
       .hero-path-progress-fill { transition: none; }
-      .hero-path-step { transition: none; animation: none; }
-      .hero-path-step.is-active { animation: none; }
-      .hero-path-oneliner { transition: none; }
-      .ops-flow-step { transition: none; animation: none; }
-      .ops-flow-step.is-active { animation: none; }
-      .ops-flow-progress-fill { transition: none; }
-      .ops-flow-oneliner { transition: none; }
+      .ops-compare-row { transition: none; }
     }
 
     /* ===================================================================
@@ -2221,132 +2264,6 @@
     }
     .nav-mobile-only { display: none; }
 
-    /* Homepage v2 — compact hero path strip */
-    .hero-path-wrap {
-      margin: 0;
-      padding: 18px 20px 16px;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: linear-gradient(165deg, rgba(24, 24, 44, 0.92), rgba(16, 16, 30, 0.96));
-      box-shadow: 0 0 40px rgba(139, 92, 246, 0.1);
-      max-width: 100%;
-    }
-    .hero-path-label {
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--text-card);
-      margin: 0 0 12px;
-      text-align: center;
-    }
-    .hero-path-mini {
-      position: relative;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 6px 8px;
-      padding-bottom: 10px;
-    }
-    .hero-path-progress {
-      position: absolute;
-      left: 8%;
-      right: 8%;
-      bottom: 4px;
-      height: 3px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 3px;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .hero-path-progress-fill {
-      display: block;
-      height: 100%;
-      width: 0%;
-      background: var(--gradient);
-      border-radius: 3px;
-      transition: width 0.65s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 0 12px rgba(240, 160, 48, 0.4);
-    }
-    .hero-path-step {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(12, 12, 22, 0.65);
-      cursor: default;
-      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease, background 0.45s ease, filter 0.45s ease;
-      min-width: 0;
-      opacity: 0.32;
-      transform: scale(0.92);
-      filter: saturate(0.5);
-      position: relative;
-      z-index: 1;
-    }
-    .hero-path-step.is-active {
-      opacity: 1;
-      transform: scale(1.08);
-      filter: saturate(1);
-      background: linear-gradient(rgba(15, 15, 28, 0.95), rgba(15, 15, 28, 0.95)) padding-box, var(--gradient) border-box;
-      border: 2px solid transparent;
-      box-shadow: 0 0 36px rgba(240, 160, 48, 0.35), 0 0 24px rgba(139, 92, 246, 0.25);
-      animation: heroStepPulse 1.4s ease-in-out infinite;
-    }
-    @keyframes heroStepPulse {
-      0%, 100% { box-shadow: 0 0 24px rgba(139, 92, 246, 0.3); }
-      50% { box-shadow: 0 0 40px rgba(240, 160, 48, 0.45); }
-    }
-    .hero-path-step-num {
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      transition: color 0.35s ease;
-    }
-    .hero-path-step.is-active .hero-path-step-num { color: var(--amber); }
-    .hero-path-step-name {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      color: rgba(255, 255, 255, 0.68);
-      white-space: nowrap;
-      transition: color 0.35s ease;
-    }
-    .hero-path-step.is-active .hero-path-step-name { color: #fff; text-shadow: 0 0 20px rgba(240, 160, 48, 0.35); }
-    .hero-path-arrow {
-      color: rgba(255, 255, 255, 0.2);
-      font-size: 0.7rem;
-      flex-shrink: 0;
-      transition: color 0.35s ease, transform 0.35s ease, opacity 0.35s ease;
-      opacity: 0.5;
-    }
-    .hero-path-arrow.is-active {
-      color: var(--amber);
-      opacity: 1;
-      transform: scale(1.15);
-    }
-    .hero-path-oneliner {
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      line-height: 1.45;
-      margin: 12px 0 0;
-      min-height: 2.2em;
-      padding: 0 8px;
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .hero-path-oneliner.is-changing {
-      opacity: 0;
-      transform: translateY(6px);
-    }
-
     .drain-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -2401,193 +2318,157 @@
     }
 
 
-    /* Ops flow — dual tracks (hero-style spotlight transitions) */
-    .ops-flows-dual {
+    /* Ops compare — static dual-column table */
+    .ops-compare-table {
+      max-width: 920px;
+      margin: 0 auto;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      background: rgba(12, 12, 22, 0.75);
+    }
+    .ops-compare-table-head {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      max-width: 1000px;
-      margin: 0 auto;
+      gap: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    .ops-flow-track {
-      padding: 20px 18px 16px;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      flex-direction: column;
-    }
-    .ops-flow-track--before {
-      background: linear-gradient(165deg, rgba(52, 28, 28, 0.55), rgba(20, 20, 36, 0.96));
-      border-color: rgba(224, 85, 69, 0.28);
-      box-shadow: 0 0 40px rgba(224, 85, 69, 0.06);
-    }
-    .ops-flow-track--after {
-      background: linear-gradient(165deg, rgba(28, 32, 52, 0.65), rgba(20, 20, 36, 0.96));
-      border-color: rgba(139, 92, 246, 0.3);
-      box-shadow: 0 0 40px rgba(139, 92, 246, 0.1);
-    }
-    .ops-flow-track-head {
+    .ops-compare-table-head span {
+      padding: 14px 18px;
       font-family: var(--font-display);
-      font-size: 0.95rem;
+      font-size: 0.82rem;
       font-weight: 700;
-      margin-bottom: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .ops-flow-track--before .ops-flow-track-head { color: rgba(255, 180, 160, 0.9); }
-    .ops-flow-track--after .ops-flow-track-head { color: #fff; }
-    .ops-flow-badge {
-      display: inline-block;
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 999px;
-      width: fit-content;
     }
-    .ops-flow-badge--muted { background: rgba(224, 85, 69, 0.15); color: #f0a090; }
-    .ops-flow-badge--good {
-      background: linear-gradient(rgba(15, 15, 28, 0.9), rgba(15, 15, 28, 0.9)) padding-box, var(--gradient) border-box;
-      border: 1px solid transparent;
-      color: #fff;
+    .ops-compare-table-head span:first-child {
+      background: rgba(224, 85, 69, 0.12);
+      color: #ffc9b8;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .ops-flow-body {
-      position: relative;
+    .ops-compare-table-head span:last-child {
+      background: rgba(139, 92, 246, 0.12);
+      color: #e8e0ff;
+    }
+    .ops-compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .ops-compare-row:last-child { border-bottom: none; }
+    .ops-compare-row:hover { background: rgba(255, 255, 255, 0.02); }
+    .ops-compare-cell {
       display: flex;
-      gap: 12px;
-      align-items: stretch;
-      flex: 1;
-    }
-    .ops-flow-progress {
-      flex-shrink: 0;
-      width: 3px;
-      border-radius: 3px;
-      background: rgba(255, 255, 255, 0.08);
-      position: relative;
-      overflow: hidden;
-      margin-top: 6px;
-      margin-bottom: 6px;
-    }
-    .ops-flow-progress-fill {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 0%;
-      border-radius: 3px;
-      transition: height 0.65s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .ops-flow-track--before .ops-flow-progress-fill {
-      background: linear-gradient(180deg, rgba(224, 85, 69, 0.9), rgba(240, 160, 48, 0.7));
-      box-shadow: 0 0 12px rgba(224, 85, 69, 0.35);
-    }
-    .ops-flow-track--after .ops-flow-progress-fill {
-      background: var(--gradient);
-      box-shadow: 0 0 12px rgba(240, 160, 48, 0.4);
-    }
-    .ops-flow-steps {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .ops-flow-step {
-      display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(12, 12, 22, 0.5);
-      cursor: default;
-      opacity: 0.32;
-      transform: scale(0.96);
-      filter: saturate(0.5);
-      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease, background 0.45s ease, filter 0.45s ease;
+      padding: 14px 18px;
+      font-size: 0.88rem;
+      line-height: 1.45;
     }
-    .ops-flow-step.is-active {
-      opacity: 1;
-      transform: scale(1.02);
-      filter: saturate(1);
-      border: 2px solid transparent;
-      animation: heroStepPulse 1.4s ease-in-out infinite;
+    .ops-compare-cell--before {
+      color: rgba(255, 210, 195, 0.95);
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(52, 28, 28, 0.25);
     }
-    .ops-flow-track--before .ops-flow-step.is-active {
-      background: linear-gradient(rgba(28, 14, 14, 0.95), rgba(28, 14, 14, 0.95)) padding-box,
-        linear-gradient(135deg, rgba(224, 85, 69, 0.9), rgba(240, 160, 48, 0.6)) border-box;
-      box-shadow: 0 0 32px rgba(224, 85, 69, 0.25);
+    .ops-compare-cell--after {
+      color: rgba(255, 255, 255, 0.92);
+      background: rgba(28, 32, 52, 0.35);
     }
-    .ops-flow-track--after .ops-flow-step.is-active {
-      background: linear-gradient(rgba(15, 15, 28, 0.95), rgba(15, 15, 28, 0.95)) padding-box, var(--gradient) border-box;
-      box-shadow: 0 0 36px rgba(240, 160, 48, 0.3), 0 0 24px rgba(139, 92, 246, 0.2);
-    }
-    .ops-flow-step-num {
+    .ops-compare-num {
       flex-shrink: 0;
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
       font-size: 0.68rem;
       font-weight: 700;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: rgba(14, 14, 26, 0.9);
-      color: rgba(255, 255, 255, 0.72);
-      transition: border-color 0.35s ease, background 0.35s ease, color 0.35s ease, transform 0.35s ease;
     }
-    .ops-flow-step.is-active .ops-flow-step-num {
-      transform: scale(1.1);
-      color: #fff;
-    }
-    .ops-flow-track--before .ops-flow-step.is-active .ops-flow-step-num {
-      border-color: rgba(224, 85, 69, 0.75);
-      background: rgba(224, 85, 69, 0.25);
-    }
-    .ops-flow-track--after .ops-flow-step.is-active .ops-flow-step-num {
-      border-color: transparent;
-      background: var(--gradient);
-    }
-    .ops-flow-step-text {
-      font-size: 0.82rem;
-      line-height: 1.35;
-      color: rgba(255, 255, 255, 0.68);
-      transition: color 0.35s ease, font-weight 0.35s ease, text-shadow 0.35s ease;
-    }
-    .ops-flow-step.is-active .ops-flow-step-text {
-      font-weight: 600;
-    }
-    .ops-flow-track--before .ops-flow-step.is-active .ops-flow-step-text {
+    .ops-compare-cell--before .ops-compare-num {
+      background: rgba(224, 85, 69, 0.2);
       color: #ffc9b8;
-      text-shadow: 0 0 16px rgba(224, 85, 69, 0.25);
     }
-    .ops-flow-track--after .ops-flow-step.is-active .ops-flow-step-text {
-      color: #fff;
-      text-shadow: 0 0 20px rgba(240, 160, 48, 0.3);
+    .ops-compare-cell--after .ops-compare-num {
+      background: rgba(139, 92, 246, 0.25);
+      color: #ddd6fe;
     }
-    .ops-flow-oneliner {
-      text-align: center;
-      font-size: 0.76rem;
-      color: var(--text-muted);
+
+    /* Ops compare slider (mobile-friendly toggle) */
+    .ops-compare-slider-wrap {
+      max-width: 920px;
+      margin: 0 auto 20px;
+    }
+    .ops-compare-slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--text-section);
+    }
+    .ops-compare-slider-labels span.is-active { color: #fff; }
+    .ops-compare-slider-labels span:first-child.is-active { color: #ffc9b8; }
+    .ops-compare-slider-labels span:last-child.is-active { color: #ddd6fe; }
+    .ops-compare-slider {
+      width: 100%;
+      accent-color: var(--amber);
+      cursor: pointer;
+    }
+    .ops-compare-panel {
+      display: none;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .ops-compare-panel.is-visible { display: block; }
+    .ops-compare-panel--before {
+      background: rgba(52, 28, 28, 0.35);
+      border-color: rgba(224, 85, 69, 0.25);
+    }
+    .ops-compare-panel--after {
+      background: rgba(28, 32, 52, 0.45);
+      border-color: rgba(139, 92, 246, 0.25);
+    }
+    .ops-compare-panel ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .ops-compare-panel li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.88rem;
       line-height: 1.45;
-      margin: 12px 0 0;
-      min-height: 2.2em;
-      padding: 0 4px;
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.4s ease, transform 0.4s ease;
     }
-    .ops-flow-oneliner.is-changing {
-      opacity: 0;
-      transform: translateY(6px);
+    .ops-compare-panel li .ops-compare-num {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 0.68rem;
+      font-weight: 700;
     }
-    .ops-flow-track--before .ops-flow-oneliner { color: rgba(255, 180, 160, 0.65); }
-    .ops-flow-track--after .ops-flow-oneliner { color: rgba(200, 190, 255, 0.75); }
+    .ops-compare-panel--before li .ops-compare-num {
+      background: rgba(224, 85, 69, 0.2);
+      color: #ffc9b8;
+    }
+    .ops-compare-panel--after li .ops-compare-num {
+      background: rgba(139, 92, 246, 0.25);
+      color: #ddd6fe;
+    }
+    .ops-compare-panel--before li { color: rgba(255, 210, 195, 0.95); }
+    .ops-compare-panel--after li { color: rgba(255, 255, 255, 0.92); }
+    .ops-compare-slider-wrap { display: none; }
 
     #what-changes { padding-top: 72px; padding-bottom: 80px; }
     .transform-rows { display: flex; flex-direction: column; gap: 12px; max-width: 900px; margin: 0 auto; }
@@ -2791,83 +2672,71 @@
       white-space: nowrap;
     }
 
-    /* Why Kautilyan visual */
-    .why-visual {
+    /* Why Kautilyan — compact static comparison table */
+    .why-table {
       max-width: 900px;
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .why-visual-row {
-      display: grid;
-      grid-template-columns: 120px 1fr 1fr;
-      gap: 12px;
-      align-items: center;
-      padding: 14px 16px;
-      border-radius: 12px;
-      background: linear-gradient(165deg, rgba(24, 24, 44, 0.75), rgba(18, 18, 32, 0.9));
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .why-visual-aspect {
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-    }
-    .why-pill {
-      display: block;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      line-height: 1.35;
-    }
-    .why-pill--dim {
-      background: rgba(255, 255, 255, 0.06);
-      color: rgba(255, 255, 255, 0.78);
+      border-radius: 14px;
       border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      background: rgba(12, 12, 22, 0.6);
     }
-    .why-pill--highlight {
-      background: linear-gradient(rgba(12, 12, 22, 0.95), rgba(12, 12, 22, 0.95)) padding-box, var(--gradient) border-box;
-      border: 1px solid transparent;
-      color: #fff;
-      font-weight: 600;
+    .why-table-head,
+    .why-table-row {
+      display: grid;
+      grid-template-columns: 108px 1fr 1fr;
     }
-    .why-visual-row--header {
-      background: transparent;
-      border: none;
-      padding: 0 16px 4px;
+    .why-table-head {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
     }
-    .why-visual-row--header .why-visual-aspect { visibility: hidden; }
-    .why-col-header {
-      font-size: 0.72rem;
-      font-weight: 600;
-      line-height: 1.4;
-      color: var(--text-section);
-    }
-    .why-col-header--k {
-      text-align: right;
+    .why-table-head span {
+      padding: 12px 14px;
+      font-size: 0.68rem;
       font-weight: 700;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .why-visual-legend {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      margin-top: 8px;
-      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       color: var(--text-dim);
     }
-    .why-legend-k {
-      font-weight: 700;
+    .why-table-head span:last-child {
       background: var(--gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+    }
+    .why-table-row {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .why-table-row:last-child { border-bottom: none; }
+    .why-table-row:hover { background: rgba(255, 255, 255, 0.02); }
+    .why-table-aspect {
+      padding: 12px 14px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.12);
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+    }
+    .why-table-others,
+    .why-table-k {
+      padding: 12px 14px;
+      font-size: 0.84rem;
+      line-height: 1.4;
+      display: flex;
+      align-items: center;
+    }
+    .why-table-others {
+      color: rgba(255, 255, 255, 0.8);
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .why-table-k {
+      color: #fff;
+      font-weight: 600;
+      background: rgba(139, 92, 246, 0.07);
     }
 
     /* Trust visual */
@@ -3110,10 +2979,27 @@
         writing-mode: horizontal-tb;
         transform: none;
       }
-      .why-visual-row {
-        grid-template-columns: 1fr;
-        gap: 8px;
+      .why-table-head,
+      .why-table-row {
+        grid-template-columns: 1fr 1fr;
       }
+      .why-table-head span:first-child { display: none; }
+      .why-table-aspect {
+        grid-column: 1 / -1;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 10px 14px 6px;
+      }
+      .why-table-others {
+        border-right: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .why-table-others,
+      .why-table-k {
+        font-size: 0.8rem;
+        padding: 10px 12px 12px;
+      }
+      .ops-compare-table { display: none; }
+      .ops-compare-slider-wrap { display: block; }
       .trust-visual { grid-template-columns: 1fr 1fr; }
       .footer-top {
         grid-template-columns: 1fr;
@@ -3164,6 +3050,8 @@
       :root { --section-gap: 80px; }
       .stages { grid-template-columns: 1fr; }
       .ops-flows-dual { grid-template-columns: 1fr; }
+      .ops-compare-table-head span,
+      .ops-compare-cell { padding: 12px 14px; font-size: 0.82rem; }
       .pricing-grid { grid-template-columns: 1fr; }
       .trust-grid-4 { grid-template-columns: 1fr; }
       .nav-links {
@@ -3285,41 +3173,23 @@
             <div class="hero-badge fade-up">From Diagnosis to Governed AI — One Workflow at a Time</div>
 
             <h1 class="hero-headline hero-title fade-up">
-              Turn your most painful workflow into a <span class="hero-title-accent">measurable AI win in 45 days.</span>
+              Map how work runs. <span class="hero-title-accent">Then we use AI to run them for you.</span>
             </h1>
 
-            <p class="hero-lead fade-up fade-up-delay-1">Before any AI can work, your existing process has to be understood — how it actually runs, not how leadership thinks it runs. Kautilyan maps your operating reality first, then redesigns the workflow with AI, and deploys governed agents on your existing systems. Your team approves every step.</p>
+            <div class="hero-lead-block fade-up fade-up-delay-1">
+              <p class="hero-lead">Turn your most painful workflow into a <span class="hero-title-accent">measurable AI win in 45 days.</span></p>
+              <p class="hero-lead">We map how work actually runs, redesign the workflow for AI, and deploy governed agents on your existing systems—your team approves every step.</p>
+              
+            </div>
           </div>
 
-          <div class="hero-action-block fade-up fade-up-delay-1">
+          <div class="hero-action-block fade-up fade-up-delay-2">
             <p class="hero-principle">Agent proposes. Human approves. Organisation learns.</p>
 
             <div class="hero-cta-row">
               <button type="button" class="btn-hero-primary js-open-modal">Book Stage 0 Call →</button>
               <a href="how-it-works.html" class="btn-hero-secondary">See How It Works →</a>
             </div>
-          </div>
-
-          <div class="hero-path-wrap fade-up fade-up-delay-2" aria-label="Proof-of-value path">
-            <p class="hero-path-label">Your path to a measurable AI win</p>
-            <div class="hero-path-mini" id="hero-path-mini">
-              <div class="hero-path-progress" aria-hidden="true"><span class="hero-path-progress-fill" id="hero-path-progress-fill" style="width:0%"></span></div>
-              <span class="hero-path-step is-active" data-path="0">
-                <span class="hero-path-step-num">Stage 0</span>
-                <span class="hero-path-step-name">Diagnosis</span>
-              </span>
-              <span class="hero-path-arrow" aria-hidden="true">→</span>
-              <span class="hero-path-step" data-path="1">
-                <span class="hero-path-step-num">Stage 1</span>
-                <span class="hero-path-step-name">Blueprint</span>
-              </span>
-              <span class="hero-path-arrow" aria-hidden="true">→</span>
-              <span class="hero-path-step" data-path="2">
-                <span class="hero-path-step-num">Stage 2</span>
-                <span class="hero-path-step-name">Pilot</span>
-              </span>
-            </div>
-            <p class="hero-path-oneliner" id="hero-path-oneliner">No sales deck. No product demo. Just a blueprint of your operating reality that you can keep — even if you never hire us.</p>
           </div>
         </div>
       </div>
@@ -3384,42 +3254,61 @@
           <span class="label">The difference</span>
           <h2 class="section-headline">What your operations look like before and after.</h2>
         </div>
-        <div class="ops-flows-dual fade-up" id="ops-flows-dual" aria-label="Before and after workflow steps">
-          <div class="ops-flow-track ops-flow-track--before">
-            <div class="ops-flow-track-head">
-              <span class="ops-flow-badge ops-flow-badge--muted">Before</span>
-              Without process clarity
-            </div>
-            <div class="ops-flow-body">
-              <div class="ops-flow-progress" aria-hidden="true"><span class="ops-flow-progress-fill" id="ops-flow-before-fill" style="height:0%"></span></div>
-              <ol class="ops-flow-steps" id="ops-flow-before">
-              <li class="ops-flow-step is-active"><span class="ops-flow-step-num">1</span><span class="ops-flow-step-text">Signal buried in chat & email</span></li>
-              <li class="ops-flow-step"><span class="ops-flow-step-num">2</span><span class="ops-flow-step-text">Manual context search</span></li>
-              <li class="ops-flow-step"><span class="ops-flow-step-num">3</span><span class="ops-flow-step-text">Escalates to senior judgment</span></li>
-              <li class="ops-flow-step"><span class="ops-flow-step-num">4</span><span class="ops-flow-step-text">Verbal approval, no record</span></li>
-              <li class="ops-flow-step"><span class="ops-flow-step-num">5</span><span class="ops-flow-step-text">Manual follow-up</span></li>
-              <li class="ops-flow-step"><span class="ops-flow-step-num">6</span><span class="ops-flow-step-text">Learning stays with one person</span></li>
-              </ol>
-            </div>
-            <p class="ops-flow-oneliner" id="ops-flow-before-oneliner">Critical signals drown in threads no one owns.</p>
+        <div class="ops-compare-table fade-up" id="ops-compare-table" aria-label="Before and after workflow comparison">
+          <div class="ops-compare-table-head">
+            <span>Before — without process clarity</span>
+            <span>With Kautilyan — governed workflow</span>
           </div>
-          <div class="ops-flow-track ops-flow-track--after">
-            <div class="ops-flow-track-head">
-              <span class="ops-flow-badge ops-flow-badge--good">With Kautilyan</span>
-              Governed workflow
-            </div>
-            <div class="ops-flow-body">
-              <div class="ops-flow-progress" aria-hidden="true"><span class="ops-flow-progress-fill" id="ops-flow-after-fill" style="height:0%"></span></div>
-              <ol class="ops-flow-steps" id="ops-flow-after">
-              <li class="ops-flow-step is-active"><span class="ops-flow-step-num">1</span><span class="ops-flow-step-text">Signal detected</span></li>
-              <li class="ops-flow-step"><span class="ops-flow-step-num">2</span><span class="ops-flow-step-text">Context pack assembled</span></li>
-              <li class="ops-flow-step"><span class="ops-flow-step-num">3</span><span class="ops-flow-step-text">3 options drafted</span></li>
-              <li class="ops-flow-step"><span class="ops-flow-step-num">4</span><span class="ops-flow-step-text">One-click approval</span></li>
-              <li class="ops-flow-step"><span class="ops-flow-step-num">5</span><span class="ops-flow-step-text">Action routed</span></li>
-              <li class="ops-flow-step"><span class="ops-flow-step-num">6</span><span class="ops-flow-step-text">Decision trace becomes memory</span></li>
-              </ol>
-            </div>
-            <p class="ops-flow-oneliner" id="ops-flow-after-oneliner">Signals surface automatically from your stack.</p>
+          <div class="ops-compare-row">
+            <div class="ops-compare-cell ops-compare-cell--before"><span class="ops-compare-num">1</span>Signal buried in chat &amp; email</div>
+            <div class="ops-compare-cell ops-compare-cell--after"><span class="ops-compare-num">1</span>Signal detected from your stack</div>
+          </div>
+          <div class="ops-compare-row">
+            <div class="ops-compare-cell ops-compare-cell--before"><span class="ops-compare-num">2</span>Manual context search across tools</div>
+            <div class="ops-compare-cell ops-compare-cell--after"><span class="ops-compare-num">2</span>Context pack assembled automatically</div>
+          </div>
+          <div class="ops-compare-row">
+            <div class="ops-compare-cell ops-compare-cell--before"><span class="ops-compare-num">3</span>Escalates to senior judgment</div>
+            <div class="ops-compare-cell ops-compare-cell--after"><span class="ops-compare-num">3</span>Three options drafted with tradeoffs</div>
+          </div>
+          <div class="ops-compare-row">
+            <div class="ops-compare-cell ops-compare-cell--before"><span class="ops-compare-num">4</span>Verbal approval, no record</div>
+            <div class="ops-compare-cell ops-compare-cell--after"><span class="ops-compare-num">4</span>One-click approval with audit trail</div>
+          </div>
+          <div class="ops-compare-row">
+            <div class="ops-compare-cell ops-compare-cell--before"><span class="ops-compare-num">5</span>Manual follow-up from memory</div>
+            <div class="ops-compare-cell ops-compare-cell--after"><span class="ops-compare-num">5</span>Action routed to the right owner</div>
+          </div>
+          <div class="ops-compare-row">
+            <div class="ops-compare-cell ops-compare-cell--before"><span class="ops-compare-num">6</span>Learning stays with one person</div>
+            <div class="ops-compare-cell ops-compare-cell--after"><span class="ops-compare-num">6</span>Every decision becomes searchable memory</div>
+          </div>
+        </div>
+        <div class="ops-compare-slider-wrap fade-up" id="ops-compare-slider-wrap" aria-label="Before and after workflow comparison">
+          <div class="ops-compare-slider-labels">
+            <span id="ops-slider-label-before" class="is-active">Before</span>
+            <span id="ops-slider-label-after">With Kautilyan</span>
+          </div>
+          <input type="range" class="ops-compare-slider" id="ops-compare-slider" min="0" max="1" step="1" value="0" aria-label="Toggle between before and after workflow">
+          <div class="ops-compare-panel ops-compare-panel--before is-visible" id="ops-panel-before">
+            <ol>
+              <li><span class="ops-compare-num">1</span>Signal buried in chat &amp; email</li>
+              <li><span class="ops-compare-num">2</span>Manual context search across tools</li>
+              <li><span class="ops-compare-num">3</span>Escalates to senior judgment</li>
+              <li><span class="ops-compare-num">4</span>Verbal approval, no record</li>
+              <li><span class="ops-compare-num">5</span>Manual follow-up from memory</li>
+              <li><span class="ops-compare-num">6</span>Learning stays with one person</li>
+            </ol>
+          </div>
+          <div class="ops-compare-panel ops-compare-panel--after" id="ops-panel-after">
+            <ol>
+              <li><span class="ops-compare-num">1</span>Signal detected from your stack</li>
+              <li><span class="ops-compare-num">2</span>Context pack assembled automatically</li>
+              <li><span class="ops-compare-num">3</span>Three options drafted with tradeoffs</li>
+              <li><span class="ops-compare-num">4</span>One-click approval with audit trail</li>
+              <li><span class="ops-compare-num">5</span>Action routed to the right owner</li>
+              <li><span class="ops-compare-num">6</span>Every decision becomes searchable memory</li>
+            </ol>
           </div>
         </div>
         <div class="compare-callout fade-up">
@@ -3438,36 +3327,36 @@
           <h2 class="section-headline">Not a tool vendor. Not a traditional consultant. Not a chatbot agency.</h2>
           <p class="section-intro">Compared against AI platform vendors, strategy consultants, and automation agencies — here's who we're not and why that matters.</p>
         </div>
-        <div class="why-visual fade-up">
-          <div class="why-visual-row why-visual-row--header">
-            <div class="why-visual-aspect"></div>
-            <div class="why-col-header">AI Platform Vendors (Copilot, Glean, etc.) · Strategy Consultants (McKinsey, BCG style) · No-Code / Automation Agencies</div>
-            <div class="why-col-header why-col-header--k">Kautilyan</div>
+        <div class="why-table fade-up" role="table" aria-label="How Kautilyan compares to typical AI vendors and consultants">
+          <div class="why-table-head" role="row">
+            <span role="columnheader"></span>
+            <span role="columnheader">Typical vendors &amp; consultants</span>
+            <span role="columnheader">Kautilyan</span>
           </div>
-          <div class="why-visual-row">
-            <div class="why-visual-aspect">Starting point</div>
-            <div class="why-visual-others"><span class="why-pill why-pill--dim">Sells software first</span></div>
-            <div class="why-visual-kautilyan"><span class="why-pill why-pill--highlight">Decides what is worth building</span></div>
+          <div class="why-table-row" role="row">
+            <span class="why-table-aspect" role="rowheader">Starting point</span>
+            <span class="why-table-others" role="cell">Sells software or a strategy deck first</span>
+            <span class="why-table-k" role="cell">Decides what is worth building</span>
           </div>
-          <div class="why-visual-row">
-            <div class="why-visual-aspect">Workflow</div>
-            <div class="why-visual-others"><span class="why-pill why-pill--dim">Automates existing steps</span></div>
-            <div class="why-visual-kautilyan"><span class="why-pill why-pill--highlight">Redesigns before building</span></div>
+          <div class="why-table-row" role="row">
+            <span class="why-table-aspect" role="rowheader">Workflow</span>
+            <span class="why-table-others" role="cell">Automates existing steps as-is</span>
+            <span class="why-table-k" role="cell">Redesigns the workflow before building</span>
           </div>
-          <div class="why-visual-row">
-            <div class="why-visual-aspect">Adoption</div>
-            <div class="why-visual-others"><span class="why-pill why-pill--dim">Leaves it to your team</span></div>
-            <div class="why-visual-kautilyan"><span class="why-pill why-pill--highlight">Embeds through the pilot</span></div>
+          <div class="why-table-row" role="row">
+            <span class="why-table-aspect" role="rowheader">Adoption</span>
+            <span class="why-table-others" role="cell">Leaves rollout to your team</span>
+            <span class="why-table-k" role="cell">Embeds through the full 45-day pilot</span>
           </div>
-          <div class="why-visual-row">
-            <div class="why-visual-aspect">AI model</div>
-            <div class="why-visual-others"><span class="why-pill why-pill--dim">Answers questions</span></div>
-            <div class="why-visual-kautilyan"><span class="why-pill why-pill--highlight">Proposes → human approves → executes</span></div>
+          <div class="why-table-row" role="row">
+            <span class="why-table-aspect" role="rowheader">AI model</span>
+            <span class="why-table-others" role="cell">Answers questions on demand</span>
+            <span class="why-table-k" role="cell">Proposes → human approves → executes</span>
           </div>
-          <div class="why-visual-row">
-            <div class="why-visual-aspect">Value</div>
-            <div class="why-visual-others"><span class="why-pill why-pill--dim">In the tool or deck</span></div>
-            <div class="why-visual-kautilyan"><span class="why-pill why-pill--highlight">In repeatable workflow proof</span></div>
+          <div class="why-table-row" role="row">
+            <span class="why-table-aspect" role="rowheader">Value</span>
+            <span class="why-table-others" role="cell">Lives in the tool or the deck</span>
+            <span class="why-table-k" role="cell">Lives in repeatable workflow proof</span>
           </div>
         </div>
         <div class="compare-callout fade-up" style="margin-top:28px;">
@@ -3496,55 +3385,67 @@
           </ol>
           <ol class="path-grid" aria-label="Four phases of the proof-of-value path">
             <li>
-              <article class="path-card path-card--0">
+              <article class="path-card path-card--0" tabindex="0" aria-expanded="false">
                 <span class="path-card-phase">Stage 0</span>
                 <h3 class="path-card-title">Free AI Workflow Diagnosis</h3>
                 <p class="path-card-hook">Map how work actually runs and pick the first workflow to transform.</p>
-                <ul class="path-card-tags">
-                  <li>Written summary</li>
-                  <li>Ranked candidates</li>
-                  <li>First workflow pick</li>
-                </ul>
-                <p class="path-card-meta">45 mins · Free · No commitment</p>
+                <div class="path-card-expand">
+                  <ul class="path-card-tags">
+                    <li>Written summary</li>
+                    <li>Ranked candidates</li>
+                    <li>First workflow pick</li>
+                  </ul>
+                  <p class="path-card-meta">45 mins · Free · No commitment</p>
+                </div>
+                <span class="path-card-hint">Hover or tap for details</span>
               </article>
             </li>
             <li>
-              <article class="path-card path-card--1">
+              <article class="path-card path-card--1" tabindex="0" aria-expanded="false">
                 <span class="path-card-phase">Stage 1</span>
                 <h3 class="path-card-title">Proof of Value Blueprint</h3>
                 <p class="path-card-hook">Deep-dive on one workflow — as-is map, future design, and a named pilot metric.</p>
-                <ul class="path-card-tags">
-                  <li>As-is map</li>
-                  <li>Future design</li>
-                  <li>Success metric</li>
-                </ul>
-                <p class="path-card-meta">72 hrs · Proof before you commit</p>
+                <div class="path-card-expand">
+                  <ul class="path-card-tags">
+                    <li>As-is map</li>
+                    <li>Future design</li>
+                    <li>Success metric</li>
+                  </ul>
+                  <p class="path-card-meta">72 hrs · Proof before you commit</p>
+                </div>
+                <span class="path-card-hint">Hover or tap for details</span>
               </article>
             </li>
             <li>
-              <article class="path-card path-card--2">
+              <article class="path-card path-card--2" tabindex="0" aria-expanded="false">
                 <span class="path-card-phase">Stage 2</span>
                 <h3 class="path-card-title">45-Day Pilot</h3>
                 <p class="path-card-hook">One workflow live on your systems with human approval at every consequential step.</p>
-                <ul class="path-card-tags">
-                  <li>Governed AI workflow</li>
-                  <li>Human-in-the-loop</li>
-                  <li>Day-45 evidence</li>
-                </ul>
-                <p class="path-card-meta">Guaranteed outcome or full refund</p>
+                <div class="path-card-expand">
+                  <ul class="path-card-tags">
+                    <li>Governed AI workflow</li>
+                    <li>Human-in-the-loop</li>
+                    <li>Day-45 evidence</li>
+                  </ul>
+                  <p class="path-card-meta">Guaranteed outcome or full refund</p>
+                </div>
+                <span class="path-card-hint">Hover or tap for details</span>
               </article>
             </li>
             <li>
-              <article class="path-card path-card--3">
+              <article class="path-card path-card--3" tabindex="0" aria-expanded="false">
                 <span class="path-card-phase">Stage 3</span>
                 <h3 class="path-card-title">Institutionalise what works</h3>
                 <p class="path-card-hook">Turn the pilot into reusable operating intelligence for the next workflow.</p>
-                <ul class="path-card-tags">
-                  <li>Reusable intelligence</li>
-                  <li>Faster rebuilds</li>
-                  <li>Org memory</li>
-                </ul>
-                <p class="path-card-meta">After proof · Scale what worked</p>
+                <div class="path-card-expand">
+                  <ul class="path-card-tags">
+                    <li>Reusable intelligence</li>
+                    <li>Faster rebuilds</li>
+                    <li>Org memory</li>
+                  </ul>
+                  <p class="path-card-meta">After proof · Scale what worked</p>
+                </div>
+                <span class="path-card-hint">Hover or tap for details</span>
               </article>
             </li>
           </ol>
@@ -3787,105 +3688,7 @@
       observer.observe(el);
     });
 
-    /* Hero path spotlight — runs here so highlighting works even if homepage.js fails to load */
-    (function () {
-      var mini = document.getElementById('hero-path-mini');
-      if (!mini || mini.dataset.spotlightInit) return;
-      mini.dataset.spotlightInit = '1';
-      var steps = mini.querySelectorAll('.hero-path-step');
-      var arrows = mini.querySelectorAll('.hero-path-arrow');
-      var fill = document.getElementById('hero-path-progress-fill');
-      var oneliner = document.getElementById('hero-path-oneliner');
-      var lines = [
-        'No sales deck. No product demo. Just a blueprint you can keep — even if you never hire us.',
-        'Proof of value on your data in 72 hours — before you commit to a pilot.',
-        '45-day pilot with a guaranteed outcome or full refund.',
-      ];
-      var widths = [0, 50, 100];
-      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var idx = 0;
-
-      function setStage(i) {
-        steps.forEach(function (s, n) { s.classList.toggle('is-active', n === i); });
-        arrows.forEach(function (a, n) { a.classList.toggle('is-active', n === i - 1); });
-        if (fill) fill.style.width = widths[i] + '%';
-        if (oneliner && lines[i]) oneliner.textContent = lines[i];
-      }
-
-      setStage(0);
-      if (!reduced && steps.length > 1) {
-        setInterval(function () {
-          idx = (idx + 1) % steps.length;
-          setStage(idx);
-        }, 3200);
-      }
-    })();
-
-    /* Ops flow spotlight — same continuous loop as hero */
-    function initOpsFlowSpotlight() {
-      var beforeList = document.getElementById('ops-flow-before');
-      var afterList = document.getElementById('ops-flow-after');
-      if (!beforeList || !afterList || beforeList.dataset.spotlightInit === '1') return;
-      beforeList.dataset.spotlightInit = '1';
-
-      var beforeSteps = beforeList.querySelectorAll('.ops-flow-step');
-      var afterSteps = afterList.querySelectorAll('.ops-flow-step');
-      var count = beforeSteps.length;
-      if (!count || count !== afterSteps.length) return;
-
-      var beforeFill = document.getElementById('ops-flow-before-fill');
-      var afterFill = document.getElementById('ops-flow-after-fill');
-      var beforeOneliner = document.getElementById('ops-flow-before-oneliner');
-      var afterOneliner = document.getElementById('ops-flow-after-oneliner');
-      var beforeLines = [
-        'Critical signals drown in threads no one owns.',
-        'Someone hunts across five tools for context.',
-        'Every non-routine call waits on one person who "just knows."',
-        'Approvals happen in calls — nothing lands in the system.',
-        'Follow-ups depend on memory, not workflow.',
-        'When they leave, the playbook leaves with them.',
-      ];
-      var afterLines = [
-        'Signals surface automatically from your stack.',
-        'Context arrives assembled — not hunted.',
-        'Options arrive with tradeoffs, not blank slates.',
-        'One click. Full audit trail.',
-        'Actions route to the right owner instantly.',
-        'Every decision becomes searchable memory.',
-      ];
-      var idx = 0;
-
-      function progressPct(i) {
-        return count <= 1 ? 0 : (i / (count - 1)) * 100;
-      }
-
-      function setOneliner(el, text) {
-        if (!el || !text || el.textContent === text) return;
-        el.classList.add('is-changing');
-        setTimeout(function () {
-          el.textContent = text;
-          el.classList.remove('is-changing');
-        }, 220);
-      }
-
-      function setOpsStage(i) {
-        beforeSteps.forEach(function (s, n) { s.classList.toggle('is-active', n === i); });
-        afterSteps.forEach(function (s, n) { s.classList.toggle('is-active', n === i); });
-        var pct = progressPct(i) + '%';
-        if (beforeFill) beforeFill.style.height = pct;
-        if (afterFill) afterFill.style.height = pct;
-        if (beforeOneliner && beforeLines[i]) setOneliner(beforeOneliner, beforeLines[i]);
-        if (afterOneliner && afterLines[i]) setOneliner(afterOneliner, afterLines[i]);
-      }
-
-      setOpsStage(0);
-      setInterval(function () {
-        idx = (idx + 1) % count;
-        setOpsStage(idx);
-      }, 3200);
-    }
-    initOpsFlowSpotlight();
-    document.addEventListener('DOMContentLoaded', initOpsFlowSpotlight);
+    /* Hero path spotlight removed — static roadmap */
 
     var hamburgerEl = document.getElementById('hamburger');
     if (hamburgerEl) {
@@ -3919,6 +3722,6 @@
   <script src="js/nav.js"></script>
   <script src="js/analytics.js" defer></script>
   <script src="js/booking.js"></script>
-  <script src="js/homepage.js?v=6"></script>
+  <script src="js/homepage.js?v=8"></script>
 </body>
 </html>

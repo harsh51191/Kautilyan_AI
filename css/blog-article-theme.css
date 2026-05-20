@@ -1,7 +1,14 @@
 /* Article page — gradient theme + rich block polish (all posts) */
 
 body.article-page .article-wrap {
-  max-width: 800px;
+  max-width: min(1280px, 96vw);
+}
+
+body.article-page .article-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 300px);
+  gap: 28px 32px;
+  align-items: start;
 }
 
 body.article-page .article-shell {
@@ -298,6 +305,19 @@ body.article-page .article-body .blog-video-wrap {
 body.article-page .article-cta {
   margin-top: 40px;
   box-shadow: var(--gradient-glow);
+}
+
+body.article-page .article-sidebar-block {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 820px) {
+  body.article-page .article-layout {
+    grid-template-columns: 1fr;
+  }
+  body.article-page .article-sidebar {
+    position: static;
+  }
 }
 
 @media (max-width: 640px) {

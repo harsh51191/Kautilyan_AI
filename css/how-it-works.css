@@ -133,7 +133,7 @@
   margin: 0;
 }
 
-/* SLOPE — preview always visible; detail on active / hover; auto-cycle via JS */
+/* SLOPE — equal cards by default; expand on hover (desktop) or click */
 #slope .slope-hint {
   margin: 4px 0 14px;
   font-size: 0.82rem;
@@ -145,28 +145,34 @@
   flex-direction: row;
   align-items: stretch;
   gap: 8px;
-  min-height: 220px;
 }
 #slope .slope-cell {
   flex: 1 1 0;
-  min-width: 72px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(16, 16, 28, 0.95);
   overflow: hidden;
-  cursor: default;
+  cursor: pointer;
   outline: none;
   transition: flex 0.35s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
-#slope .slope-cell.is-active,
-#slope .slope-cell:hover,
-#slope .slope-cell:focus-within {
-  flex: 4 1 0;
+#slope .slope-cell.is-pinned {
+  flex: 3.2 1 0;
   border-color: rgba(240, 160, 48, 0.4);
   box-shadow: 0 8px 32px rgba(139, 92, 246, 0.12);
   background: linear-gradient(165deg, rgba(22, 22, 38, 0.98), rgba(12, 12, 22, 0.96));
+}
+@media (hover: hover) {
+  #slope .slope-cell:hover,
+  #slope .slope-cell:focus-within {
+    flex: 3.2 1 0;
+    border-color: rgba(240, 160, 48, 0.4);
+    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.12);
+    background: linear-gradient(165deg, rgba(22, 22, 38, 0.98), rgba(12, 12, 22, 0.96));
+  }
 }
 #slope .slope-cell-letter {
   flex-shrink: 0;
@@ -184,61 +190,27 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 10px 8px 12px;
+  padding: 10px 10px 12px;
   overflow: hidden;
   min-height: 0;
+  text-align: center;
 }
 #slope .slope-cell-body h4 {
   font-family: var(--font-display);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: #fff;
-  margin: 0 0 4px;
+  margin: 0;
   line-height: 1.25;
-}
-#slope .slope-cell:not(.is-active):not(:hover):not(:focus-within) .slope-cell-body h4 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 #slope .slope-cell-tag {
   font-size: 0.72rem;
   color: var(--amber);
   margin: 0;
   line-height: 1.35;
-}
-#slope .slope-cell:not(.is-active):not(:hover):not(:focus-within) .slope-cell-tag {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  max-height: 0;
+  opacity: 0;
   overflow: hidden;
-}
-#slope .slope-cell.is-active .slope-cell-body h4,
-#slope .slope-cell.is-active .slope-cell-tag,
-#slope .slope-cell:hover .slope-cell-body h4,
-#slope .slope-cell:hover .slope-cell-tag,
-#slope .slope-cell:focus-within .slope-cell-body h4,
-#slope .slope-cell:focus-within .slope-cell-tag {
-  display: block;
-  -webkit-line-clamp: unset;
-  overflow: visible;
-}
-#slope .slope-cell.is-active .slope-cell-body,
-#slope .slope-cell:hover .slope-cell-body,
-#slope .slope-cell:focus-within .slope-cell-body {
-  padding: 12px 14px 16px;
-}
-#slope .slope-cell.is-active .slope-cell-body h4,
-#slope .slope-cell:hover .slope-cell-body h4,
-#slope .slope-cell:focus-within .slope-cell-body h4 {
-  font-size: 0.92rem;
-  margin-bottom: 6px;
-}
-#slope .slope-cell.is-active .slope-cell-tag,
-#slope .slope-cell:hover .slope-cell-tag,
-#slope .slope-cell:focus-within .slope-cell-tag {
-  font-size: 0.78rem;
-  margin-bottom: 8px;
+  transition: max-height 0.32s ease, opacity 0.24s ease, margin 0.24s ease;
 }
 #slope .slope-cell-detail {
   overflow: hidden;
@@ -246,12 +218,57 @@
   opacity: 0;
   transition: max-height 0.32s ease, opacity 0.24s ease, margin 0.24s ease;
 }
-#slope .slope-cell.is-active .slope-cell-detail,
-#slope .slope-cell:hover .slope-cell-detail,
-#slope .slope-cell:focus-within .slope-cell-detail {
+#slope .slope-cell.is-pinned .slope-cell-body {
+  padding: 12px 14px 16px;
+  text-align: left;
+}
+@media (hover: hover) {
+  #slope .slope-cell:hover .slope-cell-body,
+  #slope .slope-cell:focus-within .slope-cell-body {
+    padding: 12px 14px 16px;
+    text-align: left;
+  }
+}
+#slope .slope-cell.is-pinned .slope-cell-body h4 {
+  font-size: 0.92rem;
+  margin-bottom: 6px;
+}
+@media (hover: hover) {
+  #slope .slope-cell:hover .slope-cell-body h4,
+  #slope .slope-cell:focus-within .slope-cell-body h4 {
+    font-size: 0.92rem;
+    margin-bottom: 6px;
+  }
+}
+#slope .slope-cell.is-pinned .slope-cell-tag {
+  max-height: 4em;
+  opacity: 1;
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 0.78rem;
+}
+@media (hover: hover) {
+  #slope .slope-cell:hover .slope-cell-tag,
+  #slope .slope-cell:focus-within .slope-cell-tag {
+    max-height: 4em;
+    opacity: 1;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 0.78rem;
+  }
+}
+#slope .slope-cell.is-pinned .slope-cell-detail {
   max-height: 420px;
   opacity: 1;
   margin-top: 4px;
+}
+@media (hover: hover) {
+  #slope .slope-cell:hover .slope-cell-detail,
+  #slope .slope-cell:focus-within .slope-cell-detail {
+    max-height: 420px;
+    opacity: 1;
+    margin-top: 4px;
+  }
 }
 #slope .slope-cell-detail > p:not(.slope-cell-ex) {
   font-size: 0.82rem;
@@ -448,28 +465,14 @@
   #slope .slope-hint { display: none; }
   #slope .slope-bar {
     flex-direction: column;
-    min-height: 0;
     gap: 10px;
   }
   #slope .slope-cell,
-  #slope .slope-cell:hover,
-  #slope .slope-cell:focus-within,
-  #slope .slope-cell.is-active {
+  #slope .slope-cell.is-pinned {
     flex: none;
   }
   #slope .slope-cell-body {
-    padding: 0 16px 14px;
-  }
-  #slope .slope-cell-body h4,
-  #slope .slope-cell-tag {
-    display: block;
-    -webkit-line-clamp: unset;
-    overflow: visible;
-  }
-  #slope .slope-cell-detail {
-    max-height: none;
-    opacity: 1;
-    margin-top: 8px;
+    padding: 10px 14px 12px;
   }
   #slope .slope-cell-letter {
     min-height: 44px;

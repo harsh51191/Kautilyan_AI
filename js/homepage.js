@@ -13,8 +13,6 @@
   }
 
   onReady(function () {
-    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
     document.querySelectorAll('#nav-menu .js-open-modal').forEach(function (link) {
       link.addEventListener('click', function () {
         var nav = document.getElementById('navbar');
@@ -27,53 +25,6 @@
       });
     });
 
-    /* ——— Hero path strip — one stage highlighted at a time ——— */
-    var heroPathMini = document.getElementById('hero-path-mini');
-    var pathSteps = heroPathMini ? qsa('.hero-path-step', heroPathMini) : [];
-    var pathArrows = heroPathMini ? qsa('.hero-path-arrow', heroPathMini) : [];
-    var pathOneliner = document.getElementById('hero-path-oneliner');
-    var pathProgressFill = document.getElementById('hero-path-progress-fill');
-    var pathLines = [
-      'No sales deck. No product demo. Just a blueprint you can keep — even if you never hire us.',
-      'Proof of value on your data in 72 hours — before you commit to a pilot.',
-      '45-day pilot with a guaranteed outcome or full refund.',
-    ];
-    var pathProgress = [0, 50, 100];
-    var heroPathTimer = null;
-
-    function setHeroPathStage(idx) {
-      pathSteps.forEach(function (s, i) {
-        s.classList.toggle('is-active', i === idx);
-      });
-      pathArrows.forEach(function (a, i) {
-        a.classList.remove('is-active', 'is-lit');
-        a.classList.toggle('is-active', i === idx - 1);
-      });
-      if (pathProgressFill) pathProgressFill.style.width = pathProgress[idx] + '%';
-      if (pathOneliner && pathLines[idx]) {
-        pathOneliner.classList.add('is-changing');
-        setTimeout(function () {
-          pathOneliner.textContent = pathLines[idx];
-          pathOneliner.classList.remove('is-changing');
-        }, 220);
-      }
-    }
-
-    function startHeroPathLoop() {
-      if (!pathSteps.length || (heroPathMini && heroPathMini.dataset.spotlightInit)) return;
-      if (heroPathMini) heroPathMini.dataset.spotlightInit = '1';
-      setHeroPathStage(0);
-      if (prefersReducedMotion) return;
-      if (heroPathTimer) clearInterval(heroPathTimer);
-      var pathIdx = 0;
-      heroPathTimer = setInterval(function () {
-        pathIdx = (pathIdx + 1) % pathSteps.length;
-        setHeroPathStage(pathIdx);
-      }, 3200);
-    }
-
-    startHeroPathLoop();
-
     /* ——— Drain cards expand ——— */
     qsa('.drain-card').forEach(function (card) {
       card.addEventListener('click', function () {
@@ -81,6 +32,36 @@
         card.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
     });
+
+    /* ——— Path cards expand on click (hover handled in CSS) ——— */
+    qsa('.path-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var open = card.classList.toggle('is-open');
+        card.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+
+    /* ——— Before/after mobile slider ——— */
+    var opsSlider = document.getElementById('ops-compare-slider');
+    if (opsSlider) {
+      var panelBefore = document.getElementById('ops-panel-before');
+      var panelAfter = document.getElementById('ops-panel-after');
+      var labelBefore = document.getElementById('ops-slider-label-before');
+      var labelAfter = document.getElementById('ops-slider-label-after');
+
+      function setOpsSlider(val) {
+        var showAfter = Number(val) === 1;
+        if (panelBefore) panelBefore.classList.toggle('is-visible', !showAfter);
+        if (panelAfter) panelAfter.classList.toggle('is-visible', showAfter);
+        if (labelBefore) labelBefore.classList.toggle('is-active', !showAfter);
+        if (labelAfter) labelAfter.classList.toggle('is-active', showAfter);
+      }
+
+      opsSlider.addEventListener('input', function () {
+        setOpsSlider(opsSlider.value);
+      });
+      setOpsSlider(opsSlider.value);
+    }
 
     /* ——— Generic tabs ——— */
     qsa('[data-tabs]').forEach(function (wrap) {

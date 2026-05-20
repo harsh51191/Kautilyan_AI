@@ -15,7 +15,7 @@
             'Kautilyan AI' +
           '</a>' +
           '<p class="footer-tagline">AI workflow transformation for growing businesses.</p>' +
-          '<p class="footer-desc">We help companies identify, redesign, and implement high-value AI workflows on existing systems.</p>' +
+          '<p class="footer-desc">We help companies identify, re-imagine, and implement high-value AI workflows on existing systems.</p>' +
         '</div>' +
         '<div class="footer-nav" role="navigation" aria-label="Footer navigation">' +
           '<div class="footer-col">' +
@@ -25,7 +25,6 @@
               '<li><a href="use-cases.html">Use Cases</a></li>' +
               '<li><a href="pricing.html" id="footer-pricing-link">Pricing</a></li>' +
               '<li><a href="resources.html">Resources</a></li>' +
-              '<li><a href="blog.html">Blog</a></li>' +
             '</ul>' +
           '</div>' +
           '<div class="footer-col">' +

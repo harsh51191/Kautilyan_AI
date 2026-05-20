@@ -155,15 +155,11 @@
       );
     }
     var cap = block.caption ? '<figcaption class="blog-figcaption">' + esc(block.caption) + '</figcaption>' : '';
-    var openLink = info.openUrl
-      ? '<p class="blog-video-open"><a href="' + esc(info.openUrl) + '" target="_blank" rel="noopener noreferrer">Open in Google Drive if the player does not load</a></p>'
-      : '';
     var inner =
       '<p class="blog-block-title"><span class="blog-block-badge">Video</span></p>' +
       '<div class="blog-video-wrap">' +
       '<iframe src="' + esc(info.embed) + '" title="' + esc(block.caption || 'Video') + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>' +
       '</div>' +
-      openLink +
       cap;
     return blockWrap('video', block.id, inner);
   }
@@ -366,7 +362,22 @@
     });
   }
 
+  function stripVideoOpenLinks(root) {
+    if (!root) return;
+    root.querySelectorAll('.blog-video-open').forEach(function (el) {
+      el.remove();
+    });
+    root.querySelectorAll('.blog-block--video a[href*="drive.google.com"]').forEach(function (a) {
+      var label = (a.textContent || '').toLowerCase();
+      if (label.indexOf('google drive') >= 0 || label.indexOf('open in') >= 0 || label.indexOf('player does not load') >= 0) {
+        var parent = a.closest('p') || a;
+        parent.remove();
+      }
+    });
+  }
+
   function enhanceArticle(root) {
+    stripVideoOpenLinks(root);
     wireMediaFallbacks(root);
     initChartsWhenReady(root, 0);
   }
