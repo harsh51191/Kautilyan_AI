@@ -202,11 +202,15 @@
     );
   }
 
+  function privacyHref() {
+    return (/\/data\//.test(location.pathname) ? '../' : '') + 'privacy.html';
+  }
+
   function calButtonHTML() {
     return (
       '<button type="button" class="cr-submit js-open-cal">Pick your time on Cal.com →</button>' +
       '<p class="cr-hint">About 2 minutes. After you confirm, you’ll answer five prep questions on the next screen.</p>' +
-      '<p class="cr-foot">By continuing, you agree to our <a href="privacy.html">Privacy Policy</a>.</p>'
+      '<p class="cr-foot">By continuing, you agree to our <a href="' + privacyHref() + '">Privacy Policy</a>.</p>'
     );
   }
 

@@ -1,0 +1,258 @@
+/* Booking modal + form on resource guide pages */
+
+.doc-cta-btn {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.doc-cta-btn--dark {
+  background: #0f0f13;
+  color: #c9a84c;
+}
+
+.doc-cta-btn--gold {
+  background: #c9a84c;
+  color: #0f0f13;
+  font-weight: 700;
+  padding: 13px 26px;
+}
+
+.doc-cta-btn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.doc-cta-email {
+  font-size: 13px;
+  color: #6b6b80;
+}
+
+.doc-cta-email a {
+  color: #0f0f13;
+  font-weight: 600;
+}
+
+.doc-cta-row--dark .doc-cta-email {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.doc-cta-row--dark .doc-cta-email a {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  font-family: 'Inter', -apple-system, sans-serif;
+  z-index: 10050;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  max-width: 340px;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.toast-success {
+  background: rgba(52, 211, 153, 0.15);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  color: #34d399;
+}
+
+.toast-error {
+  background: rgba(224, 85, 69, 0.15);
+  border: 1px solid rgba(224, 85, 69, 0.3);
+  color: #e05545;
+}
+
+/* Booking modal */
+.booking-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.booking-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.booking-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 4, 10, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.booking-modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: linear-gradient(165deg, #12121f, #0a0a14);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.booking-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.booking-modal h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #fff;
+}
+
+.modal-sub {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.cr-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 0;
+}
+
+.cr-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.cr-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.cr-input,
+.cr-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(8, 8, 16, 0.8);
+  color: #fff;
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+}
+
+.cr-input:focus,
+.cr-textarea:focus {
+  border-color: rgba(201, 168, 76, 0.45);
+}
+
+.cr-input.is-invalid {
+  border-color: rgba(224, 85, 69, 0.75);
+}
+
+.cr-submit {
+  width: 100%;
+  margin-top: 8px;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #f0a030, #8b5cf6);
+  color: #fff;
+  cursor: pointer;
+}
+
+.cr-submit:hover {
+  opacity: 0.92;
+}
+
+.cr-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cr-hint,
+.cr-foot {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.45;
+  margin: 8px 0 0;
+}
+
+.cr-foot a,
+.cr-hint a {
+  color: #f0a030;
+}
+
+.booking-cal-actions {
+  margin-top: 8px;
+}
+
+.booking-form-error {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  color: #e05545;
+  background: rgba(224, 85, 69, 0.12);
+  border: 1px solid rgba(224, 85, 69, 0.35);
+}
+
+.booking-form-error[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 600px) {
+  .cr-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .booking-modal,
+  .toast {
+    display: none !important;
+  }
+}

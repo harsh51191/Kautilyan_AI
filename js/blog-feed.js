@@ -275,6 +275,25 @@
     );
   }
 
+  /** Site pages: resources.html locally, /resources on production (Vercel cleanUrls). */
+  function pageUrl(page) {
+    page = String(page || '').replace(/^\//, '').replace(/\.html$/, '');
+    if (!page) return needsArticleHtmlPath() ? 'index.html' : '/';
+    if (needsArticleHtmlPath()) {
+      return page + '.html';
+    }
+    return '/' + page;
+  }
+
+  function resourcesUrl(hash) {
+    var url = pageUrl('resources');
+    return hash ? url + (hash.charAt(0) === '#' ? hash : '#' + hash) : url;
+  }
+
+  function articlesIndexUrl() {
+    return resourcesUrl('blog');
+  }
+
   function articleUrl(slug) {
     slug = String(slug || '').trim().toLowerCase();
     if (needsArticleHtmlPath()) {
@@ -315,6 +334,9 @@
     readCache: readCache,
     getPostBySlug: getPostBySlug,
     formatDate: formatDate,
+    pageUrl: pageUrl,
+    resourcesUrl: resourcesUrl,
+    articlesIndexUrl: articlesIndexUrl,
     articleUrl: articleUrl,
     absoluteArticleUrl: absoluteArticleUrl,
     renderArticleSchema: renderArticleSchema,

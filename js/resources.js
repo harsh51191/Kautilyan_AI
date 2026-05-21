@@ -3,15 +3,11 @@
 
   var RESOURCES = window.RESOURCE_URLS || {
     free: {
-      'execution-stack': '',
-      slope: '',
-      readiness: '',
+      'ai-agent': 'data/resource-1-what-is-an-ai-agent.html',
+      slope: 'data/resource-2-slope-framework.html',
+      roadmap: 'data/resource-3-implementation-roadmap.html',
     },
-    gated: {
-      guide: '',
-      checklist: '',
-      rfp: '',
-    },
+    gated: {},
   };
 
   var gateModal = document.getElementById('gate-modal');
@@ -21,6 +17,9 @@
   var pendingResourceId = null;
 
   var resourceTitles = {
+    'ai-agent': 'What is an AI Agent?',
+    slope: 'The SLOPE Framework',
+    roadmap: 'AI Implementation Roadmap',
     guide: 'AI-Era Operations Guide',
     checklist: 'Workflow Diagnosis Checklist',
     rfp: 'AI Implementation RFP Template',
@@ -57,15 +56,31 @@
     return 'assessment.html';
   }
 
-  function triggerDownload(url) {
+  function openResourceGuide(url) {
     if (!url) {
       if (typeof showToast === 'function') {
-        showToast('Download link not configured yet. Email founders@kautilyan.com.', 'error');
+        showToast('Guide link not configured yet. Email founders@kautilyan.com.', 'error');
       }
       return;
     }
     window.open(url, '_blank', 'noopener,noreferrer');
   }
+
+  function trackResourceRead(id) {
+    if (window.KautilyanAnalytics) {
+      KautilyanAnalytics.resourceDownloaded({
+        resource_id: id,
+        resource_title: resourceTitles[id] || id,
+        action: 'read',
+      });
+    }
+  }
+
+  document.querySelectorAll('[data-read-resource]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      trackResourceRead(link.getAttribute('data-read-resource'));
+    });
+  });
 
   document.querySelectorAll('[data-free-resource]').forEach(function (btn) {
     btn.addEventListener('click', function (e) {
@@ -76,7 +91,8 @@
         return;
       }
       var url = (RESOURCES.free[id] || '').trim();
-      triggerDownload(url);
+      trackResourceRead(id);
+      openResourceGuide(url);
     });
   });
 
@@ -134,7 +150,7 @@
       if (typeof showToast === 'function') {
         showToast(url ? 'Download starting…' : 'Thanks — we will send your download shortly.', 'success');
       }
-      if (url) setTimeout(function () { triggerDownload(url); }, 400);
+      if (url) setTimeout(function () { openResourceGuide(url); }, 400);
     });
   }
 

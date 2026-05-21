@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The SLOPE Framework — Kautilyan AI's Guide to AI Adoption</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --ink: #0F0F13;
+    --ink-soft: #3A3A4A;
+    --ink-muted: #6B6B80;
+    --gold: #C9A84C;
+    --gold-light: #F0D98A;
+    --gold-pale: #FBF5E6;
+    --surface: #FFFFFF;
+    --surface-2: #F7F7FA;
+    --border: #E2E2EB;
+    --s-color: #5B4CF5;
+    --l-color: #2CB5A8;
+    --o-color: #E8614D;
+    --p-color: #C9A84C;
+    --e-color: #3A7BD5;
+    --page-width: 1120px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--surface-2);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .doc-wrapper { max-width: var(--page-width); margin: 0 auto; background: var(--surface); box-shadow: 0 4px 40px rgba(0,0,0,0.08); }
+
+  /* Cover */
+  .cover { background: var(--ink); padding: 64px 56px 56px; position: relative; overflow: hidden; }
+  .cover::after {
+    content: 'SLOPE';
+    position: absolute; right: -10px; bottom: -20px;
+    font-size: 160px; font-weight: 800; letter-spacing: -.04em;
+    color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none;
+    font-family: 'Inter', sans-serif;
+  }
+  .cover-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 48px; }
+  .cover-logo { font-size: 13px; font-weight: 600; letter-spacing: .06em; color: var(--gold); text-transform: uppercase; }
+  .cover-divider { width: 1px; height: 18px; background: rgba(201,168,76,0.4); }
+  .cover-type { font-size: 12px; color: rgba(255,255,255,0.45); letter-spacing: .04em; text-transform: uppercase; }
+  .cover-tag { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35); color: var(--gold-light); font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 20px; }
+  .cover h1 { font-size: 42px; font-weight: 700; line-height: 1.15; color: #fff; margin-bottom: 16px; letter-spacing: -0.02em; }
+  .cover h1 span { color: var(--gold); }
+  .cover-sub { font-size: 16px; color: rgba(255,255,255,0.6); max-width: 520px; line-height: 1.6; margin-bottom: 40px; }
+  .cover-meta { display: flex; gap: 32px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; }
+  .cover-meta-item { font-size: 12px; }
+  .cover-meta-label { color: rgba(255,255,255,0.35); margin-bottom: 3px; text-transform: uppercase; letter-spacing:.04em; }
+  .cover-meta-value { color: rgba(255,255,255,0.75); font-weight: 500; }
+
+  /* SLOPE letters row */
+  .slope-letters {
+    display: flex; gap: 0; margin-bottom: 40px; border-radius: 10px; overflow: hidden;
+  }
+  .slope-letter {
+    flex: 1; text-align: center; padding: 16px 8px;
+    font-size: 28px; font-weight: 800; color: white; letter-spacing: -.01em;
+  }
+  .s-bg { background: var(--s-color); }
+  .l-bg { background: var(--l-color); }
+  .o-bg { background: var(--o-color); }
+  .p-bg { background: var(--p-color); }
+  .e-bg { background: var(--e-color); }
+  .slope-letter .word { font-size: 9px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; opacity: 0.8; display: block; margin-top: 4px; }
+
+  /* Body */
+  .body-content { padding: 56px; }
+  .section { margin-bottom: 52px; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  h2 { font-size: 28px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.2; }
+  h3 { font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
+  p { font-size: 15px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 14px; }
+  p:last-child { margin-bottom: 0; }
+  .divider-line { height: 1px; background: var(--border); margin: 28px 0; }
+
+  /* Principle block */
+  .principle {
+    border-radius: 12px; overflow: hidden; margin-bottom: 24px;
+    border: 1px solid var(--border);
+  }
+  .principle-header {
+    display: flex; align-items: center; gap: 16px; padding: 20px 24px;
+  }
+  .principle-letter {
+    width: 52px; height: 52px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; font-weight: 800; color: white; flex-shrink: 0;
+  }
+  .principle-meta { flex: 1; }
+  .principle-title { font-size: 18px; font-weight: 700; margin-bottom: 2px; }
+  .principle-subtitle { font-size: 13px; color: var(--ink-muted); }
+  .principle-body { padding: 0 24px 24px; }
+  .principle-body p { font-size: 14px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 12px; }
+
+  .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+  .do, .dont {
+    border-radius: 8px; padding: 14px 16px; font-size: 13px; line-height: 1.5;
+  }
+  .do { background: rgba(44,181,168,0.07); border: 1px solid rgba(44,181,168,0.2); }
+  .do strong { color: #1A7A72; font-size: 10px; text-transform: uppercase; letter-spacing: .06em; display: block; margin-bottom: 5px; }
+  .dont { background: rgba(232,97,77,0.06); border: 1px solid rgba(232,97,77,0.15); }
+  .dont strong { color: #B5341C; font-size: 10px; text-transform: uppercase; letter-spacing: .06em; display: block; margin-bottom: 5px; }
+  .do p, .dont p { font-size: 13px; color: var(--ink-soft); margin: 0; }
+
+  .example-box {
+    background: var(--surface-2); border-radius: 8px; padding: 14px 16px; margin-top: 14px;
+    border: 1px solid var(--border);
+  }
+  .example-box strong { font-size: 11px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .06em; display: block; margin-bottom: 6px; }
+  .example-box p { font-size: 13px; color: var(--ink-soft); margin: 0; }
+
+  /* Summary table */
+  .summary-table { width: 100%; border-collapse: collapse; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .summary-table th { background: var(--ink); color: var(--gold); font-size: 12px; font-weight: 600; padding: 12px 16px; text-align: left; letter-spacing: .03em; }
+  .summary-table td { padding: 12px 16px; font-size: 13px; color: var(--ink-soft); border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+  .summary-table tr:last-child td { border-bottom: none; }
+  .summary-table tr:nth-child(even) td { background: var(--surface-2); }
+  .summary-table td:first-child { font-weight: 700; width: 90px; }
+
+  /* Adoption curve */
+  .curve-steps { display: flex; align-items: stretch; gap: 0; margin: 20px 0; }
+  .curve-step {
+    flex: 1; text-align: center; padding: 16px 10px; position: relative;
+    border-top: 3px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .curve-step:first-child { border-left: 1px solid var(--border); border-radius: 8px 0 0 8px; }
+  .curve-step:last-child { border-right: 1px solid var(--border); border-radius: 0 8px 8px 0; }
+  .curve-step.active { border-top-color: var(--gold); background: var(--gold-pale); }
+  .curve-step .step-num { font-size: 20px; font-weight: 700; color: var(--ink-muted); margin-bottom: 4px; }
+  .curve-step.active .step-num { color: var(--gold); }
+  .curve-step .step-label { font-size: 11px; color: var(--ink-muted); line-height: 1.3; font-weight: 500; }
+
+  /* Warning box */
+  .warning-box {
+    background: rgba(232,97,77,0.06); border: 1px solid rgba(232,97,77,0.2);
+    border-radius: 10px; padding: 20px 22px; margin: 20px 0;
+  }
+  .warning-box .w-title { font-size: 13px; font-weight: 600; color: #B5341C; margin-bottom: 6px; }
+  .warning-box p { font-size: 13px; color: var(--ink-soft); margin: 0; line-height: 1.6; }
+
+  /* Footer */
+  .doc-footer { background: var(--ink); padding: 32px 56px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-brand { font-size: 13px; color: var(--gold); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+  .footer-contact { font-size: 12px; color: rgba(255,255,255,0.4); }
+  .footer-contact a { color: rgba(255,255,255,0.6); text-decoration: none; }
+
+  @media print { body { background: white; } .doc-wrapper { box-shadow: none; } }
+</style>
+<link rel="stylesheet" href="resource-doc-toolbar.css" />
+<link rel="stylesheet" href="resource-booking.css" />
+</head>
+<body>
+<nav class="doc-toolbar" aria-label="Document actions">
+  <a class="doc-toolbar-back" href="../resources.html">← Resources</a>
+  <span class="doc-toolbar-title">The SLOPE Framework</span>
+  <div class="doc-toolbar-actions">
+    <button type="button" class="doc-toolbar-pdf" id="doc-save-pdf">Download PDF</button>
+  </div>
+</nav>
+<div class="doc-wrapper">
+
+  <!-- Cover -->
+  <div class="cover">
+    <div class="cover-brand">
+      <div class="cover-logo">⚡ Kautilyan AI</div>
+      <div class="cover-divider"></div>
+      <div class="cover-type">Proprietary Framework · Series 2 of 3</div>
+    </div>
+    <div class="cover-tag">Strategic Framework</div>
+    <h1>The <span>SLOPE</span> Framework</h1>
+    <p class="cover-sub">Kautilyan's five-principle approach to strategic, sustainable AI adoption — built for Indian businesses navigating their first real AI bets.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Audience</div>
+        <div class="cover-meta-value">Operations, Strategy, and Tech Leaders</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Read time</div>
+        <div class="cover-meta-value">10 minutes</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Published</div>
+        <div class="cover-meta-value">May 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body-content">
+
+    <!-- Intro -->
+    <div class="section">
+      <div class="section-label">Why SLOPE exists</div>
+      <h2>Most AI initiatives fail before they start</h2>
+
+      <div class="slope-letters">
+        <div class="slope-letter s-bg">S <span class="word">Start Small</span></div>
+        <div class="slope-letter l-bg">L <span class="word">Leverage Tools</span></div>
+        <div class="slope-letter o-bg">O <span class="word">Own Your Data</span></div>
+        <div class="slope-letter p-bg">P <span class="word">Powered Experiments</span></div>
+        <div class="slope-letter e-bg">E <span class="word">Evaluate Always</span></div>
+      </div>
+
+      <p>The most common failure mode in AI adoption isn't bad technology — it's bad sequencing. Companies try to build a platform before they have a use case. They outsource data ownership before they understand what data they have. They invest in a large rollout before proving value in a small one.</p>
+      <p>SLOPE is the framework Kautilyan developed from working with Indian B2B businesses across distribution, manufacturing, D2C, and services. It isn't theory — it's the sequence that consistently produces real outcomes in 45 days rather than slide decks in six months.</p>
+
+      <div class="warning-box">
+        <div class="w-title">⚠ The most important SLOPE principle</div>
+        <p>Adding AI to a broken process gives you a faster broken process. SLOPE begins with process understanding — not tool selection. If you don't know why a workflow is failing, no AI agent can fix it.</p>
+      </div>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- S -->
+    <div class="section">
+      <div class="section-label">Principle 1</div>
+      <div class="principle">
+        <div class="principle-header" style="background: rgba(91,76,245,0.06);">
+          <div class="principle-letter" style="background: var(--s-color);">S</div>
+          <div class="principle-meta">
+            <div class="principle-title" style="color: var(--s-color);">Start Small</div>
+            <div class="principle-subtitle">Focus on one workflow, one metric, one 45-day proof of value</div>
+          </div>
+        </div>
+        <div class="principle-body">
+          <p>The instinct to "transform the business with AI" is understandable — but it's the instinct that produces the most expensive failures. AI transformation happens workflow by workflow, not organisation by organisation.</p>
+          <p>SLOPE insists on beginning with a single, painful, high-frequency workflow — one that your team can name without hesitation, one where the current manual process is visibly costing time or money, and one where a measurable outcome can be agreed upon before work begins.</p>
+          <div class="do-dont">
+            <div class="do">
+              <strong>✓ Right approach</strong>
+              <p>Pick one workflow. Define one metric (e.g. "reduce forecast preparation from 7 days to 1"). Set a 45-day deadline. Prove it works, then expand.</p>
+            </div>
+            <div class="dont">
+              <strong>✗ Common mistake</strong>
+              <p>Launch an "AI transformation programme" across 5 departments simultaneously with a 12-month timeline and no clear success metric.</p>
+            </div>
+          </div>
+          <div class="example-box">
+            <strong>In practice</strong>
+            <p>A ₹90Cr distribution company started with one workflow: weekly sales review preparation. Before: 8 hours of manual spreadsheet work every Monday morning. After: same-day automated brief, reviewed and approved by the sales head in 20 minutes. That one win created the internal mandate to expand to 3 more workflows in quarter 2.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- L -->
+    <div class="section">
+      <div class="section-label">Principle 2</div>
+      <div class="principle">
+        <div class="principle-header" style="background: rgba(44,181,168,0.06);">
+          <div class="principle-letter" style="background: var(--l-color);">L</div>
+          <div class="principle-meta">
+            <div class="principle-title" style="color: var(--l-color);">Leverage the Right Tools</div>
+            <div class="principle-subtitle">Use agents equipped with the tools the workflow actually needs</div>
+          </div>
+        </div>
+        <div class="principle-body">
+          <p>There is no universal AI stack. The right tools depend on your data environment, your team's technical maturity, and the specific workflow being transformed. What works for a D2C brand in Bengaluru may not work for a manufacturing operation in Pune.</p>
+          <p>SLOPE prescribes a "tool-fit" assessment before any implementation begins — matching agent architecture to the workflow's actual requirements: which systems need to be accessed, what level of reasoning is required, where human approval is necessary, and what the organisation can realistically maintain after the pilot.</p>
+          <div class="do-dont">
+            <div class="do">
+              <strong>✓ Right approach</strong>
+              <p>Start with the simplest tool that solves the problem. Use no-code or low-code where possible for rapid prototyping. Move to custom development only when scale demands it.</p>
+            </div>
+            <div class="dont">
+              <strong>✗ Common mistake</strong>
+              <p>Buy the most expensive enterprise AI platform because it promises to handle everything — then spend 6 months in implementation with no business outcome to show.</p>
+            </div>
+          </div>
+          <div class="example-box">
+            <strong>In practice</strong>
+            <p>Kautilyan's approach: prototype using modern low-code agent tools (n8n, Cursor, or similar) to validate the workflow logic in 2–3 weeks. Only move to custom development once the prototype proves value and the organisation commits to scaling it. This keeps initial risk low and iteration fast.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- O -->
+    <div class="section">
+      <div class="section-label">Principle 3</div>
+      <div class="principle">
+        <div class="principle-header" style="background: rgba(232,97,77,0.06);">
+          <div class="principle-letter" style="background: var(--o-color);">O</div>
+          <div class="principle-meta">
+            <div class="principle-title" style="color: var(--o-color);">Own Your Data and Models</div>
+            <div class="principle-subtitle">Data sovereignty is non-negotiable — especially for Indian businesses</div>
+          </div>
+        </div>
+        <div class="principle-body">
+          <p>Handing your operational data to a third-party AI platform without understanding where it goes, how it's used, and who else can access it is a governance failure — not just a technical concern. For Indian businesses, this intersects directly with the DPDP Act 2023 and data residency considerations.</p>
+          <p>SLOPE requires that every AI deployment be designed with clear data ownership from the start: your data stays in your infrastructure (BYOK — bring your own keys), the AI models read your data but never learn from it in ways that expose it to other clients, and your team can audit what the agent accessed and why.</p>
+          <div class="do-dont">
+            <div class="do">
+              <strong>✓ Right approach</strong>
+              <p>Use a Bring-Your-Own-Key (BYOK) model. Ensure agents operate in read-only mode by default. Review data access logs monthly. Agree on data handling in writing before the pilot begins.</p>
+            </div>
+            <div class="dont">
+              <strong>✗ Common mistake</strong>
+              <p>Let a vendor ingest your business data into their platform without a data processing agreement. Assume "cloud AI" is secure by default without verifying the actual architecture.</p>
+            </div>
+          </div>
+          <div class="example-box">
+            <strong>Kautilyan's commitment</strong>
+            <p>Every Kautilyan engagement operates with read-only data access, client-controlled keys, data minimisation by design, and strict no-cross-client data isolation. These aren't features — they're non-negotiable foundations of the engagement model.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P -->
+    <div class="section">
+      <div class="section-label">Principle 4</div>
+      <div class="principle">
+        <div class="principle-header" style="background: rgba(201,168,76,0.06);">
+          <div class="principle-letter" style="background: var(--p-color);">P</div>
+          <div class="principle-meta">
+            <div class="principle-title" style="color: #9A7520);">Powered Experiments</div>
+            <div class="principle-subtitle">Run structured beta tests before committing to full deployment</div>
+          </div>
+        </div>
+        <div class="principle-body">
+          <p>An AI agent that works perfectly in a demo often behaves unexpectedly in a live business environment — because demos don't include edge cases, exception data, or the messiness of real organisational workflows. Powered Experiments is the discipline of finding this out before it matters.</p>
+          <p>Every Kautilyan pilot includes an internal testing phase where the agent handles real data in a sandboxed environment, your team reviews its outputs, and feedback is incorporated before any external or cross-functional use. This is how you catch the 20% of cases where the agent needs guardrails — before those cases cost you customer trust or decision accuracy.</p>
+          <div class="do-dont">
+            <div class="do">
+              <strong>✓ Right approach</strong>
+              <p>Define test scenarios before the pilot starts, including edge cases and failure modes. Run 2 weeks of internal testing with real (not synthetic) data before any customer-facing deployment.</p>
+            </div>
+            <div class="dont">
+              <strong>✗ Common mistake</strong>
+              <p>Ship the agent directly to end users or customers because the prototype "worked great in the demo." Discover the failure modes after they've caused a real problem.</p>
+            </div>
+          </div>
+          <div class="example-box">
+            <strong>In practice</strong>
+            <p>During a Kautilyan pilot for a B2B distributor, internal testing revealed that the agent misclassified returns as new orders in 7% of edge cases due to a non-standard SKU format. Fixed in 3 days. If that had gone live to the ERP, it would have corrupted inventory data for two weeks before anyone noticed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- E -->
+    <div class="section">
+      <div class="section-label">Principle 5</div>
+      <div class="principle">
+        <div class="principle-header" style="background: rgba(58,123,213,0.06);">
+          <div class="principle-letter" style="background: var(--e-color);">E</div>
+          <div class="principle-meta">
+            <div class="principle-title" style="color: var(--e-color);">Evaluate Always</div>
+            <div class="principle-subtitle">Measure usage, cost, accuracy, and business impact — continuously</div>
+          </div>
+        </div>
+        <div class="principle-body">
+          <p>An AI deployment that isn't measured is either a tool no one is using or a tool creating problems no one has noticed yet. Evaluation is not a phase at the end — it's a continuous practice built into how the agent operates from day one.</p>
+          <p>SLOPE requires that every deployment includes a measurement framework agreed upon before the pilot starts: which metric will prove value (the Day-45 metric), how it will be tracked, who is accountable, and what the threshold is for expanding versus pausing. This is also Kautilyan's basis for the outcome guarantee — if the Day-45 metric isn't met, the engagement is refunded.</p>
+          <div class="do-dont">
+            <div class="do">
+              <strong>✓ Right approach</strong>
+              <p>Define one primary metric before work begins. Review it weekly during the pilot. Set a 45-day checkpoint where the decision to expand, adjust, or stop is made explicitly and objectively.</p>
+            </div>
+            <div class="dont">
+              <strong>✗ Common mistake</strong>
+              <p>Judge AI success by how impressive it looks in a presentation, or by "general team satisfaction," without a hard metric that connects to revenue, cost, or time savings.</p>
+            </div>
+          </div>
+          <div class="example-box">
+            <strong>The Day-45 commitment</strong>
+            <p>At Kautilyan, the Day-45 metric is agreed in writing before Stage 2 begins. The metric, the measurement method, the access requirements, and the refund trigger are all defined in the contract. If the metric is missed and client-side dependencies were met — you get your money back. That's what genuine accountability looks like.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- Summary table -->
+    <div class="section">
+      <div class="section-label">Quick Reference</div>
+      <h2>SLOPE at a glance</h2>
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>Letter</th>
+            <th>Principle</th>
+            <th>The question it answers</th>
+            <th>The failure it prevents</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color: var(--s-color);">S</td>
+            <td>Start Small</td>
+            <td>Where do we begin?</td>
+            <td>Boiling-the-ocean initiatives that produce no output</td>
+          </tr>
+          <tr>
+            <td style="color: var(--l-color);">L</td>
+            <td>Leverage Right Tools</td>
+            <td>Which tools fit this workflow?</td>
+            <td>Expensive platforms that never get deployed</td>
+          </tr>
+          <tr>
+            <td style="color: var(--o-color);">O</td>
+            <td>Own Your Data</td>
+            <td>Who controls the data and models?</td>
+            <td>Governance failures and vendor lock-in</td>
+          </tr>
+          <tr>
+            <td style="color: var(--p-color);">P</td>
+            <td>Powered Experiments</td>
+            <td>Have we tested this with real data?</td>
+            <td>Live failures that damage trust and accuracy</td>
+          </tr>
+          <tr>
+            <td style="color: var(--e-color);">E</td>
+            <td>Evaluate Always</td>
+            <td>Is this actually working?</td>
+            <td>Deployments that drift, degrade, or go unused</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CTA -->
+    <div class="section" style="background: var(--surface-2); border-radius: 12px; padding: 32px; border: 1px solid var(--border); margin-bottom: 0;">
+      <div class="section-label">Apply SLOPE to your business</div>
+      <h2 style="font-size: 22px; margin-bottom: 10px;">See which workflow SLOPE would diagnose first</h2>
+      <p style="margin-bottom: 20px;">In a free 45-minute session, Kautilyan applies the SLOPE framework to your most painful workflow — mapping the current state, identifying where AI applies, and defining the Day-45 metric we'd be accountable to. No platform pitch. No obligation to proceed.</p>
+      <div class="doc-cta-row" style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+        <button type="button" class="doc-cta-btn doc-cta-btn--dark js-open-modal" data-booking-prefill="Resource: The SLOPE Framework">Book Free Diagnosis →</button>
+        <p class="doc-cta-email">or email <a href="mailto:founders@kautilyan.com">founders@kautilyan.com</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <div class="footer-brand">⚡ Kautilyan AI</div>
+    <div class="footer-contact">Resource 2 of 3 &nbsp;·&nbsp; <a href="mailto:founders@kautilyan.com">founders@kautilyan.com</a> &nbsp;·&nbsp; <a href="https://www.kautilyan.com">kautilyan.com</a></div>
+  </div>
+
+</div>
+<script src="../js/site.js"></script>
+<script src="../js/booking.js"></script>
+<script src="resource-doc.js"></script>
+</body>
+</html>

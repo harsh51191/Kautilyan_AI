@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/site.css" />
-  <link rel="stylesheet" href="css/resources.css?v=2" />
+  <link rel="stylesheet" href="css/resources.css?v=5" />
   <link rel="stylesheet" href="css/blog.css" />
 </head>
 <body>
@@ -57,18 +57,81 @@
 
     <main id="main">
 
-      <section class="resources-hero content-section content-section--page-top">
+      <section id="free-resources" class="content-section content-section--page-top">
         <div class="container">
-          <div class="section-header fade-up">
-            <span class="label">Insights &amp; Resources</span>
-            <h1 class="section-headline">Insights &amp; Resources</h1>
-            <p class="section-intro">Practical guides on AI workflow transformation, mandates, and organisational capability — written for operators, not theorists.</p>
+          <header class="resources-page-header fade-up">
+            <div class="resource-section-label">
+              <span class="label">Resources</span>
+              <span class="resource-badge resource-badge--free">Free to read</span>
+            </div>
+            <h1 class="section-headline">Guides for operators building with AI</h1>
+            <p class="section-intro">Three frameworks—agents, SLOPE, and a 45-day roadmap. Read online or download a PDF from inside each guide.</p>
+          </header>
+
+          <div class="resource-grid fade-up">
+            <article class="resource-card resource-card--agent">
+              <div class="resource-card-head">
+                <span class="resource-card-series">Guide 1 of 3</span>
+                <span class="resource-card-time">8 min read</span>
+              </div>
+              <h3>What is an AI Agent?</h3>
+              <p class="resource-card-type">Beginner's guide</p>
+              <p class="resource-card-desc">Plain-English primer for leaders—what agents do, when to use them, and how they differ from automation.</p>
+              <div class="resource-card-tags">
+                <span class="resource-tag">Foundations</span>
+                <span class="resource-tag">For leaders</span>
+              </div>
+              <div class="resource-card-footer">
+                <a href="data/resource-1-what-is-an-ai-agent.html" class="resource-card-cta--primary" target="_blank" rel="noopener" data-read-resource="ai-agent">Read guide →</a>
+                <p class="resource-card-hint">Opens in a new tab · Email required to download PDF</p>
+              </div>
+            </article>
+
+            <article class="resource-card resource-card--slope">
+              <div class="resource-card-head">
+                <span class="resource-card-series">Guide 2 of 3</span>
+                <span class="resource-card-time">10 min read</span>
+              </div>
+              <h3>The SLOPE Framework</h3>
+              <p class="resource-card-type">Strategic framework</p>
+              <p class="resource-card-desc">Five principles for AI adoption that sticks—start small, own your data, run experiments, evaluate always.</p>
+              <div class="resource-card-tags">
+                <span class="resource-tag">Framework</span>
+                <span class="resource-tag">Adoption</span>
+              </div>
+              <div class="resource-card-footer">
+                <a href="data/resource-2-slope-framework.html" class="resource-card-cta--primary" target="_blank" rel="noopener" data-read-resource="slope">Read guide →</a>
+                <p class="resource-card-hint">Opens in a new tab · Email required to download PDF</p>
+              </div>
+            </article>
+
+            <article class="resource-card resource-card--roadmap">
+              <div class="resource-card-head">
+                <span class="resource-card-series">Guide 3 of 3</span>
+                <span class="resource-card-time">12 min read</span>
+              </div>
+              <h3>AI Implementation Roadmap</h3>
+              <p class="resource-card-type">Implementation playbook</p>
+              <p class="resource-card-desc">Stage-by-stage path from diagnosis to a measurable outcome—in 45 days, on your existing systems.</p>
+              <div class="resource-card-tags">
+                <span class="resource-tag">Roadmap</span>
+                <span class="resource-tag">45-day pilot</span>
+              </div>
+              <div class="resource-card-footer">
+                <a href="data/resource-3-implementation-roadmap.html" class="resource-card-cta--primary" target="_blank" rel="noopener" data-read-resource="roadmap">Read guide →</a>
+                <p class="resource-card-hint">Opens in a new tab · Email required to download PDF</p>
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
       <section id="blog" class="content-section content-section--compact">
         <div class="container">
+          <header class="resources-subsection-header fade-up">
+            <span class="label">From the team</span>
+            <h2 class="section-headline section-headline--sm">Articles</h2>
+          </header>
           <div id="resources-blog-grid" class="blog-list-grid" aria-busy="true" aria-live="polite">
             <article class="blog-list-card blog-list-card--skeleton" aria-hidden="true"><span class="blog-skeleton-line blog-skeleton-line--sm"></span><span class="blog-skeleton-line blog-skeleton-line--lg"></span><span class="blog-skeleton-line blog-skeleton-line--md"></span></article>
             <article class="blog-list-card blog-list-card--skeleton" aria-hidden="true"><span class="blog-skeleton-line blog-skeleton-line--sm"></span><span class="blog-skeleton-line blog-skeleton-line--lg"></span><span class="blog-skeleton-line blog-skeleton-line--md"></span></article>
@@ -118,10 +181,21 @@
     </div>
   </div> -->
 
+  <script>
+    window.RESOURCE_URLS = {
+      free: {
+        'ai-agent': 'data/resource-1-what-is-an-ai-agent.html',
+        slope: 'data/resource-2-slope-framework.html',
+        roadmap: 'data/resource-3-implementation-roadmap.html',
+      },
+      gated: {},
+    };
+  </script>
   <script src="js/site.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/analytics.js" defer></script>
   <script src="js/booking.js"></script>
+  <script src="js/resources.js?v=4"></script>
   <script src="js/blog-markdown.js"></script>
   <script src="js/blog-feed.js?v=7"></script>
   <script src="js/blog-resources.js?v=2"></script>

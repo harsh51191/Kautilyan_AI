@@ -28,9 +28,24 @@
   var loading = document.getElementById('article-loading');
 
   if (!slug) {
-    window.location.replace('/resources');
+    window.location.replace(
+      window.BlogFeed && BlogFeed.articlesIndexUrl
+        ? BlogFeed.articlesIndexUrl()
+        : 'resources.html#blog'
+    );
     return;
   }
+
+  function applyStaticArticleLinks() {
+    if (!window.BlogFeed) return;
+    var back = document.querySelector('.article-back');
+    if (back) back.href = BlogFeed.articlesIndexUrl();
+    document.querySelectorAll('[data-page-href]').forEach(function (el) {
+      var page = el.getAttribute('data-page-href');
+      if (page) el.href = BlogFeed.pageUrl(page);
+    });
+  }
+  applyStaticArticleLinks();
 
   if (!root || !window.BlogFeed) return;
 
@@ -42,7 +57,8 @@
       root.textContent = '';
       var err = document.createElement('p');
       err.className = 'blog-error';
-      err.innerHTML = 'Article not found. <a href="/resources">Back to articles</a>';
+      var backHref = BlogFeed.articlesIndexUrl ? BlogFeed.articlesIndexUrl() : 'resources.html#blog';
+      err.innerHTML = 'Article not found. <a href="' + backHref + '">Back to articles</a>';
       root.appendChild(err);
       return;
     }
@@ -153,19 +169,13 @@
     var list = el('ul', 'article-sidebar-list article-sidebar-list--guides');
     getGuideItems().forEach(function (item) {
       var li = document.createElement('li');
-      if (item.modal) {
-        var btn = el('button', 'article-sidebar-link js-open-modal');
-        btn.type = 'button';
-        btn.appendChild(textEl('span', 'article-sidebar-link-title', item.title));
-        btn.appendChild(textEl('span', 'article-sidebar-link-desc', item.desc));
-        li.appendChild(btn);
-      } else {
-        var a = document.createElement('a');
-        a.href = item.href;
-        a.appendChild(textEl('span', 'article-sidebar-link-title', item.title));
-        a.appendChild(textEl('span', 'article-sidebar-link-desc', item.desc));
-        li.appendChild(a);
-      }
+      var a = document.createElement('a');
+      a.href = item.href;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.appendChild(textEl('span', 'article-sidebar-link-title', item.title));
+      a.appendChild(textEl('span', 'article-sidebar-link-desc', item.desc));
+      li.appendChild(a);
       list.appendChild(li);
     });
 
@@ -183,22 +193,30 @@
     return block;
   }
 
+  function resourceGuideHref(filename) {
+    var path = window.location.pathname || '';
+    if (path.indexOf('/data/') !== -1) {
+      return filename;
+    }
+    return 'data/' + filename;
+  }
+
   function getGuideItems() {
     return [
       {
+        title: 'What is an AI Agent?',
+        desc: "Beginner's guide · 8 min — read online",
+        href: resourceGuideHref('resource-1-what-is-an-ai-agent.html'),
+      },
+      {
         title: 'The SLOPE Framework',
-        desc: 'Five principles behind every engagement.',
-        href: '/how-it-works#slope',
+        desc: 'Strategic framework · 10 min — read online',
+        href: resourceGuideHref('resource-2-slope-framework.html'),
       },
       {
-        title: 'AI Execution Stack',
-        desc: 'The nine building blocks operators need.',
-        href: BlogFeed.articleUrl('ai-execution-stack'),
-      },
-      {
-        title: 'Free Workflow Diagnosis',
-        desc: '45-minute operating map — no pitch.',
-        modal: true,
+        title: 'AI Implementation Roadmap',
+        desc: 'Implementation playbook · 12 min — read online',
+        href: resourceGuideHref('resource-3-implementation-roadmap.html'),
       },
     ];
   }

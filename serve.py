@@ -18,6 +18,14 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
+        # Mirror Vercel cleanUrls: /resources → resources.html
+        if path and path != "/" and "." not in os.path.basename(path):
+            html_file = path.rstrip("/") + ".html"
+            if os.path.isfile(os.path.join(ROOT, html_file.lstrip("/"))):
+                self.path = html_file + (
+                    ("?" + parsed.query) if parsed.query else ""
+                )
+                return super().do_GET()
         if path.startswith("/blog/") and path not in ("/blog", "/blog.html"):
             slug = path[len("/blog/") :].strip("/")
             if slug and "." not in os.path.basename(slug):

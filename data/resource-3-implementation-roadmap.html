@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Implementation Roadmap — From Diagnosis to Scale | Kautilyan AI</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --ink: #0F0F13;
+    --ink-soft: #3A3A4A;
+    --ink-muted: #6B6B80;
+    --gold: #C9A84C;
+    --gold-light: #F0D98A;
+    --gold-pale: #FBF5E6;
+    --surface: #FFFFFF;
+    --surface-2: #F7F7FA;
+    --border: #E2E2EB;
+    --stage0: #5B4CF5;
+    --stage1: #2CB5A8;
+    --stage2: #C9A84C;
+    --scale: #3A7BD5;
+    --page-width: 1120px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--surface-2); color: var(--ink); line-height: 1.6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .doc-wrapper { max-width: var(--page-width); margin: 0 auto; background: var(--surface); box-shadow: 0 4px 40px rgba(0,0,0,0.08); }
+
+  /* Cover */
+  .cover { background: var(--ink); padding: 64px 56px 56px; position: relative; overflow: hidden; }
+  .cover::before { content: ''; position: absolute; bottom: -100px; left: -60px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%); }
+  .cover-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 48px; }
+  .cover-logo { font-size: 13px; font-weight: 600; letter-spacing: .06em; color: var(--gold); text-transform: uppercase; }
+  .cover-divider { width: 1px; height: 18px; background: rgba(201,168,76,0.4); }
+  .cover-type { font-size: 12px; color: rgba(255,255,255,0.45); letter-spacing: .04em; text-transform: uppercase; }
+  .cover-tag { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35); color: var(--gold-light); font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 20px; }
+  .cover h1 { font-size: 40px; font-weight: 700; line-height: 1.15; color: #fff; margin-bottom: 16px; letter-spacing: -0.02em; }
+  .cover h1 span { color: var(--gold); }
+  .cover-sub { font-size: 16px; color: rgba(255,255,255,0.6); max-width: 520px; line-height: 1.6; margin-bottom: 40px; }
+  .cover-meta { display: flex; gap: 32px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; }
+  .cover-meta-item { font-size: 12px; }
+  .cover-meta-label { color: rgba(255,255,255,0.35); margin-bottom: 3px; text-transform: uppercase; letter-spacing:.04em; }
+  .cover-meta-value { color: rgba(255,255,255,0.75); font-weight: 500; }
+
+  /* Body */
+  .body-content { padding: 56px; }
+  .section { margin-bottom: 52px; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  h2 { font-size: 28px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.2; }
+  h3 { font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
+  p { font-size: 15px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 14px; }
+  p:last-child { margin-bottom: 0; }
+  .divider-line { height: 1px; background: var(--border); margin: 28px 0; }
+
+  /* Stage cards */
+  .stage-cards { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+  .stage-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .stage-header { display: flex; align-items: center; gap: 16px; padding: 18px 22px; }
+  .stage-num {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700; color: white; flex-shrink: 0;
+  }
+  .stage-title-block { flex: 1; }
+  .stage-name { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+  .stage-meta { font-size: 12px; color: var(--ink-muted); }
+  .stage-badge { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+  .stage-body { padding: 0 22px 20px; }
+  .stage-body p { font-size: 14px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 10px; }
+  .deliverables { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+  .deliverable { background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; font-size: 11px; padding: 4px 10px; color: var(--ink-soft); }
+
+  /* Lippitt-Knoster */
+  .lk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+  .lk-card { border-radius: 8px; padding: 16px; border: 1px solid var(--border); background: var(--surface); }
+  .lk-icon { font-size: 20px; margin-bottom: 8px; }
+  .lk-title { font-size: 13px; font-weight: 600; margin-bottom: 5px; }
+  .lk-desc { font-size: 12px; color: var(--ink-muted); line-height: 1.5; }
+  .lk-miss { background: var(--surface-2); border-color: transparent; }
+  .lk-miss-header { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #B5341C; margin-bottom: 5px; }
+
+  /* Outcome matrix */
+  .lk-matrix { width: 100%; border-collapse: collapse; margin-top: 16px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .lk-matrix th { background: var(--ink); color: rgba(255,255,255,0.6); font-size: 11px; font-weight: 600; padding: 10px 14px; text-align: left; letter-spacing: .04em; text-transform: uppercase; }
+  .lk-matrix td { padding: 10px 14px; font-size: 13px; border-bottom: 1px solid var(--border); line-height: 1.4; }
+  .lk-matrix tr:last-child td { border-bottom: none; }
+  .lk-matrix td:first-child { width: 200px; }
+  .lk-matrix .missing { color: #B5341C; font-weight: 600; }
+  .lk-matrix .outcome { color: var(--ink-soft); }
+  .lk-matrix tr:nth-child(even) td { background: var(--surface-2); }
+
+  /* Timeline */
+  .timeline { margin-top: 20px; }
+  .timeline-row { display: grid; grid-template-columns: 90px 20px 1fr; gap: 0 14px; margin-bottom: 4px; align-items: start; }
+  .timeline-week { font-size: 12px; font-weight: 600; color: var(--ink-muted); padding-top: 12px; text-align: right; }
+  .timeline-dot-col { display: flex; flex-direction: column; align-items: center; }
+  .timeline-dot { width: 14px; height: 14px; border-radius: 50%; margin-top: 14px; flex-shrink: 0; }
+  .timeline-line { width: 2px; background: var(--border); flex: 1; min-height: 30px; }
+  .timeline-content { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; margin-bottom: 4px; }
+  .timeline-content h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .timeline-content p { font-size: 12px; color: var(--ink-muted); margin: 0; line-height: 1.5; }
+  .timeline-content .criteria { font-size: 11px; font-style: italic; color: var(--ink-muted); margin-top: 5px; }
+
+  /* Cost of inaction */
+  .inaction-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .inaction-card { border-radius: 10px; padding: 20px; border: 1px solid var(--border); }
+  .inaction-icon { font-size: 22px; margin-bottom: 10px; }
+  .inaction-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+  .inaction-stat { font-size: 20px; font-weight: 700; color: #B5341C; margin-bottom: 4px; }
+  .inaction-desc { font-size: 12px; color: var(--ink-muted); line-height: 1.5; }
+
+  /* Steps list */
+  .steps-list { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+  .step-item { display: grid; grid-template-columns: 32px 1fr; gap: 14px; }
+  .step-circle { width: 32px; height: 32px; border-radius: 50%; background: var(--ink); color: var(--gold); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .step-body h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .step-body p { font-size: 13px; color: var(--ink-muted); margin: 0; line-height: 1.55; }
+
+  /* Footer */
+  .doc-footer { background: var(--ink); padding: 32px 56px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-brand { font-size: 13px; color: var(--gold); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+  .footer-contact { font-size: 12px; color: rgba(255,255,255,0.4); }
+  .footer-contact a { color: rgba(255,255,255,0.6); text-decoration: none; }
+
+  @media print { body { background: white; } .doc-wrapper { box-shadow: none; } }
+</style>
+<link rel="stylesheet" href="resource-doc-toolbar.css" />
+<link rel="stylesheet" href="resource-booking.css" />
+</head>
+<body>
+<nav class="doc-toolbar" aria-label="Document actions">
+  <a class="doc-toolbar-back" href="../resources.html">← Resources</a>
+  <span class="doc-toolbar-title">AI Implementation Roadmap</span>
+  <div class="doc-toolbar-actions">
+    <button type="button" class="doc-toolbar-pdf" id="doc-save-pdf">Download PDF</button>
+  </div>
+</nav>
+<div class="doc-wrapper">
+
+  <!-- Cover -->
+  <div class="cover">
+    <div class="cover-brand">
+      <div class="cover-logo">⚡ Kautilyan AI</div>
+      <div class="cover-divider"></div>
+      <div class="cover-type">Implementation Guide · Series 3 of 3</div>
+    </div>
+    <div class="cover-tag">Implementation Playbook</div>
+    <h1>AI Implementation<br><span>Roadmap</span></h1>
+    <p class="cover-sub">A practical, stage-by-stage guide to taking your first AI workflow from diagnosis to a measurable, operating outcome — in 45 days, not 12 months.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Audience</div>
+        <div class="cover-meta-value">CTOs, COOs, and Operations Leaders</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Read time</div>
+        <div class="cover-meta-value">12 minutes</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Published</div>
+        <div class="cover-meta-value">May 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body-content">
+
+    <!-- Cost of inaction -->
+    <div class="section">
+      <div class="section-label">The Business Case</div>
+      <h2>The cost of not acting — right now</h2>
+      <p>The question for most Indian businesses in 2026 is no longer "should we invest in AI?" — it's "which workflows do we start with, and how do we ensure the investment produces a real outcome?" The businesses that have started are compounding their advantage. The ones waiting for a "mature" moment are watching the gap widen.</p>
+
+      <div class="inaction-grid">
+        <div class="inaction-card">
+          
+          <div class="inaction-title">Efficiency gap</div>
+          <div class="inaction-stat">20–30%</div>
+          <div class="inaction-desc">Average reduction in operational costs reported by businesses with deployed AI workflows — driven by reduced manual coordination and faster decision cycles.</div>
+        </div>
+        <div class="inaction-card">
+          
+          <div class="inaction-title">Decision quality</div>
+          <div class="inaction-stat">3×</div>
+          <div class="inaction-desc">Businesses using AI-assisted decision-making report significantly higher quality in operational decisions — less gut-feel, more data-grounded judgement calls.</div>
+        </div>
+        <div class="inaction-card">
+          
+          <div class="inaction-title">Team capacity</div>
+          <div class="inaction-stat">30%+</div>
+          <div class="inaction-desc">Right AI implementation has been shown to improve productive team output by 30% or more — the same team serving more clients, with fewer coordination errors.</div>
+        </div>
+      </div>
+
+      <p style="margin-top: 20px; font-size: 14px; color: var(--ink-muted); font-style: italic;">Sources: McKinsey Global AI Survey 2025; Accenture AI Impact Index 2025; MIT Sloan Management Review AI Adoption Study 2025. Statistics represent averages across medium and large enterprises with deployed AI workflows.</p>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- Lippitt-Knoster -->
+    <div class="section">
+      <div class="section-label">Organisational Alignment</div>
+      <h2>Why most AI projects fail before the technology does</h2>
+      <p>The Lippitt-Knoster Model for Managing Complex Change identifies six conditions that must be present for any significant organisational change to succeed. AI adoption is change — and it fails for the same reasons any change programme fails: missing prerequisites, not bad technology.</p>
+
+      <div class="lk-grid">
+        <div class="lk-card">
+          
+          <div class="lk-title">Vision</div>
+          <div class="lk-desc">A clear, specific "why" behind the AI initiative that stakeholders at every level can articulate — not just "we need to be AI-first."</div>
+        </div>
+        <div class="lk-card">
+          
+          <div class="lk-title">Consensus</div>
+          <div class="lk-desc">Active alignment across the teams whose workflows are changing — not just top-down approval, but genuine buy-in from the people closest to the work.</div>
+        </div>
+        <div class="lk-card">
+          
+          <div class="lk-title">Skills</div>
+          <div class="lk-desc">Identified gaps in AI literacy, process documentation, and data handling — with a plan to address them before deployment, not after.</div>
+        </div>
+        <div class="lk-card">
+          
+          <div class="lk-title">Incentives</div>
+          <div class="lk-desc">Clear signals to the team that adopting AI-assisted workflows is rewarded, not threatening. People need a reason to change how they work.</div>
+        </div>
+        <div class="lk-card">
+          
+          <div class="lk-title">Resources</div>
+          <div class="lk-desc">Sufficient time, data access, budget, and human bandwidth allocated to the implementation — not bolted on to existing full workloads.</div>
+        </div>
+        <div class="lk-card">
+          
+          <div class="lk-title">Action Plan</div>
+          <div class="lk-desc">A specific, time-bound plan with owners, milestones, and a success metric — not a general roadmap that drifts.</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 14px;">What happens when one element is missing</h3>
+      <table class="lk-matrix">
+        <thead>
+          <tr>
+            <th>Missing element</th>
+            <th>What it produces</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="missing">No Vision</td><td class="outcome">Confusion — teams pull in different directions, no shared definition of success</td></tr>
+          <tr><td class="missing">No Consensus</td><td class="outcome">Sabotage — silent resistance from teams whose workflows are being changed without buy-in</td></tr>
+          <tr><td class="missing">No Skills</td><td class="outcome">Anxiety — people fear being replaced or incompetent, leading to disengagement</td></tr>
+          <tr><td class="missing">No Incentives</td><td class="outcome">Resistance — the change is mandated but not adopted; workarounds proliferate</td></tr>
+          <tr><td class="missing">No Resources</td><td class="outcome">Frustration — good intentions with no capacity to execute; initiative stalls</td></tr>
+          <tr><td class="missing">No Action Plan</td><td class="outcome">Treadmill — constant activity with no measurable progress or clear endpoint</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 14px; font-size: 14px; color: var(--ink-muted);">Kautilyan's Stage 0 Diagnosis maps these six conditions against your target workflow before any implementation begins — so the gaps are identified and addressed, not discovered mid-pilot.</p>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- Stage cards -->
+    <div class="section">
+      <div class="section-label">The Kautilyan Engagement Model</div>
+      <h2>Four stages, one workflow, measurable proof</h2>
+      <p>Kautilyan's implementation model is structured so that every stage produces a concrete output before the next stage begins. There is no 12-week "discovery" before you see anything. The first stage is free. The second produces a Blueprint in 2 weeks. The third delivers a working, measured outcome in 45 days.</p>
+
+      <div class="stage-cards">
+
+        <div class="stage-card">
+          <div class="stage-header" style="background: rgba(91,76,245,0.05);">
+            <div class="stage-num" style="background: var(--stage0);">0</div>
+            <div class="stage-title-block">
+              <div class="stage-name" style="color: var(--stage0);">Free Diagnosis</div>
+              <div class="stage-meta">45 minutes · No cost · No commitment</div>
+            </div>
+            <div class="stage-badge" style="background: rgba(91,76,245,0.1); color: var(--stage0);">Free</div>
+          </div>
+          <div class="stage-body">
+            <p>A structured conversation — not a sales call — where Kautilyan maps your most painful workflow using a standardised diagnostic framework. We identify the coordination tax, the decision latency, the invisible leakage. You leave with a clear picture of where AI applies and where it doesn't.</p>
+            <p>If the workflow isn't right for an agentic approach, we'll tell you. If it is, we'll tell you what a 45-day outcome could look like, and what the Day-45 metric would be.</p>
+            <div class="deliverables">
+              <span class="deliverable">Workflow diagnosis summary</span>
+              <span class="deliverable">AI applicability assessment</span>
+              <span class="deliverable">Proposed Day-45 metric</span>
+              <span class="deliverable">Lippitt-Knoster readiness flag</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-header" style="background: rgba(44,181,168,0.05);">
+            <div class="stage-num" style="background: var(--stage1);">1</div>
+            <div class="stage-title-block">
+              <div class="stage-name" style="color: var(--stage1);">AI Workflow Blueprint</div>
+              <div class="stage-meta">2 weeks</div>
+            </div>
+            
+          </div>
+          <div class="stage-body">
+            <p>A deep-dive into the selected workflow: current-state process mapping, to-be design with the AI agent architecture, data requirements, integration points, and the exact success criteria for Stage 2. The Blueprint is a working specification — not a slide deck.</p>
+            
+            <div class="deliverables">
+              <span class="deliverable">As-is process map (with owner sign-off)</span>
+              <span class="deliverable">To-be agent architecture</span>
+              <span class="deliverable">Data requirements document</span>
+              <span class="deliverable">Stage 2 success criteria</span>
+              <span class="deliverable">45-day implementation plan</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-header" style="background: rgba(201,168,76,0.05);">
+            <div class="stage-num" style="background: var(--stage2);">2</div>
+            <div class="stage-title-block">
+              <div class="stage-name" style="color: #9A7520;">45-Day Pilot</div>
+              <div class="stage-meta">45 days · Outcome guaranteed in writing</div>
+            </div>
+            <div class="stage-badge" style="background: rgba(201,168,76,0.12); color: #9A7520;">Guaranteed</div>
+          </div>
+          <div class="stage-body">
+            <p>Implementation of the Blueprint — prototype development, internal testing with real data (Powered Experiments), feedback incorporation, deployment to operational use, and measurement against the agreed Day-45 metric. The engagement is led directly by Kautilyan's founding team. No SDRs. No offshore delivery. No disappearing after kick-off.</p>
+            <p><strong>The guarantee:</strong> If the Day-45 metric is missed and client-side dependencies (data access, team time, agreed integration points) were met — you receive a full refund. The metric, the dependencies, and the refund trigger are defined in the contract before work begins.</p>
+            <div class="deliverables">
+              <span class="deliverable">Deployed AI workflow agent</span>
+              <span class="deliverable">Internal test results</span>
+              <span class="deliverable">Day-45 metric outcome report</span>
+              <span class="deliverable">Team training and handover</span>
+              <span class="deliverable">Decision trace documentation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-header" style="background: rgba(58,123,213,0.05);">
+            <div class="stage-num" style="background: var(--scale);">→</div>
+            <div class="stage-title-block">
+              <div class="stage-name" style="color: var(--scale);">Scale and Institutionalise</div>
+              <div class="stage-meta">Ongoing · Expands to next workflow</div>
+            </div>
+            <div class="stage-badge" style="background: rgba(58,123,213,0.1); color: var(--scale);">Ongoing</div>
+          </div>
+          <div class="stage-body">
+            <p>Once the first workflow is proven, the organisation has three things it didn't have before: a working AI agent, a team that knows how to use it, and internal credibility to expand. Stage 3 takes the learning from Workflow 1 and applies it systematically to the next-highest-priority workflow — with shorter cycles because the organisational muscles are now built.</p>
+            <p>This is also where "organisation learns" becomes literal — the decision traces from Workflow 1 become the training signal for Workflow 2. The intelligence compounds.</p>
+            <div class="deliverables">
+              <span class="deliverable">Next workflow prioritisation</span>
+              <span class="deliverable">Organisational AI memory</span>
+              <span class="deliverable">Expanding agent architecture</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- Process steps -->
+    <div class="section">
+      <div class="section-label">Under the Hood</div>
+      <h2>What Kautilyan does inside Stage 2</h2>
+      <p>For those who want to understand what actually happens during the 45-day pilot — here is the implementation process step by step.</p>
+
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-circle">1</div>
+          <div class="step-body">
+            <h4>Process mapping and agent architecture design</h4>
+            <p>We map the current workflow in detail — every input, decision point, handoff, and exception — and design the to-be flow with the AI agent positioned at the right points. The architecture determines which agent types are needed and how they interact.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-circle">2</div>
+          <div class="step-body">
+            <h4>Data curation and environment setup</h4>
+            <p>We audit the data sources the agent will access, identify quality issues, create any necessary data structures or simulations for testing, and set up the secure, read-only data environment per the data governance requirements.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-circle">3</div>
+          <div class="step-body">
+            <h4>Prototype development (no-code / low-code first)</h4>
+            <p>We build the first working prototype using modern low-code agent tools to validate workflow logic quickly. This is not the final system — it's the fastest way to see if the architecture works with real data before investing in custom development.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-circle">4</div>
+          <div class="step-body">
+            <h4>Internal testing with real data (Powered Experiments phase)</h4>
+            <p>The prototype runs against real operational data in a sandboxed environment. Your team reviews outputs, flags edge cases, and provides feedback. This phase catches the 20% of scenarios where guardrails are needed before they encounter them in production.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-circle">5</div>
+          <div class="step-body">
+            <h4>Deployment, measurement, and Day-45 evaluation</h4>
+            <p>The agent goes live in the operational workflow. The Day-45 metric is tracked weekly. At Day 45, the outcome is measured against the agreed criteria. If the metric is met, Stage 3 planning begins. If not — and client-side dependencies were met — the refund is issued.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-circle">6</div>
+          <div class="step-body">
+            <h4>Team training and institutional handover</h4>
+            <p>Your team is trained to operate, monitor, and maintain the agent without ongoing Kautilyan involvement. This is by design — the goal is that you own the capability, not that you remain dependent on an external vendor.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- Timeline -->
+    <div class="section">
+      <div class="section-label">Timeline Overview</div>
+      <h2>From first conversation to operating outcome</h2>
+      <p>Here is a realistic timeline from Stage 0 through the end of Stage 2 — assuming a single workflow is selected and client-side access and team bandwidth are available from kick-off.</p>
+
+      <div class="timeline">
+        <div class="timeline-row">
+          <div class="timeline-week">Day 1</div>
+          <div class="timeline-dot-col"><div class="timeline-dot" style="background: var(--stage0);"></div><div class="timeline-line"></div></div>
+          <div class="timeline-content">
+            <h4>Stage 0: Free Diagnosis</h4>
+            <p>45-minute structured conversation. Workflow selected. AI applicability confirmed. Day-45 metric proposed.</p>
+          </div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-week">Week 1–2</div>
+          <div class="timeline-dot-col"><div class="timeline-dot" style="background: var(--stage1);"></div><div class="timeline-line"></div></div>
+          <div class="timeline-content">
+            <h4>Stage 1: Blueprint</h4>
+            <p>Deep process mapping, to-be architecture design, data requirements, and success criteria finalised.</p>
+            <div class="criteria">Output: Blueprint document with owner sign-off.</div>
+          </div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-week">Week 3–4</div>
+          <div class="timeline-dot-col"><div class="timeline-dot" style="background: var(--stage2);"></div><div class="timeline-line"></div></div>
+          <div class="timeline-content">
+            <h4>Build: Prototype and data setup</h4>
+            <p>Agent prototype built, data environment configured, internal testing begins with real operational data.</p>
+          </div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-week">Week 5–6</div>
+          <div class="timeline-dot-col"><div class="timeline-dot" style="background: var(--stage2);"></div><div class="timeline-line"></div></div>
+          <div class="timeline-content">
+            <h4>Test: Powered Experiments phase</h4>
+            <p>Team reviews outputs, edge cases identified and resolved, guardrails implemented.</p>
+            <div class="criteria">Gate: Team sign-off before deployment to live operations.</div>
+          </div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-week">Week 7–8</div>
+          <div class="timeline-dot-col"><div class="timeline-dot" style="background: var(--stage2);"></div><div class="timeline-line"></div></div>
+          <div class="timeline-content">
+            <h4>Deploy: Agent goes live in operations</h4>
+            <p>Agent operates in the live workflow. Weekly metric tracking begins. Team training completed.</p>
+          </div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-week">Day 45</div>
+          <div class="timeline-dot-col"><div class="timeline-dot" style="background: #3B6D11;"></div></div>
+          <div class="timeline-content" style="border-color: var(--gold); background: var(--gold-pale);">
+            <h4 style="color: #7A5A0A;">Day-45 Evaluation</h4>
+            <p style="color: var(--ink-soft);">Metric measured. Outcome vs. agreed criteria. Decision: expand to Stage 3, adjust, or — if metric missed — full refund issued.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="section" style="background: var(--ink); border-radius: 12px; padding: 36px; margin-bottom: 0;">
+      <div class="section-label" style="color: var(--gold);">Start here</div>
+      <h2 style="font-size: 24px; margin-bottom: 12px; color: white;">Book Stage 0 — it costs nothing and takes 45 minutes</h2>
+      <p style="color: rgba(255,255,255,0.65); margin-bottom: 24px;">Identify which workflow Kautilyan would start with, see the 45-day outcome it would target, and understand exactly what Stage 2 would cost — with zero obligation to proceed. Personally facilitated by Harsha Vellanki, Co-Founder. No SDRs. No sales scripts.</p>
+      <div class="doc-cta-row doc-cta-row--dark" style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+        <button type="button" class="doc-cta-btn doc-cta-btn--gold js-open-modal" data-booking-prefill="Resource: AI Implementation Roadmap">Book Free Diagnosis →</button>
+        <p class="doc-cta-email">or email <a href="mailto:founders@kautilyan.com">founders@kautilyan.com</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <div class="footer-brand">⚡ Kautilyan AI</div>
+    <div class="footer-contact">Resource 3 of 3 &nbsp;·&nbsp; <a href="mailto:founders@kautilyan.com">founders@kautilyan.com</a> &nbsp;·&nbsp; <a href="https://www.kautilyan.com">kautilyan.com</a></div>
+  </div>
+
+</div>
+<script src="../js/site.js"></script>
+<script src="../js/booking.js"></script>
+<script src="resource-doc.js"></script>
+</body>
+</html>

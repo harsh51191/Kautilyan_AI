@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is an AI Agent? A Business Leader's Guide — Kautilyan AI</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --ink: #0F0F13;
+    --ink-soft: #3A3A4A;
+    --ink-muted: #6B6B80;
+    --gold: #C9A84C;
+    --gold-light: #F0D98A;
+    --gold-pale: #FBF5E6;
+    --surface: #FFFFFF;
+    --surface-2: #F7F7FA;
+    --surface-3: #EFEFF5;
+    --border: #E2E2EB;
+    --accent-purple: #5B4CF5;
+    --accent-teal: #2CB5A8;
+    --accent-coral: #E8614D;
+    --page-width: 1120px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--surface-2);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .doc-wrapper {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    background: var(--surface);
+    box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+  }
+
+  /* ── Cover ── */
+  .cover {
+    background: var(--ink);
+    padding: 64px 56px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+  }
+  .cover-brand {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 48px;
+  }
+  .cover-logo {
+    font-size: 13px; font-weight: 600; letter-spacing: .06em;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .cover-divider {
+    width: 1px; height: 18px; background: rgba(201,168,76,0.4);
+  }
+  .cover-type {
+    font-size: 12px; color: rgba(255,255,255,0.45); letter-spacing: .04em; text-transform: uppercase;
+  }
+  .cover-tag {
+    display: inline-block;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.35);
+    color: var(--gold-light);
+    font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .cover h1 {
+    font-size: 42px; font-weight: 700; line-height: 1.15;
+    color: #FFFFFF; margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  .cover h1 span { color: var(--gold); }
+  .cover-sub {
+    font-size: 16px; color: rgba(255,255,255,0.6);
+    max-width: 520px; line-height: 1.6; margin-bottom: 40px;
+  }
+  .cover-meta {
+    display: flex; gap: 32px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;
+  }
+  .cover-meta-item { font-size: 12px; }
+  .cover-meta-label { color: rgba(255,255,255,0.35); margin-bottom: 3px; text-transform: uppercase; letter-spacing:.04em; }
+  .cover-meta-value { color: rgba(255,255,255,0.75); font-weight: 500; }
+
+  /* ── Body ── */
+  .body-content { padding: 56px; }
+
+  .section { margin-bottom: 52px; }
+
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 8px;
+  }
+  h2 {
+    font-size: 28px; font-weight: 700; color: var(--ink);
+    letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.2;
+  }
+  h3 {
+    font-size: 17px; font-weight: 600; color: var(--ink);
+    margin-bottom: 10px; margin-top: 4px;
+  }
+  p {
+    font-size: 15px; color: var(--ink-soft);
+    line-height: 1.75; margin-bottom: 14px;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── Pull quote ── */
+  .pull-quote {
+    background: var(--ink);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin: 28px 0;
+  }
+  .pull-quote p {
+    font-size: 17px; font-weight: 500; color: rgba(255,255,255,0.9);
+    line-height: 1.6; margin-bottom: 6px;
+  }
+  .pull-quote .attr {
+    font-size: 12px; color: rgba(255,255,255,0.4);
+    letter-spacing: .04em; text-transform: uppercase; margin: 0;
+  }
+
+  /* ── Highlight box ── */
+  .highlight-box {
+    background: var(--gold-pale);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin: 20px 0;
+  }
+  .highlight-box p { font-size: 14px; color: var(--ink-soft); margin-bottom: 0; }
+  .highlight-box strong { color: var(--ink); }
+
+  /* ── Feature grid ── */
+  .feature-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px;
+  }
+  .feature-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    background: var(--surface);
+    transition: box-shadow .2s;
+  }
+  .feature-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--ink); display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px; font-size: 18px;
+  }
+  .feature-card h3 { font-size: 14px; margin-bottom: 6px; }
+  .feature-card p { font-size: 13px; color: var(--ink-muted); margin-bottom: 0; }
+
+  /* ── Comparison table ── */
+  .compare-table {
+    width: 100%; border-collapse: collapse; margin-top: 20px; border-radius: 10px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .compare-table th {
+    background: var(--ink); color: #fff; font-size: 13px; font-weight: 600;
+    padding: 14px 18px; text-align: left; letter-spacing: .02em;
+  }
+  .compare-table th:first-child { color: var(--gold); }
+  .compare-table td {
+    padding: 13px 18px; font-size: 13px; color: var(--ink-soft);
+    border-bottom: 1px solid var(--border); vertical-align: top;
+    line-height: 1.55;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:nth-child(even) td { background: var(--surface-2); }
+  .compare-table td:first-child { font-weight: 600; color: var(--ink); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+
+  /* ── Agent type cards ── */
+  .agent-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px;
+  }
+  .agent-card {
+    border-radius: 10px; padding: 22px;
+    border: 1px solid var(--border);
+  }
+  .agent-card.orchestrator { border-color: #C9A84C; background: rgba(201,168,76,0.04); }
+  .agent-card.reactive { border-color: #2CB5A8; background: rgba(44,181,168,0.04); }
+  .agent-card.analytical { border-color: #5B4CF5; background: rgba(91,76,245,0.04); }
+  .agent-card.autonomous { border-color: #E8614D; background: rgba(232,97,77,0.04); }
+  .agent-type-badge {
+    font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 20px; display: inline-block; margin-bottom: 10px;
+  }
+  .orchestrator .agent-type-badge { background: rgba(201,168,76,0.15); color: #9A7520; }
+  .reactive .agent-type-badge { background: rgba(44,181,168,0.15); color: #1A7A72; }
+  .analytical .agent-type-badge { background: rgba(91,76,245,0.15); color: #3D30C5; }
+  .autonomous .agent-type-badge { background: rgba(232,97,77,0.15); color: #B5341C; }
+  .agent-card h3 { font-size: 15px; margin-bottom: 8px; }
+  .agent-card p { font-size: 13px; color: var(--ink-muted); margin-bottom: 6px; }
+  .agent-card .use-case { font-size: 12px; color: var(--ink-muted); font-style: italic; }
+
+  /* ── Decision framework ── */
+  .decision-block {
+    background: var(--surface-2); border-radius: 10px; padding: 24px; margin: 20px 0;
+    border: 1px solid var(--border);
+  }
+  .decision-block h3 { font-size: 15px; margin-bottom: 14px; }
+  .decision-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px;
+  }
+  .decision-item {
+    background: var(--surface); border-radius: 8px; padding: 14px;
+    border: 1px solid var(--border);
+  }
+  .decision-item .label {
+    font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .decision-item.yes .label { color: var(--accent-teal); }
+  .decision-item.no .label { color: var(--ink-muted); }
+  .decision-item p { font-size: 12px; color: var(--ink-muted); margin: 0; line-height: 1.5; }
+
+  /* ── Example scenario ── */
+  .scenario-box {
+    background: var(--ink); border-radius: 12px; padding: 28px; margin: 24px 0;
+  }
+  .scenario-title {
+    font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--gold); margin-bottom: 16px;
+  }
+  .scenario-chat { display: flex; flex-direction: column; gap: 12px; }
+  .chat-item { display: flex; gap: 10px; align-items: flex-start; }
+  .chat-item.agent { flex-direction: row-reverse; }
+  .chat-bubble {
+    background: rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 14px;
+    font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.5; max-width: 75%;
+  }
+  .chat-item.agent .chat-bubble { background: rgba(201,168,76,0.15); }
+  .chat-label { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 4px; white-space: nowrap; }
+  .query-type {
+    font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    display: inline-block; padding: 2px 8px; border-radius: 4px; margin-top: 4px;
+  }
+  .simple { background: rgba(44,181,168,0.2); color: #2CB5A8; }
+  .medium { background: rgba(201,168,76,0.2); color: var(--gold); }
+  .complex { background: rgba(232,97,77,0.2); color: #E8614D; }
+
+  /* ── Footer ── */
+  .doc-footer {
+    background: var(--ink); padding: 32px 56px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-brand { font-size: 13px; color: var(--gold); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+  .footer-contact { font-size: 12px; color: rgba(255,255,255,0.4); }
+  .footer-contact a { color: rgba(255,255,255,0.6); text-decoration: none; }
+  .footer-contact a:hover { color: var(--gold); }
+  .divider-line { height: 1px; background: var(--border); margin: 28px 0; }
+
+  @media print {
+    body { background: white; }
+    .doc-wrapper { box-shadow: none; }
+  }
+</style>
+<link rel="stylesheet" href="resource-doc-toolbar.css" />
+<link rel="stylesheet" href="resource-booking.css" />
+</head>
+<body>
+<nav class="doc-toolbar" aria-label="Document actions">
+  <a class="doc-toolbar-back" href="../resources.html">← Resources</a>
+  <span class="doc-toolbar-title">What is an AI Agent?</span>
+  <div class="doc-toolbar-actions">
+    <button type="button" class="doc-toolbar-pdf" id="doc-save-pdf">Download PDF</button>
+  </div>
+</nav>
+<div class="doc-wrapper">
+
+  <!-- Cover -->
+  <div class="cover">
+    <div class="cover-brand">
+      <div class="cover-logo">⚡ Kautilyan AI</div>
+      <div class="cover-divider"></div>
+      <div class="cover-type">Business Resource · Series 1 of 3</div>
+    </div>
+    <div class="cover-tag">Beginner's Guide</div>
+    <h1>What is an<br><span>AI Agent?</span></h1>
+    <p class="cover-sub">A plain-English guide for business leaders — no technical background required. Understand what AI agents do, when to use them, and how they differ from traditional automation.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Audience</div>
+        <div class="cover-meta-value">CEOs, COOs, Business Ops Leaders</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Read time</div>
+        <div class="cover-meta-value">8 minutes</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Published</div>
+        <div class="cover-meta-value">May 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body-content">
+
+    <!-- Intro -->
+    <div class="section">
+      <div class="section-label">Introduction</div>
+      <h2>The simplest way to understand AI agents</h2>
+      <p>An AI agent is a system that <strong>gets things done</strong>. Unlike a chatbot that answers questions, or a rule-based bot that follows fixed scripts, an AI agent can understand a task, figure out the right approach, use the right tools, and execute — all with minimal hand-holding.</p>
+      <p>Think of it as the difference between asking an intern "what are our Q3 sales numbers?" (a lookup) and asking a capable analyst "what should we do about declining margins in our Western region?" (a multi-step reasoning task that requires pulling data, comparing trends, and forming a recommendation).</p>
+
+      <div class="pull-quote">
+        <p>"The most important shift isn't that AI can answer questions. It's that AI can now reason through problems, use tools, and take actions — the way a skilled employee would."</p>
+        <div class="attr">— Team Kautilyan</div>
+      </div>
+
+      <p>AI agents represent this shift. They're not replacing your team. They're handling the coordination overhead, the data retrieval, the repetitive judgment calls — so your team can focus on decisions that genuinely require human expertise.</p>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- Key features -->
+    <div class="section">
+      <div class="section-label">Key Capabilities</div>
+      <h2>What makes an AI agent different</h2>
+      <p>AI agents have five characteristics that separate them from traditional automation tools. These aren't marketing claims — they're the specific capabilities that make agents useful for complex business workflows.</p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon" style="font-size:13px;font-weight:700;color:var(--gold);">AU</div>
+          <h3>Autonomy</h3>
+          <p>Agents initiate and complete tasks without continuous human instruction. You define the goal; the agent figures out the steps.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="font-size:13px;font-weight:700;color:var(--gold);">RE</div>
+          <h3>Reasoning</h3>
+          <p>Agents can make contextual judgments — weighing trade-offs, considering past outcomes, and selecting the best path forward.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="font-size:13px;font-weight:700;color:var(--gold);">AP</div>
+          <h3>Adaptive planning</h3>
+          <p>When conditions change mid-task, agents adjust their approach instead of failing or freezing. They're built for dynamic environments.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="font-size:13px;font-weight:700;color:var(--gold);">NL</div>
+          <h3>Natural language understanding</h3>
+          <p>You communicate in plain English (or any language). No coding, no rigid command syntax. The agent interprets intent, not just keywords.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="font-size:13px;font-weight:700;color:var(--gold);">TU</div>
+          <h3>Tool use</h3>
+          <p>Agents connect to your existing systems — databases, APIs, spreadsheets, CRMs — to retrieve information and take action where the data lives.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="font-size:13px;font-weight:700;color:var(--gold);">ML</div>
+          <h3>Memory and learning</h3>
+          <p>Agents remember context across interactions. Decisions made today improve the quality and speed of decisions next month.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- Agentic vs Traditional -->
+    <div class="section">
+      <div class="section-label">Key Distinction</div>
+      <h2>AI agents vs. traditional automation</h2>
+      <p>Most businesses already use automation — rule-based scripts, RPA bots, workflow triggers. These tools are excellent for high-volume, predictable tasks. The distinction matters when you're choosing which technology to invest in.</p>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Traditional Automation</th>
+            <th>AI Agents</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Best for</td>
+            <td>Fixed, repetitive, rule-based tasks</td>
+            <td>Complex, variable, judgment-required tasks</td>
+          </tr>
+          <tr>
+            <td>Handles exceptions?</td>
+            <td>No — breaks or escalates</td>
+            <td>Yes — reasons through novel situations</td>
+          </tr>
+          <tr>
+            <td>Instructions format</td>
+            <td>If-then rules, flowcharts</td>
+            <td>Natural language goals</td>
+          </tr>
+          <tr>
+            <td>Multi-system coordination</td>
+            <td>Limited — requires manual integration</td>
+            <td>Native — agents switch between tools</td>
+          </tr>
+          <tr>
+            <td>Improves over time?</td>
+            <td>Only if manually updated</td>
+            <td>Yes — learns from feedback and outcomes</td>
+          </tr>
+          <tr>
+            <td>Needs technical setup?</td>
+            <td>Yes — significant dev work</td>
+            <td>Less — modern tools lower the barrier significantly</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-box" style="margin-top: 20px;">
+        <p><strong>The bottom line:</strong> Traditional automation handles your fixed "if X then Y" processes efficiently. AI agents handle everything where the answer to "what should happen next?" isn't predetermined — which is most of what consumes your team's time.</p>
+      </div>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- When to use -->
+    <div class="section">
+      <div class="section-label">Decision Framework</div>
+      <h2>When does your process need an AI agent?</h2>
+      <p>Not every process benefits from an AI agent. The right question isn't "can we add AI?" — it's "does this process involve reasoning, variability, or multi-step coordination that traditional automation can't handle?"</p>
+
+      <div class="decision-block">
+        <h3>Use an AI agent when your process involves…</h3>
+        <div class="decision-row">
+          <div class="decision-item yes">
+            <div class="label">✓ Use an agent</div>
+            <p>Multiple systems that need to be queried and reconciled together before an answer emerges</p>
+          </div>
+          <div class="decision-item yes">
+            <div class="label">✓ Use an agent</div>
+            <p>Decisions that depend on context, history, or nuance that changes case by case</p>
+          </div>
+          <div class="decision-item yes">
+            <div class="label">✓ Use an agent</div>
+            <p>Exceptions and edge cases that currently require a human to step in and judge</p>
+          </div>
+          <div class="decision-item yes">
+            <div class="label">✓ Use an agent</div>
+            <p>Coordination across teams or departments where information is siloed</p>
+          </div>
+          <div class="decision-item no">
+            <div class="label">→ Traditional automation works</div>
+            <p>Entirely predictable inputs → outputs with no need for judgment (e.g. invoice line-item extraction)</p>
+          </div>
+          <div class="decision-item no">
+            <div class="label">→ Traditional automation works</div>
+            <p>Fixed, high-volume repetition with clear rules and zero variation (e.g. data sync between two systems)</p>
+          </div>
+        </div>
+      </div>
+
+      <p>A useful heuristic: if your current process has a standard operating procedure that a new employee can follow exactly without ever needing to "use judgment," traditional automation is right. If your SOP says "check the situation and decide" at multiple points — that's where AI agents deliver value.</p>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- Types of agents -->
+    <div class="section">
+      <div class="section-label">Agent Architecture</div>
+      <h2>Four types of AI agents</h2>
+      <p>In practice, AI agent systems are built using different types of agents working together — each handling a specific layer of complexity. Here's how to think about them:</p>
+
+      <div class="agent-grid">
+        <div class="agent-card orchestrator">
+          <span class="agent-type-badge">Orchestrator</span>
+          <h3>The coordinator</h3>
+          <p>Manages the overall workflow — receives the goal, breaks it into subtasks, assigns them to the right agents, and synthesises the final output.</p>
+          <p class="use-case">Example: A weekly performance briefing agent that coordinates data collection, analysis, and narrative writing across multiple sub-agents.</p>
+        </div>
+        <div class="agent-card reactive">
+          <span class="agent-type-badge">Reactive Agent</span>
+          <h3>The lookup specialist</h3>
+          <p>Handles focused, well-defined retrieval and simple operations — fetching records, running queries, updating fields.</p>
+          <p class="use-case">Example: "What's the current inventory level for SKU-4421?" — retrieves and returns, no reasoning required.</p>
+        </div>
+        <div class="agent-card analytical">
+          <span class="agent-type-badge">Analytical Agent</span>
+          <h3>The insight generator</h3>
+          <p>Handles more complex tasks requiring interpretation — trend analysis, anomaly detection, generating recommendations from data.</p>
+          <p class="use-case">Example: "Which distributors are showing early signs of churn based on order patterns over the last 90 days?"</p>
+        </div>
+        <div class="agent-card autonomous">
+          <span class="agent-type-badge">Domain Agent</span>
+          <h3>The domain expert</h3>
+          <p>Specialises in a specific vertical with deep context — handles complex, open-ended queries within its area using domain-specific knowledge.</p>
+          <p class="use-case">Example: A supply chain agent that evaluates procurement decisions factoring in lead times, seasonal patterns, and vendor reliability scores.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- Example -->
+    <div class="section">
+      <div class="section-label">Real-world Example</div>
+      <h2>Seeing it in action</h2>
+      <p>Here's how different query types would be handled in an agentic system built for a retail business with apparel and footwear lines:</p>
+
+      <div class="scenario-box">
+        <div class="scenario-title">Example: Retail business agentic system</div>
+        <div class="scenario-chat">
+          <div class="chat-item">
+            <div>
+              <div class="chat-bubble">What's the total sales for Product ID SH-2241 this month?</div>
+              <span class="query-type simple">Simple — Reactive agent · Direct data lookup</span>
+            </div>
+          </div>
+          <div class="chat-item agent">
+            <div>
+              <div class="chat-bubble">SH-2241 (Trail Runner Pro, Size 8–11) has recorded ₹14.2L in sales this month across 847 units. 68% from online channel.</div>
+            </div>
+          </div>
+          <div class="chat-item">
+            <div>
+              <div class="chat-bubble">How are sales for our new shoe range performing overall?</div>
+              <span class="query-type medium">Medium — Analytical agent · Needs context + analysis</span>
+            </div>
+          </div>
+          <div class="chat-item agent">
+            <div>
+              <div class="chat-bubble">The new Trail series (4 SKUs, launched 6 weeks ago) is tracking 23% above the same launch period for the Forest range. However, the Size 12+ variants are understocked — reorder point was missed last week.</div>
+            </div>
+          </div>
+          <div class="chat-item">
+            <div>
+              <div class="chat-bubble">Should we create a T-shirt merchandise line for this shoe range? What's your view?</div>
+              <span class="query-type complex">Complex — Orchestrator + Domain agent · Multi-track reasoning</span>
+            </div>
+          </div>
+          <div class="chat-item agent">
+            <div>
+              <div class="chat-bubble">Based on historical data: the Forest range merchandise bundle drove a 31% uptick in LTV for repeat buyers. Given the Trail series' stronger launch trajectory, a bundle has upside. However, margin on apparel is 12% lower than footwear — I'd recommend a limited pilot (200 units) before committing to a full run. Want me to draft a brief for the product team?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top:16px;">The same system handled all three queries — but routed each to the appropriate agent type based on complexity. This is how well-designed agentic systems work: simple things stay simple, complex things are handled comprehensively.</p>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- CTA -->
+    <div class="section" style="background: var(--surface-2); border-radius: 12px; padding: 32px; border: 1px solid var(--border); margin-bottom: 0;">
+      <div class="section-label">Next Step</div>
+      <h2 style="font-size: 22px; margin-bottom: 10px;">Ready to identify where agents can help in your business?</h2>
+      <p style="margin-bottom: 20px;">Kautilyan runs a free 45-minute AI Workflow Diagnosis — we map your most painful workflow, identify where an agentic approach applies, and show you what a 45-day outcome could look like. No platform license. No sales pitch.</p>
+      <div class="doc-cta-row" style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+        <button type="button" class="doc-cta-btn doc-cta-btn--dark js-open-modal" data-booking-prefill="Resource: What is an AI Agent?">Book Free Diagnosis →</button>
+        <p class="doc-cta-email">or email <a href="mailto:founders@kautilyan.com">founders@kautilyan.com</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <div class="footer-brand">⚡ Kautilyan AI</div>
+    <div class="footer-contact">
+      Resource 1 of 3 &nbsp;·&nbsp; <a href="mailto:founders@kautilyan.com">founders@kautilyan.com</a> &nbsp;·&nbsp; <a href="https://www.kautilyan.com">kautilyan.com</a>
+    </div>
+  </div>
+
+</div>
+<script src="../js/site.js"></script>
+<script src="../js/booking.js"></script>
+<script src="resource-doc.js"></script>
+</body>
+</html>
