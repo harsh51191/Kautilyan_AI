@@ -13,7 +13,7 @@
   var SCHEDULED_KEY_LS = 'kautilyan_stage0_scheduled_v1';
 
   var MODAL_TITLE = 'Book your Stage 0 call';
-  var BOOKING_SUB = 'Share your details, then pick a time. After you confirm on the scheduler, you’ll land here with five short prep questions.';
+  var BOOKING_SUB = 'Share your details, then pick a time.';
   var QUESTIONS_SUB =
     'You’re booked. These five questions help us prepare your diagnosis — not a generic AI demo.';
 
