@@ -39,6 +39,17 @@
   line-height: 1.65;
   max-width: 52ch;
 }
+.intake-page-header--complete .intake-lede {
+  max-width: 56ch;
+}
+.intake-page-header--complete a {
+  color: var(--amber);
+  font-weight: 600;
+  text-decoration: none;
+}
+.intake-page-header--complete a:hover {
+  text-decoration: underline;
+}
 .diagnosis-intake-form--page,
 .diagnosis-intake-form--questions {
   background: var(--bg-card);

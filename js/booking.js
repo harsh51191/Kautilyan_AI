@@ -11,8 +11,12 @@
   var LEAD_KEY_LS = 'kautilyan_stage0_lead_v1';
   var SCHEDULED_KEY = 'kautilyan_stage0_scheduled';
   var SCHEDULED_KEY_LS = 'kautilyan_stage0_scheduled_v1';
+  var COMPLETE_KEY = 'kautilyan_stage0_complete';
+  var COMPLETE_KEY_LS = 'kautilyan_stage0_complete_v1';
 
   var MODAL_TITLE = 'Book your Stage 0 call';
+  var THANK_YOU_MSG =
+    'Thank you — we have your booking details and prep answers. See you on the call.';
   var BOOKING_SUB = 'Share your details, then pick a time.';
   var QUESTIONS_SUB =
     'These five questions help us prepare your diagnosis. Pick your time in the scheduler tab if you have not already.';
@@ -142,6 +146,99 @@
       if (localStorage.getItem(SCHEDULED_KEY_LS) === '1') return true;
     } catch (err) { /* ignore */ }
     return false;
+  }
+
+  function markIntakeComplete(lead) {
+    if (lead) {
+      lead.prepCompleted = true;
+      lead.prepCompletedAt = new Date().toISOString();
+      saveLead(lead);
+    }
+    try {
+      sessionStorage.setItem(COMPLETE_KEY, '1');
+    } catch (err) { /* ignore */ }
+    try {
+      localStorage.setItem(COMPLETE_KEY_LS, '1');
+    } catch (err) { /* ignore */ }
+  }
+
+  function isIntakeComplete() {
+    var lead = loadLead();
+    if (lead && lead.prepCompleted) return true;
+    try {
+      if (sessionStorage.getItem(COMPLETE_KEY) === '1') return true;
+      if (localStorage.getItem(COMPLETE_KEY_LS) === '1') return true;
+    } catch (err) { /* ignore */ }
+    return false;
+  }
+
+  function clearIntakeQueryFromUrl() {
+    if (!window.history || !window.history.replaceState) return;
+    var path = window.location.pathname || '';
+    if (path.indexOf('assessment') < 0) return;
+    history.replaceState({}, document.title, path);
+  }
+
+  function closeBookingModalIfOpen() {
+    if (typeof window.closeBookingModal === 'function') {
+      window.closeBookingModal();
+    }
+  }
+
+  function closeCalBookingTabIfAny() {
+    var w = window.__kautilyanCalWin;
+    if (w && !w.closed) {
+      try {
+        w.close();
+      } catch (err) { /* ignore */ }
+    }
+    window.__kautilyanCalWin = null;
+  }
+
+  function isCalPopupReturn() {
+    var params = urlSearchParams();
+    return (isScheduledQuery(params) || isCalReturn(params)) && !!window.opener;
+  }
+
+  function tryCloseSelfAsCalTab() {
+    setTimeout(function () {
+      try {
+        window.close();
+      } catch (err) { /* ignore */ }
+    }, 350);
+  }
+
+  function watchCalTabForRedirectClose(calWin) {
+    if (!calWin) return;
+    window.__kautilyanCalWin = calWin;
+    var started = Date.now();
+    var timer = setInterval(function () {
+      if (calWin.closed) {
+        clearInterval(timer);
+        if (window.__kautilyanCalWin === calWin) window.__kautilyanCalWin = null;
+        return;
+      }
+      if (Date.now() - started > 45 * 60 * 1000) {
+        clearInterval(timer);
+        return;
+      }
+      var href = '';
+      try {
+        href = calWin.location.href || '';
+      } catch (err) {
+        return;
+      }
+      var onIntake =
+        /assessment/i.test(href) ||
+        (isLocalDevHost() && /assessment\.html/i.test(href));
+      if (onIntake || /kautilyan\.com/i.test(href)) {
+        try {
+          calWin.close();
+        } catch (err) { /* ignore */ }
+        clearInterval(timer);
+        if (window.__kautilyanCalWin === calWin) window.__kautilyanCalWin = null;
+      }
+    }, 500);
   }
 
   function restoreLeadFromUrl() {
@@ -328,6 +425,7 @@
   }
 
   function shouldShowPrepQuestions() {
+    if (isIntakeComplete()) return false;
     var lead = loadLead();
     if (leadReadyForQuestions(lead)) return true;
     if (hasScheduledFromUrl()) return true;
@@ -335,7 +433,20 @@
     return false;
   }
 
+  function finishIntakeSuccess(lead) {
+    markIntakeComplete(lead);
+    clearIntakeQueryFromUrl();
+    closeCalBookingTabIfAny();
+    closeBookingModalIfOpen();
+
+    var mount = document.getElementById('diagnosis-intake-mount');
+    if (mount) mountThankYouPage(mount);
+
+    showToast(THANK_YOU_MSG, 'success');
+  }
+
   function showPrepQuestionsUI(lead) {
+    if (isIntakeComplete()) return false;
     if (!lead || !lead.submissionId) return false;
 
     var mount = document.getElementById('diagnosis-intake-mount');
@@ -372,9 +483,12 @@
 
   /** Open Cal in a new tab during the click (before any async work). */
   function openCalScheduler(url) {
-    if (!url) return false;
-    var opened = window.open(url, '_blank');
-    if (opened) return true;
+    if (!url) return null;
+    var calWin = window.open(url, 'kautilyan_cal_booking');
+    if (calWin) {
+      watchCalTabForRedirectClose(calWin);
+      return calWin;
+    }
     var link = document.createElement('a');
     link.href = url;
     link.target = '_blank';
@@ -382,7 +496,7 @@
     document.body.appendChild(link);
     link.click();
     link.remove();
-    return true;
+    return null;
   }
 
   function questionsFieldsHTML() {
@@ -533,7 +647,8 @@
     saveLead(lead);
 
     /* New tab must open synchronously in this click — before sheet fetch */
-    if (!openCalScheduler(url)) {
+    var calWin = openCalScheduler(url);
+    if (!calWin) {
       showCalLinkFallback(root, url);
       showToast('Allow popups for this site, or use the scheduler link above the button.', 'error');
     }
@@ -641,7 +756,7 @@
             });
             KautilyanAnalytics.assessmentStarted({ page: 'assessment_post_booking' });
           }
-          showToast('Thank you — we have your prep answers. See you on the call.', 'success');
+          finishIntakeSuccess(lead);
         })
         .catch(function (err) {
           setBtnBusy(submitBtn, false);
@@ -716,6 +831,10 @@
   }
 
   function openModal(intent, prefill) {
+    if (isIntakeComplete()) {
+      showToast(THANK_YOU_MSG, 'success');
+      return;
+    }
     pendingIntent = intent || '';
     pendingPrefill = prefill || '';
     ensureModal();
@@ -743,7 +862,21 @@
     bindBookingStart(wrap, intent, prefill);
   }
 
+  function mountThankYouPage(mount) {
+    mount.innerHTML =
+      '<div class="intake-page-header intake-page-header--complete">' +
+        '<span class="label">Stage 0 — complete</span>' +
+        '<h1>You’re all set</h1>' +
+        '<p class="intake-lede">' + THANK_YOU_MSG + '</p>' +
+        '<p class="intake-lede intake-lede--secondary"><a href="index.html">Back to homepage</a></p>' +
+      '</div>';
+  }
+
   function mountQuestionsPage(mount) {
+    if (isIntakeComplete()) {
+      mountThankYouPage(mount);
+      return;
+    }
     var lead = restoreLeadFromUrl() || loadLead();
     if (!lead || !lead.submissionId) {
       mountBookingStartPage(mount, pendingIntent, pendingPrefill);
@@ -772,9 +905,21 @@
   function mountAssessmentPage() {
     var mount = document.getElementById('diagnosis-intake-mount');
     if (!mount) return;
+
+    if (isCalPopupReturn()) {
+      tryCloseSelfAsCalTab();
+      return;
+    }
+
     var params = urlSearchParams();
     pendingIntent = params.get('intent') || '';
     pendingPrefill = params.get('workflow') || '';
+
+    if (isIntakeComplete()) {
+      clearIntakeQueryFromUrl();
+      mountThankYouPage(mount);
+      return;
+    }
 
     restoreLeadFromUrl();
 
@@ -787,19 +932,26 @@
 
   function init() {
     var mount = document.getElementById('diagnosis-intake-mount');
+    if (isCalPopupReturn()) {
+      tryCloseSelfAsCalTab();
+      if (mount) return;
+    }
+
     if (mount) {
       mountAssessmentPage();
     } else {
       ensureModal();
-      var lead = loadLead();
-      if (leadReadyForQuestions(lead)) {
-        var modal = document.getElementById('booking-modal');
-        if (modal) {
-          modal.classList.add('is-open');
-          modal.setAttribute('aria-hidden', 'false');
-          document.body.style.overflow = 'hidden';
+      if (!isIntakeComplete()) {
+        var lead = loadLead();
+        if (leadReadyForQuestions(lead)) {
+          var modal = document.getElementById('booking-modal');
+          if (modal) {
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+          }
+          showPrepQuestionsUI(lead);
         }
-        showPrepQuestionsUI(lead);
       }
     }
 
