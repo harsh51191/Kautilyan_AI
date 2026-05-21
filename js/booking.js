@@ -1,7 +1,7 @@
 /**
  * Stage 0 booking flow
- * 1) Modal / assessment (not yet scheduled): name, email, company + Cal.com button — NO five questions
- * 2) After Cal.com redirect (?scheduled=1 and/or Cal uid): five prep questions only (same sheet row)
+ * 1) Contact form → save row to Google Sheet (submissionId + timestamp)
+ * 2) Open Cal.com in a new tab + show five prep questions on this page (same sheet row on submit)
  */
 (function () {
   'use strict';
@@ -15,7 +15,7 @@
   var MODAL_TITLE = 'Book your Stage 0 call';
   var BOOKING_SUB = 'Share your details, then pick a time.';
   var QUESTIONS_SUB =
-    'You’re booked. These five questions help us prepare your diagnosis — not a generic AI demo.';
+    'These five questions help us prepare your diagnosis. Pick your time in the scheduler tab if you have not already.';
 
   var pendingIntent = '';
   var pendingPrefill = '';
@@ -167,7 +167,10 @@
       lead.submissionId = newSubmissionId();
     }
 
-    if (lead.submissionId) saveLead(lead);
+    if (lead.submissionId) {
+      lead.contactSaved = true;
+      saveLead(lead);
+    }
     return lead.submissionId ? lead : null;
   }
 
@@ -320,34 +323,38 @@
     );
   }
 
-  function shouldShowPrepQuestions() {
-    if (isScheduledFlagSet()) {
-      var lead = loadLead();
-      return !!(lead && lead.submissionId);
-    }
-    return hasScheduledFromUrl();
+  function leadReadyForQuestions(lead) {
+    return !!(lead && lead.submissionId && lead.contactSaved);
   }
 
-  function showPrepQuestionsAutomatically() {
-    if (!shouldShowPrepQuestions()) return false;
+  function shouldShowPrepQuestions() {
+    var lead = loadLead();
+    if (leadReadyForQuestions(lead)) return true;
+    if (hasScheduledFromUrl()) return true;
+    if (isScheduledFlagSet() && lead && lead.submissionId) return true;
+    return false;
+  }
 
-    var lead = restoreLeadFromUrl() || loadLead();
+  function showPrepQuestionsUI(lead) {
     if (!lead || !lead.submissionId) return false;
 
     var mount = document.getElementById('diagnosis-intake-mount');
     if (mount) {
       if (!mount.querySelector('.diagnosis-intake-form--questions')) {
         mountQuestionsPage(mount);
-        showToast('You’re booked — answer the five prep questions below.', 'success');
       }
       return true;
     }
 
     var modal = document.getElementById('booking-modal');
-    if (modal && modal.classList.contains('is-open')) {
+    if (modal) {
+      if (!modal.classList.contains('is-open')) {
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
       if (!modal.querySelector('.diagnosis-intake-form--questions')) {
         renderModalQuestions(lead);
-        showToast('You’re booked — answer the prep questions below.', 'success');
       }
       return true;
     }
@@ -355,40 +362,27 @@
     return false;
   }
 
-  function bindBookingCompleteWatcher() {
-    if (window.__bookingWatchBound) return;
-    window.__bookingWatchBound = true;
-
-    window.addEventListener('storage', function (e) {
-      if (e.key !== SCHEDULED_KEY_LS && e.key !== LEAD_KEY_LS) return;
-      showPrepQuestionsAutomatically();
-    });
-
-    window.addEventListener('focus', function () {
-      showPrepQuestionsAutomatically();
-    });
+  function onContactSavedToSheet(lead) {
+    lead.contactSaved = true;
+    lead.savedAt = lead.savedAt || new Date().toISOString();
+    saveLead(lead);
+    markScheduled();
+    showPrepQuestionsUI(lead);
   }
 
-  function watchCalPopupForBooking(calWin) {
-    if (!calWin) return;
-    var started = Date.now();
-    var timer = setInterval(function () {
-      if (shouldShowPrepQuestions()) {
-        clearInterval(timer);
-        showPrepQuestionsAutomatically();
-        return;
-      }
-      if (calWin.closed) {
-        clearInterval(timer);
-        showPrepQuestionsAutomatically();
-        return;
-      }
-      if (Date.now() - started > 45 * 60 * 1000) clearInterval(timer);
-    }, 600);
-  }
-
+  /** Open Cal in a new tab during the click (before any async work). */
   function openCalScheduler(url) {
-    return window.open(url, '_blank', 'noopener,noreferrer');
+    if (!url) return false;
+    var opened = window.open(url, '_blank');
+    if (opened) return true;
+    var link = document.createElement('a');
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    return true;
   }
 
   function questionsFieldsHTML() {
@@ -428,7 +422,11 @@
       heardFrom: '',
       source: 'stage0_booking_contact',
       score: '',
-      message: 'Contact saved — awaiting call booking',
+      message:
+        'Contact saved — awaiting call booking · ' +
+        (lead.savedAt || new Date().toISOString()) +
+        ' · session ' +
+        lead.submissionId,
     };
   }
 
@@ -497,7 +495,7 @@
 
   /* ——— Cal.com: open scheduler in click handler, save contact in background ——— */
 
-  function proceedToCal(root, intent, prefill, closeModal) {
+  function proceedToCal(root, intent, prefill) {
     var form = root.querySelector('form') || root;
     var calBtn = root.querySelector('.js-open-cal');
     showFormError(root, '');
@@ -523,6 +521,8 @@
       lead.prefill = prefill || lead.prefill || '';
     }
 
+    lead.savedAt = new Date().toISOString();
+
     var url = calUrlWithRedirect(lead);
     if (!url) {
       showFormError(root, 'Scheduling link is not configured. Email founders@kautilyan.com to book.');
@@ -532,14 +532,10 @@
 
     saveLead(lead);
 
-    /* Must open during the click — async fetch breaks the user-gesture and popups get blocked */
-    var calWin = openCalScheduler(url);
-    if (!calWin) {
+    /* New tab must open synchronously in this click — before sheet fetch */
+    if (!openCalScheduler(url)) {
       showCalLinkFallback(root, url);
       showToast('Allow popups for this site, or use the scheduler link above the button.', 'error');
-    } else {
-      watchCalPopupForBooking(calWin);
-      showToast('Scheduler opened in a new tab. After you book, return here for prep questions.', 'success');
     }
 
     if (!sheetsConfigured()) {
@@ -553,25 +549,27 @@
     setBtnBusy(calBtn, true, 'Saving…');
     postToSheetsAsync(buildContactCreatePayload(lead))
       .then(function (res) {
-        if (res && res.submissionId) {
-          lead.submissionId = res.submissionId;
-          saveLead(lead);
-        }
+        if (res && res.submissionId) lead.submissionId = res.submissionId;
+        onContactSavedToSheet(lead);
       })
-      .catch(function () { /* Cal tab may still be open */ })
+      .catch(function (err) {
+        var errMsg = sheetErrorMessage(err);
+        showFormError(root, errMsg);
+        showToast(errMsg, 'error');
+      })
       .finally(function () {
         setBtnBusy(calBtn, false);
       });
   }
 
-  function bindBookingStart(root, intent, prefill, closeModalOnCal) {
+  function bindBookingStart(root, intent, prefill) {
     if (!root || root.dataset.startBound === '1') return;
     root.dataset.startBound = '1';
 
     var calBtn = root.querySelector('.js-open-cal');
     if (calBtn) {
       calBtn.addEventListener('click', function () {
-        proceedToCal(root, intent, prefill, closeModalOnCal);
+        proceedToCal(root, intent, prefill);
       });
     }
 
@@ -580,7 +578,7 @@
       form.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
           e.preventDefault();
-          proceedToCal(root, intent, prefill, closeModalOnCal);
+          proceedToCal(root, intent, prefill);
         }
       });
     }
@@ -669,7 +667,7 @@
     if (body) {
       body.innerHTML = bookingStartHTML();
       body.removeAttribute('data-start-bound');
-      bindBookingStart(body, intent, prefill, true);
+      bindBookingStart(body, intent, prefill);
     }
   }
 
@@ -742,23 +740,28 @@
       '</div>' +
       '<div class="booking-start-wrap">' + bookingStartHTML() + '</div>';
     var wrap = mount.querySelector('.booking-start-wrap');
-    bindBookingStart(wrap, intent, prefill, false);
+    bindBookingStart(wrap, intent, prefill);
   }
 
   function mountQuestionsPage(mount) {
     var lead = restoreLeadFromUrl() || loadLead();
     if (!lead || !lead.submissionId) {
       mountBookingStartPage(mount, pendingIntent, pendingPrefill);
-      showToast('Enter your details and pick a time first. Prep questions unlock after you schedule.', 'error');
       return;
     }
 
+    var calLink = calUrlWithRedirect(lead);
     mount.innerHTML =
       '<div class="intake-page-header">' +
-        '<span class="label">Stage 0 — after booking</span>' +
+        '<span class="label">Stage 0 — prep for your call</span>' +
         '<h1>Help us prepare for your call</h1>' +
         '<p class="intake-lede">' + QUESTIONS_SUB + '</p>' +
-        '<p class="cr-hint">Booking for: <strong>' + (lead.name || '') + '</strong> · ' + (lead.email || '') + '</p>' +
+        '<p class="cr-hint">Session <strong>' + lead.submissionId + '</strong> · ' +
+        (lead.name || '') + ' · ' + (lead.email || '') +
+        (calLink
+          ? ' · <a href="' + calLink + '" target="_blank" rel="noopener noreferrer">Open scheduler</a>'
+          : '') +
+        '</p>' +
       '</div>' +
       '<form id="' + FORM_ID + '-page" class="call-request-form diagnosis-intake-form diagnosis-intake-form--questions" novalidate>' +
         questionsFieldsHTML() +
@@ -775,36 +778,28 @@
 
     restoreLeadFromUrl();
 
-    if (hasScheduledFromUrl()) {
+    if (shouldShowPrepQuestions()) {
       mountQuestionsPage(mount);
     } else {
       mountBookingStartPage(mount, pendingIntent, pendingPrefill);
     }
-
-    if (!window.__bookingReturnCheckBound) {
-      window.__bookingReturnCheckBound = true;
-      window.addEventListener('pageshow', function () {
-        showPrepQuestionsAutomatically();
-      });
-    }
   }
 
   function init() {
-    bindBookingCompleteWatcher();
-
     var mount = document.getElementById('diagnosis-intake-mount');
     if (mount) {
       mountAssessmentPage();
     } else {
       ensureModal();
-      if (shouldShowPrepQuestions()) {
+      var lead = loadLead();
+      if (leadReadyForQuestions(lead)) {
         var modal = document.getElementById('booking-modal');
         if (modal) {
           modal.classList.add('is-open');
           modal.setAttribute('aria-hidden', 'false');
           document.body.style.overflow = 'hidden';
         }
-        showPrepQuestionsAutomatically();
+        showPrepQuestionsUI(lead);
       }
     }
 
