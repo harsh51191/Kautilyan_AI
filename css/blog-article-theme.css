@@ -296,10 +296,29 @@ body.article-page .article-body .blog-block--quote cite {
 
 /* Media */
 body.article-page .article-body .blog-media-wrap,
-body.article-page .article-body .blog-video-wrap {
+body.article-page .article-body .blog-video-wrap--embed,
+body.article-page .article-body .blog-video-wrap--drive {
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+body.article-page .article-body .blog-block--video .blog-figcaption {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+@media (max-width: 640px) {
+  body.article-page .article-body .blog-video-wrap--drive.is-playing iframe {
+    top: -40px;
+    height: calc(100% + 40px);
+  }
+  body.article-page .article-body .blog-video-play-icon {
+    width: 48px;
+    height: 48px;
+  }
+  body.article-page .article-body .blog-video-play-icon::after {
+    border-width: 8px 0 8px 13px;
+  }
 }
 
 body.article-page .article-cta {

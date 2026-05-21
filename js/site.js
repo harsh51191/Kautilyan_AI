@@ -7,6 +7,7 @@
     SHOW_PRICING: false,
     SHOW_NAV_PRICING: false,
     CAL_LINK: 'https://cal.com/kautilyan/stage-0-diagnosis',
+    INTAKE_PATH: 'assessment',
     ASSESSMENT_URL: '',
     GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxr380yBL72cXD8ZiDQqAJFVtLAd7_de67q9qvqs5hvh9-VrqD1bayuJmaMJRLGysBd0g/exec',
     BLOG_FEED_URL: 'https://script.google.com/macros/s/AKfycbwr3r44sIUeaFCbHH4Qw8Ldx_VQH08vof4SsgMR6M05Cqu7dPvTwa9WZgWzZ4dQhvXe/exec',

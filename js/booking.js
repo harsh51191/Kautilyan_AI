@@ -1,18 +1,19 @@
 /**
  * Stage 0 booking flow
  * 1) Modal / assessment (not yet scheduled): name, email, company + Cal.com button — NO five questions
- * 2) After Cal.com redirect (?scheduled=1): five prep questions only (same sheet row)
+ * 2) After Cal.com redirect (?scheduled=1 and/or Cal uid): five prep questions only (same sheet row)
  */
 (function () {
   'use strict';
 
   var FORM_ID = 'diagnosis-intake-form';
   var LEAD_KEY = 'kautilyan_stage0_lead';
+  var LEAD_KEY_LS = 'kautilyan_stage0_lead_v1';
   var SCHEDULED_KEY = 'kautilyan_stage0_scheduled';
+  var SCHEDULED_KEY_LS = 'kautilyan_stage0_scheduled_v1';
 
   var MODAL_TITLE = 'Book your Stage 0 call';
-  var BOOKING_SUB =
-    'Share your details, then pick a time on Cal.com. After you confirm your slot, you’ll answer five short prep questions.';
+  var BOOKING_SUB = 'Share your details, then pick a time. After you confirm on the scheduler, you’ll land here with five short prep questions.';
   var QUESTIONS_SUB =
     'You’re booked. These five questions help us prepare your diagnosis — not a generic AI demo.';
 
@@ -27,24 +28,78 @@
     return (cfg().CAL_LINK || 'https://cal.com/kautilyan/stage-0-diagnosis').trim();
   }
 
+  function isLocalDevHost() {
+    var host = (window.location.hostname || '').toLowerCase();
+    return host === 'localhost' || host === '127.0.0.1' || host === '[::1]' || host === '::1';
+  }
+
+  function intakePath() {
+    var configured = (cfg().INTAKE_PATH || '').trim().replace(/^\//, '');
+    if (configured) return configured.replace(/\.html$/i, '');
+    return isLocalDevHost() ? 'assessment.html' : 'assessment';
+  }
+
   function intakePageUrl() {
-    var base = (cfg().SITE_URL || window.location.origin || '').replace(/\/$/, '');
-    var path = (cfg().INTAKE_PATH || 'assessment.html').replace(/^\//, '');
+    var path = intakePath();
+    var host = (window.location.hostname || '').toLowerCase();
+    var origin = (window.location.origin || '').replace(/\/$/, '');
+    /* Keep redirect on the same host the user booked from (www vs apex shares storage). */
+    if (isLocalDevHost() || /(^|\.)kautilyan\.com$/i.test(host)) {
+      return origin + '/' + path;
+    }
+    var base = (cfg().SITE_URL || origin || '').replace(/\/$/, '');
     return base + '/' + path;
   }
 
-  function postBookingRedirectUrl(intent, prefill) {
+  function urlSearchParams() {
+    return new URLSearchParams(window.location.search);
+  }
+
+  function isScheduledQuery(params) {
+    params = params || urlSearchParams();
+    return (
+      params.get('scheduled') === '1' ||
+      params.get('booked') === '1' ||
+      params.get('booking') === 'confirmed'
+    );
+  }
+
+  function calBookingUid(params) {
+    params = params || urlSearchParams();
+    return (params.get('uid') || '').trim();
+  }
+
+  function isCalReturn(params) {
+    return !!calBookingUid(params);
+  }
+
+  function attendeeNameFromParams(params) {
+    params = params || urlSearchParams();
+    var name = params.get('attendeeName') || params.get('name') || '';
+    if (!name) {
+      var first = params.get('attendeeFirstName') || '';
+      var last = params.get('attendeeLastName') || '';
+      name = (first + ' ' + last).trim();
+    }
+    return name.trim();
+  }
+
+  function postBookingRedirectUrl(lead) {
+    lead = lead || {};
     var params = new URLSearchParams();
     params.set('scheduled', '1');
-    if (intent) params.set('intent', intent);
-    if (prefill) params.set('workflow', String(prefill).slice(0, 500));
+    if (lead.submissionId) params.set('sid', lead.submissionId);
+    if (lead.intent) params.set('intent', lead.intent);
+    if (lead.prefill) params.set('workflow', String(lead.prefill).slice(0, 500));
+    if (lead.name) params.set('name', lead.name);
+    if (lead.email) params.set('email', lead.email);
     return intakePageUrl() + '?' + params.toString();
   }
 
-  function calUrlWithRedirect(intent, prefill) {
+  function calUrlWithRedirect(lead) {
     var cal = calUrl();
     if (!cal) return '';
-    var redirect = postBookingRedirectUrl(intent, prefill);
+    var redirect = postBookingRedirectUrl(lead);
     var sep = cal.indexOf('?') >= 0 ? '&' : '?';
     return cal + sep + 'redirect=' + encodeURIComponent(redirect);
   }
@@ -54,14 +109,18 @@
   }
 
   function saveLead(lead) {
+    var raw = JSON.stringify(lead);
     try {
-      sessionStorage.setItem(LEAD_KEY, JSON.stringify(lead));
+      sessionStorage.setItem(LEAD_KEY, raw);
+    } catch (err) { /* ignore */ }
+    try {
+      localStorage.setItem(LEAD_KEY_LS, raw);
     } catch (err) { /* ignore */ }
   }
 
   function loadLead() {
     try {
-      var raw = sessionStorage.getItem(LEAD_KEY);
+      var raw = sessionStorage.getItem(LEAD_KEY) || localStorage.getItem(LEAD_KEY_LS);
       return raw ? JSON.parse(raw) : null;
     } catch (err) {
       return null;
@@ -72,19 +131,57 @@
     try {
       sessionStorage.setItem(SCHEDULED_KEY, '1');
     } catch (err) { /* ignore */ }
+    try {
+      localStorage.setItem(SCHEDULED_KEY_LS, '1');
+    } catch (err) { /* ignore */ }
+  }
+
+  function isScheduledFlagSet() {
+    try {
+      if (sessionStorage.getItem(SCHEDULED_KEY) === '1') return true;
+      if (localStorage.getItem(SCHEDULED_KEY_LS) === '1') return true;
+    } catch (err) { /* ignore */ }
+    return false;
+  }
+
+  function restoreLeadFromUrl() {
+    var params = urlSearchParams();
+    var scheduled = isScheduledQuery(params);
+    var calUid = calBookingUid(params);
+    if (!scheduled && !calUid) return loadLead();
+
+    markScheduled();
+    var lead = loadLead() || {};
+    var sid = (params.get('sid') || '').trim();
+    if (sid) lead.submissionId = sid;
+    else if (!lead.submissionId && calUid) lead.submissionId = 'cal-' + calUid;
+
+    var urlName = attendeeNameFromParams(params);
+    var urlEmail = (params.get('email') || '').trim();
+    if (urlName) lead.name = urlName;
+    if (urlEmail) lead.email = urlEmail;
+    if (params.get('intent')) lead.intent = params.get('intent');
+    if (params.get('workflow')) lead.prefill = params.get('workflow');
+
+    if (!lead.submissionId && (scheduled || calUid)) {
+      lead.submissionId = newSubmissionId();
+    }
+
+    if (lead.submissionId) saveLead(lead);
+    return lead.submissionId ? lead : null;
   }
 
   function hasScheduledFromUrl() {
-    var params = new URLSearchParams(window.location.search);
-    if (params.get('scheduled') === '1' || params.get('booked') === '1') {
-      markScheduled();
-      return true;
+    var params = urlSearchParams();
+    if (isScheduledQuery(params) || isCalReturn(params)) {
+      var fromUrl = restoreLeadFromUrl();
+      return !!(fromUrl && fromUrl.submissionId);
     }
-    try {
-      return sessionStorage.getItem(SCHEDULED_KEY) === '1';
-    } catch (err) {
-      return false;
+    if (isScheduledFlagSet()) {
+      var lead = loadLead();
+      return !!(lead && lead.submissionId);
     }
+    return false;
   }
 
   function readContactFromForm(form) {
@@ -150,12 +247,12 @@
     if (!el) return;
     el.hidden = false;
     el.textContent = '';
-    el.appendChild(document.createTextNode('Your browser blocked the Cal.com popup. '));
+    el.appendChild(document.createTextNode('Your browser blocked the scheduling window. '));
     var a = document.createElement('a');
     a.href = url;
     a.target = '_blank';
     a.rel = 'noopener noreferrer';
-    a.textContent = 'Open Cal.com in a new tab →';
+    a.textContent = 'Open scheduler in a new tab →';
     el.appendChild(a);
   }
 
@@ -208,8 +305,7 @@
 
   function calButtonHTML() {
     return (
-      '<button type="button" class="cr-submit js-open-cal">Pick your time on Cal.com →</button>' +
-      '<p class="cr-hint">About 2 minutes. After you confirm, you’ll answer five prep questions on the next screen.</p>' +
+      '<button type="button" class="cr-submit js-open-cal">Pick your time →</button>' +
       '<p class="cr-foot">By continuing, you agree to our <a href="' + privacyHref() + '">Privacy Policy</a>.</p>'
     );
   }
@@ -222,6 +318,61 @@
       '</form>' +
       '<div class="booking-cal-actions">' + calButtonHTML() + '</div>'
     );
+  }
+
+  function shouldShowPrepQuestions() {
+    if (isScheduledFlagSet()) {
+      var lead = loadLead();
+      return !!(lead && lead.submissionId);
+    }
+    return hasScheduledFromUrl();
+  }
+
+  function showPrepQuestionsAutomatically() {
+    if (!shouldShowPrepQuestions()) return false;
+
+    var lead = restoreLeadFromUrl() || loadLead();
+    if (!lead || !lead.submissionId) return false;
+
+    var mount = document.getElementById('diagnosis-intake-mount');
+    if (mount) {
+      if (!mount.querySelector('.diagnosis-intake-form--questions')) {
+        mountQuestionsPage(mount);
+        showToast('You’re booked — answer the five prep questions below.', 'success');
+      }
+      return true;
+    }
+
+    var modal = document.getElementById('booking-modal');
+    if (modal && modal.classList.contains('is-open')) {
+      if (!modal.querySelector('.diagnosis-intake-form--questions')) {
+        renderModalQuestions(lead);
+        showToast('You’re booked — answer the prep questions below.', 'success');
+      }
+      return true;
+    }
+
+    return false;
+  }
+
+  function bindBookingCompleteWatcher() {
+    if (window.__bookingWatchBound) return;
+    window.__bookingWatchBound = true;
+
+    window.addEventListener('storage', function (e) {
+      if (e.key !== SCHEDULED_KEY_LS && e.key !== LEAD_KEY_LS) return;
+      showPrepQuestionsAutomatically();
+    });
+
+    window.addEventListener('focus', function () {
+      showPrepQuestionsAutomatically();
+    });
+  }
+
+  function openCalScheduler(url) {
+    /* Same-tab: after booking, Cal redirects back to /assessment and questions mount automatically. */
+    window.location.href = url;
+    return null;
   }
 
   function questionsFieldsHTML() {
@@ -261,7 +412,7 @@
       heardFrom: '',
       source: 'stage0_booking_contact',
       score: '',
-      message: 'Contact saved — awaiting Cal.com booking',
+      message: 'Contact saved — awaiting call booking',
     };
   }
 
@@ -296,7 +447,7 @@
       role: q('[name="q2"]').slice(0, 200),
       painPoints: answers,
       source: 'stage0_post_booking_intake',
-      message: 'Cal.com booked — prep questions submitted',
+      message: 'Call booked — prep questions submitted',
     };
   }
 
@@ -356,18 +507,11 @@
       lead.prefill = prefill || lead.prefill || '';
     }
 
-    var url = calUrlWithRedirect(lead.intent, lead.prefill || prefill);
+    var url = calUrlWithRedirect(lead);
     if (!url) {
-      showFormError(root, 'Cal.com link is not configured. Email founders@kautilyan.com to book.');
-      showToast('Cal.com link is not configured.', 'error');
+      showFormError(root, 'Scheduling link is not configured. Email founders@kautilyan.com to book.');
+      showToast('Scheduling link is not configured.', 'error');
       return;
-    }
-
-    /* Must open during the click — async fetch breaks the user-gesture and popups get blocked */
-    var calWin = window.open(url, '_blank', 'noopener,noreferrer');
-    if (!calWin) {
-      showCalLinkFallback(root, url);
-      showToast('Allow popups for this site, or use the Cal.com link above the button.', 'error');
     }
 
     saveLead(lead);
@@ -375,36 +519,21 @@
     if (!sheetsConfigured()) {
       showFormError(
         root,
-        'Cal.com is open. Lead capture is not configured on this site — email founders@kautilyan.com after booking.'
+        'Lead capture is not configured on this site — email founders@kautilyan.com after booking.'
       );
-      if (closeModal && typeof window.closeBookingModal === 'function') {
-        window.closeBookingModal();
-      }
-      return;
+    } else {
+      setBtnBusy(calBtn, true, 'Opening scheduler…');
+      postToSheetsAsync(buildContactCreatePayload(lead))
+        .then(function (res) {
+          if (res && res.submissionId) {
+            lead.submissionId = res.submissionId;
+            saveLead(lead);
+          }
+        })
+        .catch(function () { /* still continue to Cal */ });
     }
 
-    setBtnBusy(calBtn, true, 'Saving…');
-    postToSheetsAsync(buildContactCreatePayload(lead))
-      .then(function (res) {
-        setBtnBusy(calBtn, false);
-        if (res && res.submissionId) lead.submissionId = res.submissionId;
-        saveLead(lead);
-        if (closeModal && typeof window.closeBookingModal === 'function') {
-          window.closeBookingModal();
-        }
-        if (calWin) {
-          showToast('After you confirm on Cal.com, complete the five prep questions.', 'success');
-        }
-      })
-      .catch(function (err) {
-        setBtnBusy(calBtn, false);
-        var errMsg = sheetErrorMessage(err);
-        showFormError(
-          root,
-          errMsg + ' Cal.com should still be open — complete your booking, then email founders@kautilyan.com if needed.'
-        );
-        showToast(errMsg, 'error');
-      });
+    openCalScheduler(url);
   }
 
   function bindBookingStart(root, intent, prefill, closeModalOnCal) {
@@ -455,7 +584,7 @@
       e.preventDefault();
       lead = loadLead();
       if (!lead || !lead.submissionId) {
-        showToast('Please book via Cal.com from the previous step first.', 'error');
+        showToast('Please pick a time first, then answer the prep questions.', 'error');
         return;
       }
 
@@ -516,6 +645,27 @@
     }
   }
 
+  function renderModalQuestions(lead) {
+    var modal = document.getElementById('booking-modal');
+    if (!modal) return;
+    var panel = modal.querySelector('.booking-modal-panel');
+    var body = modal.querySelector('#booking-modal-body');
+    var title = modal.querySelector('#modal-title');
+    var sub = modal.querySelector('.modal-sub');
+    if (title) title.textContent = 'Help us prepare for your call';
+    if (sub) sub.textContent = QUESTIONS_SUB;
+    if (panel) panel.classList.add('booking-modal-panel--wide');
+    if (body) {
+      body.innerHTML =
+        '<p class="cr-hint">Booking for: <strong>' + (lead.name || '') + '</strong> · ' + (lead.email || '') + '</p>' +
+        '<form id="' + FORM_ID + '-modal" class="call-request-form diagnosis-intake-form diagnosis-intake-form--questions" novalidate>' +
+          questionsFieldsHTML() +
+        '</form>';
+      body.removeAttribute('data-start-bound');
+      bindQuestionsForm(document.getElementById(FORM_ID + '-modal'));
+    }
+  }
+
   function modalHTML() {
     return (
       '<div id="booking-modal" class="booking-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title" aria-modal="true">' +
@@ -555,6 +705,7 @@
   /* ——— Assessment page ——— */
 
   function mountBookingStartPage(mount, intent, prefill) {
+    var lead = loadLead();
     mount.innerHTML =
       '<div class="intake-page-header">' +
         '<span class="label">Stage 0 — book your call</span>' +
@@ -567,10 +718,10 @@
   }
 
   function mountQuestionsPage(mount) {
-    var lead = loadLead();
+    var lead = restoreLeadFromUrl() || loadLead();
     if (!lead || !lead.submissionId) {
       mountBookingStartPage(mount, pendingIntent, pendingPrefill);
-      showToast('Enter your details and book on Cal.com first. Prep questions unlock after you schedule.', 'error');
+      showToast('Enter your details and pick a time first. Prep questions unlock after you schedule.', 'error');
       return;
     }
 
@@ -590,23 +741,43 @@
   function mountAssessmentPage() {
     var mount = document.getElementById('diagnosis-intake-mount');
     if (!mount) return;
-    var params = new URLSearchParams(window.location.search);
+    var params = urlSearchParams();
     pendingIntent = params.get('intent') || '';
     pendingPrefill = params.get('workflow') || '';
+
+    restoreLeadFromUrl();
 
     if (hasScheduledFromUrl()) {
       mountQuestionsPage(mount);
     } else {
       mountBookingStartPage(mount, pendingIntent, pendingPrefill);
     }
+
+    if (!window.__bookingReturnCheckBound) {
+      window.__bookingReturnCheckBound = true;
+      window.addEventListener('pageshow', function () {
+        showPrepQuestionsAutomatically();
+      });
+    }
   }
 
   function init() {
+    bindBookingCompleteWatcher();
+
     var mount = document.getElementById('diagnosis-intake-mount');
     if (mount) {
       mountAssessmentPage();
     } else {
       ensureModal();
+      if (shouldShowPrepQuestions()) {
+        var modal = document.getElementById('booking-modal');
+        if (modal) {
+          modal.classList.add('is-open');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+        showPrepQuestionsAutomatically();
+      }
     }
 
     document.addEventListener('click', function (e) {

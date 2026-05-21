@@ -53,6 +53,12 @@
     return '';
   }
 
+  function driveThumbnailUrl(id, size) {
+    if (!id) return '';
+    size = size || 'w1200';
+    return 'https://drive.google.com/thumbnail?id=' + id + '&sz=' + size;
+  }
+
   function normalizeVideoEmbed(url) {
     if (!url) return { kind: '', embed: '', openUrl: '' };
     url = String(url).trim();
@@ -72,6 +78,7 @@
         kind: 'drive',
         embed: 'https://drive.google.com/file/d/' + driveId + '/preview',
         openUrl: viewUrl,
+        thumbnail: driveThumbnailUrl(driveId),
         id: driveId,
       };
     }
@@ -85,6 +92,7 @@
     isAllowedUrl: isAllowedUrl,
     normalizeImageUrl: normalizeImageUrl,
     normalizeVideoEmbed: normalizeVideoEmbed,
+    driveThumbnailUrl: driveThumbnailUrl,
     extractDriveId: extractDriveId,
     extractYouTubeId: extractYouTubeId,
   };

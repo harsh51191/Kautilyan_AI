@@ -41,28 +41,6 @@
       });
     });
 
-    /* ——— Before/after mobile slider ——— */
-    var opsSlider = document.getElementById('ops-compare-slider');
-    if (opsSlider) {
-      var panelBefore = document.getElementById('ops-panel-before');
-      var panelAfter = document.getElementById('ops-panel-after');
-      var labelBefore = document.getElementById('ops-slider-label-before');
-      var labelAfter = document.getElementById('ops-slider-label-after');
-
-      function setOpsSlider(val) {
-        var showAfter = Number(val) === 1;
-        if (panelBefore) panelBefore.classList.toggle('is-visible', !showAfter);
-        if (panelAfter) panelAfter.classList.toggle('is-visible', showAfter);
-        if (labelBefore) labelBefore.classList.toggle('is-active', !showAfter);
-        if (labelAfter) labelAfter.classList.toggle('is-active', showAfter);
-      }
-
-      opsSlider.addEventListener('input', function () {
-        setOpsSlider(opsSlider.value);
-      });
-      setOpsSlider(opsSlider.value);
-    }
-
     /* ——— Generic tabs ——— */
     qsa('[data-tabs]').forEach(function (wrap) {
       var tabs = qsa('[data-tab]', wrap);

@@ -83,11 +83,11 @@ Hook the form to Sheets using **Responses → Link to Sheets** in Google Forms (
 
 ### Flow
 
-1. **Book Stage 0 Call** → form with **name, email, company** + **Pick your time on Cal.com** (no five questions yet).
-2. Cal.com button saves contact to the sheet, then opens Cal.com.
-3. After booking, Cal.com redirects to **`https://www.kautilyan.com/assessment?scheduled=1`** (set in Cal.com **Booking redirects**).
-4. That page shows **only the five prep questions** (same sheet row updated via `submissionId`).
-5. `/assessment` without `?scheduled=1` shows the same contact form + Cal button (not the five questions).
+1. **Book Stage 0 Call** → form with **name, email, company** + **Pick your time** (no five questions yet).
+2. Button saves contact to the sheet, then navigates to Cal.com in the **same tab**.
+3. After booking, Cal.com redirects to **`https://www.kautilyan.com/assessment?scheduled=1`** (set in Cal.com **Booking redirects** → *Redirect to a custom URL*, with **Forward parameters** enabled). Cal also appends `uid`, `email`, `attendeeName`, etc.
+4. That page **automatically** shows the five prep questions (no second CTA).
+5. Use the **same host** for the whole flow (prefer `www.kautilyan.com` everywhere).
 
 Deploy **`LeadsCapture.gs`** (`action: create` on contact, `action: update` on prep questions).
 

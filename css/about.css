@@ -3,15 +3,15 @@
 .nav-links a.is-current { color: #fff; }
 
 .page-hero {
-  padding: calc(var(--nav-height) + 40px) 64px 48px;
+  padding: calc(var(--nav-height) + 40px) 0 48px;
   min-height: auto;
   box-sizing: border-box;
 }
-.page-hero .hero-intro-wrap { gap: 24px; max-width: 720px; }
+.page-hero .hero-intro-wrap { gap: 24px; max-width: 52rem; }
 .page-hero--about .hero-lead { max-width: 600px; }
 
 @media (max-width: 768px) {
-  .page-hero { padding: calc(var(--nav-height) + 24px) 24px 36px; }
+  .page-hero { padding: calc(var(--nav-height) + 24px) 0 36px; }
 }
 
 /* Market gap — 3 columns */
@@ -191,7 +191,46 @@
 }
 .founder-grid--single {
   grid-template-columns: 1fr;
-  max-width: 420px;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+}
+
+.founder-grid--single .founder-card {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  column-gap: 28px;
+  row-gap: 6px;
+  align-items: start;
+  padding: 28px 32px;
+  max-width: 52rem;
+}
+
+.founder-grid--single .founder-avatar {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  margin-bottom: 0;
+  width: 72px;
+  height: 72px;
+  font-size: 1.35rem;
+  border-radius: 16px;
+}
+
+.founder-grid--single .founder-card h3,
+.founder-grid--single .founder-role,
+.founder-grid--single .founder-card > p:not(.founder-role):not(.founder-contact),
+.founder-grid--single .founder-link,
+.founder-grid--single .founder-contact {
+  grid-column: 2;
+}
+
+.founder-grid--single .founder-card h3 {
+  margin-top: 2px;
+}
+
+.founder-grid--single .founder-contact {
+  margin-top: 4px;
 }
 .founder-contact {
   margin-top: 12px;
@@ -285,6 +324,15 @@
     var(--bg);
 }
 
+#founders.content-section--founders {
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+
+#founders .section-header {
+  margin-bottom: 28px;
+}
+
 @media (max-width: 1024px) {
   .pillar-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -292,4 +340,24 @@
   .partner-compare { grid-template-columns: 1fr; }
   .pillar-grid { grid-template-columns: 1fr; }
   .founder-grid { grid-template-columns: 1fr; }
+
+  .founder-grid--single .founder-card {
+    grid-template-columns: 1fr;
+    padding: 24px 22px;
+    max-width: none;
+  }
+
+  .founder-grid--single .founder-avatar {
+    grid-column: 1;
+    grid-row: auto;
+    margin-bottom: 4px;
+  }
+
+  .founder-grid--single .founder-card h3,
+  .founder-grid--single .founder-role,
+  .founder-grid--single .founder-card > p:not(.founder-role):not(.founder-contact),
+  .founder-grid--single .founder-link,
+  .founder-grid--single .founder-contact {
+    grid-column: 1;
+  }
 }
