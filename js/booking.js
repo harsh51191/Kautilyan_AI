@@ -369,10 +369,26 @@
     });
   }
 
+  function watchCalPopupForBooking(calWin) {
+    if (!calWin) return;
+    var started = Date.now();
+    var timer = setInterval(function () {
+      if (shouldShowPrepQuestions()) {
+        clearInterval(timer);
+        showPrepQuestionsAutomatically();
+        return;
+      }
+      if (calWin.closed) {
+        clearInterval(timer);
+        showPrepQuestionsAutomatically();
+        return;
+      }
+      if (Date.now() - started > 45 * 60 * 1000) clearInterval(timer);
+    }, 600);
+  }
+
   function openCalScheduler(url) {
-    /* Same-tab: after booking, Cal redirects back to /assessment and questions mount automatically. */
-    window.location.href = url;
-    return null;
+    return window.open(url, '_blank', 'noopener,noreferrer');
   }
 
   function questionsFieldsHTML() {
@@ -516,24 +532,36 @@
 
     saveLead(lead);
 
+    /* Must open during the click — async fetch breaks the user-gesture and popups get blocked */
+    var calWin = openCalScheduler(url);
+    if (!calWin) {
+      showCalLinkFallback(root, url);
+      showToast('Allow popups for this site, or use the scheduler link above the button.', 'error');
+    } else {
+      watchCalPopupForBooking(calWin);
+      showToast('Scheduler opened in a new tab. After you book, return here for prep questions.', 'success');
+    }
+
     if (!sheetsConfigured()) {
       showFormError(
         root,
         'Lead capture is not configured on this site — email founders@kautilyan.com after booking.'
       );
-    } else {
-      setBtnBusy(calBtn, true, 'Opening scheduler…');
-      postToSheetsAsync(buildContactCreatePayload(lead))
-        .then(function (res) {
-          if (res && res.submissionId) {
-            lead.submissionId = res.submissionId;
-            saveLead(lead);
-          }
-        })
-        .catch(function () { /* still continue to Cal */ });
+      return;
     }
 
-    openCalScheduler(url);
+    setBtnBusy(calBtn, true, 'Saving…');
+    postToSheetsAsync(buildContactCreatePayload(lead))
+      .then(function (res) {
+        if (res && res.submissionId) {
+          lead.submissionId = res.submissionId;
+          saveLead(lead);
+        }
+      })
+      .catch(function () { /* Cal tab may still be open */ })
+      .finally(function () {
+        setBtnBusy(calBtn, false);
+      });
   }
 
   function bindBookingStart(root, intent, prefill, closeModalOnCal) {
