@@ -31,9 +31,14 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.kautilyan.com/assessment</loc>
+    <loc>https://www.kautilyan.com/stage0-intake</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.kautilyan.com/assessment.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.kautilyan.com/privacy</loc>

@@ -4,22 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="data:," />
-  <title>Stage 0 Pre-Call Intake — Kautilyan AI</title>
-  <meta name="description" content="After booking your Stage 0 call on Cal.com, answer five prep questions so we can prepare around your operating reality." />
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+  <title>Free AI Readiness Assessment for Business Leaders | Kautilyan AI</title>
+  <meta name="description" content="Assess your organisation's AI maturity, operating intelligence, governance, and agent readiness. Get a personalised report with a 90-day AI roadmap." />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.kautilyan.com/assessment" />
+  <link rel="canonical" href="https://www.kautilyan.com/assessment.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Kautilyan AI" />
-  <meta property="og:url" content="https://www.kautilyan.com/assessment" />
-  <meta property="og:title" content="Stage 0 Pre-Call Intake — Kautilyan AI" />
+  <meta property="og:url" content="https://www.kautilyan.com/assessment.html" />
+  <meta property="og:title" content="Free AI Readiness Assessment for Business Leaders | Kautilyan AI" />
+  <meta property="og:description" content="Assess your organisation's AI maturity, operating intelligence, governance, and agent readiness. Get a personalised report with a 90-day AI roadmap." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free AI Readiness Assessment | Kautilyan AI" />
+  <meta name="twitter:description" content="12-question diagnostic with instant scoring and a personalised AI operating intelligence report." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/site.css" />
   <link rel="stylesheet" href="css/assessment.css" />
 </head>
-<body>
+<body class="assessment-full-page">
+
   <a class="skip-link" href="#main">Skip to main content</a>
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
@@ -33,17 +38,8 @@
             <div class="nav-logo-icon">⚡</div>
             KAUTILYAN
           </a>
-          <ul class="nav-links" id="nav-menu">
-            <!--<li><a href="how-it-works.html">How It Works</a></li>-->
-            <!--<li><a href="use-cases.html">Use Cases</a></li>-->
-            <li><a href="resources.html">Resources</a></li>
-            <!--<li><a href="pricing.html">Pricing</a></li>-->
-            <li><a href="about.html">About</a></li>
-            <li class="nav-mobile-only"><span class="nav-current-label">Pre-call intake</span></li>
-          </ul>
-          <div class="nav-cta">
-            <span class="btn btn-ghost nav-report-link is-current">Pre-call intake</span>
-          </div>
+          <ul class="nav-links" id="nav-menu"></ul>
+          <div class="nav-cta"></div>
           <button class="nav-hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
             <span></span><span></span><span></span>
           </button>
@@ -52,8 +48,306 @@
     </nav>
 
     <main id="main" class="assessment-main">
-      <div class="container">
-        <div id="diagnosis-intake-mount"></div>
+      <div class="container assessment-shell">
+
+        <!-- VIEW 1: Landing -->
+        <div id="view-landing" class="assessment-view active">
+          <section class="assessment-landing" aria-labelledby="assessment-landing-heading">
+            <p class="assessment-tagline">Free · 7 minutes · Instant report</p>
+            <h1 id="assessment-landing-heading">Is your company using AI — or building operating intelligence?</h1>
+            <p class="assessment-subhead">Take the free AI Operating Intelligence Diagnostic to see where your organisation stands across knowledge capture, execution, governance, and agent readiness.</p>
+
+            <div class="pain-cards">
+              <article class="pain-card">
+                <h3>Why does everything still need me?</h3>
+                <p class="pain-card-audience">Founders &amp; CEOs</p>
+              </article>
+              <article class="pain-card">
+                <h3>Why do teams keep losing context?</h3>
+                <p class="pain-card-audience">COOs &amp; Ops Leaders</p>
+              </article>
+              <article class="pain-card">
+                <h3>Why are we using AI tools but still not moving faster?</h3>
+                <p class="pain-card-audience">Digital &amp; AI Leads</p>
+              </article>
+            </div>
+
+            <div class="discover-block">
+              <h2>What you will discover</h2>
+              <ol class="discover-list">
+                <li>Your AI operating maturity level across 12 structured questions</li>
+                <li>Scores across knowledge capture, process execution, and technology readiness</li>
+                <li>Operating patterns that may be limiting scale, speed, or governance</li>
+                <li>Agent readiness and a personalised path for your next 90 days</li>
+              </ol>
+            </div>
+
+            <div class="assessment-cta-wrap">
+              <button type="button" id="btn-start" class="btn-assessment-start">Start the diagnostic →</button>
+            </div>
+            <p class="assessment-supporting">Built for founders, CEOs, COOs, and business leaders.</p>
+          </section>
+        </div>
+
+        <!-- VIEW 2: Questions -->
+        <div id="view-questions" class="assessment-view" aria-live="polite">
+          <div class="questions-top-bar">
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="8" aria-label="Assessment progress">
+              <div id="progress-bar-fill"></div>
+            </div>
+            <div class="questions-top-meta">
+              <p id="section-label">Knowledge &amp; Context</p>
+              <span id="question-counter">1 / 12</span>
+            </div>
+            <div class="section-dots" aria-hidden="true">
+              <span id="section-dot-1" class="section-dot active"></span>
+              <span id="section-dot-2" class="section-dot"></span>
+              <span id="section-dot-3" class="section-dot"></span>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <button type="button" id="btn-back" style="display: none;">← Back</button>
+            <p id="question-number">Question 1 of 12</p>
+            <h2 id="question-text"></h2>
+            <div class="options-list">
+              <button type="button" id="option-A" class="option-btn" aria-keyshortcuts="a">
+                <span class="option-letter" aria-hidden="true">A</span>
+                <span id="option-A-text"></span>
+              </button>
+              <button type="button" id="option-B" class="option-btn" aria-keyshortcuts="b">
+                <span class="option-letter" aria-hidden="true">B</span>
+                <span id="option-B-text"></span>
+              </button>
+              <button type="button" id="option-C" class="option-btn" aria-keyshortcuts="c">
+                <span class="option-letter" aria-hidden="true">C</span>
+                <span id="option-C-text"></span>
+              </button>
+              <button type="button" id="option-D" class="option-btn" aria-keyshortcuts="d">
+                <span class="option-letter" aria-hidden="true">D</span>
+                <span id="option-D-text"></span>
+              </button>
+            </div>
+          </div>
+
+          <div id="section-transition" class="section-transition" aria-hidden="true">
+            <div class="section-transition-inner">
+              <h2 id="transition-section-name"></h2>
+              <p id="transition-section-desc"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 3: Lead form -->
+        <div id="view-lead-form" class="assessment-view">
+          <header class="lead-form-header">
+            <h2>Your report is almost ready.</h2>
+            <p>Tell us where to send it and we will personalise it to your company.</p>
+          </header>
+
+          <div class="lead-form-card">
+            <p id="lead-form-error" hidden role="alert"></p>
+            <form id="lead-form" novalidate>
+              <div class="form-field">
+                <label for="lead-respondent-name">Your name</label>
+                <input type="text" id="lead-respondent-name" name="respondent_name" required autocomplete="name" />
+                <span class="field-error" hidden></span>
+              </div>
+              <div class="form-field">
+                <label for="lead-work-email">Work email</label>
+                <input type="email" id="lead-work-email" name="work_email" required autocomplete="email" />
+                <span class="field-error" hidden></span>
+              </div>
+              <div class="form-field">
+                <label for="lead-company-name">Company name</label>
+                <input type="text" id="lead-company-name" name="company_name" required autocomplete="organization" />
+                <span class="field-error" hidden></span>
+              </div>
+              <div class="form-field">
+                <label for="lead-company-website">Company website</label>
+                <input type="url" id="lead-company-website" name="company_website" placeholder="https://" autocomplete="url" />
+                <span class="field-error" hidden></span>
+              </div>
+              <div class="form-field">
+                <label for="lead-role">Your role</label>
+                <select id="lead-role" name="role" required></select>
+                <span class="field-error" hidden></span>
+              </div>
+              <div class="form-field">
+                <label for="lead-employee-count">Team size</label>
+                <select id="lead-employee-count" name="employee_count" required></select>
+                <span class="field-error" hidden></span>
+              </div>
+              <div class="form-field">
+                <label for="lead-industry">Industry</label>
+                <input type="text" id="lead-industry" name="industry" required />
+                <span class="field-error" hidden></span>
+              </div>
+              <div class="form-field">
+                <label for="lead-biggest-challenge">Biggest operating challenge</label>
+                <select id="lead-biggest-challenge" name="biggest_challenge" required></select>
+                <span class="field-error" hidden></span>
+              </div>
+              <button type="submit" id="btn-submit">Get my free report →</button>
+            </form>
+            <p class="lead-form-privacy">Your answers are used only to personalise your report.</p>
+          </div>
+        </div>
+
+        <!-- VIEW 4: Results -->
+        <div id="view-results" class="assessment-view">
+          <section class="score-card" aria-labelledby="results-heading">
+            <div class="score-card-header">
+              <h2 id="result-company-name">Your organisation</h2>
+              <div class="score-card-meta">
+                <span id="result-respondent"></span>
+                <time id="result-date"></time>
+              </div>
+            </div>
+            <div class="score-card-main">
+              <p id="result-total-score">— / 50</p>
+              <p id="result-level-badge" class="result-level-badge">—</p>
+            </div>
+
+            <div id="result-maturity-explainer" class="maturity-explainer" hidden></div>
+
+            <div class="dimensions-block">
+              <div class="dimension-row">
+                <div class="dimension-row-header">
+                  <span class="dimension-row-label" data-dim-label="knowledge">Knowledge &amp; Context</span>
+                  <span id="dim-knowledge-score">— / 17</span>
+                </div>
+                <div class="dimension-bar-track">
+                  <span id="dim-knowledge-bar" role="presentation"></span>
+                </div>
+              </div>
+              <div class="dimension-row">
+                <div class="dimension-row-header">
+                  <span class="dimension-row-label" data-dim-label="process">Process &amp; Execution</span>
+                  <span id="dim-process-score">— / 16</span>
+                </div>
+                <div class="dimension-bar-track">
+                  <span id="dim-process-bar" role="presentation"></span>
+                </div>
+              </div>
+              <div class="dimension-row">
+                <div class="dimension-row-header">
+                  <span class="dimension-row-label" data-dim-label="technology">Technology &amp; AI</span>
+                  <span id="dim-technology-score">— / 17</span>
+                </div>
+                <div class="dimension-bar-track">
+                  <span id="dim-technology-bar" role="presentation"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dimensions-explainer" id="dimensions-explainer" aria-labelledby="dimensions-explainer-heading">
+              <h3 id="dimensions-explainer-heading" class="dimensions-explainer-heading">What we measured</h3>
+              <p class="dimensions-explainer-intro">Twelve questions across three operating areas. Each bar shows your score in that area on a <strong>50-point scale</strong> (Knowledge <strong>17</strong>, Process <strong>16</strong>, Technology <strong>17</strong> = 50 total).</p>
+              <ul class="dimensions-explainer-list" id="dimensions-explainer-list"></ul>
+            </div>
+
+            <div id="result-patterns-container" class="result-patterns" aria-label="Detected operating patterns"></div>
+
+            <div class="agent-readiness-block">
+              <h3>Agent readiness</h3>
+              <div id="agent-readiness-meter" aria-label="Agent readiness level"></div>
+            </div>
+
+            <p id="result-primary-constraint"></p>
+
+            <div id="result-cta-block" class="cta-block" aria-label="Recommended next step"></div>
+          </section>
+
+          <div class="report-narrative">
+            <p id="report-loading">Building your full report...</p>
+
+            <section id="section-executive-summary" class="report-section" hidden>
+              <h3>Executive summary</h3>
+              <div id="content-executive-summary" class="report-section-body"></div>
+            </section>
+
+            <section id="section-where-you-are" class="report-section" hidden>
+              <h3>Where you are today</h3>
+              <div id="content-where-you-are" class="report-section-body"></div>
+            </section>
+
+            <section id="section-cost-analysis" class="report-section" hidden>
+              <h3>The hidden costs in your operating model</h3>
+              <div class="cost-cards">
+                <article class="cost-card" id="cost-knowledge-drain">
+                  <h4>Knowledge drain</h4>
+                  <p class="cost-card-body"></p>
+                </article>
+                <article class="cost-card" id="cost-coordination-tax">
+                  <h4>Coordination tax</h4>
+                  <p class="cost-card-body"></p>
+                </article>
+                <article class="cost-card" id="cost-decision-latency">
+                  <h4>Decision latency</h4>
+                  <p class="cost-card-body"></p>
+                </article>
+                <article class="cost-card" id="cost-ai-value-leakage">
+                  <h4>AI value leakage</h4>
+                  <p class="cost-card-body"></p>
+                </article>
+              </div>
+            </section>
+
+            <section id="section-agent-readiness" class="report-section" hidden>
+              <h3>Agent readiness in depth</h3>
+              <p class="agent-readiness-intro">Based on how work moves, approvals are governed, and systems connect — not just whether you use AI tools.</p>
+              <div id="agent-readiness-level-label" class="agent-readiness-headline"></div>
+              <div class="agent-lists">
+                <div>
+                  <h4>Start with</h4>
+                  <ul id="agent-start-with"></ul>
+                </div>
+                <div>
+                  <h4>Avoid for now</h4>
+                  <ul id="agent-avoid"></ul>
+                </div>
+              </div>
+              <div id="content-agent-narrative" class="report-section-body"></div>
+            </section>
+
+            <section id="section-level-up" class="report-section" hidden>
+              <h3>What it takes to level up</h3>
+              <div id="content-level-up" class="report-section-body"></div>
+            </section>
+
+            <section id="section-roadmap" class="report-section" hidden>
+              <h3>Your 90-day roadmap</h3>
+              <div class="roadmap-months">
+                <div class="roadmap-month">
+                  <span class="roadmap-month-label">Month 1</span>
+                  <p id="content-roadmap-m1"></p>
+                </div>
+                <div class="roadmap-month">
+                  <span class="roadmap-month-label">Month 2</span>
+                  <p id="content-roadmap-m2"></p>
+                </div>
+                <div class="roadmap-month">
+                  <span class="roadmap-month-label">Month 3</span>
+                  <p id="content-roadmap-m3"></p>
+                </div>
+              </div>
+            </section>
+
+            <section id="section-kautilyan" class="report-section" hidden>
+              <h3>How Kautilyan can help</h3>
+              <div id="content-kautilyan" class="report-section-body"></div>
+            </section>
+
+            <div id="result-final-cta" class="cta-block" aria-label="Book your next step"></div>
+
+            <div class="results-share-row">
+              <button type="button" id="btn-copy-link">Copy report link</button>
+              <button type="button" id="btn-retake">Retake diagnostic</button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </main>
 
@@ -64,7 +358,8 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="js/site.js"></script>
   <script src="js/nav.js"></script>
+  <script src="js/booking.js"></script>
   <script src="js/analytics.js" defer></script>
-  <script src="js/booking.js?v=16"></script>
+  <script src="js/assessment.js"></script>
 </body>
 </html>

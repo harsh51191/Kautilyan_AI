@@ -40,7 +40,7 @@
   function intakePath() {
     var configured = (cfg().INTAKE_PATH || '').trim().replace(/^\//, '');
     if (configured) return configured.replace(/\.html$/i, '');
-    return isLocalDevHost() ? 'assessment.html' : 'assessment';
+    return isLocalDevHost() ? 'stage0-intake.html' : 'stage0-intake';
   }
 
   function intakePageUrl() {
@@ -175,7 +175,7 @@
   function clearIntakeQueryFromUrl() {
     if (!window.history || !window.history.replaceState) return;
     var path = window.location.pathname || '';
-    if (path.indexOf('assessment') < 0) return;
+    if (path.indexOf('stage0-intake') < 0) return;
     history.replaceState({}, document.title, path);
   }
 
@@ -229,8 +229,8 @@
         return;
       }
       var onIntake =
-        /assessment/i.test(href) ||
-        (isLocalDevHost() && /assessment\.html/i.test(href));
+        /stage0-intake/i.test(href) ||
+        (isLocalDevHost() && /stage0-intake\.html/i.test(href));
       if (onIntake || /kautilyan\.com/i.test(href)) {
         try {
           calWin.close();

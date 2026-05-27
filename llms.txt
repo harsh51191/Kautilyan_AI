@@ -42,7 +42,8 @@ Growing businesses with operational complexity — D2C brands, ecommerce operato
 - [Pricing](https://www.kautilyan.com/pricing)
 - [Resources](https://www.kautilyan.com/resources)
 - [About](https://www.kautilyan.com/about)
-- [Assessment](https://www.kautilyan.com/assessment)
+- [AI Operating Intelligence Diagnostic](https://www.kautilyan.com/assessment.html)
+- [Stage 0 pre-call intake](https://www.kautilyan.com/stage0-intake)
 - [Blog](https://www.kautilyan.com/blog)
 
 ## Blog articles

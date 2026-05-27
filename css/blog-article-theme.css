@@ -308,9 +308,18 @@ body.article-page .article-body .blog-block--video .blog-figcaption {
 }
 
 @media (max-width: 640px) {
-  body.article-page .article-body .blog-video-wrap--drive.is-playing iframe {
-    top: -40px;
-    height: calc(100% + 40px);
+  body.article-page .article-body .blog-block--video {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+  }
+  body.article-page .article-body .blog-video-wrap--drive,
+  body.article-page .article-body .blog-video-wrap--embed {
+    width: 100%;
+    max-width: 100%;
+  }
+  body.article-page .article-body .blog-video-poster img {
+    object-fit: contain;
   }
   body.article-page .article-body .blog-video-play-icon {
     width: 48px;

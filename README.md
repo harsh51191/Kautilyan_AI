@@ -53,7 +53,8 @@ This is the marketing and lead-capture website for Kautilyan, hosted at [www.kau
 | File | Purpose |
 |------|---------|
 | `index.html` | Main landing page — hero, problem, before/after toggle, how it works, pricing, trust, booking form, FAQ |
-| `assessment.html` | Questionnaire explainer; links to your external form via `CONFIG.ASSESSMENT_URL` |
+| `stage0-intake.html` | Stage 0 pre-call intake after Cal booking; five prep questions via `booking.js` |
+| `assessment.html` | AI Operating Intelligence Diagnostic (12 questions + report; `js/assessment.js`, `/api/*`) |
 | `SETUP.md` | Step-by-step guide: Google Sheets, Apps Script, booking links, deploy |
 | `kautilyan_master_note_v11.md` | Internal copy reference (not served to visitors) |
 

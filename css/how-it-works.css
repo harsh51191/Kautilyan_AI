@@ -24,6 +24,10 @@
   color: var(--hiw-muted, var(--text-muted));
 }
 
+.assessment-banner { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius:10px; padding:28px 24px; text-align:center; margin:32px 0; }
+.assessment-banner p { color: rgba(255,255,255,0.85); margin-bottom:18px; font-size:15px; line-height:1.5; max-width:36em; margin-left:auto; margin-right:auto; }
+.assessment-banner .btn-hero-primary { margin:0 auto; }
+
 /* Four phases — 4-column at-a-glance grid */
 #four-phases .method-phases {
   display: grid;

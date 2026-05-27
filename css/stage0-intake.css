@@ -1,0 +1,95 @@
+.assessment-main {
+  padding: 100px 0 80px;
+}
+#diagnosis-intake-mount {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.intake-page-header {
+  margin-bottom: 32px;
+}
+.intake-page-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.intake-lede--secondary {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.intake-inline-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--amber);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.intake-inline-link:hover { color: var(--text); }
+
+.intake-lede {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.65;
+  max-width: 52ch;
+}
+.intake-page-header--complete .intake-lede {
+  max-width: 56ch;
+}
+.intake-page-header--complete a {
+  color: var(--amber);
+  font-weight: 600;
+  text-decoration: none;
+}
+.intake-page-header--complete a:hover {
+  text-decoration: underline;
+}
+.diagnosis-intake-form--page,
+.diagnosis-intake-form--questions {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+}
+.booking-prep-link-wrap {
+  margin-top: 12px;
+  text-align: center;
+}
+.booking-prep-link-wrap a {
+  color: var(--amber);
+  font-weight: 600;
+  text-decoration: none;
+}
+.booking-prep-link-wrap a:hover {
+  text-decoration: underline;
+}
+.booking-prep-inline {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--amber);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.booking-prep-inline:hover {
+  color: var(--amber-light, #e8b84a);
+}
+.founder-grid--single {
+  grid-template-columns: 1fr;
+  max-width: 420px;
+}
+.founder-contact {
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+.founder-contact a {
+  color: var(--amber);
+}

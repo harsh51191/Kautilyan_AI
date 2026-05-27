@@ -2,7 +2,7 @@
 
 ## What you have
 - `index.html` — main story, pricing, trust, **Request a call** form → Google Sheets (via Apps Script)
-- `assessment.html` — questionnaire explainer + link to your external form (`CONFIG.ASSESSMENT_URL`); keep the same URL as in `index.html` CONFIG
+- `stage0-intake.html` — Stage 0 pre-call intake after booking (`CONFIG.INTAKE_PATH`); keep in sync with `index.html` CONFIG
 - This file — configure `CONFIG`, Sheet columns, and deploy
 
 ---
@@ -66,16 +66,78 @@ Other tools can POST the same JSON shape later (e.g. `source: 'questionnaire'` i
 
 ---
 
-## 2) Questionnaire (external)
+## 2) AI Operating Intelligence Diagnostic (`assessment.html`)
 
-All `.assessment-external-link` buttons use:
+The **12-question diagnostic** lives at `/assessment.html` (client: `js/assessment.js`, styles: `css/assessment.css`). It is separate from **Stage 0 intake** (`stage0-intake.html`).
 
-```javascript
-ASSESSMENT_URL: 'https://docs.google.com/forms/d/e/.../viewform',
-```
+### Supabase
 
-If empty, those links fall back to `#assessment` (hero questionnaire row).  
-Hook the form to Sheets using **Responses → Link to Sheets** in Google Forms (or Zapier), not this HTML file.
+1. Create a Supabase project.
+2. Run the migration in `supabase/migrations/20260526120000_assessment_tables.sql` (SQL editor or CLI).
+3. Copy project URL and keys into Vercel env vars (see below).
+
+### Vercel serverless + env
+
+API routes: `POST /api/submit-assessment`, `GET /api/get-report?id=…`
+
+Set in Vercel (and optionally `.env` for `vercel dev`):
+
+| Variable | Purpose |
+|----------|---------|
+| `SUPABASE_URL` | Supabase project URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server writes (never expose in browser) |
+| `SUPABASE_ANON_KEY` | Listed in `vercel.json` if needed later |
+| `GEMINI_API_KEY` | Narrative report generation |
+| `GAS_EMAIL_WEBHOOK_URL` | Same Apps Script `/exec` URL as leads (`LeadsCapture.gs`) |
+| `SITE_URL` | `https://www.kautilyan.com` (CORS + report links) |
+
+Copy `.env.example` → `.env` locally; do not commit `.env`.
+
+### Gemini vs template report
+
+- Set a real `GEMINI_API_KEY` from [Google AI Studio](https://aistudio.google.com/apikey) (not `[your-google-ai-studio-key]`).
+- After submit, the report page shows a badge: **personalised with Google Gemini** or **standard template**.
+- In Supabase `assessment_reports.full_report_json`, check `_meta.generated_by`: `gemini` or `fallback`.
+- Server logs: `[generateAndStoreReport] Gemini failed, using fallback:` when the key is missing or invalid.
+- Restart `python3 serve.py` after updating `.env`, then submit a **new** assessment (old reports keep their original narrative).
+
+### Report email (Apps Script)
+
+`LeadsCapture.gs` handles `POST` payloads with `type: 'assessment_email'` and sends via `GmailApp.sendEmail`.
+
+After each submission, check delivery in Supabase `assessment_responses`:
+
+| Column | Meaning |
+|--------|---------|
+| `report_emailed` | `true` if Gmail send succeeded |
+| `report_email_error` | Full failure reason when `report_emailed` is `false` (NULL on success) |
+| `report_emailed_at` | Timestamp of the last send attempt |
+
+Run migration `supabase/migrations/20260527180500_assessment_report_email_audit.sql` in the Supabase SQL editor if those columns are missing.
+
+1. Paste the latest `google-apps-script/LeadsCapture.gs` into your Apps Script project.
+2. **Deploy → Manage deployments → Edit → New version → Deploy** (same `/exec` URL).
+3. On first run, authorize **Gmail** when prompted (required for report emails).
+4. Set `GAS_EMAIL_WEBHOOK_URL` in `.env` / Vercel to that `/exec` URL (can match `GOOGLE_SCRIPT_URL`).
+5. Restart `python3 serve.py` after changing `.env`.
+6. After a test submit, check the terminal for `[submit-assessment] Report email sent to …` or a GAS error line.
+
+If email still fails: open the Apps Script **Executions** log for the deployment and confirm `sendAssessmentReportEmail` ran without permission errors.
+
+### Local API testing
+
+`python3 serve.py` serves static files **and** forwards `/api/submit-assessment` and `/api/get-report` to Node (`scripts/invoke-api.js`). Requirements:
+
+1. `npm install` in the project root (once)
+2. Node.js installed
+3. `.env` with real `SUPABASE_SERVICE_ROLE_KEY` (and other keys)
+4. Restart `serve.py` after changing `.env`
+
+Alternative: `npx vercel dev` (matches production Vercel routing exactly).
+
+### Legacy external form
+
+`CONFIG.ASSESSMENT_URL` in `index.html` is optional. If set, old `.assessment-external-link` buttons can still point at an external Google Form; site CTAs now use `/assessment.html`.
 
 ---
 
@@ -85,8 +147,8 @@ Hook the form to Sheets using **Responses → Link to Sheets** in Google Forms (
 
 1. **Book Stage 0 Call** → form with **name, email, company** + **Pick your time**.
 2. **Pick your time** opens Cal.com in a **new tab** immediately, then saves a sheet row (timestamp + submission ID).
-3. When the sheet save succeeds, the **five prep questions** appear on the Kautilyan page (modal or `/assessment`) — no second click.
-4. Optional: Cal.com **Booking redirects** to `https://www.kautilyan.com/assessment?scheduled=1` if you want the scheduler tab to land on the same questions page after booking.
+3. When the sheet save succeeds, the **five prep questions** appear on the Kautilyan page (modal or `/stage0-intake`) — no second click.
+4. Optional: Cal.com **Booking redirects** to `https://www.kautilyan.com/stage0-intake?scheduled=1` if you want the scheduler tab to land on the same questions page after booking.
 
 Deploy **`LeadsCapture.gs`** (`action: create` on contact, `action: update` on prep questions).
 

@@ -5,8 +5,9 @@
   var NAV_LINKS = [
     { href: 'how-it-works.html', label: 'How It Works', key: 'how-it-works' },
     { href: 'use-cases.html', label: 'Use Cases', key: 'use-cases' },
-    { href: 'resources.html', label: 'Resources', key: 'resources' },
     { href: 'pricing.html', label: 'Pricing', key: 'pricing', id: 'nav-pricing-link' },
+    { href: 'resources.html', label: 'Resources', key: 'resources' },
+    { href: 'assessment.html', label: 'Free Diagnostic*', key: 'assessment' },
     { href: 'about.html', label: 'About', key: 'about' },
   ];
 
@@ -21,22 +22,26 @@
     return page.replace('.html', '');
   }
 
-  function navLinks() {
+  function navLinks(activeKey) {
+    var links = NAV_LINKS;
     if (window.CONFIG && window.CONFIG.SHOW_NAV_PRICING === false) {
-      return NAV_LINKS.filter(function (item) { return item.key !== 'pricing'; });
+      links = links.filter(function (item) { return item.key !== 'pricing'; });
     }
-    return NAV_LINKS;
+    if (activeKey === 'assessment') {
+      links = links.filter(function (item) { return item.key !== 'assessment'; });
+    }
+    return links;
   }
 
   function buildNavMenu() {
     var active = currentKey();
     var html = '';
-    navLinks().forEach(function (item) {
+    navLinks(active).forEach(function (item) {
       var cls = item.key === active ? ' class="is-current"' : '';
       var id = item.id ? ' id="' + item.id + '"' : '';
       html += '<li><a href="' + item.href + '"' + id + cls + '>' + item.label + '</a></li>';
     });
-    if (active !== 'assessment') {
+    if (active !== 'stage0-intake') {
       html +=
         '<li class="nav-mobile-only"><button type="button" class="btn btn-primary nav-book-solid js-open-modal">Book Stage 0 Call →</button></li>';
     }
@@ -46,14 +51,15 @@
   function applyNav() {
     var menu = document.getElementById('nav-menu');
     if (!menu) return;
+    var active = currentKey();
     menu.innerHTML = buildNavMenu();
     var cta = document.querySelector('.nav-cta');
-    if (cta && currentKey() !== 'assessment') {
-      if (!cta.querySelector('.js-open-modal')) {
-        cta.innerHTML =
-          '<button type="button" class="btn btn-primary nav-book-solid js-open-modal">Book Stage 0 Call →</button>';
-      }
+    if (!cta) return;
+    if (active === 'stage0-intake') {
+      return;
     }
+    cta.innerHTML =
+      '<button type="button" class="btn btn-primary nav-book-solid js-open-modal">Book Stage 0 Call →</button>';
   }
 
   if (document.readyState === 'loading') {
