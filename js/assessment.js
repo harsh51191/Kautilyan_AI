@@ -794,9 +794,21 @@
       }
 
       state.reportId = data.responseId;
+      state.reportSubmitMeta = {
+        reportReady: !!data.reportReady,
+        reportEmailed: !!data.reportEmailed,
+      };
       saveSession();
       showView('view-results');
       renderResults();
+      if (data.reportReady) {
+        fetch('/api/get-report?id=' + encodeURIComponent(state.reportId))
+          .then(function (r) { return r.json(); })
+          .then(function (poll) {
+            if (poll && poll.ready && poll.report) renderNarrative(poll.report);
+          })
+          .catch(function () { /* polling will retry */ });
+      }
     } catch (err) {
       if (formError) {
         formError.textContent = err.message || 'Something went wrong. Please try again.';
@@ -1068,12 +1080,21 @@
     });
   }
 
-  function showReportTimeoutMessage() {
+  function showReportTimeoutMessage(pollData) {
     const loadingEl = $('report-loading');
-    if (loadingEl) {
-      loadingEl.hidden = false;
-      loadingEl.textContent = 'Your full report has been emailed to you.';
+    if (!loadingEl) return;
+    loadingEl.hidden = false;
+    if (pollData && pollData.reportEmailed) {
+      loadingEl.textContent = 'Your full narrative is still loading. Check your inbox for the report link, or refresh this page in a minute.';
+      return;
     }
+    if (pollData && pollData.reportEmailError) {
+      loadingEl.textContent =
+        'Your score summary is ready above. We could not finish generating or emailing the full narrative yet. Please refresh in a minute, or contact founders@kautilyan.com.';
+      return;
+    }
+    loadingEl.textContent =
+      'Your score summary is ready above. The full narrative is still being generated - please refresh this page in a minute.';
   }
 
   function pollForReport(attempt) {
@@ -1089,14 +1110,14 @@
         if (attempt < 15) {
           pollTimer = setTimeout(function () { pollForReport(attempt + 1); }, 4000);
         } else {
-          showReportTimeoutMessage();
+          showReportTimeoutMessage(data);
         }
       })
       .catch(function () {
         if (attempt < 15) {
           pollTimer = setTimeout(function () { pollForReport(attempt + 1); }, 4000);
         } else {
-          showReportTimeoutMessage();
+          showReportTimeoutMessage(null);
         }
       });
   }

@@ -732,6 +732,19 @@ async function generateAndStoreReport(responseId, answers, leadData, scoringResu
   if (emailAuditErr) {
     console.error('[generateAndStoreReport] report email audit update failed:', emailAuditErr);
   }
+
+  return { ready: true, emailed: emailResult.ok };
+}
+
+async function recordReportGenerationError(supabase, responseId, err) {
+  const message = truncateAudit('Report generation failed: ' + (err && err.message ? err.message : String(err)), 2000);
+  const { error } = await supabase
+    .from('assessment_responses')
+    .update({ report_email_error: message })
+    .eq('id', responseId);
+  if (error) {
+    console.error('[submit-assessment] could not record generation error:', error);
+  }
 }
 
 module.exports = async function handler(req, res) {
@@ -782,15 +795,31 @@ module.exports = async function handler(req, res) {
 
   const responseId = data.id;
 
-  generateAndStoreReport(responseId, validation.answers, validation.leadData, validation.scoringResult).catch(
-    function (err) {
-      console.error('[submit-assessment] generateAndStoreReport:', err);
-    }
-  );
+  let reportReady = false;
+  let reportEmailed = false;
 
-  json(res, 200, { success: true, responseId: responseId });
+  try {
+    const reportMeta = await generateAndStoreReport(
+      responseId,
+      validation.answers,
+      validation.leadData,
+      validation.scoringResult
+    );
+    reportReady = !!(reportMeta && reportMeta.ready);
+    reportEmailed = !!(reportMeta && reportMeta.emailed);
+  } catch (err) {
+    console.error('[submit-assessment] generateAndStoreReport:', err);
+    await recordReportGenerationError(supabase, responseId, err);
+  }
+
+  json(res, 200, {
+    success: true,
+    responseId: responseId,
+    reportReady: reportReady,
+    reportEmailed: reportEmailed,
+  });
 };
 
 module.exports.config = {
-  maxDuration: 30,
+  maxDuration: 60,
 };

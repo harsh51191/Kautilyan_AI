@@ -124,6 +124,21 @@ Run migration `supabase/migrations/20260527180500_assessment_report_email_audit.
 
 If email still fails: open the Apps Script **Executions** log for the deployment and confirm `sendAssessmentReportEmail` ran without permission errors.
 
+### Production: `report_generated` stays false
+
+Previously, report generation ran **after** the API returned `200`. On Vercel, that background work was often killed before Gemini/email finished, so `report_generated` and `report_id` stayed empty.
+
+**Fix (in code):** `api/submit-assessment.js` now **awaits** report generation before responding. Redeploy after pulling latest.
+
+**Checklist after deploy:**
+
+1. **Vercel → Project → Settings → Environment Variables** (Production): `GEMINI_API_KEY`, `GAS_EMAIL_WEBHOOK_URL`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SITE_URL` - no placeholder values.
+2. **Vercel → Deployments → Functions** → open `submit-assessment` logs for a test submit. Look for `Gemini failed`, `report insert failed`, or `GAS email failed`.
+3. **Supabase** → `assessment_responses` → `report_email_error` column often explains the failure.
+4. Run migration `20260527180500_assessment_report_email_audit.sql` if `report_emailed_at` / `report_email_error` columns are missing.
+5. **Apps Script** must be redeployed with `LeadsCapture.gs` that handles `type: 'assessment_email'`.
+6. `submit-assessment` uses `maxDuration: 60` (requires Vercel Pro). Submit may take 15-45 seconds while the button shows "Generating your report...".
+
 ### Local API testing
 
 `python3 serve.py` serves static files **and** forwards `/api/submit-assessment` and `/api/get-report` to Node (`scripts/invoke-api.js`). Requirements:

@@ -16,7 +16,7 @@
   ],
   "functions": {
     "api/submit-assessment.js": {
-      "maxDuration": 30
+      "maxDuration": 60
     },
     "api/get-report.js": {
       "maxDuration": 10

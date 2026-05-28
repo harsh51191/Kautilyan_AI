@@ -54,7 +54,7 @@ module.exports = async function handler(req, res) {
 
   const { data: responseRow, error: responseErr } = await supabase
     .from('assessment_responses')
-    .select('report_generated, report_id, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, name, work_email, company_name, role, employee_count, industry, biggest_challenge')
+    .select('report_generated, report_id, report_emailed, report_email_error, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, name, work_email, company_name, role, employee_count, industry, biggest_challenge')
     .eq('id', id)
     .single();
 
@@ -94,7 +94,12 @@ module.exports = async function handler(req, res) {
     : null;
 
   if (!responseRow || !responseRow.report_generated) {
-    json(res, 200, { ready: false, responseSnapshot });
+    json(res, 200, {
+      ready: false,
+      responseSnapshot,
+      reportEmailed: !!responseRow?.report_emailed,
+      reportEmailError: responseRow?.report_email_error || null,
+    });
     return;
   }
 
@@ -128,7 +133,14 @@ module.exports = async function handler(req, res) {
     ...reportFields
   } = reportRow;
 
-  json(res, 200, { ready: true, report: reportFields, reportMeta, responseSnapshot });
+  json(res, 200, {
+    ready: true,
+    report: reportFields,
+    reportMeta,
+    responseSnapshot,
+    reportEmailed: !!responseRow.report_emailed,
+    reportEmailError: responseRow.report_email_error || null,
+  });
 };
 
 module.exports.config = {
