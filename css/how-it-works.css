@@ -1,4 +1,4 @@
-/* Page 2 — How It Works */
+/* Page 2 - How It Works */
 
 .page-hero {
   padding: calc(var(--nav-height) + 40px) 64px 56px;
@@ -28,7 +28,7 @@
 .assessment-banner p { color: rgba(255,255,255,0.85); margin-bottom:18px; font-size:15px; line-height:1.5; max-width:36em; margin-left:auto; margin-right:auto; }
 .assessment-banner .btn-hero-primary { margin:0 auto; }
 
-/* Four phases — 4-column at-a-glance grid */
+/* Four phases - 4-column at-a-glance grid */
 #four-phases .method-phases {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -116,7 +116,7 @@
   margin-bottom: 4px;
 }
 
-/* Why it scales — text only */
+/* Why it scales - text only */
 .compound-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -137,7 +137,7 @@
   margin: 0;
 }
 
-/* SLOPE — equal cards by default; expand on hover (desktop) or click */
+/* SLOPE - equal cards by default; expand on hover (desktop) or click */
 #slope .slope-hint {
   margin: 4px 0 14px;
   font-size: 0.82rem;
@@ -399,7 +399,7 @@
   line-height: 1.5;
 }
 
-/* Partner compare — no icons */
+/* Partner compare - no icons */
 .partner-compare {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

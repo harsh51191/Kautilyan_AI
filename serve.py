@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Local dev server — static files + /api/* via Node (see scripts/invoke-api.js)."""
+"""Local dev server - static files + /api/* via Node (see scripts/invoke-api.js)."""
 from __future__ import annotations
 
 import http.server

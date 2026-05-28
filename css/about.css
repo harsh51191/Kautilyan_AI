@@ -1,4 +1,4 @@
-/* Page 6 — About */
+/* Page 6 - About */
 
 .nav-links a.is-current { color: #fff; }
 
@@ -14,7 +14,7 @@
   .page-hero { padding: calc(var(--nav-height) + 24px) 0 36px; }
 }
 
-/* Market gap — 3 columns */
+/* Market gap - 3 columns */
 .partner-compare {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -90,7 +90,7 @@
   margin: 0;
 }
 
-/* Origin story — compact */
+/* Origin story - compact */
 .about-story {
   max-width: 680px;
   margin: 28px auto 0;

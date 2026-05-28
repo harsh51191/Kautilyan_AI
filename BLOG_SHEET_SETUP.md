@@ -1,4 +1,4 @@
-# Blog content — Google Sheet setup
+# Blog content - Google Sheet setup
 
 The site loads blog posts from a **Google Sheet** via Apps Script. Rich visuals (images, videos, charts, tables, callouts) use a **Blog Rich Blocks** catalog (A2UI-inspired, allowlisted components).
 
@@ -10,8 +10,8 @@ Until you connect the sheet, posts load from **`data/blog-posts.json`** with int
 
 | Step | What you do |
 |------|-------------|
-| 1 | Write the article in **`body`** (markdown-style prose — same as today). |
-| 2 | Add **`media_urls`** (optional) — one URL per line: Google Drive images, YouTube links. |
+| 1 | Write the article in **`body`** (markdown-style prose - same as today). |
+| 2 | Add **`media_urls`** (optional) - one URL per line: Google Drive images, YouTube links. |
 | 3 | Embed known media inline with **`:::image`** / **`:::video`** fences (see below) when you want exact placement. |
 | 4 | Set **`status`** to **`published`**. |
 | 5 | **Gemini runs automatically** (Apps Script) and fills **`blocks_json`** with charts, callouts, tables, etc. based on content. |
@@ -21,7 +21,7 @@ Until you connect the sheet, posts load from **`data/blog-posts.json`** with int
 
 ---
 
-## Step 1 — Create the Google Sheet
+## Step 1 - Create the Google Sheet
 
 1. Create a new Google Sheet (e.g. **Kautilyan Website Content**).
 2. Rename the first tab to **`Blogs`** (exact name).
@@ -47,7 +47,7 @@ Until you connect the sheet, posts load from **`data/blog-posts.json`** with int
 
 ---
 
-## Step 2 — Write `body` (prose)
+## Step 2 - Write `body` (prose)
 
 Same rules as before:
 
@@ -59,7 +59,7 @@ Same rules as before:
 
 ---
 
-## Step 3 — Inline rich blocks (optional)
+## Step 3 - Inline rich blocks (optional)
 
 Place these **inside `body`** when you want exact control (no Gemini needed for these blocks):
 
@@ -95,7 +95,7 @@ What happens if you miss? | Risk transfer
 :::
 ```
 
-### Chart (interactive — Chart.js on site)
+### Chart (interactive - Chart.js on site)
 
 ```
 :::chart
@@ -132,7 +132,7 @@ right_body: Decisions, memory, and workflows compound.
 
 ---
 
-## Step 4 — `blocks_json` (Gemini output)
+## Step 4 - `blocks_json` (Gemini output)
 
 Leave **empty** when publishing; Apps Script fills it. Shape:
 
@@ -158,7 +158,7 @@ Leave **empty** when publishing; Apps Script fills it. Shape:
 
 ---
 
-## Step 5 — Google Drive & YouTube links
+## Step 5 - Google Drive & YouTube links
 
 **Images (Drive):** Share file as **Anyone with the link → Viewer**. Paste the share URL in `src:` or `media_urls`.
 
@@ -168,7 +168,7 @@ The site normalizes Drive URLs to `uc?export=view` for images. Broken media show
 
 ---
 
-## Step 6 — Deploy Apps Script
+## Step 6 - Deploy Apps Script
 
 1. **Extensions → Apps Script**
 2. Paste **`google-apps-script/BlogFeed.gs`** and **`google-apps-script/BlogEnhance.gs`**
@@ -190,7 +190,7 @@ When a row becomes **`published`** and `blocks_json` is empty:
 3. Writes JSON into **`blocks_json`**  
 4. Does **not** invent image URLs unless you listed them in `media_urls`
 
-API key stays in **Apps Script only** — never in the website.
+API key stays in **Apps Script only** - never in the website.
 
 ---
 
@@ -217,4 +217,4 @@ API key stays in **Apps Script only** — never in the website.
 python3 -m http.server 8765
 ```
 
-Open `http://localhost:8765/article.html?slug=ai-execution-stack` — charts and blocks should render.
+Open `http://localhost:8765/article.html?slug=ai-execution-stack` - charts and blocks should render.

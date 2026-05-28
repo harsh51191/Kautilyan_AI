@@ -148,7 +148,7 @@
       gateForm.reset();
 
       if (typeof showToast === 'function') {
-        showToast(url ? 'Download starting…' : 'Thanks — we will send your download shortly.', 'success');
+        showToast(url ? 'Download starting…' : 'Thanks - we will send your download shortly.', 'success');
       }
       if (url) setTimeout(function () { openResourceGuide(url); }, 400);
     });

@@ -14,7 +14,7 @@
   if (!pdfBtn) return;
 
   var docTitleEl = document.querySelector('.doc-toolbar-title');
-  var docTitle = docTitleEl ? docTitleEl.textContent.trim() : document.title.replace(/\s*—.*$/, '').trim();
+  var docTitle = docTitleEl ? docTitleEl.textContent.trim() : document.title.replace(/\s*-.*$/, '').trim();
   var docSlug = (location.pathname.match(/resource-[^/]+\.html/) || ['resource'])[0];
   var storageKey = 'kautilyan_pdf_gate_' + docSlug;
   var html2pdfPromise;
@@ -86,7 +86,7 @@
   }
 
   /**
-   * Build PDF in-browser (no print dialog) — avoids URL/date browser headers.
+   * Build PDF in-browser (no print dialog) - avoids URL/date browser headers.
    */
   function downloadCleanPdf() {
     var el = document.querySelector('.doc-wrapper');
@@ -126,7 +126,7 @@
       });
   }
 
-  /** Fallback if programmatic PDF fails — user must disable browser headers manually. */
+  /** Fallback if programmatic PDF fails - user must disable browser headers manually. */
   function openPrintDialogFallback() {
     setError(
       'Automatic PDF failed. In the print dialog, open More settings and turn off "Headers and footers", then choose Save as PDF.'

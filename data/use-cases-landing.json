@@ -4,12 +4,12 @@
     "metaDescription": "Reduce forecast preparation from 7–8 days to a same-day operating brief. Kautilyan diagnoses sales forecasting and demand coordination on your existing ERP, CRM, and field systems.",
     "headline": "Your forecast shouldn't take a week to assemble.",
     "lede": "When numbers live in the ERP and context lives in WhatsApp, email, and field judgment, leadership waits 7–8 days for a usable forecast. We map that workflow and prove value in 45 days.",
-    "situation": "Your monthly forecast takes days because inputs come from field teams, dealers, CRM, ERP, Excel, WhatsApp, and finance reviews — all manually coordinated by two or three people who chase context across every channel.",
+    "situation": "Your monthly forecast takes days because inputs come from field teams, dealers, CRM, ERP, Excel, WhatsApp, and finance reviews - all manually coordinated by two or three people who chase context across every channel.",
     "does": [
-      "Detects signals daily from connected sources — field inputs, order patterns, variance flags",
+      "Detects signals daily from connected sources - field inputs, order patterns, variance flags",
       "Identifies missing inputs and routes follow-up automatically",
       "Explains variance between forecast and actuals with evidence",
-      "Drafts a forecast brief with context assembled — for human review and approval",
+      "Drafts a forecast brief with context assembled - for human review and approval",
       "Captures every decision and override as reusable learning"
     ],
     "proofMetric": "Reduce forecast preparation cycle from 7–8 days to same-day operating brief.",
@@ -19,10 +19,10 @@
   },
   "revenue-leakage": {
     "title": "Revenue Leakage & Follow-Up Intelligence",
-    "metaDescription": "Stop silent deals and late renewal risk. Kautilyan diagnoses revenue leakage workflows across CRM, email, and field judgment — with a named proof metric in 45 days.",
+    "metaDescription": "Stop silent deals and late renewal risk. Kautilyan diagnoses revenue leakage workflows across CRM, email, and field judgment - with a named proof metric in 45 days.",
     "headline": "Revenue leaks in the gaps between systems.",
     "lede": "The CRM tracks stages, but competitor risk, discount logic, and next-best action still wait on one senior person. We redesign that workflow with governed AI on your existing stack.",
-    "situation": "Opportunities go silent. Follow-ups are missed. Renewal risks surface too late. Nobody owns the next action until the quarter is already leaking — and recovery is expensive.",
+    "situation": "Opportunities go silent. Follow-ups are missed. Renewal risks surface too late. Nobody owns the next action until the quarter is already leaking - and recovery is expensive.",
     "does": [
       "Watches relationship signals across email, CRM, and communication patterns",
       "Detects accounts where activity is declining or at risk",
@@ -39,14 +39,14 @@
     "title": "Leadership Reporting & Ops Intelligence",
     "metaDescription": "Cut weekly reporting prep with AI workflow transformation. Kautilyan diagnoses leadership reporting workflows on your existing BI, ERP, and ops tools.",
     "headline": "Dashboards show what happened. Leaders still need someone to assemble what matters.",
-    "lede": "Teams spend hours chasing updates, validating numbers, and preparing decks. By the time leadership sees a brief, the moment has passed. We fix the workflow — not just the report format.",
+    "lede": "Teams spend hours chasing updates, validating numbers, and preparing decks. By the time leadership sees a brief, the moment has passed. We fix the workflow - not just the report format.",
     "situation": "Teams spend hours every week chasing updates, validating numbers, preparing decks, and explaining variances. By the time the report reaches leadership, the moment has already passed.",
     "does": [
-      "Captures signals from connected systems daily — no manual aggregation",
+      "Captures signals from connected systems daily - no manual aggregation",
       "Validates numbers against source systems and flags discrepancies",
       "Summarises exceptions and variances with evidence",
       "Drafts an executive brief with decisions pending, risks flagged, and actions needed",
-      "Tracks what leadership acts on — to improve the next brief"
+      "Tracks what leadership acts on - to improve the next brief"
     ],
     "proofMetric": "Reduce weekly reporting preparation effort by a named percentage and improve response time to operational signals.",
     "forWho": "COOs, IT heads, and operations leads where leadership visibility depends on manual coordination.",

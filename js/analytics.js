@@ -1,4 +1,4 @@
-/* P2.6 — GA4 conversion events (set CONFIG.GA4_MEASUREMENT_ID to enable) */
+/* P2.6 - GA4 conversion events (set CONFIG.GA4_MEASUREMENT_ID to enable) */
 (function () {
   'use strict';
 

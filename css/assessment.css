@@ -1,5 +1,5 @@
 /* =============================================================================
-   AI Operating Intelligence Diagnostic — assessment.html
+   AI Operating Intelligence Diagnostic - assessment.html
    Tokens align with site.css; spec gold #C9A84C on ink #0F0F13
    ============================================================================= */
 
@@ -431,7 +431,7 @@ body.assessment-questions-active .assessment-main {
     box-shadow 0.2s ease;
 }
 
-.option-btn:hover:not(:disabled) {
+#view-questions.hover-armed .option-btn:hover:not(:disabled) {
   border-color: var(--assessment-gold);
 }
 

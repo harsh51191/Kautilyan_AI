@@ -1,4 +1,4 @@
-/* Article page — gradient theme + rich block polish (all posts) */
+/* Article page - gradient theme + rich block polish (all posts) */
 
 body.article-page .article-wrap {
   max-width: min(1280px, 96vw);
@@ -122,7 +122,7 @@ body.article-page .article-body .article-p strong {
   color: rgba(255, 255, 255, 0.95);
 }
 
-/* Rich blocks — shared shell */
+/* Rich blocks - shared shell */
 body.article-page .article-body .blog-block {
   position: relative;
   margin: 32px 0;

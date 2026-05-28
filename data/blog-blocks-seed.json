@@ -26,7 +26,7 @@
         "anchor": "Map your operating reality",
         "variant": "tip",
         "title": "Start here",
-        "body": "Pick one high-value, visibly broken workflow — not the most politically sensitive — and answer where work lives, where it breaks, who is the bottleneck, and what “fixed” means in 45 days."
+        "body": "Pick one high-value, visibly broken workflow - not the most politically sensitive - and answer where work lives, where it breaks, who is the bottleneck, and what “fixed” means in 45 days."
       }
     ]
   },
@@ -38,7 +38,7 @@
         "type": "chart",
         "anchor": "The 9 building blocks",
         "chartType": "bar",
-        "title": "AI execution stack — nine building blocks",
+        "title": "AI execution stack - nine building blocks",
         "labels": ["Prompt", "Context", "Playbook", "Tool", "Hook", "Subagent", "Agent", "Workflow", "Memory"],
         "datasets": [{ "label": "Governance depth (conceptual)", "values": [1, 2, 3, 4, 5, 6, 7, 8, 9] }]
       },
@@ -79,7 +79,7 @@
         "anchor": "The question that predicts success",
         "variant": "info",
         "title": "Success predictor",
-        "body": "One named owner with authority and time — not “the CIO, but very busy.” Transformation needs a human owner, not only a technology partner."
+        "body": "One named owner with authority and time - not “the CIO, but very busy.” Transformation needs a human owner, not only a technology partner."
       }
     ]
   },
@@ -93,7 +93,7 @@
         "leftTitle": "Individual AI tool usage",
         "leftBody": "People work faster; org chart, handoffs, and knowledge loss stay the same.",
         "rightTitle": "Organisational AI capability",
-        "rightBody": "Decisions, memory, and workflows improve — intelligence compounds across teams."
+        "rightBody": "Decisions, memory, and workflows improve - intelligence compounds across teams."
       },
       {
         "id": "signs-chart",
@@ -115,7 +115,7 @@
         "anchor": "What knowledge loss actually costs",
         "variant": "warning",
         "title": "Invisible tax",
-        "body": "Handover notes rarely capture negotiation history, exceptions, or relationship nuance — replacements rebuild context for months while relationships quietly cool."
+        "body": "Handover notes rarely capture negotiation history, exceptions, or relationship nuance - replacements rebuild context for months while relationships quietly cool."
       },
       {
         "id": "capture-chart",

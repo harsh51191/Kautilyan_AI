@@ -16,7 +16,7 @@
 
   var MODAL_TITLE = 'Book your Stage 0 call';
   var THANK_YOU_MSG =
-    'Thank you — we have your booking details and prep answers. See you on the call.';
+    'Thank you - we have your booking details and prep answers. See you on the call.';
   var BOOKING_SUB = 'Share your details, then pick a time.';
   var QUESTIONS_SUB =
     'These five questions help us prepare your diagnosis. Pick your time in the scheduler tab if you have not already.';
@@ -379,12 +379,12 @@
   function sheetErrorMessage(err) {
     var msg = err && err.message ? err.message : 'Could not save.';
     if (/failed to fetch|network/i.test(msg)) {
-      return 'Network error — check your connection and try again.';
+      return 'Network error - check your connection and try again.';
     }
     return msg + ' If this keeps happening, email founders@kautilyan.com.';
   }
 
-  /* ——— HTML blocks ——— */
+  /* --- HTML blocks --- */
 
   function contactFieldsHTML() {
     return (
@@ -519,7 +519,7 @@
     );
   }
 
-  /* ——— Payloads ——— */
+  /* --- Payloads --- */
 
   function buildContactCreatePayload(lead) {
     return {
@@ -537,7 +537,7 @@
       source: 'stage0_booking_contact',
       score: '',
       message:
-        'Contact saved — awaiting call booking · ' +
+        'Contact saved - awaiting call booking · ' +
         (lead.savedAt || new Date().toISOString()) +
         ' · session ' +
         lead.submissionId,
@@ -558,11 +558,11 @@
     var answers = [];
     if (lead.intent) answers.push('Intent: ' + lead.intent);
     answers.push(
-      'Q1 — Why now: ' + q('[name="q1"]'),
-      'Q2 — Role & outcome: ' + q('[name="q2"]'),
-      'Q3 — Painful workflow: ' + q('[name="q3"]'),
-      'Q4 — Value from call: ' + q('[name="q4"]'),
-      'Q5 — Systems/tools: ' + q('[name="q5"]')
+      'Q1 - Why now: ' + q('[name="q1"]'),
+      'Q2 - Role & outcome: ' + q('[name="q2"]'),
+      'Q3 - Painful workflow: ' + q('[name="q3"]'),
+      'Q4 - Value from call: ' + q('[name="q4"]'),
+      'Q5 - Systems/tools: ' + q('[name="q5"]')
     );
     if (uploadNote) answers.push(uploadNote);
 
@@ -575,7 +575,7 @@
       role: q('[name="q2"]').slice(0, 200),
       painPoints: answers,
       source: 'stage0_post_booking_intake',
-      message: 'Call booked — prep questions submitted',
+      message: 'Call booked - prep questions submitted',
     };
   }
 
@@ -607,7 +607,7 @@
     return c;
   }
 
-  /* ——— Cal.com: open scheduler in click handler, save contact in background ——— */
+  /* --- Cal.com: open scheduler in click handler, save contact in background --- */
 
   function proceedToCal(root, intent, prefill) {
     var form = root.querySelector('form') || root;
@@ -646,7 +646,7 @@
 
     saveLead(lead);
 
-    /* New tab must open synchronously in this click — before sheet fetch */
+    /* New tab must open synchronously in this click - before sheet fetch */
     var calWin = openCalScheduler(url);
     if (!calWin) {
       showCalLinkFallback(root, url);
@@ -656,7 +656,7 @@
     if (!sheetsConfigured()) {
       showFormError(
         root,
-        'Lead capture is not configured on this site — email founders@kautilyan.com after booking.'
+        'Lead capture is not configured on this site - email founders@kautilyan.com after booking.'
       );
       return;
     }
@@ -767,7 +767,7 @@
     });
   }
 
-  /* ——— Modal ——— */
+  /* --- Modal --- */
 
   function renderModalBookingStart(intent, prefill) {
     var modal = document.getElementById('booking-modal');
@@ -847,13 +847,13 @@
     if (first) setTimeout(function () { first.focus(); }, 80);
   }
 
-  /* ——— Assessment page ——— */
+  /* --- Assessment page --- */
 
   function mountBookingStartPage(mount, intent, prefill) {
     var lead = loadLead();
     mount.innerHTML =
       '<div class="intake-page-header">' +
-        '<span class="label">Stage 0 — book your call</span>' +
+        '<span class="label">Stage 0 - book your call</span>' +
         '<h1>Book your 45-minute diagnosis</h1>' +
         '<p class="intake-lede">' + BOOKING_SUB + '</p>' +
       '</div>' +
@@ -865,7 +865,7 @@
   function mountThankYouPage(mount) {
     mount.innerHTML =
       '<div class="intake-page-header intake-page-header--complete">' +
-        '<span class="label">Stage 0 — complete</span>' +
+        '<span class="label">Stage 0 - complete</span>' +
         '<h1>You’re all set</h1>' +
         '<p class="intake-lede">' + THANK_YOU_MSG + '</p>' +
         '<p class="intake-lede intake-lede--secondary"><a href="index.html">Back to homepage</a></p>' +
@@ -886,7 +886,7 @@
     var calLink = calUrlWithRedirect(lead);
     mount.innerHTML =
       '<div class="intake-page-header">' +
-        '<span class="label">Stage 0 — prep for your call</span>' +
+        '<span class="label">Stage 0 - prep for your call</span>' +
         '<h1>Help us prepare for your call</h1>' +
         '<p class="intake-lede">' + QUESTIONS_SUB + '</p>' +
         '<p class="cr-hint">Session <strong>' + lead.submissionId + '</strong> · ' +

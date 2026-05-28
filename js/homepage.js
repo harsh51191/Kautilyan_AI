@@ -25,7 +25,7 @@
       });
     });
 
-    /* ——— Drain cards expand ——— */
+    /* --- Drain cards expand --- */
     qsa('.drain-card').forEach(function (card) {
       card.addEventListener('click', function () {
         var open = card.classList.toggle('is-open');
@@ -33,7 +33,7 @@
       });
     });
 
-    /* ——— Path cards expand on click (hover handled in CSS) ——— */
+    /* --- Path cards expand on click (hover handled in CSS) --- */
     qsa('.path-card').forEach(function (card) {
       card.addEventListener('click', function () {
         var open = card.classList.toggle('is-open');
@@ -41,7 +41,7 @@
       });
     });
 
-    /* ——— Generic tabs ——— */
+    /* --- Generic tabs --- */
     qsa('[data-tabs]').forEach(function (wrap) {
       var tabs = qsa('[data-tab]', wrap);
       var panels = qsa('[data-panel]', wrap);
@@ -61,7 +61,7 @@
       });
     });
 
-    /* ——— Decision flow — progressive reveal ——— */
+    /* --- Decision flow - progressive reveal --- */
     var decisionFlow = document.getElementById('decision-flow');
     if (decisionFlow && 'IntersectionObserver' in window) {
       var flowSteps = qsa('.decision-flow-step', decisionFlow);
@@ -107,7 +107,7 @@
       flowIo.observe(decisionFlow);
     }
 
-    /* ——— FAQ accordion ——— */
+    /* --- FAQ accordion --- */
     var faqMoreBtn = document.getElementById('faq-show-more');
     var faqExtra = document.getElementById('faq-extra');
     if (faqMoreBtn && faqExtra) {
@@ -128,7 +128,7 @@
       });
     });
 
-    /* ——— Diagnosis map steps ——— */
+    /* --- Diagnosis map steps --- */
     if ('IntersectionObserver' in window) {
       var mapSteps = qsa('.diag-step');
       if (mapSteps.length) {
@@ -144,7 +144,7 @@
       }
     }
 
-    /* ——— Hash: open modal on load ——— */
+    /* --- Hash: open modal on load --- */
     if (window.location.hash === '#request-call' || window.location.hash === '#book-call') {
       setTimeout(function () {
         if (window.KautilyanBooking) KautilyanBooking.open();

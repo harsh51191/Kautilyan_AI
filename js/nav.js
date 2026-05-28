@@ -1,4 +1,4 @@
-/* P1.5 — consistent global navigation on every page */
+/* P1.5 - consistent global navigation on every page */
 (function () {
   'use strict';
 
@@ -7,7 +7,7 @@
     { href: 'use-cases.html', label: 'Use Cases', key: 'use-cases' },
     { href: 'pricing.html', label: 'Pricing', key: 'pricing', id: 'nav-pricing-link' },
     { href: 'resources.html', label: 'Resources', key: 'resources' },
-    { href: 'assessment.html', label: 'Free Diagnostic*', key: 'assessment' },
+    { href: 'assessment.html', label: 'Free Diagnostic', key: 'assessment' },
     { href: 'about.html', label: 'About', key: 'about' },
   ];
 

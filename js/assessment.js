@@ -28,50 +28,9 @@
   }
 
   const QUESTIONS = [
-    // SECTION 1: Knowledge & Context (Q1–Q4)
+    // SECTION 1: Process & Execution (Q1–Q4)
     {
-      id: 'q1', section: 'knowledge', sectionLabel: 'Knowledge & Context', sectionNum: 1,
-      question: 'When a key person leaves or is unavailable, what happens to their knowledge?',
-      options: [
-        { value: 1, label: 'A', text: 'Work stops or slows significantly until they return' },
-        { value: 2, label: 'B', text: 'Others manage, but important context is lost' },
-        { value: 3, label: 'C', text: 'Some documentation exists, but it is incomplete or not always current' },
-        { value: 4, label: 'D', text: 'Their decisions, context, customer history, and working knowledge are captured in systems others can use' },
-      ],
-    },
-    {
-      id: 'q2', section: 'knowledge', sectionLabel: 'Knowledge & Context', sectionNum: 1,
-      question: 'When a new hire joins, how easily can they understand past decisions, customer context, and current priorities?',
-      options: [
-        { value: 1, label: 'A', text: 'It takes months and depends heavily on shadowing people' },
-        { value: 2, label: 'B', text: 'Some documents exist, but they still need repeated explanations' },
-        { value: 3, label: 'C', text: 'They can access some shared context, but it is incomplete' },
-        { value: 4, label: 'D', text: 'They inherit structured context, decisions, priorities, and workflow history from day one' },
-      ],
-    },
-    {
-      id: 'q3', section: 'knowledge', sectionLabel: 'Knowledge & Context', sectionNum: 1,
-      question: 'How does leadership get visibility into what is really happening across the business?',
-      options: [
-        { value: 1, label: 'A', text: 'Mostly through meetings, calls, and asking people directly' },
-        { value: 2, label: 'B', text: 'Through manually prepared reports and updates' },
-        { value: 3, label: 'C', text: 'Through some dashboards or reports, but interpretation is still manual' },
-        { value: 4, label: 'D', text: 'Through automated intelligence briefs that combine system signals, team updates, and recent decisions' },
-      ],
-    },
-    {
-      id: 'q4', section: 'knowledge', sectionLabel: 'Knowledge & Context', sectionNum: 1,
-      question: 'Where are important decisions and their reasoning captured?',
-      options: [
-        { value: 1, label: 'A', text: 'Verbally, in meetings, or on WhatsApp — rarely documented' },
-        { value: 2, label: 'B', text: 'In email threads or chats that are hard to retrieve later' },
-        { value: 3, label: 'C', text: 'In shared documents or tools, but inconsistently' },
-        { value: 4, label: 'D', text: 'In systems that capture the decision, reasoning, owner, context, and follow-up action' },
-      ],
-    },
-    // SECTION 2: Process & Execution (Q5–Q8)
-    {
-      id: 'q5', section: 'process', sectionLabel: 'Process & Execution', sectionNum: 2,
+      id: 'q1', section: 'process', sectionLabel: 'Process & Execution', sectionNum: 1,
       question: 'How do teams handle recurring workflows like reports, approvals, follow-ups, or status updates?',
       options: [
         { value: 1, label: 'A', text: 'Manually every time' },
@@ -81,7 +40,7 @@
       ],
     },
     {
-      id: 'q6', section: 'process', sectionLabel: 'Process & Execution', sectionNum: 2,
+      id: 'q2', section: 'process', sectionLabel: 'Process & Execution', sectionNum: 1,
       question: 'When an exception or problem occurs, how does it get resolved?',
       options: [
         { value: 1, label: 'A', text: 'Whoever is senior and available handles it personally' },
@@ -91,23 +50,64 @@
       ],
     },
     {
-      id: 'q7', section: 'process', sectionLabel: 'Process & Execution', sectionNum: 2,
+      id: 'q3', section: 'process', sectionLabel: 'Process & Execution', sectionNum: 1,
       question: 'When approvals happen, can you later see who approved, why, with what context, and what happened next?',
       options: [
-        { value: 1, label: 'A', text: 'No — approvals are mostly verbal or informal' },
-        { value: 2, label: 'B', text: 'Partially — approvals are traceable but reasoning is usually missing' },
-        { value: 3, label: 'C', text: 'Mostly — approvals are logged, but context and outcomes are incomplete' },
-        { value: 4, label: 'D', text: 'Yes — approvals are governed, contextual, auditable, and linked to outcomes' },
+        { value: 1, label: 'A', text: 'No - approvals are mostly verbal or informal' },
+        { value: 2, label: 'B', text: 'Partially - approvals are traceable but reasoning is usually missing' },
+        { value: 3, label: 'C', text: 'Mostly - approvals are logged, but context and outcomes are incomplete' },
+        { value: 4, label: 'D', text: 'Yes - approvals are governed, contextual, auditable, and linked to outcomes' },
       ],
     },
     {
-      id: 'q8', section: 'process', sectionLabel: 'Process & Execution', sectionNum: 2,
-      question: 'When important business signals change — customer risk, delivery delay, revenue leakage, SLA breach — how does the organisation respond?',
+      id: 'q4', section: 'process', sectionLabel: 'Process & Execution', sectionNum: 1,
+      question: 'When important business signals change - customer risk, delivery delay, revenue leakage, SLA breach - how does the organisation respond?',
       options: [
         { value: 1, label: 'A', text: 'Someone notices manually and escalates' },
         { value: 2, label: 'B', text: 'Dashboards exist, but people must interpret and act' },
         { value: 3, label: 'C', text: 'Some alerts exist, but coverage is incomplete' },
         { value: 4, label: 'D', text: 'The system surfaces the issue, recommends action, and routes it into a workflow' },
+      ],
+    },
+    // SECTION 2: Knowledge & Context (Q5–Q8)
+    {
+      id: 'q5', section: 'knowledge', sectionLabel: 'Knowledge & Context', sectionNum: 2,
+      question: 'How well does your organisation capture and share critical context across teams?',
+      options: [
+        { value: 1, label: 'A', text: 'Critical context is mostly in individual heads and ad-hoc chats' },
+        { value: 2, label: 'B', text: 'Some context is shared, but teams still depend on specific people' },
+        { value: 3, label: 'C', text: 'Documentation exists, but it is uneven or not consistently used' },
+        { value: 4, label: 'D', text: 'Context, decisions, and workflow history are captured in systems teams can reliably use' },
+      ],
+    },
+    {
+      id: 'q6', section: 'knowledge', sectionLabel: 'Knowledge & Context', sectionNum: 2,
+      question: 'When a new hire joins, how easily can they understand past decisions, customer context, and current priorities?',
+      options: [
+        { value: 1, label: 'A', text: 'It takes months and depends heavily on shadowing people' },
+        { value: 2, label: 'B', text: 'Some documents exist, but they still need repeated explanations' },
+        { value: 3, label: 'C', text: 'They can access some shared context, but it is incomplete' },
+        { value: 4, label: 'D', text: 'They inherit structured context, decisions, priorities, and workflow history from day one' },
+      ],
+    },
+    {
+      id: 'q7', section: 'knowledge', sectionLabel: 'Knowledge & Context', sectionNum: 2,
+      question: 'How does leadership get visibility into what is really happening across the business?',
+      options: [
+        { value: 1, label: 'A', text: 'Mostly through meetings, calls, and asking people directly' },
+        { value: 2, label: 'B', text: 'Through manually prepared reports and updates' },
+        { value: 3, label: 'C', text: 'Through some dashboards or reports, but interpretation is still manual' },
+        { value: 4, label: 'D', text: 'Through automated intelligence briefs that combine system signals, team updates, and recent decisions' },
+      ],
+    },
+    {
+      id: 'q8', section: 'knowledge', sectionLabel: 'Knowledge & Context', sectionNum: 2,
+      question: 'Where are important decisions and their reasoning captured?',
+      options: [
+        { value: 1, label: 'A', text: 'Verbally, in meetings, or on WhatsApp - rarely documented' },
+        { value: 2, label: 'B', text: 'In email threads or chats that are hard to retrieve later' },
+        { value: 3, label: 'C', text: 'In shared documents or tools, but inconsistently' },
+        { value: 4, label: 'D', text: 'In systems that capture the decision, reasoning, owner, context, and follow-up action' },
       ],
     },
     // SECTION 3: Technology, AI & Agent Readiness (Q9–Q12)
@@ -135,7 +135,7 @@
       id: 'q11', section: 'technology', sectionLabel: 'Technology, AI & Agent Readiness', sectionNum: 3,
       question: 'When work moves across CRM, ERP, email, documents, project tools, or chat, does context move with it?',
       options: [
-        { value: 1, label: 'A', text: 'No — systems operate independently' },
+        { value: 1, label: 'A', text: 'No - systems operate independently' },
         { value: 2, label: 'B', text: 'Some manual export/import or copy-paste is required' },
         { value: 3, label: 'C', text: 'Some integrations exist, but context does not flow reliably' },
         { value: 4, label: 'D', text: 'Systems are connected and context flows with minimal manual effort' },
@@ -143,7 +143,7 @@
     },
     {
       id: 'q12', section: 'technology', sectionLabel: 'Technology, AI & Agent Readiness', sectionNum: 3,
-      question: 'When AI is used, what level of responsibility can it safely take today?',
+      question: 'In your current setup, how much workflow ownership can AI take with confidence?',
       options: [
         { value: 1, label: 'A', text: 'It only helps individuals generate content or answer questions' },
         { value: 2, label: 'B', text: 'It helps with analysis, drafts, or summaries, but humans manually move work forward' },
@@ -178,9 +178,13 @@
   ];
 
   const SECTION_INTROS = {
-    2: {
+    1: {
       name: 'Process & Execution',
-      description: 'How work moves — recurring workflows, exceptions, approvals, and how your organisation responds to signals.',
+      description: 'How work moves - recurring workflows, exceptions, approvals, and how your organisation responds to signals.',
+    },
+    2: {
+      name: 'Knowledge & Context',
+      description: 'How your organisation captures context, preserves decisions, and gives leadership shared visibility.',
     },
     3: {
       name: 'Technology, AI & Agent Readiness',
@@ -197,12 +201,12 @@
   const DIMENSION_INFO = {
     knowledge: {
       max: 17,
-      questions: 'Questions 1–4',
+      questions: 'Questions 5–8',
       topics: 'knowledge retention, onboarding context, leadership visibility, and decision capture',
     },
     process: {
       max: 16,
-      questions: 'Questions 5–8',
+      questions: 'Questions 1–4',
       topics: 'recurring workflows, exception handling, approval traceability, and signal response',
     },
     technology: {
@@ -215,14 +219,14 @@
   const MATURITY_PLAIN = {
     1: 'Most work still depends on people, meetings, and memory. AI and automation should wait until operating context is visible and documented.',
     2: 'Individuals may be using AI, but the organisation is not capturing or reusing that value. Governance and shared workflows come before scaling agents.',
-    3: 'You have approved tools and some structure, but processes and decision memory have not caught up. Focus on governed workflows and capture — not more software.',
+    3: 'You have approved tools and some structure, but processes and decision memory have not caught up. Focus on governed workflows and capture - not more software.',
     4: 'Recurring workflows, approvals, and visibility are strengthening. The next step is embedding context and audit trails into daily operations.',
     5: 'You have strong foundations for governed agents. Scale carefully so governance, ownership, and institutional memory keep pace with capability.',
   };
 
   const AGENT_TAGLINES = {
     Low: 'Build visibility and governance before any agent deployment.',
-    Emerging: 'Copilots and structured briefs — avoid autonomous execution for now.',
+    Emerging: 'Copilots and structured briefs - avoid autonomous execution for now.',
     Medium: 'Human-in-the-loop agents on one recurring workflow.',
     High: 'Governed multi-system agents with approvals and audit trails.',
   };
@@ -242,14 +246,14 @@
 
   function getDimensionScores(a) {
     return {
-      knowledge: a.q1 + a.q2 + a.q3 + a.q4,
-      process: a.q5 + a.q6 + a.q7 + a.q8,
+      knowledge: a.q5 + a.q6 + a.q7 + a.q8,
+      process: a.q1 + a.q2 + a.q3 + a.q4,
       technology: a.q9 + a.q10 + a.q11 + a.q12,
     };
   }
 
   function getAgentReadiness(a) {
-    const score = a.q5 + a.q6 + a.q7 + a.q10 + a.q11 + a.q12;
+    const score = a.q1 + a.q2 + a.q3 + a.q10 + a.q11 + a.q12;
     if (score >= 21) return { score, level: 'High', label: 'Agent-Ready', recommendation: 'Ready to explore governed multi-system agents with approvals, audit trails, and institutional memory.', startWith: ['Governed multi-system agents', 'Approval-routing agents', 'Cross-system context agents'], avoid: ['Uncontrolled agent autonomy', 'Agents without audit trails'] };
     if (score >= 17) return { score, level: 'Medium', label: 'Workflow-Ready', recommendation: 'Start with human-in-the-loop agents for one recurring workflow.', startWith: ['Human-in-the-loop workflow agents', 'Leadership intelligence brief', 'Exception triage agent'], avoid: ['Fully autonomous agents', 'Multi-system execution without approvals'] };
     if (score >= 11) return { score, level: 'Emerging', label: 'Copilot-Ready', recommendation: 'Start with copilots and structured briefs. Avoid autonomous execution.', startWith: ['AI copilots', 'Structured briefing tools', 'Draft-and-review workflows'], avoid: ['Autonomous agents', 'Agents that update records without human review'] };
@@ -265,21 +269,21 @@
       5: { label: 'Agentic Operating Layer', description: 'Governed agents, context flow, decision memory, and institutional learning are emerging.' },
     };
     let raw = total <= 18 ? 1 : total <= 25 ? 2 : total <= 33 ? 3 : total <= 41 ? 4 : 5;
-    if (raw >= 4 && !(d.process >= 11 && a.q7 >= 3 && a.q10 >= 3 && a.q11 >= 3)) raw = 3;
-    if (raw >= 5 && !(d.knowledge >= 13 && d.process >= 13 && d.technology >= 13 && a.q4 === 4 && a.q7 === 4 && a.q11 >= 3 && a.q12 >= 3)) raw = 4;
+    if (raw >= 4 && !(d.process >= 11 && a.q3 >= 3 && a.q10 >= 3 && a.q11 >= 3)) raw = 3;
+    if (raw >= 5 && !(d.knowledge >= 13 && d.process >= 13 && d.technology >= 13 && a.q8 === 4 && a.q3 === 4 && a.q11 >= 3 && a.q12 >= 3)) raw = 4;
     return { level: raw, ...LEVELS[raw] };
   }
 
   const PATTERN_RULES = [
     { id: 'shadow_ai', label: 'Shadow AI', description: 'People use AI individually, but outputs are not captured or reused by the organisation.', detect: function (a, d) { return a.q9 >= 2 && a.q10 <= 2; } },
     { id: 'tool_heavy_process_light', label: 'Tool-heavy, Process-light', description: 'Strong tool adoption, but recurring workflows, approvals, and decisions are still manual.', detect: function (a, d) { return d.technology >= 11 && d.process <= 9; } },
-    { id: 'dashboard_rich_decision_poor', label: 'Dashboard-rich, Decision-poor', description: 'Visibility exists across systems, but decision reasoning is not captured for future use.', detect: function (a, d) { return a.q3 >= 3 && a.q4 <= 2; } },
-    { id: 'founder_dependent', label: 'Founder-dependent', description: 'Execution depends too heavily on senior people — creating a single point of failure.', detect: function (a, d) { return a.q1 <= 2 && a.q3 <= 2 && a.q6 <= 2; } },
-    { id: 'approval_risk', label: 'Approval-risk', description: 'Approvals lack context, reasoning, or auditability — creating compliance and quality risk.', detect: function (a, d) { return a.q7 <= 2; } },
-    { id: 'system_fragmented', label: 'System-fragmented', description: 'Context breaks as work moves across tools — creating repeated reconstruction effort.', detect: function (a, d) { return a.q11 <= 2; } },
+    { id: 'dashboard_rich_decision_poor', label: 'Dashboard-rich, Decision-poor', description: 'Visibility exists across systems, but decision reasoning is not captured for future use.', detect: function (a, d) { return a.q7 >= 3 && a.q8 <= 2; } },
+    { id: 'founder_dependent', label: 'Founder-dependent', description: 'Execution depends too heavily on senior people - creating a single point of failure.', detect: function (a, d) { return a.q5 <= 2 && a.q7 <= 2 && a.q2 <= 2; } },
+    { id: 'approval_risk', label: 'Approval-risk', description: 'Approvals lack context, reasoning, or auditability - creating compliance and quality risk.', detect: function (a, d) { return a.q3 <= 2; } },
+    { id: 'system_fragmented', label: 'System-fragmented', description: 'Context breaks as work moves across tools - creating repeated reconstruction effort.', detect: function (a, d) { return a.q11 <= 2; } },
     { id: 'ai_value_leakage', label: 'AI Value Leakage', description: 'AI creates individual value, but that value is not captured or reused at an organisational level.', detect: function (a, d) { return a.q9 >= 3 && a.q10 <= 2; } },
-    { id: 'agent_ready', label: 'Agent-ready', description: 'Strong candidate for governed agent workflows across recurring processes.', detect: function (a, d) { return a.q5 >= 3 && a.q7 >= 3 && a.q11 >= 3 && a.q12 >= 3; } },
-    { id: 'agent_fragile', label: 'Agent-fragile', description: 'AI ambition is present, but governance or system integration is too weak for safe agent deployment.', detect: function (a, d) { return a.q9 >= 3 && (a.q7 <= 2 || a.q11 <= 2); } },
+    { id: 'agent_ready', label: 'Agent-ready', description: 'Strong candidate for governed agent workflows across recurring processes.', detect: function (a, d) { return a.q1 >= 3 && a.q3 >= 3 && a.q11 >= 3 && a.q12 >= 3; } },
+    { id: 'agent_fragile', label: 'Agent-fragile', description: 'AI ambition is present, but governance or system integration is too weak for safe agent deployment.', detect: function (a, d) { return a.q9 >= 3 && (a.q3 <= 2 || a.q11 <= 2); } },
   ];
 
   function getPatterns(a, d) {
@@ -292,7 +296,7 @@
     const ctas = {
       1: { headline: 'Book a free AI Operating Awareness Session', body: 'Identify where AI can reduce manual coordination, knowledge dependency, and repeated follow-ups.', buttonText: 'Book Free Awareness Session' },
       2: { headline: 'Book a free Shadow AI Risk & Opportunity Review', body: 'Understand where AI is already being used, where value is leaking, and what should be governed first.', buttonText: 'Book Free Shadow AI Review' },
-      3: { headline: 'Book a free 45-minute Operating Reality Diagnosis', body: 'Map where your tools, teams, and workflows are losing context — and identify the highest-leverage first workflow.', buttonText: 'Book Free Diagnosis' },
+      3: { headline: 'Book a free 45-minute Operating Reality Diagnosis', body: 'Map where your tools, teams, and workflows are losing context - and identify the highest-leverage first workflow.', buttonText: 'Book Free Diagnosis' },
       4: { headline: 'Start Stage 1: Operating Reality Blueprint', body: 'We map your workflows, decision points, systems, and first 90-day implementation path.', buttonText: 'Request Blueprint Scope' },
       5: { headline: 'Book a Kautilyan Strategy Call', body: 'Explore how to scale governed agents, institutional memory, and operating intelligence across your teams.', buttonText: 'Book Strategy Call' },
     };
@@ -481,6 +485,20 @@
     });
   }
 
+  function armOptionHoverOnMouseMove() {
+    const questionsView = $('view-questions');
+    if (!questionsView) return;
+
+    questionsView.classList.remove('hover-armed');
+
+    function onFirstMouseMove() {
+      questionsView.classList.add('hover-armed');
+      document.removeEventListener('mousemove', onFirstMouseMove);
+    }
+
+    document.addEventListener('mousemove', onFirstMouseMove, { once: true });
+  }
+
   function renderQuestion(index) {
     const q = QUESTIONS[index];
     if (!q) return;
@@ -503,17 +521,16 @@
     if (backBtn) backBtn.style.display = index > 0 ? '' : 'none';
 
     updateSectionDots(q.sectionNum);
+    armOptionHoverOnMouseMove();
 
     const letters = ['A', 'B', 'C', 'D'];
-    const currentAnswer = state.answers[q.id];
-
     letters.forEach(function (letter, idx) {
       const btn = $('option-' + letter);
       const textSpan = $('option-' + letter + '-text');
       const opt = q.options[idx];
       if (textSpan && opt) textSpan.textContent = opt.text;
       if (btn) {
-        btn.classList.toggle('selected', currentAnswer === opt.value);
+        btn.classList.remove('selected');
         btn.disabled = false;
         btn.onclick = function () {
           if (advancing || sectionTransitionActive) return;
@@ -603,6 +620,9 @@
     const empty = document.createElement('option');
     empty.value = '';
     empty.textContent = placeholder || 'Select…';
+    empty.disabled = true;
+    empty.selected = true;
+    empty.hidden = true;
     select.appendChild(empty);
     options.forEach(function (opt) {
       const option = document.createElement('option');
@@ -652,25 +672,56 @@
     const challenge = (form.querySelector('[name="biggest_challenge"]') || {}).value || '';
 
     if (!name.trim()) { showFieldError('respondent_name', 'Please enter your name.'); valid = false; }
-    if (!email.trim() || email.indexOf('@') < 1) { showFieldError('work_email', 'Please enter a valid work email.'); valid = false; }
+    if (!validateWorkEmailField()) valid = false;
     if (!company.trim()) { showFieldError('company_name', 'Please enter your company name.'); valid = false; }
     if (!role) { showFieldError('role', 'Please select your role.'); valid = false; }
     if (!employees) { showFieldError('employee_count', 'Please select team size.'); valid = false; }
     if (!industry.trim()) { showFieldError('industry', 'Please enter your industry.'); valid = false; }
     if (!challenge) { showFieldError('biggest_challenge', 'Please select your biggest challenge.'); valid = false; }
 
+    if (!valid) {
+      const firstInvalidField = document.querySelector('#lead-form .has-error');
+      if (firstInvalidField) {
+        firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (typeof firstInvalidField.focus === 'function') firstInvalidField.focus();
+      }
+    }
+
     return valid;
+  }
+
+  function isValidEmailFormat(email) {
+    if (!email) return false;
+    return /^[^\s@,]+@[^\s@,]+\.[^\s@,]+$/.test(email);
+  }
+
+  function validateWorkEmailField() {
+    const field = document.querySelector('#lead-form [name="work_email"]');
+    if (!field) return true;
+    const email = (field.value || '').trim();
+    const emailDomain = email.toLowerCase().split('@')[1] || '';
+
+    if (!isValidEmailFormat(email)) {
+      showFieldError('work_email', 'Please enter a valid work email.');
+      return false;
+    }
+    if (emailDomain === 'gmail.com' || emailDomain === 'googlemail.com') {
+      showFieldError('work_email', 'Please use your company work email (Gmail is not accepted).');
+      return false;
+    }
+
+    showFieldError('work_email', '');
+    return true;
   }
 
   function collectLeadData() {
     const form = $('lead-form');
     if (!form) return {};
-    const website = (form.querySelector('[name="company_website"]') || {}).value || '';
     return {
       respondent_name: (form.querySelector('[name="respondent_name"]') || {}).value.trim(),
       work_email: (form.querySelector('[name="work_email"]') || {}).value.trim(),
       company_name: (form.querySelector('[name="company_name"]') || {}).value.trim(),
-      company_website: website.trim(),
+      company_website: '',
       role: (form.querySelector('[name="role"]') || {}).value,
       employee_count: (form.querySelector('[name="employee_count"]') || {}).value,
       industry: (form.querySelector('[name="industry"]') || {}).value.trim(),
@@ -681,11 +732,22 @@
   function setupLeadForm() {
     populateSelect('role', ROLE_OPTIONS, 'Your role');
     populateSelect('employee_count', EMPLOYEE_OPTIONS, 'Team size');
-    populateSelect('biggest_challenge', CHALLENGE_OPTIONS, 'Biggest operating challenge');
+    populateSelect('biggest_challenge', CHALLENGE_OPTIONS, '');
 
     const form = $('lead-form');
     if (!form || form.dataset.bound === 'true') return;
     form.dataset.bound = 'true';
+
+    const workEmailField = form.querySelector('[name="work_email"]');
+    if (workEmailField && !workEmailField.dataset.bound) {
+      workEmailField.dataset.bound = 'true';
+      workEmailField.addEventListener('blur', function () {
+        validateWorkEmailField();
+      });
+      workEmailField.addEventListener('input', function () {
+        if (workEmailField.classList.contains('has-error')) validateWorkEmailField();
+      });
+    }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -772,7 +834,7 @@
     el.hidden = false;
     el.innerHTML =
       '<h3 class="maturity-explainer-title">Your maturity level</h3>' +
-      '<p class="maturity-explainer-level"><span class="text-gradient-accent">Level ' + ml.level + '</span> — ' + escapeHtml(ml.label) + '</p>' +
+      '<p class="maturity-explainer-level"><span class="text-gradient-accent">Level ' + ml.level + '</span> - ' + escapeHtml(ml.label) + '</p>' +
       '<p class="maturity-explainer-official">' + escapeHtml(ml.description) + '</p>' +
       '<p class="maturity-explainer-plain"><strong>In plain terms:</strong> ' + escapeHtml(plain) + '</p>';
   }
@@ -788,7 +850,7 @@
         '<li class="dimensions-explainer-item">' +
         '<span class="dimensions-explainer-dim">' + escapeHtml(DIMENSION_LABELS[key]) + '</span>' +
         '<span class="dimensions-explainer-score">' + score + ' / ' + max + '</span>' +
-        '<span class="dimensions-explainer-detail">' + escapeHtml(info.questions) + ' — ' + escapeHtml(info.topics) + '.</span>' +
+        '<span class="dimensions-explainer-detail">' + escapeHtml(info.questions) + ' - ' + escapeHtml(info.topics) + '.</span>' +
         '</li>'
       );
     }).join('');
@@ -802,13 +864,13 @@
     return (
       '<div class="level-up-static">' +
       '<div class="level-up-level-card">' +
-      '<p class="level-up-level-heading"><span class="text-gradient-accent">Level ' + ml.level + '</span> — ' + escapeHtml(ml.label) + '</p>' +
+      '<p class="level-up-level-heading"><span class="text-gradient-accent">Level ' + ml.level + '</span> - ' + escapeHtml(ml.label) + '</p>' +
       '<p class="level-up-level-official">' + escapeHtml(ml.description) + '</p>' +
       '<p class="level-up-plain"><strong>What this means:</strong> ' + escapeHtml(plain) + '</p>' +
       '</div>' +
       '<ul class="level-up-signals">' +
       '<li><strong>Strongest area:</strong> ' + escapeHtml(strongest) + '</li>' +
-      '<li><strong>Biggest gap:</strong> ' + escapeHtml(weakest) + ' — improving here unlocks the next level.</li>' +
+      '<li><strong>Biggest gap:</strong> ' + escapeHtml(weakest) + ' - improving here unlocks the next level.</li>' +
       '<li><strong>Primary constraint:</strong> ' + escapeHtml(result.primaryConstraint) + '</li>' +
       '</ul>' +
       '<div class="level-up-narrative-slot" id="level-up-narrative-slot"></div>' +
@@ -901,14 +963,14 @@
     const display = result.displayScores || buildDisplayScores(result);
     if (scoreEl) scoreEl.textContent = display.total + ' / ' + display.maxTotal;
     if (badgeEl) {
-      badgeEl.textContent = 'Level ' + ml.level + ' — ' + ml.label;
+      badgeEl.textContent = 'Level ' + ml.level + ' - ' + ml.label;
       badgeEl.className = 'result-level-badge level-' + ml.level;
       badgeEl.title = ml.description;
     }
     if (constraintEl) {
       constraintEl.innerHTML =
         '<strong>Primary constraint:</strong> ' + escapeHtml(result.primaryConstraint) +
-        '<span class="constraint-hint"> — your lowest-scoring area drives this.</span>';
+        '<span class="constraint-hint"> - your lowest-scoring area drives this.</span>';
     }
 
     renderMaturityExplainer(ml);
@@ -1039,6 +1101,51 @@
       });
   }
 
+  function hydrateFromResponseSnapshot(snapshot) {
+    if (!snapshot || typeof snapshot !== 'object') return false;
+    const answers = snapshot.answers || {};
+    const answerKeys = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12'];
+    const hasAllAnswers = answerKeys.every(function (k) {
+      const v = Number(answers[k]);
+      return Number.isFinite(v) && v >= 1 && v <= 4;
+    });
+    if (!hasAllAnswers) return false;
+
+    const normalizedAnswers = {};
+    answerKeys.forEach(function (k) {
+      normalizedAnswers[k] = Number(answers[k]);
+    });
+
+    state.answers = normalizedAnswers;
+    state.leadData = snapshot.leadData || {};
+    state.scoringResult = scoreAssessment(state.answers);
+    saveSession();
+    return true;
+  }
+
+  function loadSharedReport(reportId) {
+    state.reportId = reportId;
+    fetch('/api/get-report?id=' + encodeURIComponent(reportId))
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        hydrateFromResponseSnapshot(data && data.responseSnapshot);
+        if (!state.scoringResult) {
+          showView('view-landing');
+          return;
+        }
+        showView('view-results');
+        if (data && data.ready && data.report) {
+          renderStaticResults();
+          renderNarrative(data.report);
+        } else {
+          renderResults();
+        }
+      })
+      .catch(function () {
+        showView('view-landing');
+      });
+  }
+
   function renderResults() {
     if (pollTimer) {
       clearTimeout(pollTimer);
@@ -1096,7 +1203,9 @@
     if (startBtn) {
       startBtn.addEventListener('click', function () {
         showView('view-questions');
-        renderQuestion(0);
+        showSectionTransition(QUESTIONS[0].sectionNum, function () {
+          renderQuestion(0);
+        });
       });
     }
 
@@ -1139,7 +1248,6 @@
     const params = new URLSearchParams(window.location.search);
     const reportParam = params.get('report');
     if (reportParam) {
-      state.reportId = reportParam;
       try {
         const storedScore = sessionStorage.getItem(STORAGE_KEYS.score);
         const storedLead = sessionStorage.getItem(STORAGE_KEYS.lead);
@@ -1149,8 +1257,11 @@
         if (storedAnswers) state.answers = JSON.parse(storedAnswers);
       } catch (e) { /* ignore */ }
       if (state.scoringResult) {
+        state.reportId = reportParam;
         showView('view-results');
         renderResults();
+      } else {
+        loadSharedReport(reportParam);
       }
     }
   }

@@ -1,4 +1,4 @@
-/* Page 4 — Pricing */
+/* Page 4 - Pricing */
 
 .nav-links a.is-current { color: #fff; }
 
@@ -98,7 +98,7 @@
 .pricing-credit-flow strong { color: var(--amber); }
 .pricing-credit-arrow { color: var(--amber); font-weight: 700; }
 
-/* Cards — chip highlights instead of long lists */
+/* Cards - chip highlights instead of long lists */
 .pricing-page-grid {
   margin-top: 40px;
 }

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="data:," />
   <title>Free AI Readiness Assessment for Business Leaders | Kautilyan AI</title>
-  <meta name="description" content="Assess your organisation's AI maturity, operating intelligence, governance, and agent readiness. Get a personalised report with a 90-day AI roadmap." />
+  <meta name="description" content="Assess your organisation's AI maturity, operational intelligence, governance, and agent readiness. Get a personalised report with a 90-day AI roadmap." />
   <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.kautilyan.com/assessment.html" />
@@ -13,10 +13,10 @@
   <meta property="og:site_name" content="Kautilyan AI" />
   <meta property="og:url" content="https://www.kautilyan.com/assessment.html" />
   <meta property="og:title" content="Free AI Readiness Assessment for Business Leaders | Kautilyan AI" />
-  <meta property="og:description" content="Assess your organisation's AI maturity, operating intelligence, governance, and agent readiness. Get a personalised report with a 90-day AI roadmap." />
+  <meta property="og:description" content="Assess your organisation's AI maturity, operational intelligence, governance, and agent readiness. Get a personalised report with a 90-day AI roadmap." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free AI Readiness Assessment | Kautilyan AI" />
-  <meta name="twitter:description" content="12-question diagnostic with instant scoring and a personalised AI operating intelligence report." />
+  <meta name="twitter:description" content="12-question diagnostic with instant scoring and a personalised AI operational intelligence report." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -35,7 +35,7 @@
       <div class="container">
         <div class="nav-inner">
           <a href="index.html" class="nav-logo">
-            <div class="nav-logo-icon">⚡</div>
+            <div class="nav-logo-icon">K</div>
             KAUTILYAN
           </a>
           <ul class="nav-links" id="nav-menu"></ul>
@@ -54,8 +54,12 @@
         <div id="view-landing" class="assessment-view active">
           <section class="assessment-landing" aria-labelledby="assessment-landing-heading">
             <p class="assessment-tagline">Free · 7 minutes · Instant report</p>
-            <h1 id="assessment-landing-heading">Is your company using AI — or building operating intelligence?</h1>
-            <p class="assessment-subhead">Take the free AI Operating Intelligence Diagnostic to see where your organisation stands across knowledge capture, execution, governance, and agent readiness.</p>
+            <h1 id="assessment-landing-heading">Is your company using AI - or building operational intelligence?</h1>
+            <p class="assessment-subhead">Take the free AI Operational Intelligence Diagnostic to see where your organisation stands across knowledge capture, execution, governance, and agent readiness.</p>
+
+            <div class="assessment-cta-wrap">
+              <button type="button" id="btn-start" class="btn-assessment-start">Start the diagnostic →</button>
+            </div>
 
             <div class="pain-cards">
               <article class="pain-card">
@@ -82,9 +86,6 @@
               </ol>
             </div>
 
-            <div class="assessment-cta-wrap">
-              <button type="button" id="btn-start" class="btn-assessment-start">Start the diagnostic →</button>
-            </div>
             <p class="assessment-supporting">Built for founders, CEOs, COOs, and business leaders.</p>
           </section>
         </div>
@@ -149,42 +150,37 @@
             <p id="lead-form-error" hidden role="alert"></p>
             <form id="lead-form" novalidate>
               <div class="form-field">
-                <label for="lead-respondent-name">Your name</label>
+                <label for="lead-respondent-name">Your name *</label>
                 <input type="text" id="lead-respondent-name" name="respondent_name" required autocomplete="name" />
                 <span class="field-error" hidden></span>
               </div>
               <div class="form-field">
-                <label for="lead-work-email">Work email</label>
+                <label for="lead-work-email">Work email *</label>
                 <input type="email" id="lead-work-email" name="work_email" required autocomplete="email" />
                 <span class="field-error" hidden></span>
               </div>
               <div class="form-field">
-                <label for="lead-company-name">Company name</label>
+                <label for="lead-company-name">Company name *</label>
                 <input type="text" id="lead-company-name" name="company_name" required autocomplete="organization" />
                 <span class="field-error" hidden></span>
               </div>
               <div class="form-field">
-                <label for="lead-company-website">Company website</label>
-                <input type="url" id="lead-company-website" name="company_website" placeholder="https://" autocomplete="url" />
-                <span class="field-error" hidden></span>
-              </div>
-              <div class="form-field">
-                <label for="lead-role">Your role</label>
+                <label for="lead-role">Your role *</label>
                 <select id="lead-role" name="role" required></select>
                 <span class="field-error" hidden></span>
               </div>
               <div class="form-field">
-                <label for="lead-employee-count">Team size</label>
+                <label for="lead-employee-count">Team size *</label>
                 <select id="lead-employee-count" name="employee_count" required></select>
                 <span class="field-error" hidden></span>
               </div>
               <div class="form-field">
-                <label for="lead-industry">Industry</label>
+                <label for="lead-industry">Industry *</label>
                 <input type="text" id="lead-industry" name="industry" required />
                 <span class="field-error" hidden></span>
               </div>
               <div class="form-field">
-                <label for="lead-biggest-challenge">Biggest operating challenge</label>
+                <label for="lead-biggest-challenge">Biggest operating challenge *</label>
                 <select id="lead-biggest-challenge" name="biggest_challenge" required></select>
                 <span class="field-error" hidden></span>
               </div>
@@ -205,8 +201,8 @@
               </div>
             </div>
             <div class="score-card-main">
-              <p id="result-total-score">— / 50</p>
-              <p id="result-level-badge" class="result-level-badge">—</p>
+              <p id="result-total-score">- / 50</p>
+              <p id="result-level-badge" class="result-level-badge">-</p>
             </div>
 
             <div id="result-maturity-explainer" class="maturity-explainer" hidden></div>
@@ -215,7 +211,7 @@
               <div class="dimension-row">
                 <div class="dimension-row-header">
                   <span class="dimension-row-label" data-dim-label="knowledge">Knowledge &amp; Context</span>
-                  <span id="dim-knowledge-score">— / 17</span>
+                  <span id="dim-knowledge-score">- / 17</span>
                 </div>
                 <div class="dimension-bar-track">
                   <span id="dim-knowledge-bar" role="presentation"></span>
@@ -224,7 +220,7 @@
               <div class="dimension-row">
                 <div class="dimension-row-header">
                   <span class="dimension-row-label" data-dim-label="process">Process &amp; Execution</span>
-                  <span id="dim-process-score">— / 16</span>
+                  <span id="dim-process-score">- / 16</span>
                 </div>
                 <div class="dimension-bar-track">
                   <span id="dim-process-bar" role="presentation"></span>
@@ -233,7 +229,7 @@
               <div class="dimension-row">
                 <div class="dimension-row-header">
                   <span class="dimension-row-label" data-dim-label="technology">Technology &amp; AI</span>
-                  <span id="dim-technology-score">— / 17</span>
+                  <span id="dim-technology-score">- / 17</span>
                 </div>
                 <div class="dimension-bar-track">
                   <span id="dim-technology-bar" role="presentation"></span>
@@ -296,7 +292,7 @@
 
             <section id="section-agent-readiness" class="report-section" hidden>
               <h3>Agent readiness in depth</h3>
-              <p class="agent-readiness-intro">Based on how work moves, approvals are governed, and systems connect — not just whether you use AI tools.</p>
+              <p class="agent-readiness-intro">Based on how work moves, approvals are governed, and systems connect - not just whether you use AI tools.</p>
               <div id="agent-readiness-level-label" class="agent-readiness-headline"></div>
               <div class="agent-lists">
                 <div>

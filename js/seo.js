@@ -1,4 +1,4 @@
-/* Shared SEO helpers — canonical URLs for www.kautilyan.com */
+/* Shared SEO helpers - canonical URLs for www.kautilyan.com */
 (function (global) {
   'use strict';
 

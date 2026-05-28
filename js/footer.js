@@ -1,4 +1,4 @@
-/* Shared site footer — injected into #site-footer on every page */
+/* Shared site footer - injected into #site-footer on every page */
 (function () {
   'use strict';
 
@@ -11,8 +11,8 @@
       '<div class="footer-top">' +
         '<div class="footer-brand">' +
           '<a href="index.html" class="footer-logo">' +
-            '<span class="footer-logo-icon" aria-hidden="true">⚡</span>' +
-            'Kautilyan AI' +
+            '<span class="footer-logo-icon" aria-hidden="true">K</span>' +
+            'Kautilyan' +
           '</a>' +
           '<p class="footer-tagline">AI workflow transformation for growing businesses.</p>' +
           '<p class="footer-desc">We help companies identify, re-imagine, and implement high-value AI workflows on existing systems.</p>' +

@@ -1,5 +1,5 @@
 /**
- * Assessment report email — deploy as Web app (Execute as Me, Anyone).
+ * Assessment report email - deploy as Web app (Execute as Me, Anyone).
  * Set Script property ASSESSMENT_FROM_EMAIL or use session active user.
  *
  * POST JSON: { action: "send_assessment_report", responseId, reportUrl, leadData, scoringResult }
@@ -39,14 +39,14 @@ function sendAssessmentReportEmail_(data) {
 
   var name = String(lead.name || 'there');
   var company = String(lead.company_name || 'your organisation');
-  var total = score.totalScore != null ? score.totalScore : '—';
+  var total = score.totalScore != null ? score.totalScore : '-';
   var maturityLabel = score.maturityLabel || '';
-  var pattern = score.primaryPattern || '—';
+  var pattern = score.primaryPattern || '-';
   var insight = score.levelInsight || '';
   var ctaHeadline = (score.recommendedCTA && score.recommendedCTA.headline) || 'Book your next step with Kautilyan';
   var reportUrl = data.reportUrl || 'https://www.kautilyan.com/assessment.html';
 
-  var subject = 'Your AI Operating Intelligence Report — ' + company;
+  var subject = 'Your AI Operating Intelligence Report - ' + company;
 
   var html =
     '<div style="font-family:Inter,Arial,sans-serif;background:#0F0F13;color:#E8E8F0;padding:32px;max-width:560px;">' +
@@ -57,7 +57,7 @@ function sendAssessmentReportEmail_(data) {
     '<div style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);border-radius:10px;padding:20px;margin:24px 0;">' +
     '<p style="margin:0;font-size:18px;font-weight:600;">Your organisation scored ' +
     total +
-    '/48 — ' +
+    '/48 - ' +
     escapeHtml_(maturityLabel) +
     '</p>' +
     '<p style="margin:12px 0 0;font-size:14px;color:rgba(255,255,255,0.75);">Primary pattern: ' +

@@ -259,7 +259,7 @@ function buildUserPrompt(answers, leadData, scoringResult, companyResearch) {
     '\n' +
     'Maturity Level: ' +
     (scoringResult.maturityLevel?.level ?? '') +
-    ' — ' +
+    ' - ' +
     (scoringResult.maturityLevel?.label ?? '') +
     '\nPrimary Pattern: ' +
     primaryPatternString(scoringResult) +
@@ -269,7 +269,7 @@ function buildUserPrompt(answers, leadData, scoringResult, companyResearch) {
     (scoringResult.primaryConstraint || '') +
     '\nAgent Readiness: ' +
     (scoringResult.agentReadiness?.level ?? '') +
-    ' — ' +
+    ' - ' +
     (scoringResult.agentReadiness?.label ?? '') +
     '\n\nKey answer signals:\n' +
     'Q4 decision capture: ' +
@@ -306,7 +306,7 @@ function getFallbackNarrative(scoringResult, leadData) {
   const level = scoringResult?.maturityLevel?.level || 3;
   const ml = scoringResult?.maturityLevel || {};
   const insights = {
-    1: 'The most important first step is not tooling — it is making operating context visible.',
+    1: 'The most important first step is not tooling - it is making operating context visible.',
     2: 'AI value is being created individually, but it is not yet captured organisationally.',
     3: 'Your tools are ahead of your processes. The primary constraint is decision memory, not more software.',
     4: 'You have the foundation. The next step is embedding context and approval capture into recurring workflows.',
@@ -316,7 +316,7 @@ function getFallbackNarrative(scoringResult, leadData) {
   const company = leadData?.company_name || 'your organisation';
   const label = ml.label || 'Governed Tool Adoption';
   const display = buildDisplayScores(scoringResult);
-  const total = display.total ?? '—';
+  const total = display.total ?? '-';
   const dims = scoringResult?.dimensions || {};
   const weakest = DIM_LABELS[scoringResult?.weakestDimension] || 'Process & Execution';
   const strongest = DIM_LABELS[scoringResult?.strongestDimension] || 'Technology & AI';
@@ -333,7 +333,7 @@ function getFallbackNarrative(scoringResult, leadData) {
       total +
       '/' +
       SCORE_DISPLAY_MAX +
-      ' on the AI Operating Intelligence Diagnostic — Level ' +
+      ' on the AI Operating Intelligence Diagnostic - Level ' +
       level +
       ' (' +
       label +
@@ -367,15 +367,15 @@ function getFallbackNarrative(scoringResult, leadData) {
         ' may slow because knowledge and customer context are not consistently captured in systems others can use (Knowledge & Context: ' +
         display.knowledge +
         '/17).',
-      'Teams likely spend significant time coordinating across tools, senior people, and manual follow-ups — especially where process score is ' +
+      'Teams likely spend significant time coordinating across tools, senior people, and manual follow-ups - especially where process score is ' +
         display.process +
         '/16.',
-      'Approvals and decisions may be delayed when reasoning and context are not logged in an auditable way — a common signal at Level ' +
+      'Approvals and decisions may be delayed when reasoning and context are not logged in an auditable way - a common signal at Level ' +
         level +
         '.',
       'AI may be creating individual productivity gains that are not captured organisationally. Agent readiness is "' +
         (ar.label || 'Copilot-Ready') +
-        '" — ' +
+        '" - ' +
         (ar.recommendation || 'start with governed copilots before autonomous agents.'),
     ].join('|||'),
     agent_readiness_narrative:
@@ -396,7 +396,7 @@ function getFallbackNarrative(scoringResult, leadData) {
       label +
       '), focus on ' +
       weakest +
-      ' first — not additional tools. ' +
+      ' first - not additional tools. ' +
       insight +
       ' Practical next steps: document one high-friction workflow end-to-end; capture decisions with owner, reasoning, and follow-up; introduce human-in-the-loop AI only where approvals and context already exist.',
     roadmap_month1:
@@ -404,13 +404,13 @@ function getFallbackNarrative(scoringResult, leadData) {
       weakest +
       ' and list every point where context, approvals, or knowledge are lost.',
     roadmap_month2:
-      'Introduce governed capture for decisions, exceptions, and AI outputs in that workflow — with named owners and retrieval paths.',
+      'Introduce governed capture for decisions, exceptions, and AI outputs in that workflow - with named owners and retrieval paths.',
     roadmap_month3:
       'Pilot a human-in-the-loop agent or leadership intelligence brief on that workflow, with audit trails aligned to your ' +
       (ar.label || 'current') +
       ' readiness level.',
     kautilyan_section:
-      'Kautilyan helps growing businesses map operating reality, embed context into workflows, and deploy governed AI with measurable outcomes — typically proving value on one workflow in 45 days. For Level ' +
+      'Kautilyan helps growing businesses map operating reality, embed context into workflows, and deploy governed AI with measurable outcomes - typically proving value on one workflow in 45 days. For Level ' +
       level +
       ' organisations, we start with an Operating Reality Diagnosis before any agent deployment.',
     next_step_narrative:
@@ -474,7 +474,7 @@ async function callGeminiForReport(userPrompt) {
 }
 
 /**
- * Send report email via Google Apps Script (GmailApp) — see LeadsCapture.gs.
+ * Send report email via Google Apps Script (GmailApp) - see LeadsCapture.gs.
  */
 /**
  * @returns {{ ok: boolean, error: string|null }}
@@ -487,7 +487,7 @@ async function sendReportEmailViaGAS(leadData, scoringResult, responseId) {
   ).trim();
 
   if (!webhookUrl) {
-    const err = 'GAS_EMAIL_WEBHOOK_URL / GOOGLE_SCRIPT_URL not set — email skipped.';
+    const err = 'GAS_EMAIL_WEBHOOK_URL / GOOGLE_SCRIPT_URL not set - email skipped.';
     console.warn('[submit-assessment]', err);
     return { ok: false, error: err };
   }
@@ -495,7 +495,7 @@ async function sendReportEmailViaGAS(leadData, scoringResult, responseId) {
   const toEmail = leadEmail(leadData);
   if (!toEmail) {
     const err = 'Missing recipient work_email.';
-    console.error('[submit-assessment] Cannot send email —', err);
+    console.error('[submit-assessment] Cannot send email -', err);
     return { ok: false, error: err };
   }
 
@@ -515,7 +515,7 @@ async function sendReportEmailViaGAS(leadData, scoringResult, responseId) {
       companyName: leadData.company_name,
       totalScore: display.total,
       totalScoreMax: display.maxTotal,
-      maturityLabel: `Level ${ml.level} — ${ml.label}`,
+      maturityLabel: `Level ${ml.level} - ${ml.label}`,
       primaryPattern: pp ? (pp.label || null) : null,
       level: ml.level,
       agentReadinessLevel: ar.level,
@@ -600,7 +600,7 @@ async function sendAssessmentLeadToGAS(leadData, scoringResult, responseId) {
       teamSize: leadData.employee_count || '',
       industry: leadData.industry || '',
       biggestChallenge: leadData.biggest_challenge || '',
-      maturityLabel: `Level ${ml.level || 3} — ${ml.label || 'Governed Tool Adoption'}`,
+      maturityLabel: `Level ${ml.level || 3} - ${ml.label || 'Governed Tool Adoption'}`,
       agentReadinessLevel: ar.level || '',
       primaryPattern: pp ? (pp.label || pp.id || '') : '',
       totalScore: display.total,

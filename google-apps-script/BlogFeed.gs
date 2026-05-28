@@ -1,5 +1,5 @@
 /**
- * Kautilyan Blog Feed — Google Apps Script
+ * Kautilyan Blog Feed - Google Apps Script
  *
  * 1. Create a Google Sheet with tab "Blogs" (see BLOG_SHEET_SETUP.md)
  * 2. Paste this script in Extensions → Apps Script

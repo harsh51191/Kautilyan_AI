@@ -1,4 +1,4 @@
-/* Blog Rich Blocks — A2UI-inspired allowlisted component catalog */
+/* Blog Rich Blocks - A2UI-inspired allowlisted component catalog */
 (function (global) {
   'use strict';
 

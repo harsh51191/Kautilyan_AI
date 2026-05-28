@@ -1,5 +1,5 @@
 /**
- * Kautilyan Blog — Gemini enhancement on publish
+ * Kautilyan Blog - Gemini enhancement on publish
  *
  * Setup:
  * 1. Add this file alongside BlogFeed.gs in the same Apps Script project

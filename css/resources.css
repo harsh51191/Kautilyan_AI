@@ -1,4 +1,4 @@
-/* Page 5 — Resources */
+/* Page 5 - Resources */
 
 .nav-links a.is-current { color: #fff; }
 
@@ -57,7 +57,7 @@
   }
 }
 
-/* Skeleton cards — visible while feed loads */
+/* Skeleton cards - visible while feed loads */
 .blog-list-card--skeleton {
   pointer-events: none;
   min-height: 200px;

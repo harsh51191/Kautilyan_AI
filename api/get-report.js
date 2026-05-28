@@ -54,7 +54,7 @@ module.exports = async function handler(req, res) {
 
   const { data: responseRow, error: responseErr } = await supabase
     .from('assessment_responses')
-    .select('report_generated, report_id')
+    .select('report_generated, report_id, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, name, work_email, company_name, role, employee_count, industry, biggest_challenge')
     .eq('id', id)
     .single();
 
@@ -64,8 +64,37 @@ module.exports = async function handler(req, res) {
     return;
   }
 
+  const responseSnapshot = responseRow
+    ? {
+        answers: {
+          q1: responseRow.q1,
+          q2: responseRow.q2,
+          q3: responseRow.q3,
+          q4: responseRow.q4,
+          q5: responseRow.q5,
+          q6: responseRow.q6,
+          q7: responseRow.q7,
+          q8: responseRow.q8,
+          q9: responseRow.q9,
+          q10: responseRow.q10,
+          q11: responseRow.q11,
+          q12: responseRow.q12,
+        },
+        leadData: {
+          respondent_name: responseRow.name || '',
+          work_email: responseRow.work_email || '',
+          company_name: responseRow.company_name || '',
+          company_website: '',
+          role: responseRow.role || '',
+          employee_count: responseRow.employee_count || '',
+          industry: responseRow.industry || '',
+          biggest_challenge: responseRow.biggest_challenge || '',
+        },
+      }
+    : null;
+
   if (!responseRow || !responseRow.report_generated) {
-    json(res, 200, { ready: false });
+    json(res, 200, { ready: false, responseSnapshot });
     return;
   }
 
@@ -87,7 +116,7 @@ module.exports = async function handler(req, res) {
 
   if (!reportRow) {
     // Response says generated but report not readable yet (eventual consistency / race).
-    json(res, 200, { ready: false });
+    json(res, 200, { ready: false, responseSnapshot });
     return;
   }
 
@@ -99,7 +128,7 @@ module.exports = async function handler(req, res) {
     ...reportFields
   } = reportRow;
 
-  json(res, 200, { ready: true, report: reportFields, reportMeta });
+  json(res, 200, { ready: true, report: reportFields, reportMeta, responseSnapshot });
 };
 
 module.exports.config = {

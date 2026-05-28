@@ -1,5 +1,5 @@
 /**
- * Kautilyan lead capture — append + update same row by submissionId
+ * Kautilyan lead capture - append + update same row by submissionId
  *
  * Sheet row 1 headers (add Submission ID as column N if missing):
  * Timestamp | Name | Email | Phone | Company | Role | Team Size | Revenue | Pain Points | Heard From | Source | Score | Message | Submission ID
@@ -10,7 +10,7 @@
  *
  * Assessment (from Vercel api/submit-assessment.js):
  *   { type: 'assessment_email', data: { toEmail, name, companyName, totalScore, totalScoreMax, ... } }
- *   { type: 'assessment_lead', data: { ... } }  — optional sheet log (wire in API when needed)
+ *   { type: 'assessment_lead', data: { ... } }  - optional sheet log (wire in API when needed)
  */
 
 function doPost(e) {
@@ -72,7 +72,7 @@ function createLeadRow_(sheet, data) {
     data.heardFrom || '',
     data.source || 'stage0_booking',
     data.score || '',
-    data.message || 'Contact submitted — clarification pending',
+    data.message || 'Contact submitted - clarification pending',
     submissionId,
   ]);
 
@@ -175,7 +175,7 @@ function sendAssessmentReportEmail_(emailData) {
 
   var name = escapeHtml_(emailData.name || 'there');
   var companyName = escapeHtml_(emailData.companyName || 'your organisation');
-  var totalScore = emailData.totalScore != null ? emailData.totalScore : '—';
+  var totalScore = emailData.totalScore != null ? emailData.totalScore : '-';
   var totalScoreMax = emailData.totalScoreMax != null ? emailData.totalScoreMax : 50;
   var maturityLabel = escapeHtml_(emailData.maturityLabel || '');
   var primaryPattern = emailData.primaryPattern ? escapeHtml_(emailData.primaryPattern) : '';
@@ -185,7 +185,7 @@ function sendAssessmentReportEmail_(emailData) {
   var siteUrl = String(emailData.siteUrl || 'https://www.kautilyan.com');
 
   var levelInsights = {
-    1: 'The most important first step is not tooling — it is making operating context visible.',
+    1: 'The most important first step is not tooling - it is making operating context visible.',
     2: 'AI value is being created individually, but it is not yet captured organisationally.',
     3: 'Your tools are ahead of your processes. The primary constraint is decision memory, not more software.',
     4: 'You have the foundation. The next step is embedding context and approval capture into recurring workflows.',
@@ -193,7 +193,7 @@ function sendAssessmentReportEmail_(emailData) {
   };
   var insight = levelInsights[level] || levelInsights[3];
 
-  var subject = 'Your AI Operating Intelligence Report — ' + (emailData.companyName || 'your organisation');
+  var subject = 'Your AI Operating Intelligence Report - ' + (emailData.companyName || 'your organisation');
 
   var patternLine = primaryPattern
     ? '<p style="margin:0;font-size:13px;color:rgba(255,255,255,0.5);">Pattern: ' + primaryPattern + '</p>'

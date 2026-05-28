@@ -6,7 +6,7 @@
   },
   "ai-execution-stack": {
     "src": "https://drive.google.com/file/d/1pY90i4wuqM7tKwejxYjOycHkGR3ncAjz/view?usp=sharing",
-    "caption": "The AI execution stack — prompts, agents, workflows, and memory",
+    "caption": "The AI execution stack - prompts, agents, workflows, and memory",
     "insertAfter": "Here's the actual stack."
   },
   "why-ai-mandates-fail": {
@@ -26,7 +26,7 @@
   },
   "cio-ai-mandate-execution-gap": {
     "src": "https://drive.google.com/file/d/1BsTdkS79pyYq5HtLAXJEArJNP6S-Q2Rf/view?usp=sharing",
-    "caption": "From AI mandate and budget to first proof — a CIO path",
+    "caption": "From AI mandate and budget to first proof - a CIO path",
     "insertAfter": "Here's what's actually happening."
   }
 }

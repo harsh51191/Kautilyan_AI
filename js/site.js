@@ -1,4 +1,4 @@
-/* Shared site JS — CONFIG, modal, nav, tabs, fade-up */
+/* Shared site JS - CONFIG, modal, nav, tabs, fade-up */
 (function () {
   'use strict';
 
@@ -80,7 +80,7 @@
   /** Fire-and-forget (contact form, resource downloads). */
   window.submitToSheets = function (data) {
     if (!(CONFIG.GOOGLE_SCRIPT_URL || '').trim()) {
-      console.warn('[Kautilyan] GOOGLE_SCRIPT_URL is not set — row not sent:', data);
+      console.warn('[Kautilyan] GOOGLE_SCRIPT_URL is not set - row not sent:', data);
       return false;
     }
     window.submitToSheetsAsync(data).catch(function (err) {

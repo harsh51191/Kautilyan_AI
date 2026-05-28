@@ -1,5 +1,5 @@
 # Kautilyan: AI Operating Intelligence Diagnostic
-## Cursor Implementation Spec — Revised for Actual File Structure
+## Cursor Implementation Spec - Revised for Actual File Structure
 
 ---
 
@@ -8,13 +8,13 @@
 The original spec assumed React + Vite + TypeScript. That is WRONG.
 
 The actual Kautilyan_Website is:
-- **Vanilla HTML / CSS / JS** — one .html + one .css + one .js per page
+- **Vanilla HTML / CSS / JS** - one .html + one .css + one .js per page
 - **Vercel** for hosting (vercel.json exists)
 - **Supabase** for backend storage (supabase/migrations/ folder exists)
 - **Google Apps Script** for leads/blog automation (google-apps-script/ folder)
 - **No build step, no npm, no JSX, no TypeScript**
 
-Confirmed layout (two different “assessment” flows — do not conflate):
+Confirmed layout (two different “assessment” flows - do not conflate):
 ```
 Kautilyan_Website/
   assessment.html          ← AI Operating Intelligence Diagnostic (12 Q + report)
@@ -40,14 +40,14 @@ Kautilyan_Website/
 1. Save this file in your Kautilyan_Website project root as `ASSESSMENT_SPEC.md`
 2. Open Cursor Agent (Cmd+Shift+I)
 3. Reference it with `@ASSESSMENT_SPEC.md` in each prompt
-4. Run the 8 prompts IN ORDER — each builds on the previous
+4. Run the 8 prompts IN ORDER - each builds on the previous
 
 ---
 
 ## ARCHITECTURE OVERVIEW
 
 The assessment is a **single-page experience** inside `assessment.html`.
-It has 4 views controlled by JavaScript show/hide — no page navigation:
+It has 4 views controlled by JavaScript show/hide - no page navigation:
 
 ```
 View 1: LANDING     → hero, promise, "Start diagnostic" button
@@ -113,7 +113,7 @@ const QUESTIONS = [
     id: 'q4', section: 'knowledge', sectionLabel: 'Knowledge & Context', sectionNum: 1,
     question: 'Where are important decisions and their reasoning captured?',
     options: [
-      { value: 1, label: 'A', text: 'Verbally, in meetings, or on WhatsApp — rarely documented' },
+      { value: 1, label: 'A', text: 'Verbally, in meetings, or on WhatsApp - rarely documented' },
       { value: 2, label: 'B', text: 'In email threads or chats that are hard to retrieve later' },
       { value: 3, label: 'C', text: 'In shared documents or tools, but inconsistently' },
       { value: 4, label: 'D', text: 'In systems that capture the decision, reasoning, owner, context, and follow-up action' },
@@ -144,15 +144,15 @@ const QUESTIONS = [
     id: 'q7', section: 'process', sectionLabel: 'Process & Execution', sectionNum: 2,
     question: 'When approvals happen, can you later see who approved, why, with what context, and what happened next?',
     options: [
-      { value: 1, label: 'A', text: 'No — approvals are mostly verbal or informal' },
-      { value: 2, label: 'B', text: 'Partially — approvals are traceable but reasoning is usually missing' },
-      { value: 3, label: 'C', text: 'Mostly — approvals are logged, but context and outcomes are incomplete' },
-      { value: 4, label: 'D', text: 'Yes — approvals are governed, contextual, auditable, and linked to outcomes' },
+      { value: 1, label: 'A', text: 'No - approvals are mostly verbal or informal' },
+      { value: 2, label: 'B', text: 'Partially - approvals are traceable but reasoning is usually missing' },
+      { value: 3, label: 'C', text: 'Mostly - approvals are logged, but context and outcomes are incomplete' },
+      { value: 4, label: 'D', text: 'Yes - approvals are governed, contextual, auditable, and linked to outcomes' },
     ],
   },
   {
     id: 'q8', section: 'process', sectionLabel: 'Process & Execution', sectionNum: 2,
-    question: 'When important business signals change — customer risk, delivery delay, revenue leakage, SLA breach — how does the organisation respond?',
+    question: 'When important business signals change - customer risk, delivery delay, revenue leakage, SLA breach - how does the organisation respond?',
     options: [
       { value: 1, label: 'A', text: 'Someone notices manually and escalates' },
       { value: 2, label: 'B', text: 'Dashboards exist, but people must interpret and act' },
@@ -185,7 +185,7 @@ const QUESTIONS = [
     id: 'q11', section: 'technology', sectionLabel: 'Technology, AI & Agent Readiness', sectionNum: 3,
     question: 'When work moves across CRM, ERP, email, documents, project tools, or chat, does context move with it?',
     options: [
-      { value: 1, label: 'A', text: 'No — systems operate independently' },
+      { value: 1, label: 'A', text: 'No - systems operate independently' },
       { value: 2, label: 'B', text: 'Some manual export/import or copy-paste is required' },
       { value: 3, label: 'C', text: 'Some integrations exist, but context does not flow reliably' },
       { value: 4, label: 'D', text: 'Systems are connected and context flows with minimal manual effort' },
@@ -275,9 +275,9 @@ const PATTERN_RULES = [
   { id: 'shadow_ai',                  label: 'Shadow AI',                      description: 'People use AI individually, but outputs are not captured or reused by the organisation.',                             detect: (a,d) => a.q9 >= 2 && a.q10 <= 2 },
   { id: 'tool_heavy_process_light',   label: 'Tool-heavy, Process-light',      description: 'Strong tool adoption, but recurring workflows, approvals, and decisions are still manual.',                            detect: (a,d) => d.technology >= 11 && d.process <= 9 },
   { id: 'dashboard_rich_decision_poor',label:'Dashboard-rich, Decision-poor',  description: 'Visibility exists across systems, but decision reasoning is not captured for future use.',                            detect: (a,d) => a.q3 >= 3 && a.q4 <= 2 },
-  { id: 'founder_dependent',          label: 'Founder-dependent',              description: 'Execution depends too heavily on senior people — creating a single point of failure.',                                  detect: (a,d) => a.q1 <= 2 && a.q3 <= 2 && a.q6 <= 2 },
-  { id: 'approval_risk',              label: 'Approval-risk',                  description: 'Approvals lack context, reasoning, or auditability — creating compliance and quality risk.',                          detect: (a,d) => a.q7 <= 2 },
-  { id: 'system_fragmented',          label: 'System-fragmented',              description: 'Context breaks as work moves across tools — creating repeated reconstruction effort.',                                  detect: (a,d) => a.q11 <= 2 },
+  { id: 'founder_dependent',          label: 'Founder-dependent',              description: 'Execution depends too heavily on senior people - creating a single point of failure.',                                  detect: (a,d) => a.q1 <= 2 && a.q3 <= 2 && a.q6 <= 2 },
+  { id: 'approval_risk',              label: 'Approval-risk',                  description: 'Approvals lack context, reasoning, or auditability - creating compliance and quality risk.',                          detect: (a,d) => a.q7 <= 2 },
+  { id: 'system_fragmented',          label: 'System-fragmented',              description: 'Context breaks as work moves across tools - creating repeated reconstruction effort.',                                  detect: (a,d) => a.q11 <= 2 },
   { id: 'ai_value_leakage',           label: 'AI Value Leakage',               description: 'AI creates individual value, but that value is not captured or reused at an organisational level.',                    detect: (a,d) => a.q9 >= 3 && a.q10 <= 2 },
   { id: 'agent_ready',                label: 'Agent-ready',                    description: 'Strong candidate for governed agent workflows across recurring processes.',                                             detect: (a,d) => a.q5 >= 3 && a.q7 >= 3 && a.q11 >= 3 && a.q12 >= 3 },
   { id: 'agent_fragile',              label: 'Agent-fragile',                  description: 'AI ambition is present, but governance or system integration is too weak for safe agent deployment.',                  detect: (a,d) => a.q9 >= 3 && (a.q7 <= 2 || a.q11 <= 2) },
@@ -292,7 +292,7 @@ function getRecommendedCTA(level) {
   const ctas = {
     1: { headline: 'Book a free AI Operating Awareness Session',          body: 'Identify where AI can reduce manual coordination, knowledge dependency, and repeated follow-ups.',                                          buttonText: 'Book Free Awareness Session' },
     2: { headline: 'Book a free Shadow AI Risk & Opportunity Review',     body: 'Understand where AI is already being used, where value is leaking, and what should be governed first.',                                      buttonText: 'Book Free Shadow AI Review'  },
-    3: { headline: 'Book a free 45-minute Operating Reality Diagnosis',   body: 'Map where your tools, teams, and workflows are losing context — and identify the highest-leverage first workflow.',                          buttonText: 'Book Free Diagnosis'         },
+    3: { headline: 'Book a free 45-minute Operating Reality Diagnosis',   body: 'Map where your tools, teams, and workflows are losing context - and identify the highest-leverage first workflow.',                          buttonText: 'Book Free Diagnosis'         },
     4: { headline: 'Start Stage 1: Operating Reality Blueprint',          body: 'We map your workflows, decision points, systems, and first 90-day implementation path.',                                                     buttonText: 'Request Blueprint Scope'     },
     5: { headline: 'Book a Kautilyan Strategy Call',                      body: 'Explore how to scale governed agents, institutional memory, and operating intelligence across your teams.',                                   buttonText: 'Book Strategy Call'          },
   };
@@ -393,7 +393,7 @@ SITE_URL=https://www.kautilyan.com
 
 ---
 
-## CURSOR PROMPT 1 — Create js/assessment.js
+## CURSOR PROMPT 1 - Create js/assessment.js
 
 ```
 I'm building the AI Operating Intelligence Diagnostic for the Kautilyan website.
@@ -406,11 +406,11 @@ Create the file js/assessment.js. This file controls the entire assessment exper
 
 The file must contain these sections in order:
 
-1. CONSTANTS — paste the QUESTIONS array, ROLE_OPTIONS, EMPLOYEE_OPTIONS, and CHALLENGE_OPTIONS exactly from the ASSESSMENT_SPEC.md reference section.
+1. CONSTANTS - paste the QUESTIONS array, ROLE_OPTIONS, EMPLOYEE_OPTIONS, and CHALLENGE_OPTIONS exactly from the ASSESSMENT_SPEC.md reference section.
 
-2. SCORING ENGINE — paste the complete scoring engine functions (getDimensionScores, getAgentReadiness, getMaturityLevel, getPatterns, getRecommendedCTA, getPrimaryConstraint, scoreAssessment) exactly from the ASSESSMENT_SPEC.md reference section.
+2. SCORING ENGINE - paste the complete scoring engine functions (getDimensionScores, getAgentReadiness, getMaturityLevel, getPatterns, getRecommendedCTA, getPrimaryConstraint, scoreAssessment) exactly from the ASSESSMENT_SPEC.md reference section.
 
-3. STATE — a simple state object:
+3. STATE - a simple state object:
    const state = {
      answers: {},           // {q1: 2, q2: 3, ...}
      currentQuestion: 0,    // 0-indexed
@@ -420,17 +420,17 @@ The file must contain these sections in order:
    };
    On page load: restore state.answers from sessionStorage['kautilyan_answers'] if present.
 
-4. VIEW CONTROLLER — functions to show/hide the four views:
-   - showView(viewId) — hides all views (landing, questions, lead-form, results), shows the one with id viewId
+4. VIEW CONTROLLER - functions to show/hide the four views:
+   - showView(viewId) - hides all views (landing, questions, lead-form, results), shows the one with id viewId
    - Views are div elements with ids: view-landing, view-questions, view-lead-form, view-results
 
-5. QUESTION RENDERER — function renderQuestion(index):
+5. QUESTION RENDERER - function renderQuestion(index):
    - Updates DOM: question number, section label, section progress dots, question text, 4 option buttons
    - Updates progress bar: percentage = ((index + 1) / 12) * 100
    - On option button click: setAnswer(questionId, value) → wait 400ms → advance
    - Last question (index 11): advance to showView('view-lead-form')
 
-6. KEYBOARD HANDLER — document keydown listener:
+6. KEYBOARD HANDLER - document keydown listener:
    - Keys 'a'/'A' → select option 0
    - Keys 'b'/'B' → select option 1
    - Keys 'c'/'C' → select option 2
@@ -438,18 +438,18 @@ The file must contain these sections in order:
    - Backspace/ArrowLeft → go to previous question (if index > 0)
    - Only active when view-questions is visible
 
-7. SECTION TRANSITION — when moving from Q4→Q5 and Q8→Q9:
+7. SECTION TRANSITION - when moving from Q4→Q5 and Q8→Q9:
    - Show a full-screen section intro overlay for 1.5 seconds
    - The overlay shows the new section name and a brief description
    - Then auto-hide and render the next question
 
-8. LEAD FORM HANDLER — function setupLeadForm():
+8. LEAD FORM HANDLER - function setupLeadForm():
    - Dynamically populates the role, employee count, and challenge dropdowns from the constants
    - On form submit: validate all required fields
    - On validation pass: collect form data into state.leadData
-   - Call submitAssessment() — see below
+   - Call submitAssessment() - see below
 
-9. SUBMIT FUNCTION — async function submitAssessment():
+9. SUBMIT FUNCTION - async function submitAssessment():
    - Compute: state.scoringResult = scoreAssessment(state.answers)
    - Save to sessionStorage
    - Show loading state on the submit button ("Generating your report...")
@@ -457,7 +457,7 @@ The file must contain these sections in order:
    - On success: state.reportId = response.responseId → showView('view-results') → renderResults()
    - On error: show inline error message, restore button text
 
-10. RESULTS RENDERER — function renderResults():
+10. RESULTS RENDERER - function renderResults():
     - Uses state.scoringResult and state.reportId
     - Renders the score card, dimension bars, patterns, agent readiness meter
     - Immediately renders static scoring data (does not wait for LLM report)
@@ -466,19 +466,19 @@ The file must contain these sections in order:
     - If poll times out: show "Your full report has been emailed to you."
     - Renders the recommended CTA block at the bottom
 
-11. INIT — DOMContentLoaded listener:
+11. INIT - DOMContentLoaded listener:
     - Call setupLeadForm()
     - Attach "Start Diagnostic" button click → showView('view-questions') → renderQuestion(0)
     - Attach "Retake" button click → clear sessionStorage, reset state, showView('view-landing')
     - Check sessionStorage on load: if answers exist and count > 0, show a "Resume" banner on the landing view
 
 All DOM manipulation uses vanilla JS (querySelector, innerHTML, addEventListener). No jQuery.
-Do not use ES modules (no import/export) — this file is loaded with a plain script tag.
+Do not use ES modules (no import/export) - this file is loaded with a plain script tag.
 ```
 
 ---
 
-## CURSOR PROMPT 2 — Replace assessment.html
+## CURSOR PROMPT 2 - Replace assessment.html
 
 ```
 Replace the entire content of assessment.html with a complete implementation.
@@ -496,13 +496,13 @@ The four view divs (all inside a main container, only one visible at a time):
 
 ── VIEW 1: id="view-landing" ──
 - Tag line: "Free · 7 minutes · Instant report"
-- H1: "Is your company using AI — or building operating intelligence?"
+- H1: "Is your company using AI - or building operating intelligence?"
 - Subheadline: "Take the free AI Operating Intelligence Diagnostic to see where your organisation stands across knowledge capture, execution, governance, and agent readiness."
 - Three pain cards in a row (no emojis, just clean text cards):
   Card 1: "Why does everything still need me?" / Founders & CEOs
   Card 2: "Why do teams keep losing context?" / COOs & Ops Leaders  
   Card 3: "Why are we using AI tools but still not moving faster?" / Digital & AI Leads
-- "What you will discover" — 4 numbered items
+- "What you will discover" - 4 numbered items
 - Button id="btn-start": "Start the diagnostic →"
 - Supporting line: "Built for founders, CEOs, COOs, and business leaders."
 
@@ -527,21 +527,21 @@ The four view divs (all inside a main container, only one visible at a time):
   - name="work_email" (email, required, label "Work email")
   - name="company_name" (text, required, label "Company name")
   - name="company_website" (url, optional, label "Company website", placeholder "https://")
-  - name="role" (select, required, label "Your role") — options populated by JS
-  - name="employee_count" (select, required, label "Team size") — options populated by JS
+  - name="role" (select, required, label "Your role") - options populated by JS
+  - name="employee_count" (select, required, label "Team size") - options populated by JS
   - name="industry" (text, required, label "Industry")
-  - name="biggest_challenge" (select, required, label "Biggest operating challenge") — options populated by JS
+  - name="biggest_challenge" (select, required, label "Biggest operating challenge") - options populated by JS
 - Each field has an error span below it (class="field-error", hidden by default)
 - Submit button id="btn-submit": "Get my free report →"
 - Privacy line: "Your answers are used only to personalise your report."
 
 ── VIEW 4: id="view-results" ──
-Section A — Score card (always shown immediately):
+Section A - Score card (always shown immediately):
 - id="result-company-name"
 - id="result-respondent"  
 - id="result-date"
 - Large score: id="result-total-score" (e.g. "29 / 48")
-- Level badge: id="result-level-badge" (e.g. "Level 3 — Governed Tool Adoption")
+- Level badge: id="result-level-badge" (e.g. "Level 3 - Governed Tool Adoption")
 - Three dimension bars: each has a label, score fraction, and a fill bar
   ids: dim-knowledge-score, dim-knowledge-bar, dim-process-score, dim-process-bar, dim-technology-score, dim-technology-bar
 - Patterns: id="result-patterns-container" (badges rendered by JS)
@@ -549,8 +549,8 @@ Section A — Score card (always shown immediately):
 - Primary constraint line: id="result-primary-constraint"
 - CTA block: id="result-cta-block" (populated by JS based on level)
 
-Section B — Narrative (shown after LLM report loads, or shows loading state):
-- id="report-loading" — "Building your full report..." (shown while polling)
+Section B - Narrative (shown after LLM report loads, or shows loading state):
+- id="report-loading" - "Building your full report..." (shown while polling)
 - id="section-where-you-are" with id="content-where-you-are"
 - id="section-cost-analysis" with four cost cards:
   ids: cost-knowledge-drain, cost-coordination-tax, cost-decision-latency, cost-ai-value-leakage
@@ -573,7 +573,7 @@ Meta tags for this page:
 
 ---
 
-## CURSOR PROMPT 3 — Replace css/assessment.css
+## CURSOR PROMPT 3 - Replace css/assessment.css
 
 ```
 Replace the entire content of css/assessment.css.
@@ -642,10 +642,10 @@ No emojis in CSS content properties.
 
 ---
 
-## CURSOR PROMPT 4 — Create api/submit-assessment.js (Vercel serverless)
+## CURSOR PROMPT 4 - Create api/submit-assessment.js (Vercel serverless)
 
 ```
-Create api/submit-assessment.js — a Vercel serverless function (Node.js, CommonJS).
+Create api/submit-assessment.js - a Vercel serverless function (Node.js, CommonJS).
 
 It handles POST /api/submit-assessment.
 
@@ -737,10 +737,10 @@ CORS headers on all responses:
 
 ---
 
-## CURSOR PROMPT 5 — Create api/get-report.js (Vercel serverless)
+## CURSOR PROMPT 5 - Create api/get-report.js (Vercel serverless)
 
 ```
-Create api/get-report.js — a Vercel serverless GET endpoint.
+Create api/get-report.js - a Vercel serverless GET endpoint.
 
 Handles GET /api/get-report?id={responseId}
 
@@ -757,7 +757,7 @@ Use CommonJS module.exports.
 
 ---
 
-## CURSOR PROMPT 6 — Email delivery via Google Apps Script
+## CURSOR PROMPT 6 - Email delivery via Google Apps Script
 
 ```
 Add email delivery inside api/submit-assessment.js.
@@ -765,14 +765,14 @@ Add email delivery inside api/submit-assessment.js.
 We are NOT using Resend. Email is sent via Google Apps Script (GmailApp) using the
 existing GAS web app already in the project (google-apps-script/LeadsCapture.gs).
 
-PART A — Add sendReportEmailViaGAS to api/submit-assessment.js
+PART A - Add sendReportEmailViaGAS to api/submit-assessment.js
 
 Add this function at the bottom of api/submit-assessment.js:
 
 async function sendReportEmailViaGAS(leadData, scoringResult, responseId) {
   const webhookUrl = process.env.GAS_EMAIL_WEBHOOK_URL;
   if (!webhookUrl) {
-    console.warn('GAS_EMAIL_WEBHOOK_URL not set — email skipped');
+    console.warn('GAS_EMAIL_WEBHOOK_URL not set - email skipped');
     return;
   }
 
@@ -785,7 +785,7 @@ async function sendReportEmailViaGAS(leadData, scoringResult, responseId) {
       name:                leadData.name,
       companyName:         leadData.company_name,
       totalScore:          scoringResult.totalScore,
-      maturityLabel:       `Level ${scoringResult.maturityLevel.level} — ${scoringResult.maturityLevel.label}`,
+      maturityLabel:       `Level ${scoringResult.maturityLevel.level} - ${scoringResult.maturityLevel.label}`,
       primaryPattern:      scoringResult.primaryPattern ? scoringResult.primaryPattern.label : null,
       level:               scoringResult.maturityLevel.level,
       agentReadinessLevel: scoringResult.agentReadiness.level,
@@ -813,7 +813,7 @@ Then inside generateAndStoreReport, after updating report_generated=true, add:
   sendReportEmailViaGAS(leadData, scoringResult, responseId); // fire-and-forget, no await
 
 
-PART B — Update google-apps-script/LeadsCapture.gs
+PART B - Update google-apps-script/LeadsCapture.gs
 
 Open LeadsCapture.gs. It already has a doPost function. Merge assessment email routing into it.
 
@@ -849,14 +849,14 @@ function sendAssessmentReportEmail(data) {
   } = data;
 
   const levelInsights = {
-    1: 'The most important first step is not tooling — it is making operating context visible.',
+    1: 'The most important first step is not tooling - it is making operating context visible.',
     2: 'AI value is being created individually, but it is not yet captured organisationally.',
     3: 'Your tools are ahead of your processes. The primary constraint is decision memory, not more software.',
     4: 'You have the foundation. The next step is embedding context and approval capture into recurring workflows.',
     5: 'You are positioned to deploy governed agents. Ensure governance keeps pace with capability.',
   };
   const insight = levelInsights[level] || levelInsights[3];
-  const subject = 'Your AI Operating Intelligence Report — ' + companyName;
+  const subject = 'Your AI Operating Intelligence Report - ' + companyName;
 
   const htmlBody =
     '<!DOCTYPE html><html><body style="margin:0;padding:0;background:#F7F7FA;font-family:Arial,sans-serif;">' +
@@ -900,7 +900,7 @@ function sendAssessmentReportEmail(data) {
 }
 
 
-PART C — Redeploy the Apps Script web app
+PART C - Redeploy the Apps Script web app
 
 After saving LeadsCapture.gs:
 1. In Google Apps Script: Deploy → Manage deployments
@@ -917,12 +917,12 @@ The GAS web app must be deployed with:
 
 ---
 
-## CURSOR PROMPT 7 — Update vercel.json for /api routes
+## CURSOR PROMPT 7 - Update vercel.json for /api routes
 
 ```
 Update vercel.json to ensure the /api serverless functions work correctly.
 
-Current vercel.json content is unknown — look at the existing file first.
+Current vercel.json content is unknown - look at the existing file first.
 
 Add or merge these settings:
 - rewrites or routes: ensure /api/* routes go to the serverless functions
@@ -942,13 +942,13 @@ Do not break existing static file serving.
 
 ---
 
-## CURSOR PROMPT 8 — Add CTAs to existing pages
+## CURSOR PROMPT 8 - Add CTAs to existing pages
 
 ```
 Add "Take Assessment" CTAs to the following existing pages. 
-Make minimal edits — add only the CTA elements, do not change anything else.
+Make minimal edits - add only the CTA elements, do not change anything else.
 
-1. index.html — hero section
+1. index.html - hero section
 Find the primary hero CTA button (the "Book Free Diagnosis" button or equivalent).
 Add below it, as a secondary action:
 <a href="/assessment.html" class="assessment-cta-link">
@@ -967,14 +967,14 @@ Add this style to the inline styles or ask me to add it to css/site.css:
 }
 .assessment-cta-link:hover { color: #C9A84C; }
 
-2. pricing.html — below each stage card
+2. pricing.html - below each stage card
 After the Stage 0 "Book Free Diagnosis" description, add:
 <p style="margin-top:12px; font-size:13px;">
   Not sure which stage you are ready for? 
   <a href="/assessment.html" style="color:#C9A84C; text-decoration:none;">Take the free 7-minute diagnostic →</a>
 </p>
 
-3. how-it-works.html — after the SLOPE section
+3. how-it-works.html - after the SLOPE section
 Add a banner before the final CTA section:
 <div class="assessment-banner">
   <p>See where your organisation stands across all five SLOPE dimensions.</p>
@@ -1006,7 +1006,7 @@ Label: "Free Diagnostic" with a subtle indicator (a small dot or asterisk) to si
 
 Run through this after all prompts complete:
 
-- [ ] assessment.html loads cleanly — nav and footer match other pages
+- [ ] assessment.html loads cleanly - nav and footer match other pages
 - [ ] "Start Diagnostic" button shows View 2
 - [ ] All 12 questions render with correct text (spot-check Q1, Q7, Q12)
 - [ ] Option A/B/C/D keyboard shortcuts work

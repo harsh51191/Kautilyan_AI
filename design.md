@@ -1,4 +1,4 @@
-# Kautilyan — Visual Design System
+# Kautilyan - Visual Design System
 
 Design reference for **video production**, motion graphics, thumbnails, and social content. Values are extracted from the live website (`css/site.css`, page-specific CSS) so motion assets stay visually consistent with the site.
 
@@ -6,7 +6,7 @@ Design reference for **video production**, motion graphics, thumbnails, and soci
 
 ## Brand aesthetic (in one line)
 
-**Dark, premium operations-tech:** deep navy-black canvas, warm amber-to-violet gradient accents, soft atmospheric glows, glassy cards with gradient borders — confident and precise, not playful or corporate-blue.
+**Dark, premium operations-tech:** deep navy-black canvas, warm amber-to-violet gradient accents, soft atmospheric glows, glassy cards with gradient borders - confident and precise, not playful or corporate-blue.
 
 ### Mood keywords
 
@@ -174,7 +174,7 @@ radial-gradient(ellipse 55% 45% at 0% 80%, rgba(240,160,48,0.06), transparent 45
 
 ### Alt section tint
 
-`rgba(255,255,255,0.02)` full-width band — subtle lift between sections.
+`rgba(255,255,255,0.02)` full-width band - subtle lift between sections.
 
 ---
 
@@ -198,8 +198,8 @@ radial-gradient(ellipse 55% 45% at 0% 80%, rgba(240,160,48,0.06), transparent 45
 | Card title | Bricolage | 16–22px | 700 | -0.02em | 1.25 |
 | Body / lead | Inter | 15–18px | 400 | 0 | 1.65 |
 | UI / tabs | Inter | 13–15px | 600 | 0.04em (caps) | 1.45 |
-| Section label | Inter | 11px | 600 | **0.1em** | — |
-| Fine print | Inter | 12px | 500 | 0.02em | — |
+| Section label | Inter | 11px | 600 | **0.1em** | - |
+| Fine print | Inter | 12px | 500 | 0.02em | - |
 
 ### Section labels
 
@@ -209,8 +209,8 @@ radial-gradient(ellipse 55% 45% at 0% 80%, rgba(240,160,48,0.06), transparent 45
 
 ### Logo wordmark
 
-- **KAUTILYAN** — Bricolage Grotesque, bold, tracked slightly tight
-- Icon: ⚡ in a **gradient-filled** square (`border-radius` ~10px)
+- **KAUTILYAN** - Bricolage Grotesque, bold, tracked slightly tight
+- Icon: K in a **gradient-filled** square (`border-radius` ~10px)
 
 ---
 
@@ -457,7 +457,7 @@ Respect `prefers-reduced-motion`: no pulse, no fade-up transform, static orbs.
 ### Audio / pacing (optional)
 
 - Cut rhythm: allow **0.6s** beats after headline reveals (matches fade-up)
-- Avoid fast MTV cuts; align with “operating brief” tone — deliberate, clear
+- Avoid fast MTV cuts; align with “operating brief” tone - deliberate, clear
 
 ---
 
@@ -470,7 +470,7 @@ Respect `prefers-reduced-motion`: no pulse, no fade-up transform, static orbs.
 
 ---
 
-## Quick reference — hex swatch
+## Quick reference - hex swatch
 
 ```
 #080810  Background
@@ -499,4 +499,4 @@ Respect `prefers-reduced-motion`: no pulse, no fade-up transform, static orbs.
 
 ---
 
-*Last synced with website build — May 2026. Update this doc when CSS variables change.*
+*Last synced with website build - May 2026. Update this doc when CSS variables change.*

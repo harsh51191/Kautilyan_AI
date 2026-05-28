@@ -1,4 +1,4 @@
-/* How It Works — SLOPE cards: equal size by default, expand on hover or click */
+/* How It Works - SLOPE cards: equal size by default, expand on hover or click */
 (function () {
   var bar = document.getElementById('slope-bar');
   if (!bar) return;

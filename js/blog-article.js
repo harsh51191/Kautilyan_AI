@@ -114,7 +114,7 @@
 
     var cta = el('div', 'article-cta');
     cta.appendChild(textEl('h2', 'article-cta-title', 'Ready to map your first workflow?'));
-    var ctaP = textEl('p', '', 'Book a free 45-minute diagnosis — a written operating map of where AI can create measurable value. No pitch. No commitment.');
+    var ctaP = textEl('p', '', 'Book a free 45-minute diagnosis - a written operating map of where AI can create measurable value. No pitch. No commitment.');
     cta.appendChild(ctaP);
     var ctaBtn = el('button', 'btn-hero-primary js-open-modal');
     ctaBtn.type = 'button';
@@ -205,17 +205,17 @@
     return [
       {
         title: 'What is an AI Agent?',
-        desc: "Beginner's guide · 8 min — read online",
+        desc: "Beginner's guide · 8 min - read online",
         href: resourceGuideHref('resource-1-what-is-an-ai-agent.html'),
       },
       {
         title: 'The SLOPE Framework',
-        desc: 'Strategic framework · 10 min — read online',
+        desc: 'Strategic framework · 10 min - read online',
         href: resourceGuideHref('resource-2-slope-framework.html'),
       },
       {
         title: 'AI Implementation Roadmap',
-        desc: 'Implementation playbook · 12 min — read online',
+        desc: 'Implementation playbook · 12 min - read online',
         href: resourceGuideHref('resource-3-implementation-roadmap.html'),
       },
     ];

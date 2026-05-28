@@ -1,15 +1,15 @@
-# Kautilyan Landing Page — Setup Guide
+# Kautilyan Landing Page - Setup Guide
 
 ## What you have
-- `index.html` — main story, pricing, trust, **Request a call** form → Google Sheets (via Apps Script)
-- `stage0-intake.html` — Stage 0 pre-call intake after booking (`CONFIG.INTAKE_PATH`); keep in sync with `index.html` CONFIG
-- This file — configure `CONFIG`, Sheet columns, and deploy
+- `index.html` - main story, pricing, trust, **Request a call** form → Google Sheets (via Apps Script)
+- `stage0-intake.html` - Stage 0 pre-call intake after booking (`CONFIG.INTAKE_PATH`); keep in sync with `index.html` CONFIG
+- This file - configure `CONFIG`, Sheet columns, and deploy
 
 ---
 
 ## 1) Google Sheet + Apps Script (call requests & future leads)
 
-### 1a — Create the Sheet and header row
+### 1a - Create the Sheet and header row
 
 1. [sheets.google.com](https://sheets.google.com) → New spreadsheet → name it e.g. `Kautilyan Leads`.
 2. In **row 1**, paste these headers (exact order matches the script):
@@ -18,9 +18,9 @@
 Timestamp | Name | Email | Phone | Company | Role | Team Size | Revenue | Pain Points | Heard From | Source | Score | Message | Submission ID
 ```
 
-Column **N — Submission ID** links step 1 (contact) and step 2 (five questions) to the **same row**.
+Column **N - Submission ID** links step 1 (contact) and step 2 (five questions) to the **same row**.
 
-### 1b — Apps Script (`doPost`)
+### 1b - Apps Script (`doPost`)
 
 1. Sheet → **Extensions → Apps Script**.
 2. Copy the code from **`google-apps-script/LeadsCapture.gs`** in this repo (supports `action: create` and `action: update` by `submissionId`).
@@ -30,16 +30,16 @@ The booking flow uses **`submitToSheetsAsync`**, which reads the JSON response (
 
 After any script change: **Deploy → Manage deployments → Edit → New version → Deploy** (same `/exec` URL).
 
-Test the endpoint: open `YOUR_WEB_APP_URL?ping=1` in a browser — you should see `{"status":"ok","ping":true}`.
+Test the endpoint: open `YOUR_WEB_APP_URL?ping=1` in a browser - you should see `{"status":"ok","ping":true}`.
 
-### 1c — Deploy as Web App
+### 1c - Deploy as Web App
 
 1. **Deploy → New deployment** → type **Web app**.
 2. **Execute as:** Me  
 3. **Who has access:** Anyone  
 4. **Deploy** → authorize → copy the **Web App URL** (ends with `/exec`).
 
-### 1d — Paste URL into `index.html`
+### 1d - Paste URL into `index.html`
 
 In the `CONFIG` block at the bottom of `index.html`:
 
@@ -47,7 +47,7 @@ In the `CONFIG` block at the bottom of `index.html`:
 GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec',
 ```
 
-### 1e — Verify submissions
+### 1e - Verify submissions
 
 The browser uses `fetch(..., { mode: 'no-cors' })`, so the page **cannot** read the HTTP response. After testing **Request a call**, confirm a new row appears in the Sheet.
 
@@ -147,7 +147,7 @@ Alternative: `npx vercel dev` (matches production Vercel routing exactly).
 
 1. **Book Stage 0 Call** → form with **name, email, company** + **Pick your time**.
 2. **Pick your time** opens Cal.com in a **new tab** immediately, then saves a sheet row (timestamp + submission ID).
-3. When the sheet save succeeds, the **five prep questions** appear on the Kautilyan page (modal or `/stage0-intake`) — no second click.
+3. When the sheet save succeeds, the **five prep questions** appear on the Kautilyan page (modal or `/stage0-intake`) - no second click.
 4. Optional: Cal.com **Booking redirects** to `https://www.kautilyan.com/stage0-intake?scheduled=1` if you want the scheduler tab to land on the same questions page after booking.
 
 Deploy **`LeadsCapture.gs`** (`action: create` on contact, `action: update` on prep questions).
@@ -188,7 +188,7 @@ SHOW_NAV_PRICING: false,
 ## 5) Deploy + SEO
 
 - Put `index.html` behind Vercel (or similar); add your domain.
-- **Live site (canonical):** `https://www.kautilyan.com` — already set in page `<link rel="canonical">`, Open Graph URLs, `sitemap.xml`, `robots.txt`, `llms.txt`, and `CONFIG.SITE_URL` in `js/site.js` / `index.html`.
+- **Live site (canonical):** `https://www.kautilyan.com` - already set in page `<link rel="canonical">`, Open Graph URLs, `sitemap.xml`, `robots.txt`, `llms.txt`, and `CONFIG.SITE_URL` in `js/site.js` / `index.html`.
 - **Redirects:** `vercel.json` sends apex `kautilyan.com` → `https://www.kautilyan.com` (301). All canonical and OG URLs use `www.kautilyan.com`.
 - In Google Search Console, verify the **www** property (`https://www.kautilyan.com`).
 
